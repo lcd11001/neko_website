@@ -1,6 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { I18nextProvider } from 'react-i18next'
+import i18next from 'i18next'
+import common_en from './Translations/EN/common.json'
+import common_vn from './Translations/VN/common.json'
+
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { defaultTheme } from './Styles'
@@ -24,27 +29,50 @@ console.log('metadata', metadata)
 const divLoading = document.getElementById('loading')
 document.body.removeChild(divLoading)
 
+i18next.init({
+    debug: process.env.NODE_ENV === 'development',
+    react: {
+        wait: true
+    },
+    interpolation: {
+        escapeValue: false
+    },
+    lng: 'en',
+    resources: {
+        en: {
+            common: common_en
+        },
+        vn: {
+            common: common_vn
+        }
+    },
+    defaultNS: 'common',
+    ns: ['common']
+})
+
 const Routes = () => {
     return (
         <MuiThemeProvider theme={defaultTheme}>
             <Provider store={store}>
-                <Router>
-                    <React.Fragment>
-                        <CssBaseline />
-                        <App>
-                            <Switch>
-                                {/* Homepage === Profile because of user permission */}
-                                <Redirect exact from='/' to={'/home'} />
+                <I18nextProvider i18n={i18next}>
+                    <Router>
+                        <React.Fragment>
+                            <CssBaseline />
+                            <App>
+                                <Switch>
+                                    {/* Homepage === Profile because of user permission */}
+                                    <Redirect exact from='/' to={'/home'} />
 
-                                {/* Force login if needed by using protected route */}
-                                <Route exact path='/home' component={Home} />
-                                
-                                {/* invalid path */}
-                                <Route path='*' component={PageNotFound} />
-                            </Switch>
-                        </App>
-                    </React.Fragment>
-                </Router>
+                                    {/* Force login if needed by using protected route */}
+                                    <Route exact path='/home' component={Home} />
+
+                                    {/* invalid path */}
+                                    <Route path='*' component={PageNotFound} />
+                                </Switch>
+                            </App>
+                        </React.Fragment>
+                    </Router>
+                </I18nextProvider>
             </Provider>
         </MuiThemeProvider>
     )

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withMultipleStyles, breakpointsStyle } from '../Styles';
 
+import { withTranslation } from 'react-i18next'
+
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
@@ -27,7 +29,7 @@ class Generic extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, t } = this.props;
         // console.log('Generic::render', this.props)
         return (
             <div className={classes.root}>
@@ -55,6 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withMultipleStyles(styles)
+    withMultipleStyles(styles),
+    withTranslation('common')
 )(Generic);
 
