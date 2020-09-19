@@ -1,0 +1,61 @@
+{
+  "name": "neko_website",
+  "version": "1.0.0",
+  "description": "neko website",
+  "main": "index.js",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "axios": "^0.20.0",
+    "crypto-js": "^4.0.0",
+    "moment": "^2.28.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.5",
+    "redux-promise-middleware": "^6.1.2",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start-beta": "env-cmd -f .env.beta npm run start",
+    "start-gold": "env-cmd -f .env.gold npm run start",
+    "build": "node tools/GenerateBuildNumber && react-scripts build",
+    "build-beta": "env-cmd -f .env.beta npm run build",
+    "build-gold": "env-cmd -f .env.gold npm run build",
+    "obfuscate": "javascript-obfuscator ./build --output ./obfuscated --compact true --control-flow-flattening false --dead-code-injection false --debug-protection false --debug-protection-interval false --disable-console-output true --identifier-names-generator hexadecimal --log false --rename-globals false --rotate-string-array true --self-defending true --shuffle-string-array true --split-strings true --string-array true --string-array-encoding false --string-array-threshold 0.75 --unicode-escape-sequence false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lcd11001/neko_website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lcd11001/neko_website/issues"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "javascript-obfuscator": "^1.9.0",
+    "json-loader": "^0.5.7",
+    "redux-devtools-extension": "^2.13.8"
+  },
+  "homepage": "https://github.com/lcd11001/neko_website#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
