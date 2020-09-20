@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom'
 import { withMultipleStyles, breakpointsStyle } from '../Styles'
 import { Toolbar, Typography } from '@material-ui/core'
 
-import * as ActionCMS from '../Redux/Actions/ActionCMS'
+import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Header from './Header';
 import Menu from './Menu';
@@ -203,30 +203,10 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <div className={classes.root}>
-                    {
-                        others.isLoggedIn && (
-                            <React.Fragment>
-                                <Header {...others} />
-                                <Menu {...others} />
-                            </React.Fragment>
-                        )
-                    }
 
-                    <main className={classes.content}>
-                        {
-                            others.isLoggedIn && <Toolbar />
-                        }
-                        <div className={classContainer}>
-                            {
-                                others.isLoggedIn && this.renderTitle()
-                            }
-                            <div id={'main-container'} className={classContainerContent} style={{ overflowY: 'auto', position: 'relative' }}>
-                                {
-                                    children
-                                }
-                            </div>
-                        </div>
-                    </main>
+                    <Header {...others} />
+                    <Menu {...others} />
+
 
 
 
@@ -274,10 +254,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     ClearError: () => {
-        dispatch(ActionCMS.ClearError())
+        dispatch(ActionGlobal.ClearError())
     },
     ClearNotify: () => {
-        dispatch(ActionCMS.ClearNotify())
+        dispatch(ActionGlobal.ClearNotify())
     }
 })
 

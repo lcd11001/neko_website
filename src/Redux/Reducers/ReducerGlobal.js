@@ -1,6 +1,10 @@
 const defaultState = {
     title: 'TITLE',
-    forceRerender: false
+    isLoading: 0,
+    loadingMessage: '',
+    error: null,
+    notifyMessage: '',
+    notifyErrorMessage: '',
 }
 
 const ReducerGlobal = (state = defaultState, action) => {
@@ -11,10 +15,41 @@ const ReducerGlobal = (state = defaultState, action) => {
                 title: action.payload
             }
         }
-        case 'GLOBAL_RERENDER': {
+        
+        case 'GLOBAL_CLEAR_ERROR': {
             return {
                 ...state,
-                forceRerender: !state.forceRerender
+                error: null
+            }
+        }
+
+        case 'GLOBAL_ERROR': {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+
+        case 'GLOBAL_CLEAR_LOADING': {
+            return {
+                ...state,
+                isLoading: state.isLoading - 1
+            }
+        }
+
+        case 'GLOBAL_LOADING': {
+            return {
+                ...state,
+                isLoading: state.isLoading + 1,
+                loadingMessage: action.payload
+            }
+        }
+
+        case 'GLOBAL_CLEAR_NOTIFY': {
+            return {
+                ...state,
+                notifyMessage: '',
+                notifyErrorMessage: ''
             }
         }
 

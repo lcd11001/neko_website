@@ -1,14 +1,22 @@
 import { ActionType } from 'redux-promise-middleware'
+import * as ActionGlobal from './ActionGlobal'
 
-export const ClearError = () => ({
-    type: 'CMS_CLEAR_ERROR'
-})
+// Fixed: share state between 2 reducers
+export const ChangeLanguage = (language) => {
+    return (dispatch) => {
+        dispatch(ActionGlobal.SetLoading())
 
-export const ClearRefresh = () => ({
-    type: 'CMS_CLEAR_REFRESH'
-})
+        return dispatch({
+            type: 'CHANGE_LANGUAGE',
+            payload: new Promise.resolve({language})
+                .catch(err => {
+                    dispatch(ActionGlobal.SetError(err))
+                })
+                .finally(() => {
+                    dispatch(ActionGlobal.ClearLoading())
+                })
+        })
+    }
+}
 
-export const ClearNotify = () => ({
-    type: 'CMS_CLEAR_NOTIFY'
-})
 

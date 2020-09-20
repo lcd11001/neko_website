@@ -3,52 +3,29 @@ import TEXT from '../../Data/Text'
 import Utils from '../../Utils'
 
 const defaultState = {
-    isLoading: 0,
-    loadingMessage: '',
-    hiddenMessage: '',
-    notifyMessage: '',
-    notifyErrorMessage: '',
-    error: null,
-    isLoggedIn: false,
-    needRefresh: false,
-
-    // CMS_LOAD_CONFIG
-    configCMS: {},
-
-    // CMS_LOGIN
-    email: '',
-    username: '',
-    expire_warning: -1,
-    privilege: '',
-    status: '',
-    access: null,
-    access_group: null,
-
-    // CMS_LOAD_ASSETS
-    assets: {}
+    languages: [
+        {
+            EN: {
+                flag: 'images/US.png',
+                key: 'language'
+            }
+        },
+        {
+            VN: {
+                flag: 'images/VN.png',
+                key: 'language'
+            }
+        }
+    ],
+    currentLang: 'EN'
 }
 
 const ReducerCMS = (state = defaultState, action) => {
     switch (action.type) {
-        case 'CMS_CLEAR_ERROR': {
+        case `CHANGE_LANGUAGE_${ActionType.Fulfilled}`: {
             return {
                 ...state,
-                error: null,
-            }
-        }
-
-        case 'CMS_CLEAR_REFRESH': {
-            return {
-                ...state,
-                needRefresh: false,
-            }
-        }
-
-        case 'CMS_CLEAR_NOTIFY': {
-            return {
-                ...state,
-                notifyMessage: '',
-                notifyErrorMessage: ''
+                currentLang: action.payload.language
             }
         }
 
