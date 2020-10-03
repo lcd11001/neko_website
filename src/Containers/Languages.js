@@ -1,44 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { withMultipleStyles, breakpointsStyle } from '../Styles';
-import { Drawer, List, ListItem, ListItemText, Toolbar, ListItemIcon, Tooltip, Divider, IconButton, Collapse } from '@material-ui/core';
-import { DataLanguages } from '../Data/Defines'
+import compose from 'recompose/compose'
 
-// import { IconLanguagesShow, IconLanguagesHide } from '../Components/CmsIcons'
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 
+import { ENFlag, VNFlag } from '../Data/Defines'
+import ID from '../Translations/ID.json'
 import Utils from '../Utils'
 
 import clsx from 'clsx'
+import { withTranslation } from 'react-i18next';
+import { Icon, IconButton } from '@material-ui/core';
 
 
 const styles = theme => ({
     root: {
-        backgroundColor: 'yellow',
-        width: 200,
-        height: 100
+
     },
-    
+
+    buttonRoot: {
+        '&:hover': {
+            backgroundColor: 'transparent'
+        }
+    },
+    icon: {
+        height: 20,
+        width: 'auto',
+        objectFit: 'cover'
+    }
 });
 
 class Languages extends React.Component {
-    
-
     render() {
         const {
-            classes
+            classes,
+            i18n
         } = this.props
 
         return (
-            <div className={classes.root}>
-
+            <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
+                <IconButton
+                    classes={{ root: classes.buttonRoot }}
+                    onClick={() => i18n.changeLanguage(ID.COMMON.LANGUAGE_EN)}
+                >
+                    <img className={classes.icon} alt={'EN'} src={Utils.getImageUrl(ENFlag)} />
+                </IconButton>
+                <IconButton
+                    classes={{ root: classes.buttonRoot }}
+                    onClick={() => i18n.changeLanguage(ID.COMMON.LANGUAGE_VN)}
+                >
+                    <img className={classes.icon} alt={'VN'} src={Utils.getImageUrl(VNFlag)} />
+                </IconButton>
             </div>
         );
     }
-
-    
 }
 
 Languages.propTypes =
@@ -46,4 +61,7 @@ Languages.propTypes =
     classes: PropTypes.object.isRequired
 };
 
-export default withMultipleStyles(styles)(Languages);
+export default compose(
+    withMultipleStyles(commonStyles, styles),
+    withTranslation()
+)(Languages);
