@@ -1,7 +1,8 @@
 var path = require('path')
 var fs = require('fs');
 var xlsx = require('xlsx');
-var lodash = require('lodash')
+var lodash = require('lodash');
+const { lang } = require('moment');
 
 const main = (input, output) => {
     console.log(`Reading ${input}`)
@@ -43,15 +44,29 @@ const main = (input, output) => {
             data.shift();
         }
 
+        console.log('data', data)
+
         // translate id-text
-        for (let i = 1, keys = Object.keys(headers), len = keys.length; i < len; i++) {
+        for (let i = 0, keys = Object.keys(headers), len = keys.length; i < len; i++) {
             let id = headers[keys[0]]
             let language = headers[keys[i]]
-            let define = lodash.mapValues(lodash.keyBy(data, id), language)
+            let define = lodash.mapValues(lodash.keyBy(data, id), (obj) => {
+                if (id === language) {
+                    return `${namespace}:${obj[language]}`
+                }
+                return obj[language]
+            })
             if (!i18.hasOwnProperty(language)) {
                 i18[language] = {}
             }
-            i18[language][namespace] = define
+
+            console.log('define ', define)
+
+            if (i === 0) {
+                i18[language][namespace] = define
+            } else {
+                i18[language][namespace] = define
+            }
         }
     })
 
