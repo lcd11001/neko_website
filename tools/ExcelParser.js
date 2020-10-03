@@ -44,8 +44,6 @@ const main = (input, output) => {
             data.shift();
         }
 
-        console.log('data', data)
-
         // translate id-text
         for (let i = 0, keys = Object.keys(headers), len = keys.length; i < len; i++) {
             let id = headers[keys[0]]
@@ -59,8 +57,6 @@ const main = (input, output) => {
             if (!i18.hasOwnProperty(language)) {
                 i18[language] = {}
             }
-
-            console.log('define ', define)
 
             if (i === 0) {
                 i18[language][namespace] = define
