@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom'
 
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
-import common_en from './Translations/EN/common.json'
-import common_vn from './Translations/VN/common.json'
+
+import ID from './Translations/ID.json'
+import EN from './Translations/EN.json'
+import VN from './Translations/VN.json'
 
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { MuiThemeProvider } from '@material-ui/core/styles'
@@ -37,17 +39,12 @@ i18next.init({
     interpolation: {
         escapeValue: false
     },
-    lng: 'en',
+    lng: ID.COMMON.LANGUAGE_EN,
     resources: {
-        en: {
-            common: common_en
-        },
-        vn: {
-            common: common_vn
-        }
+        [ID.COMMON.LANGUAGE_EN]: EN,
+        [ID.COMMON.LANGUAGE_VN]: VN
     },
-    defaultNS: 'common',
-    ns: ['common']
+    ns: Object.keys(ID)
 })
 
 const Routes = () => {
