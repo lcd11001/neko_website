@@ -38,6 +38,9 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
+# i18 translation source
+src/Translations/
+
 # Dependency directories
 node_modules/
 jspm_packages/
