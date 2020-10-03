@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { withMultipleStyles, breakpointsStyle } from '../Styles';
 
 import { Trans, withTranslation } from 'react-i18next'
+import ID from '../Translations/ID.json'
 
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
-import ID from '../Translations/ID.json'
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
 import { Button } from '@material-ui/core';
@@ -60,6 +60,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(styles),
-    withTranslation('common')
+    withTranslation()
 )(Home);
 

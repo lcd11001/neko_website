@@ -7,12 +7,12 @@ const defaultMuiTheme = createMuiTheme();
 const defaultTheme = createMuiTheme({
     palette: {
         background: {
-            default: '#3E3E84'
+            default: '#FFFFFF'
         },
         text: {
-            primary: '#1B1F43',
-            secondary: '#EBEBEB',
-            disabled: '#ABABAB'
+            primary: '#231F20',
+            secondary: '#F26A65',
+            disabled: '#C3C3C3'
         },
         error: {
             main: '#FF4444'
@@ -89,7 +89,7 @@ const defaultTheme = createMuiTheme({
             },
             label: {
                 fontWeight: 'normal',
-                fontFamily: '"Roboto" !important'
+                fontFamily: '"Raleway", sans-serif !important'
             }
         },
         MuiOutlinedInput: {
@@ -160,7 +160,7 @@ const defaultTheme = createMuiTheme({
         MuiTypography: {
             root: {
                 userSelect: 'none',
-                fontFamily: '"Roboto" !important'
+                fontFamily: '"Raleway", sans-serif !important'
             },
             caption: {
                 color: '#525252'

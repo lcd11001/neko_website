@@ -40,6 +40,7 @@ i18next.init({
         escapeValue: false
     },
     lng: ID.COMMON.LANGUAGE_EN,
+    fallbackLng: ID.COMMON.LANGUAGE_EN,
     resources: {
         [ID.COMMON.LANGUAGE_EN]: EN,
         [ID.COMMON.LANGUAGE_VN]: VN
