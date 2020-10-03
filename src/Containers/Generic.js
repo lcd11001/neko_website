@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
-import TEXT from '../Data/Text'
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
 

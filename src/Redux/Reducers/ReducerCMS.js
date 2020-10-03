@@ -1,6 +1,4 @@
 import { ActionType } from 'redux-promise-middleware'
-import TEXT from '../../Data/Text'
-import Utils from '../../Utils'
 
 const defaultState = {
     languages: [
