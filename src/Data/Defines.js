@@ -1,6 +1,8 @@
 import * as Icons from '../Components/CmsIcons'
-import SubIcon from '@material-ui/icons/RadioButtonCheckedOutlined'
+import ContactIcon from '@material-ui/icons/TrendingFlat'
+
 import ID from '../Translations/ID.json'
+
 
 export const ACCESS_VERSION = 115
 
@@ -20,7 +22,7 @@ export const DataMenu = [
     {
         text: ID.MENU.STREAMLINE, link: '/streamline',
         customStyle: {
-            color: 'F26A65'
+            color: '#F26A65'
         }
     },
     {
@@ -30,8 +32,10 @@ export const DataMenu = [
         text: ID.MENU.CONTACT, link: '/contact',
         customStyle: {
             border: '1px solid #707070',
-            borderRadius: 10
-        }
+            borderRadius: 10,
+            padding: '10px 25px'
+        },
+        icon: ContactIcon
     },
 ]
 

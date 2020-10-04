@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { withMultipleStyles, breakpointsStyle } from '../Styles';
-import { Drawer, List, ListItem, ListItemText, Toolbar, ListItemIcon, Tooltip, Divider, IconButton, Collapse } from '@material-ui/core';
+import compose from 'recompose/compose'
+
+
+import { Link, withRouter } from 'react-router-dom';
+import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { Divider, Typography } from '@material-ui/core';
 import { DataMenu } from '../Data/Defines'
 
 // import { IconMenuShow, IconMenuHide } from '../Components/CmsIcons'
@@ -12,19 +15,125 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Utils from '../Utils'
 
 import clsx from 'clsx'
+import { Trans, withTranslation } from 'react-i18next';
+import { relative } from 'path';
 
 
 const styles = theme => ({
     root: {
-        backgroundColor: 'red',
-        width: 800,
-        height: 100
+
     },
-    
+
+    menu: {
+        padding: '0 18px',
+        position: 'relative'
+    },
+
+    menuItem: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [15, 18],
+                variant: [2, 2],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 500,
+        textAlign: 'left',
+        textTransform: 'uppercase',
+        color: 'inherit',
+
+        '&--selected': {
+            fontWeight: 700
+        }
+    },
+
+    menuIcon: {
+        marginLeft: 30
+    },
+
+    menuLink: {
+        textDecoration: 'none',
+        color: theme.palette.text.primary
+    },
+
+    underline: {
+        width: 0,
+        height: 2,
+        maxWidth: '100%',
+        backgroundColor: theme.palette.primary.main,
+        transitionOrigin: 'left',
+        transition: theme.transitions.create(['width'], {
+            duration: 300
+        }),
+
+        '&--hover': {
+            width: '100%',
+            transition: theme.transitions.create(['width'], {
+                duration: 300
+            }),
+        }
+    }
+
 });
 
 class Menu extends React.Component {
-    
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    handleMouseEnter = (link) => (evt) => {
+        this.setState({
+            [`hover_${link}`]: true
+        })
+    }
+
+    handleMouseLeave = (link) => (evt) => {
+        this.setState({
+            [`hover_${link}`]: false
+        })
+    }
+
+    renderMenu(menu) {
+        const {
+            classes,
+            location: {
+                pathname
+            }
+        } = this.props
+
+        console.log('state', this.state)
+
+        let isSelected = menu.link === pathname
+
+        let classMenuItem = clsx(classes.menuItem, {
+            [classes.menuItem + '--selected']: isSelected
+        })
+
+        let classUnderline = clsx(classes.underline, {
+            [classes.underline + '--hover']: this.state[`hover_${menu.link}`] === true
+        })
+
+        return (
+
+            <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
+                <Link to={menu.link} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menu.link)} onMouseLeave={this.handleMouseLeave(menu.link)}>
+                    <div className={clsx(classes.divRow, classes.divCenter)} style={menu.customStyle}>
+                        <Typography className={classMenuItem} noWrap color={'textPrimary'} >
+                            <Trans i18nKey={menu.text} />
+                        </Typography>
+                        {
+                            menu.icon && <menu.icon className={classes.menuIcon} />
+                        }
+                    </div>
+                </Link>
+                <Divider className={classUnderline} style={{ backgroundColor: menu.customStyle ? menu.customStyle.color : null }} />
+            </div>
+        )
+    }
 
     render() {
         const {
@@ -32,18 +141,27 @@ class Menu extends React.Component {
         } = this.props
 
         return (
-            <div className={classes.root}>
-
+            <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
+                {
+                    DataMenu.map(menu => (
+                        this.renderMenu(menu)
+                    ))
+                }
             </div>
         );
     }
 
-    
+
 }
 
 Menu.propTypes =
 {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
 };
 
-export default withMultipleStyles(styles)(Menu);
+export default compose(
+    withMultipleStyles(commonStyles, styles),
+    withTranslation(),
+    withRouter
+)(Menu);

@@ -10,6 +10,10 @@ const styles = (theme) => ({
     divCenter: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    divBetween: {
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 })
 

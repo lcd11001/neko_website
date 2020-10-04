@@ -24,7 +24,7 @@ const styles = theme => ({
         }
     },
     icon: {
-        height: 20,
+        height: 30,
         width: 'auto',
         objectFit: 'cover'
     }
