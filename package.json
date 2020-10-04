@@ -30,7 +30,7 @@
     "build": "node tools/GenerateBuildNumber && react-scripts build",
     "build-beta": "env-cmd -f .env.beta npm run build",
     "build-gold": "env-cmd -f .env.gold npm run build",
-    "obfuscate": "javascript-obfuscator ./build --output ./obfuscated --compact true --control-flow-flattening false --dead-code-injection false --debug-protection false --debug-protection-interval false --disable-console-output true --identifier-names-generator hexadecimal --log false --rename-globals false --rotate-string-array true --self-defending true --shuffle-string-array true --split-strings true --string-array true --string-array-encoding false --string-array-threshold 0.75 --unicode-escape-sequence false",
+    "obfuscate": "javascript-obfuscator ./build --output ./obfuscated --compact true --control-flow-flattening false --dead-code-injection false --debug-protection false --debug-protection-interval false --disable-console-output true --identifier-names-generator hexadecimal --log false --rename-globals false --rotate-string-array true --self-defending true --shuffle-string-array true --split-strings true --string-array true --string-array-encoding none --string-array-threshold 0.75 --unicode-escape-sequence false",
     "predeploy": "call deploy.bat",
     "deploy": "gh-pages -d deploy"
   },
