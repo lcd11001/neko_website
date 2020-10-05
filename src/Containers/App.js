@@ -12,7 +12,8 @@ import { Toolbar, Typography } from '@material-ui/core'
 
 import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
-import Header from './Header';
+import Header from './Header'
+import Footer from './Footer'
 import CircularLoading from '../Components/CircularLoading'
 
 
@@ -35,8 +36,9 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <div className={classes.root}>
-                    <Header {...others} />
+                    <Header />
                     {children}
+                    <Footer />
                 </div>
                 {
                     others.isLoading > 0 && <CircularLoading message={others.loadingMessage} />

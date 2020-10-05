@@ -16,7 +16,8 @@ import { Button } from '@material-ui/core';
 const styles = theme => ({
     root: {
         width: '100%',
-        height: '100%'
+        height: '200vh',
+        backgroundColor: 'aliceblue'
     }
 });
 
@@ -27,14 +28,7 @@ class Home extends React.Component {
         // console.log('Home::render', this.props)
         return (
             <div className={classes.root}>
-                <div>
-                    <Button onClick={() => i18n.changeLanguage(ID.COMMON.LANGUAGE_EN)}>
-                        <Trans i18nKey={ID.COMMON.LANGUAGE_EN} />
-                    </Button>
-                    <Button onClick={() => i18n.changeLanguage(ID.COMMON.LANGUAGE_VN)}>
-                        <Trans i18nKey={ID.COMMON.LANGUAGE_VN} />
-                    </Button>
-                </div>
+                
                 <PageUnderContruction />
             </div>
         );

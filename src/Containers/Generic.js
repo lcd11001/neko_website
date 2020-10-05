@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withMultipleStyles, breakpointsStyle } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withRouter } from 'react-router-dom'
 
-import { withTranslation } from 'react-i18next'
+import { Trans, withTranslation } from 'react-i18next'
+import ID from '../Translations/ID.json'
 
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
@@ -57,6 +59,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(styles),
-    withTranslation('common')
+    withTranslation()
 )(Generic);
 
