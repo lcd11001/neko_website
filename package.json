@@ -24,7 +24,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f ./.env.local react-scripts start",
     "start-beta": "env-cmd -f .env.beta npm run start",
     "start-gold": "env-cmd -f .env.gold npm run start",
     "build": "node tools/GenerateBuildNumber && react-scripts build",
