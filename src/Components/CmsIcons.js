@@ -7,3 +7,11 @@ export const IconHome = (props) => (
     </SvgIcon>
 )
 
+export const IconMenuArrow = (props) => (
+    <SvgIcon {...props} width="63.849" height="9.801" viewBox="0 0 63.849 9.801" xmlns="http://www.w3.org/2000/svg">
+        <g id="Group_4" data-name="Group 4" transform="translate(1)">
+            <path id="Path_8" data-name="Path 8" d="M0,0H57.83" transform="translate(0 4.804)" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
+            <path id="Path_5" data-name="Path 5" d="M137.325,49.89,144.352,46a.815.815,0,0,0,.02-1.483l-7.026-4.088c-.748-.435-1.793-.007-1.793.736v7.982C135.553,49.874,136.576,50.305,137.325,49.89Z" transform="translate(-81.991 -40.251)" fill="currentColor" />
+        </g>
+    </SvgIcon >
+)
