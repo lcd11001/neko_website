@@ -22,7 +22,11 @@ const styles = theme => ({
         width: 53,
         height: 53,
         color: theme.palette.text.secondary,
-        margin: '0 30px'
+        margin: '0 30px',
+
+        '&--secondary': {
+            color: 'white'
+        }
     },
 
     title: {
@@ -36,7 +40,11 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
-        position: 'relative'
+        position: 'relative',
+
+        '&--secondary': {
+            color: 'white'
+        }
     },
 
     subtitle: {
@@ -51,7 +59,11 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
-        position: 'relative'
+        position: 'relative',
+
+        '&--secondary': {
+            color: 'white'
+        }
     }
 });
 
@@ -60,17 +72,30 @@ class Logo extends React.Component {
 
     render() {
         const {
-            classes
+            classes,
+            secondary
         } = this.props
+
+        let classLogo = clsx(classes.logo, {
+            [classes.logo + '--secondary']: secondary
+        })
+
+        let classTitle = clsx(classes.title, {
+            [classes.title + '--secondary']: secondary
+        })
+
+        let classSubTitle = clsx(classes.subtitle, {
+            [classes.subtitle + '--secondary']: secondary
+        })
 
         return (
             <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
-                <AppLogo className={classes.logo} />
+                <AppLogo className={classLogo} />
                 <div className={classes.divColumn, classes.divCenter} >
-                    <Typography className={classes.title} >
+                    <Typography className={classTitle} >
                         <Trans i18nKey={ID.COMMON.LOGO_TITLE} />
                     </Typography>
-                    <Typography className={classes.subtitle} >
+                    <Typography className={classSubTitle} >
                         <Trans i18nKey={ID.COMMON.LOGO_SUBTITLE} />
                     </Typography>
                 </div>
@@ -83,7 +108,12 @@ class Logo extends React.Component {
 
 Logo.propTypes =
 {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    secondary: PropTypes.bool
 };
+
+Logo.defaultProps = {
+    secondary: false
+}
 
 export default withMultipleStyles(commonStyles, styles)(Logo);

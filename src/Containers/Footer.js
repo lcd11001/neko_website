@@ -24,6 +24,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.primary.main,
         width: '100%',
         height: '66vw',
+        padding: '32% 10% 8%'
     },
 
     rootSecondary: {
@@ -33,16 +34,30 @@ const styles = theme => ({
         position: 'absolute',
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -150%)',
+        transform: 'translate(-50%, -158%)',
         borderRadius: 30
     },
 
-    logo: {
+    copyright: {
         color: '#FFF',
-        width: 53
+        padding: '5px 0'
+    },
+
+    title: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingBottom'],
+                value: [54],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
+    },
+
+    logo: {
+        position: 'relative',
+        transform: 'translate(0, -50%)',
     }
-
-
 });
 
 class Footer extends React.Component {
@@ -60,16 +75,75 @@ class Footer extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div className={clsx(classes.rootPrimary, classes.divColum, classes.divCenter)}>
-                <div className={clsx(classes.divRow, classes.divBetween)}>
-                    <div id={'logo'}>
-                        <Logo />
+            <div className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
+                <div className={clsx(classes.divRow, classes.divBetween, classes.fullWidth)}>
+                    <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", minWidth: '50%' }}>
+                        <div className={classes.logo}>
+                            <Logo secondary />
+                        </div>
+                        <div className={clsx(classes.divColumn, classes.divBetween, classes.fullHeight)}>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_EMAIL} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_PHONE} />
+                            </Typography>
+                        </div>
                     </div>
-                    <div id={'work'}></div>
-                    <div id={'support'}></div>
-                    <div id={'social'}></div>
+                    <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
+                        <div>
+                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.title)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
+                            </Typography>
+                        </div>
+                        <div>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_BRAND} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_MOTION} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_WEB} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_2D} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_DIGITAL} />
+                            </Typography>
+                        </div>
+                    </div>
+                    <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
+                        <div>
+                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.title)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
+                            </Typography>
+                        </div>
+                        <div>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_CONTACT} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_POLICY} />
+                            </Typography>
+                            <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_TERMS} />
+                            </Typography>
+                        </div>
+                    </div>
+                    <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
+                        <div>
+                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.title)}>
+                                <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
+                            </Typography>
+                        </div>
+                    </div>
                 </div>
-                <Typography>
+                <Typography className={clsx(classes.copyright, classes.textNormal)}>
                     <Trans i18nKey={ID.FOOTER.PRIMARY_COPYRIGHT} />
                 </Typography>
             </div>

@@ -49,10 +49,12 @@ const main = (input, output) => {
             let id = headers[keys[0]]
             let language = headers[keys[i]]
             let define = lodash.mapValues(lodash.keyBy(data, id), (obj) => {
-                if (id === language) {
-                    return `${namespace}:${obj[language]}`
+                if (obj) {
+                    if (id === language) {
+                        return `${namespace}:${obj[language]}`
+                    }
+                    return obj[language]
                 }
-                return obj[language]
             })
             if (!i18.hasOwnProperty(language)) {
                 i18[language] = {}

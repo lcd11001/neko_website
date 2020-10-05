@@ -22,14 +22,6 @@ const styles = theme => ({
     },
 
     menuItem: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [15, 18],
-                variant: [2, 2],
-                unit: ['px', 'px']
-            }
-        ),
         fontWeight: 500,
         textAlign: 'left',
         textTransform: 'uppercase',
@@ -144,7 +136,7 @@ class Menu extends React.Component {
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menu.link} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menu.link)} onMouseLeave={this.handleMouseLeave(menu.link)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground)} style={menu.customStyle}>
-                        <Typography className={classMenuItem} noWrap color={'textPrimary'} >
+                        <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap color={'textPrimary'} >
                             <Trans i18nKey={menu.text} />
                         </Typography>
                         {
