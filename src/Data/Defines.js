@@ -1,4 +1,5 @@
-import * as Icons from '../Components/CmsIcons'
+import { Icon } from '@material-ui/core'
+import * as Icons from '../Components/NekoIcons'
 // import ContactIcon from '@material-ui/icons/TrendingFlat'
 
 import ID from '../Translations/ID.json'
@@ -36,9 +37,10 @@ export const DataMenu = [
             borderRadius: 10,
             padding: '10px 25px'
         },
-        icon: 'menu/mui_ten.svg',
+        icon: Icons.IconMenuArrow,
         customIconStyle: {
-            width: 63
+            width: 63,
+            marginLeft: 30
         },
         underline: 'disable'
     },

@@ -8,7 +8,6 @@ import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 import { Divider, Typography } from '@material-ui/core';
 import { DataMenu } from '../Data/Defines'
 
-// import { IconMenuShow, IconMenuHide } from '../Components/CmsIcons'
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
@@ -49,7 +48,17 @@ const styles = theme => ({
     },
 
     menuIcon: {
-        marginLeft: 30
+        color: 'inherit',
+        // transition: theme.transitions.create(['color'], {
+        //     duration: 300
+        // }),
+
+        // '&--hover': {
+        //     color: 'white',
+        //     transition: theme.transitions.create(['color'], {
+        //         duration: 300
+        //     }),
+        // }
     },
 
     menuLink: {
@@ -125,6 +134,10 @@ class Menu extends React.Component {
             [classes.menuItem + '--selected']: isSelected
         })
 
+        let classMenuIcon = clsx(classes.menuIcon, {
+            [classes.menuIcon + '--hover']: this.state[`hover_${menu.link}`] === true
+        })
+
         let classUnderline = clsx(classes.underline, {
             [classes.underline + '--hover']: this.state[`hover_${menu.link}`] === true
         })
@@ -143,7 +156,7 @@ class Menu extends React.Component {
                         </Typography>
                         {
                             menu.icon &&
-                            <img alt={`${menu.icon}`} src={Utils.getImageUrl(menu.icon)} className={classes.menuIcon} style={menu.customIconStyle} />
+                            <menu.icon className={classMenuIcon} style={menu.customIconStyle} />
                         }
                     </div>
                 </Link>
