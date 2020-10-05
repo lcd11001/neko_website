@@ -1,7 +1,8 @@
 import * as Icons from '../Components/CmsIcons'
-import ContactIcon from '@material-ui/icons/TrendingFlat'
+// import ContactIcon from '@material-ui/icons/TrendingFlat'
 
 import ID from '../Translations/ID.json'
+
 
 
 export const ACCESS_VERSION = 115
@@ -35,7 +36,11 @@ export const DataMenu = [
             borderRadius: 10,
             padding: '10px 25px'
         },
-        icon: ContactIcon
+        icon: 'menu/mui_ten.svg',
+        customIconStyle: {
+            width: 63
+        },
+        underline: 'disable'
     },
 ]
 

@@ -62,7 +62,6 @@ const styles = theme => ({
         height: 2,
         maxWidth: '100%',
         backgroundColor: theme.palette.primary.main,
-        transitionOrigin: 'left',
         transition: theme.transitions.create(['width'], {
             duration: 300
         }),
@@ -70,6 +69,21 @@ const styles = theme => ({
         '&--hover': {
             width: '100%',
             transition: theme.transitions.create(['width'], {
+                duration: 300
+            }),
+        }
+    },
+
+    underbackground: {
+        backgroundColor: 'white',
+        transition: theme.transitions.create(['background-color', 'color'], {
+            duration: 300
+        }),
+
+        '&--hover': {
+            color: 'white',
+            backgroundColor: theme.palette.primary.main,
+            transition: theme.transitions.create(['background-color', 'color'], {
                 duration: 300
             }),
         }
@@ -105,8 +119,6 @@ class Menu extends React.Component {
             }
         } = this.props
 
-        console.log('state', this.state)
-
         let isSelected = menu.link === pathname
 
         let classMenuItem = clsx(classes.menuItem, {
@@ -117,20 +129,28 @@ class Menu extends React.Component {
             [classes.underline + '--hover']: this.state[`hover_${menu.link}`] === true
         })
 
+        let classUnderbackground = clsx(classes.underbackground, {
+            [classes.underbackground + '--hover']: (this.state[`hover_${menu.link}`] === true && menu.underline === 'disable')
+        })
+
         return (
 
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menu.link} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menu.link)} onMouseLeave={this.handleMouseLeave(menu.link)}>
-                    <div className={clsx(classes.divRow, classes.divCenter)} style={menu.customStyle}>
+                    <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground)} style={menu.customStyle}>
                         <Typography className={classMenuItem} noWrap color={'textPrimary'} >
                             <Trans i18nKey={menu.text} />
                         </Typography>
                         {
-                            menu.icon && <menu.icon className={classes.menuIcon} />
+                            menu.icon &&
+                            <img alt={`${menu.icon}`} src={Utils.getImageUrl(menu.icon)} className={classes.menuIcon} style={menu.customIconStyle} />
                         }
                     </div>
                 </Link>
-                <Divider className={classUnderline} style={{ backgroundColor: menu.customStyle ? menu.customStyle.color : null }} />
+                {
+                    menu.underline !== 'disable' &&
+                    <Divider className={classUnderline} style={{ backgroundColor: menu.customStyle ? menu.customStyle.color : null }} />
+                }
             </div>
         )
     }
