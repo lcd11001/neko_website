@@ -22,13 +22,13 @@ const styles = theme => ({
     },
 
     menuItem: {
-        fontWeight: 500,
+        fontWeight: 400,
         textAlign: 'left',
         textTransform: 'uppercase',
         color: 'inherit',
 
         '&--selected': {
-            fontWeight: 700
+            fontWeight: 600
         }
     },
 

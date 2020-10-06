@@ -22,7 +22,6 @@ const styles = theme => ({
         width: 53,
         height: 53,
         color: theme.palette.text.secondary,
-        margin: '0 30px',
 
         '&--secondary': {
             color: 'white'
@@ -30,6 +29,7 @@ const styles = theme => ({
     },
 
     title: {
+        marginLeft: 30,
         textAlign: 'center',
         fontWeight: 700,
         ...breakpointsStyle(theme,
