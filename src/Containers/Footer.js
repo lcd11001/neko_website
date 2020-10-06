@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 import clsx from 'clsx'
@@ -10,6 +10,7 @@ import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
 
 import Logo from './Logo'
+import * as Icons from '../Components/NekoIcons'
 
 import { IconButton, Typography } from '@material-ui/core';
 import Utils from '../Utils';
@@ -35,7 +36,15 @@ const styles = theme => ({
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -158%)',
-        borderRadius: 30
+        padding: '10% 10% 10% 30%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['borderRadius'],
+                value: [30],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
     },
 
     copyright: {
@@ -43,7 +52,7 @@ const styles = theme => ({
         padding: '5px 0'
     },
 
-    title: {
+    caption: {
         ...breakpointsStyle(theme,
             {
                 key: ['paddingBottom'],
@@ -80,22 +89,112 @@ const styles = theme => ({
         '&:hover': {
             backgroundColor: 'transparent'
         },
+    },
+
+    title: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [75, 85],
+                variant: [15, 15],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600
+    },
+
+    subTitle: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [20, 24],
+                variant: [4, 4],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 400,
+        textTransform: 'uppercase',
+        color: 'inherit',
+    },
+
+    iconArrow: {
+        color: 'inherit',
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'marginLeft'],
+                value: [63, 30],
+                variant: [7, 5],
+                unit: ['px', 'px']
+            }
+        ),
+    },
+
+    footerLink: {
+        textDecoration: 'none',
+        color: 'white',
+        transition: theme.transitions.create(['color'], {
+            duration: 300
+        }),
+
+        '&--hover': {
+            color: theme.palette.primary.main,
+        }
     }
 });
 
 class Footer extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isHover: false
+        }
+    }
+
+    handleOpenUrl = (url) => (evt) => {
+        console.log(url)
+        window.open(url, '_blank', undefined, false)
+    }
+
+    handleMouseEnter = (evt) => {
+        this.setState({
+            isHover: true
+        })
+    }
+
+    handleMouseLeave = (evt) => {
+        this.setState({
+            isHover: false
+        })
+    }
+
     renderSecondary() {
         const { classes } = this.props;
 
+        let classFooterLink = clsx(classes.footerLink, {
+            [classes.footerLink + '--hover']: this.state.isHover
+        })
+
         return (
             <div className={classes.rootSecondary}>
-
+                <div className={clsx(classes.divColumn, classes.divCenter, classes.fullHeight)}>
+                    <Typography className={clsx(classes.copyright, classes.title)}>
+                        <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
+                    </Typography>
+                    <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+                        <div className={clsx(classes.divRow, classes.divCenter)}>
+                            <Typography className={clsx(classes.copyright, classes.subTitle)}>
+                                <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
+                            </Typography>
+                            <Icons.IconMenuArrow className={classes.iconArrow} />
+                        </div>
+                    </Link>
+                </div>
             </div>
         )
     }
 
     renderPrimary() {
-        const { classes } = this.props;
+        const { classes, t } = this.props;
 
         return (
             <div className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
@@ -118,7 +217,7 @@ class Footer extends React.Component {
                     </div>
                     <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
                         <div>
-                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.title)}>
+                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
                             </Typography>
                         </div>
@@ -142,7 +241,7 @@ class Footer extends React.Component {
                     </div>
                     <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
                         <div>
-                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.title)}>
+                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
                             </Typography>
                         </div>
@@ -160,18 +259,27 @@ class Footer extends React.Component {
                     </div>
                     <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
                         <div>
-                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.title)}>
+                            <Typography className={clsx(classes.copyright, classes.textTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
                             </Typography>
                         </div>
                         <div>
-                            <IconButton className={classes.iconButton}>
+                            <IconButton
+                                className={classes.iconButton}
+                                onClick={this.handleOpenUrl(t(ID.FOOTER.PRIMARY_SOCIAL_LINK_FACEBOOK))}
+                            >
                                 <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('facebook.png')} />
                             </IconButton>
-                            <IconButton className={classes.iconButton}>
+                            <IconButton
+                                className={classes.iconButton}
+                                onClick={this.handleOpenUrl(t(ID.FOOTER.PRIMARY_SOCIAL_LINK_INSTAGRAM))}
+                            >
                                 <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('instagram.png')} />
                             </IconButton>
-                            <IconButton className={classes.iconButton}>
+                            <IconButton
+                                className={classes.iconButton}
+                                onClick={this.handleOpenUrl(t(ID.FOOTER.PRIMARY_SOCIAL_LINK_YOUTUBE))}
+                            >
                                 <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.png')} />
                             </IconButton>
                         </div>

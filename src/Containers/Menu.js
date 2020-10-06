@@ -72,10 +72,7 @@ const styles = theme => ({
         // }),
 
         // '&--hover': {
-        //     color: 'white',
-        //     transition: theme.transitions.create(['color'], {
-        //         duration: 300
-        //     }),
+        //     color: 'white'
         // }
     },
 
@@ -110,10 +107,7 @@ const styles = theme => ({
         }),
 
         '&--hover': {
-            width: '100%',
-            transition: theme.transitions.create(['width'], {
-                duration: 300
-            }),
+            width: '100%'
         },
 
         '&--custom-underline-color-1': {
@@ -129,10 +123,7 @@ const styles = theme => ({
 
         '&--hover': {
             color: 'white',
-            backgroundColor: theme.palette.primary.main,
-            transition: theme.transitions.create(['background-color', 'color'], {
-                duration: 300
-            }),
+            backgroundColor: theme.palette.primary.main
         }
     }
 

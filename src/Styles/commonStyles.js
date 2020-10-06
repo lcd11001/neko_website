@@ -26,6 +26,10 @@ const styles = (theme) => ({
         alignItems: 'flex-start'
     },
 
+    divRight: {
+        alignItems: 'flex-end'
+    },
+
     fullWidth: {
         width: '100%'
     },

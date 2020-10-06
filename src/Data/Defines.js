@@ -1,12 +1,5 @@
-import { Icon } from '@material-ui/core'
 import * as Icons from '../Components/NekoIcons'
-// import ContactIcon from '@material-ui/icons/TrendingFlat'
-
 import ID from '../Translations/ID.json'
-
-
-
-export const ACCESS_VERSION = 115
 
 export const DataMenu = [
     {
