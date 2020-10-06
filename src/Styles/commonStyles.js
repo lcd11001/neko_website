@@ -34,18 +34,19 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [15, 18],
+                value: [13, 15],
                 variant: [2, 2],
                 unit: ['px', 'px']
             }
         ),
+        fontWeight: 400
     },
 
     textTitle: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [20, 24],
+                value: [15, 18],
                 variant: [2, 2],
                 unit: ['px', 'px']
             }

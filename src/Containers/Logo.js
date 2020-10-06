@@ -10,7 +10,7 @@ import ID from '../Translations/ID.json'
 
 import clsx from 'clsx'
 
-const TEXT_OFFSET = -6
+const TEXT_OFFSET = -5
 const TEXT_OFFSET_DELTA = -1
 
 const styles = theme => ({
@@ -19,8 +19,14 @@ const styles = theme => ({
     },
 
     logo: {
-        width: 53,
-        height: 53,
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [53, 53],
+                variant: [5, 5],
+                unit: ['px', 'px']
+            }
+        ),
         color: theme.palette.text.secondary,
 
         '&--secondary': {
@@ -29,13 +35,14 @@ const styles = theme => ({
     },
 
     title: {
-        marginLeft: 30,
+        marginLeft: 10,
         textAlign: 'center',
+        letterSpacing: 0,
         fontWeight: 700,
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'bottom'],
-                value: [40, TEXT_OFFSET],
+                value: [30, TEXT_OFFSET],
                 variant: [5, TEXT_OFFSET_DELTA],
                 unit: ['px', 'px']
             }
@@ -54,7 +61,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'top'],
-                value: [11, TEXT_OFFSET],
+                value: [8, TEXT_OFFSET],
                 variant: [1, TEXT_OFFSET_DELTA],
                 unit: ['px', 'px']
             }

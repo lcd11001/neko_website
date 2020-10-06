@@ -17,7 +17,16 @@ const styles = theme => ({
     },
 
     menu: {
-        padding: '0 18px',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft', 'paddingRight'],
+                value: [18, 18],
+                variant: [3, 3],
+                unit: ['px', 'px']
+            }
+        ),
+        paddingTop: 0,
+        paddingBottom: 0,
         position: 'relative'
     },
 
@@ -29,11 +38,35 @@ const styles = theme => ({
 
         '&--selected': {
             fontWeight: 600
+        },
+
+        '&--custom-color-1': {
+            color: theme.palette.primary.secondary
         }
     },
 
     menuIcon: {
         color: 'inherit',
+        ...breakpointsStyle(theme,
+            {
+                key: ['width'],
+                value: [63],
+                variant: [7],
+                unit: ['px']
+            }
+        ),
+
+        '&--custom-icon-1': {
+            ...breakpointsStyle(theme,
+                {
+                    key: ['marginLeft'],
+                    value: [30],
+                    variant: [5],
+                    unit: ['px']
+                }
+            )
+        }
+
         // transition: theme.transitions.create(['color'], {
         //     duration: 300
         // }),
@@ -44,6 +77,22 @@ const styles = theme => ({
         //         duration: 300
         //     }),
         // }
+    },
+
+    menuBorder: {
+        border: 'none',
+
+        '&--custom-border-1': {
+            border: '1px solid #707070',
+            ...breakpointsStyle(theme,
+                {
+                    key: ['borderRadius', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
+                    value: [10, 10, 10, 25, 25],
+                    variant: [1, 2, 2, 2, 2],
+                    unit: ['px', 'px', 'px', 'px', 'px']
+                }
+            )
+        }
     },
 
     menuLink: {
@@ -65,6 +114,10 @@ const styles = theme => ({
             transition: theme.transitions.create(['width'], {
                 duration: 300
             }),
+        },
+
+        '&--custom-underline-color-1': {
+            backgroundColor: theme.palette.primary.secondary
         }
     },
 
@@ -116,15 +169,22 @@ class Menu extends React.Component {
         let isSelected = menu.link === pathname
 
         let classMenuItem = clsx(classes.menuItem, {
-            [classes.menuItem + '--selected']: isSelected
+            [classes.menuItem + '--selected']: isSelected,
+            [classes.menuItem + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (menu.customStyle && menu.customStyle.color)
         })
 
         let classMenuIcon = clsx(classes.menuIcon, {
-            [classes.menuIcon + '--hover']: this.state[`hover_${menu.link}`] === true
+            [classes.menuIcon + '--hover']: this.state[`hover_${menu.link}`] === true,
+            [classes.menuIcon + '--' + ((menu.customStyle && menu.customStyle.icon) || 'undefined')]: (menu.customStyle && menu.customStyle.icon)
+        })
+
+        let classMenuBorder = clsx(classes.menuBorder, {
+            [classes.menuBorder + '--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (menu.customStyle && menu.customStyle.border)
         })
 
         let classUnderline = clsx(classes.underline, {
-            [classes.underline + '--hover']: this.state[`hover_${menu.link}`] === true
+            [classes.underline + '--hover']: this.state[`hover_${menu.link}`] === true,
+            [classes.underline + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (menu.customStyle && menu.customStyle.underlineColor)
         })
 
         let classUnderbackground = clsx(classes.underbackground, {
@@ -135,19 +195,19 @@ class Menu extends React.Component {
 
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menu.link} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menu.link)} onMouseLeave={this.handleMouseLeave(menu.link)}>
-                    <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground)} style={menu.customStyle}>
+                    <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
                         <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap color={'textPrimary'} >
                             <Trans i18nKey={menu.text} />
                         </Typography>
                         {
                             menu.icon &&
-                            <menu.icon className={classMenuIcon} style={menu.customIconStyle} />
+                            <menu.icon className={classMenuIcon} />
                         }
                     </div>
                 </Link>
                 {
                     menu.underline !== 'disable' &&
-                    <Divider className={classUnderline} style={{ backgroundColor: menu.customStyle ? menu.customStyle.color : null }} />
+                    <Divider className={classUnderline} />
                 }
             </div>
         )

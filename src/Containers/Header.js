@@ -10,7 +10,14 @@ import Languages from './Languages'
 
 const styles = theme => ({
     root: {
-        padding: '0 10%'
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
+                value: [10, 10, 3, 3],
+                variant: [2, 2, 0.5, 0.5],
+                unit: ['%', '%', '%', '%']
+            }
+        )
     },
     logo: {
         color: '#FFF',

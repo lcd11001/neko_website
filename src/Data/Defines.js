@@ -24,7 +24,8 @@ export const DataMenu = [
     {
         text: ID.MENU.STREAMLINE, link: '/streamline',
         customStyle: {
-            color: '#F26A65'
+            color: 'custom-color-1',
+            underlineColor: 'custom-underline-color-1'
         }
     },
     {
@@ -33,15 +34,10 @@ export const DataMenu = [
     {
         text: ID.MENU.CONTACT, link: '/contact',
         customStyle: {
-            border: '1px solid #707070',
-            borderRadius: 10,
-            padding: '10px 25px'
+            border: 'custom-border-1',
+            icon: 'custom-icon-1'
         },
         icon: Icons.IconMenuArrow,
-        customIconStyle: {
-            width: 63,
-            marginLeft: 30
-        },
         underline: 'disable'
     },
 ]

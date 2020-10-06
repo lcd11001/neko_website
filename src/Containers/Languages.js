@@ -21,10 +21,18 @@ const styles = theme => ({
     buttonRoot: {
         '&:hover': {
             backgroundColor: 'transparent'
-        }
+        },
+        padding: 5
     },
     icon: {
-        height: 30,
+        ...breakpointsStyle(theme,
+            {
+                key: ['height'],
+                value: [25],
+                variant: [2],
+                unit: ['px']
+            }
+        ),
         width: 'auto',
         objectFit: 'cover'
     }
