@@ -15,10 +15,12 @@ const styles = theme => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         width: '100%',
         height: '100%',
+        minHeight: '200vh',
+        backgroundColor: 'aliceblue'
     },
     text: {
         ...breakpointsStyle(
@@ -38,6 +40,7 @@ const styles = theme => ({
         backgroundPosition: 'bottom',
         width: '100%',
         height: '100%',
+        minHeight: '100vh'
     }
 })
 
