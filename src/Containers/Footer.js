@@ -10,9 +10,9 @@ import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
 
 import Logo from './Logo'
-import Menu from './Menu'
-import Languages from './Languages'
-import { Typography } from '@material-ui/core';
+
+import { IconButton, Typography } from '@material-ui/core';
+import Utils from '../Utils';
 
 const styles = theme => ({
     root: {
@@ -55,8 +55,31 @@ const styles = theme => ({
     },
 
     logo: {
+        display: 'flex',
+        justifyContent: 'flex-start',
         position: 'relative',
-        transform: 'translate(0, -50%)',
+        transform: 'translate(0, -50%) scale(1.5)',
+        transformOrigin: 'left'
+    },
+
+    icon: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['height'],
+                value: [24],
+                variant: [2],
+                unit: ['px']
+            }
+        ),
+        width: 'auto',
+        objectFit: 'cover'
+    },
+
+    iconButton: {
+        padding: 5,
+        '&:hover': {
+            backgroundColor: 'transparent'
+        },
     }
 });
 
@@ -81,7 +104,7 @@ class Footer extends React.Component {
                         <div className={classes.logo}>
                             <Logo secondary />
                         </div>
-                        <div className={clsx(classes.divColumn, classes.divBetween, classes.fullHeight)}>
+                        <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)}>
                             <Typography className={clsx(classes.copyright, classes.textNormal)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
                             </Typography>
@@ -140,6 +163,17 @@ class Footer extends React.Component {
                             <Typography className={clsx(classes.copyright, classes.textTitle, classes.title)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
                             </Typography>
+                        </div>
+                        <div>
+                            <IconButton className={classes.iconButton}>
+                                <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('facebook.png')} />
+                            </IconButton>
+                            <IconButton className={classes.iconButton}>
+                                <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('instagram.png')} />
+                            </IconButton>
+                            <IconButton className={classes.iconButton}>
+                                <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.png')} />
+                            </IconButton>
                         </div>
                     </div>
                 </div>
