@@ -60,6 +60,10 @@ const styles = (theme) => ({
             }
         ),
         fontWeight: 500
+    },
+
+    textBreak: {
+        whiteSpace: 'pre'
     }
 })
 
