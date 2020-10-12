@@ -35,11 +35,13 @@ const styles = (theme) => ({
     },
 
     fullWidth: {
-        width: '100%'
+        width: '100% !important'
+        // backgroundColor: 'red'
     },
 
     fullHeight: {
-        height: '100%'
+        height: '100% !important',
+        // backgroundColor: 'red'
     },
 
     textNormal: {
@@ -47,7 +49,7 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [13, 15],
-                variant: [2, 2],
+                variant: [1.5, 1.5],
                 unit: ['px', 'px']
             }
         ),

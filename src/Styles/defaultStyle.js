@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { breakpointsStyle } from '../Styles'
 
 const pxToRem = (size) => `${size / 16}rem`
 
@@ -53,10 +54,15 @@ const defaultTheme = createMuiTheme({
         },
         MuiButton: {
             root: {
-                minWidth: 100,
-                height: 40,
-                borderRadius: 5,
-                padding: '8px 24px'
+                minWidth: 135,
+                ...breakpointsStyle(defaultMuiTheme,
+                    {
+                        key: ['borderRadius', 'height', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
+                        value: [10, 50, 20, 20, 30, 30],
+                        variant: [1, 3, 2, 2, 2, 2],
+                        unit: ['px', 'px', 'px', 'px', 'px', 'px']
+                    }
+                ),
             },
             contained: {
                 backgroundColor: '#4A58B2',
@@ -93,7 +99,16 @@ const defaultTheme = createMuiTheme({
             },
             label: {
                 fontWeight: 'normal',
-                fontFamily: '"Raleway", sans-serif !important'
+                fontFamily: '"Raleway", sans-serif !important',
+                textTransform: 'initial',
+                ...breakpointsStyle(defaultMuiTheme,
+                    {
+                        key: ['font-size'],
+                        value: [1],
+                        variant: [0.1],
+                        unit: ['rem']
+                    }
+                ),
             }
         },
         MuiOutlinedInput: {
