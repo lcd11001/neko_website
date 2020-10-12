@@ -35,8 +35,6 @@ const styles = theme => ({
     },
 
     title: {
-        marginLeft: 10,
-        textAlign: 'center',
         letterSpacing: 0,
         fontWeight: 700,
         ...breakpointsStyle(theme,
@@ -55,8 +53,8 @@ const styles = theme => ({
     },
 
     subtitle: {
-        textAlign: 'center',
-        letterSpacing: 6.05,
+        letterSpacing: 6,
+        marginRight: -6,  // remove letter-spacing for the last letter of an element in CSS
         fontWeight: 700,
         ...breakpointsStyle(theme,
             {
@@ -98,11 +96,11 @@ class Logo extends React.Component {
         return (
             <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
                 <AppLogo className={classLogo} />
-                <div className={classes.divColumn, classes.divCenter} >
-                    <Typography className={classTitle} >
+                <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 10 }}>
+                    <Typography className={clsx(classTitle, classes.divRow, classes.divCenter)} >
                         <Trans i18nKey={ID.COMMON.LOGO_TITLE} />
                     </Typography>
-                    <Typography className={classSubTitle} >
+                    <Typography className={clsx(classSubTitle, classes.divRow, classes.divCenter)} >
                         <Trans i18nKey={ID.COMMON.LOGO_SUBTITLE} />
                     </Typography>
                 </div>

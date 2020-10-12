@@ -24,8 +24,16 @@ const styles = theme => ({
     rootPrimary: {
         backgroundColor: theme.palette.primary.main,
         width: '100%',
-        height: '66vw',
-        padding: '32% 10% 8%'
+        minHeight: '50vw',
+        paddingTop: '20vw',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft', 'paddingRight', 'paddingBottom'],
+                value: [8, 8, 5],
+                variant: [1, 1, 1],
+                unit: ['vw', 'vw', 'vw']
+            }
+        ),
     },
 
     rootSecondary: {
@@ -99,8 +107,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [65, 75],
-                variant: [11, 11],
+                value: [60, 75],
+                variant: [10, 11],
                 unit: ['px', 'px']
             }
         ),
@@ -111,7 +119,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [17, 20],
+                value: [15, 18],
                 variant: [2.5, 2.5],
                 unit: ['px', 'px']
             }
@@ -204,8 +212,8 @@ class Footer extends React.Component {
 
         return (
             <div className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
-                <div className={clsx(classes.divRow, classes.divBetween, classes.fullWidth)}>
-                    <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", minWidth: '50%' }}>
+                <div className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
+                    <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3 }}>
                         <div className={classes.logo}>
                             <Logo secondary />
                         </div>
@@ -221,7 +229,7 @@ class Footer extends React.Component {
                             </Typography>
                         </div>
                     </div>
-                    <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
+                    <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
                         <div>
                             <Typography className={clsx(classes.copyright, classes.textTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
@@ -245,7 +253,7 @@ class Footer extends React.Component {
                             </Typography>
                         </div>
                     </div>
-                    <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
+                    <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
                         <div>
                             <Typography className={clsx(classes.copyright, classes.textTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
@@ -263,7 +271,7 @@ class Footer extends React.Component {
                             </Typography>
                         </div>
                     </div>
-                    <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)}>
+                    <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
                         <div>
                             <Typography className={clsx(classes.copyright, classes.textTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
