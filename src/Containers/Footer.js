@@ -25,7 +25,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.primary.main,
         width: '100%',
         minHeight: '50vw',
-        paddingTop: '20vw',
+        paddingTop: '30vw',
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'paddingRight', 'paddingBottom'],
@@ -299,9 +299,11 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Typography className={clsx(classes.copyright, classes.textNormal)}>
-                    <Trans i18nKey={ID.FOOTER.PRIMARY_COPYRIGHT} />
-                </Typography>
+                <div style={{ paddingTop: 50 }}>
+                    <Typography className={clsx(classes.copyright, classes.textNormal)}>
+                        <Trans i18nKey={ID.FOOTER.PRIMARY_COPYRIGHT} />
+                    </Typography>
+                </div>
             </div>
         )
     }
