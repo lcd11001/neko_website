@@ -22,6 +22,10 @@ const styles = (theme) => ({
         justifyContent: 'flex-start'
     },
 
+    divBottom: {
+        justifyContent: 'flex-end'
+    },
+
     divLeft: {
         alignItems: 'flex-start'
     },

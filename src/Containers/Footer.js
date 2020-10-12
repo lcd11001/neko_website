@@ -29,14 +29,18 @@ const styles = theme => ({
     },
 
     rootSecondary: {
-        width: '82%',
-        height: '30vw',
+        width: '83%',
+        height: '25vw',
         backgroundColor: theme.palette.primary.secondary,
+        backgroundImage: `url(${Utils.getImageUrl('footer/Make_It_Live.png')})`,
+        backgroundPosition: 'left top',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain',
         position: 'absolute',
-        top: '50%',
+        top: 0,
         left: '50%',
-        transform: 'translate(-50%, -158%)',
-        padding: '10% 10% 10% 30%',
+        transform: 'translate(-50%, -50%)',
+        padding: 0,
         ...breakpointsStyle(theme,
             {
                 key: ['borderRadius'],
@@ -95,8 +99,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [75, 85],
-                variant: [15, 15],
+                value: [65, 75],
+                variant: [11, 11],
                 unit: ['px', 'px']
             }
         ),
@@ -107,8 +111,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [20, 24],
-                variant: [4, 4],
+                value: [17, 20],
+                variant: [2.5, 2.5],
                 unit: ['px', 'px']
             }
         ),
@@ -123,7 +127,7 @@ const styles = theme => ({
             {
                 key: ['width', 'marginLeft'],
                 value: [63, 30],
-                variant: [7, 5],
+                variant: [10, 5],
                 unit: ['px', 'px']
             }
         ),
@@ -176,18 +180,20 @@ class Footer extends React.Component {
 
         return (
             <div className={classes.rootSecondary}>
-                <div className={clsx(classes.divColumn, classes.divCenter, classes.fullHeight)}>
-                    <Typography className={clsx(classes.copyright, classes.title)}>
-                        <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
-                    </Typography>
-                    <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-                        <div className={clsx(classes.divRow, classes.divCenter)}>
-                            <Typography className={clsx(classes.copyright, classes.subTitle)}>
-                                <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
-                            </Typography>
-                            <Icons.IconMenuArrow className={classes.iconArrow} />
-                        </div>
-                    </Link>
+                <div className={clsx(classes.divColumn, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ paddingRight: '4%' }}>
+                    <div className={clsx(classes.divColumn, classes.divCenter)}>
+                        <Typography className={clsx(classes.copyright, classes.title)}>
+                            <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
+                        </Typography>
+                        <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+                            <div className={clsx(classes.divRow, classes.divCenter)}>
+                                <Typography className={clsx(classes.copyright, classes.subTitle)}>
+                                    <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
+                                </Typography>
+                                <Icons.IconMenuArrow className={classes.iconArrow} />
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         )
