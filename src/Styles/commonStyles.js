@@ -17,8 +17,8 @@ const styles = (theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    
-    divTop:{
+
+    divTop: {
         justifyContent: 'flex-start'
     },
 
@@ -42,6 +42,14 @@ const styles = (theme) => ({
     fullHeight: {
         height: '100% !important',
         // backgroundColor: 'red'
+    },
+
+    relative: {
+        position: 'relative'
+    },
+
+    absolute: {
+        position: 'absolute'
     },
 
     textNormal: {
