@@ -41,33 +41,33 @@ const styles = theme => ({
         ),
     },
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
     section1: {
         width: '100%',
         // minHeight: '50vw'
     },
 
     section1_img1: {
-        width: '45%',
         objectFit: 'contain',
         ...breakpointsStyle(theme,
             {
-                key: ['padding-left'],
-                value: [50],
-                variant: [5],
-                unit: ['px']
+                key: ['padding-left', 'width'],
+                value: [50, 45],
+                variant: [10, 2],
+                unit: ['px', '%']
             }
         ),
     },
 
     section1_img2: {
-        width: '60%',
         objectFit: 'contain',
         ...breakpointsStyle(theme,
             {
-                key: ['padding-right'],
-                value: [50],
-                variant: [5],
-                unit: ['px']
+                key: ['padding-right', 'width'],
+                value: [50, 65],
+                variant: [10, 3],
+                unit: ['px', '%']
             }
         ),
     },
@@ -126,6 +126,8 @@ const styles = theme => ({
             }
         ),
     },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section2: {
         width: '100%',
@@ -206,6 +208,81 @@ const styles = theme => ({
         '&--hover': {
             color: theme.palette.text.primary
         }
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    section3: {
+        width: '100%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop'],
+                value: [10],
+                variant: [0.5],
+                unit: ['%', '%', '%']
+            }
+        ),
+    },
+
+    section3_txt1: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [25, 30],
+                variant: [3, 5],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600,
+        textAlign: 'center',
+        color: 'inherit',
+        transform: 'translateY(25%)'
+    },
+
+    section3_txt1_plus: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size'],
+                value: [80],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
+        fontWeight: 200,
+    },
+
+    section3_txt2: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [150, 170],
+                variant: [20, 20],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 500,
+        textAlign: 'center',
+        color: 'inherit',
+    },
+
+    section3_txt3: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [20, 24],
+                variant: [3, 3],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 400,
+        textAlign: 'left',
+        color: 'inherit',
+        whiteSpace: 'pre-wrap'
+    },
+
+    section3_img1: {
+        objectFit: 'contain',
+        width: '100%'
     }
 });
 
@@ -257,7 +334,7 @@ class Home extends React.Component {
                     </div>
                     <img alt={'but_chi_nho.png'} src={Utils.getImageUrl('home/but_chi_nho.png')} className={classes.section1_img1} />
                 </div>
-                <div id={'section1.2'} className={clsx(classes.divRow, classes.divCenter)}>
+                <div id={'section1.2'} className={clsx(classes.divRow, classes.divCenter)} style={{ paddingTop: 10 }}>
                     <img alt={'Con_Meo0001_nho.png'} src={Utils.getImageUrl('home/Con_Meo0001_nho.png')} className={classes.section1_img2} />
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
@@ -354,6 +431,49 @@ class Home extends React.Component {
         )
     }
 
+    renderSection3() {
+        const {
+            classes
+        } = this.props
+
+        return (
+            <div id={'section3'} className={clsx(classes.divColumn, classes.section3)}>
+                <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <div id={'section3.1.1'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '30%', maxWidth: '30% !important', background: 'blue' }}>
+                        <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1}  />
+                    </div>
+
+                    <div id={'section3.1.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '30%', maxWidth: '30% !important', background: 'red' }}>
+                        <div id={'section3.1.2.a'} className={clsx(classes.divRow, classes.divCenter)}>
+                            <Typography className={clsx(classes.textBreak, classes.section3_txt2)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_3_TEXT_2}
+                                />
+                            </Typography>
+                            <Typography className={clsx(classes.textBreak, classes.section3_txt1)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_3_TEXT_1}
+                                    components={{ span: <span /> }}
+                                    values={{
+                                        custom: clsx(classes.secondaryText, classes.section3_txt1_plus)
+                                    }}
+                                />
+                            </Typography>
+                        </div>
+                        <div id={'section3.1.2.b'} className={clsx(classes.divRow, classes.divCenter)}>
+                            <Typography className={clsx(classes.textBreak, classes.section3_txt3)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_3_TEXT_3}
+                                />
+                            </Typography>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        )
+    }
+
     render() {
         const { classes } = this.props;
         // console.log('Home::render', this.props)
@@ -361,6 +481,7 @@ class Home extends React.Component {
             <div className={classes.root}>
                 {this.renderSection1()}
                 {this.renderSection2()}
+                {this.renderSection3()}
                 <PageUnderContruction />
             </div>
         );
