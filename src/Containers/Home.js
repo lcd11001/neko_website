@@ -285,6 +285,14 @@ const styles = theme => ({
         width: '30%'
     },
 
+    section3_img2: {
+        objectFit: 'contain',
+        width: '15%',
+        backgroundColor: `${theme.palette.primary.secondary}1E`,
+        borderRadius: '50%',
+        marginRight: 10
+    },
+
     section3_divider: {
         width: '100%',
         height: 2,
@@ -482,6 +490,7 @@ class Home extends React.Component {
                         </div>
                         <Divider className={classes.section3_divider} />
                         <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter)}>
+                            <img alt={'pen.svg'} src={Utils.getImageUrl('home/pen.svg')} className={classes.section3_img2} />
                             <Typography className={clsx(classes.textBreak, classes.section3_txt3)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_3_TEXT_3}
