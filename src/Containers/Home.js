@@ -12,12 +12,13 @@ import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Divider, Typography } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
 import { HomeMenu } from '../Data/Defines'
 import { Link } from 'react-router-dom';
+import Carousel from 'react-material-ui-carousel';
 
 const styles = theme => ({
     root: {
@@ -228,7 +229,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [25, 30],
+                value: [25, 25],
                 variant: [3, 5],
                 unit: ['px', 'px']
             }
@@ -236,7 +237,7 @@ const styles = theme => ({
         fontWeight: 600,
         textAlign: 'center',
         color: 'inherit',
-        transform: 'translateY(25%)'
+        transform: 'translateY(50%)'
     },
 
     section3_txt1_plus: {
@@ -244,7 +245,7 @@ const styles = theme => ({
             {
                 key: ['font-size'],
                 value: [80],
-                variant: [5],
+                variant: [10],
                 unit: ['px']
             }
         ),
@@ -256,7 +257,7 @@ const styles = theme => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [150, 170],
-                variant: [20, 20],
+                variant: [25, 30],
                 unit: ['px', 'px']
             }
         ),
@@ -277,12 +278,28 @@ const styles = theme => ({
         fontWeight: 400,
         textAlign: 'left',
         color: 'inherit',
-        whiteSpace: 'pre-wrap'
     },
 
     section3_img1: {
         objectFit: 'contain',
-        width: '100%'
+        width: '30%'
+    },
+
+    section3_divider: {
+        width: '100%',
+        height: 2,
+        color: '#707070',
+        margin: '10px 0'
+    },
+
+    section3_carousel: {
+        height: '25vw',
+        // backgroundColor: 'red'
+    },
+
+    section3_logo: {
+        width: '100%',
+        padding: '10%'
     }
 });
 
@@ -436,15 +453,18 @@ class Home extends React.Component {
             classes
         } = this.props
 
+        const carouselAnim = 'slide'
+        // const carouselAnim = 'fade'
+
+        const numLogo = 5
+        const totalLogo = 20
+
         return (
             <div id={'section3'} className={clsx(classes.divColumn, classes.section3)}>
                 <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
-                    <div id={'section3.1.1'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '30%', maxWidth: '30% !important', background: 'blue' }}>
-                        <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1}  />
-                    </div>
-
-                    <div id={'section3.1.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '30%', maxWidth: '30% !important', background: 'red' }}>
-                        <div id={'section3.1.2.a'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1} />
+                    <div className={clsx(classes.divColumn, classes.divCenter)} style={{ padding: 20 }}>
+                        <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divCenter)}>
                             <Typography className={clsx(classes.textBreak, classes.section3_txt2)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_3_TEXT_2}
@@ -460,7 +480,8 @@ class Home extends React.Component {
                                 />
                             </Typography>
                         </div>
-                        <div id={'section3.1.2.b'} className={clsx(classes.divRow, classes.divCenter)}>
+                        <Divider className={classes.section3_divider} />
+                        <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter)}>
                             <Typography className={clsx(classes.textBreak, classes.section3_txt3)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_3_TEXT_3}
@@ -468,10 +489,68 @@ class Home extends React.Component {
                             </Typography>
                         </div>
                     </div>
+                </div>
 
+                <div id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <Carousel
+                        className={clsx(classes.divRow, classes.divCenter, classes.section3_carousel)}
+                        autoPlay={true}
+                        indicators={false}
+                        navButtonsAlwaysInvisible={true}
+                        animation={carouselAnim}
+                        interval={3000}
+                    >
+                        {
+                            Array.apply(0, Array(totalLogo))
+                                .filter((value, index) => {
+                                    if (carouselAnim === 'slide') {
+                                        return index % numLogo === 0
+                                    }
+                                    return true
+                                })
+                                .map((value, index) => {
+                                    if (carouselAnim === 'slide') {
+                                        return this.renderSection3LogoSlide(index, numLogo, totalLogo)
+                                    }
+                                    return this.renderSection3LogoFade(index, numLogo, totalLogo)
+                                })
+                        }
+                    </Carousel>
                 </div>
             </div>
         )
+    }
+
+    renderSection3LogoFade(index, len, total) {
+        const {
+            classes
+        } = this.props
+
+        console.log('=============')
+
+        return (
+            <div key={index} className={clsx(classes.divRow, classes.divCenter, classes.fullHeight)} style={{ flex: len }}>
+                {
+                    Array.apply(0, Array(len))
+                        .map((v, i) => {
+                            let name = Utils.zeroPadding((index + i) % total, 2)
+                            let path = Utils.getLogoUrl(`${name}.svg`)
+                            console.log('path', path)
+
+                            return (
+                                <div key={name} style={{ flex: 1 }}>
+                                    <img alt={`${name}.svg`} src={path} className={classes.section3_logo} />
+                                </div>
+                            )
+                        })
+                }
+            </div >
+        )
+
+    }
+
+    renderSection3LogoSlide(index, len, total) {
+        return this.renderSection3LogoFade(index * len, len, total)
     }
 
     render() {

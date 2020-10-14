@@ -9,6 +9,7 @@ const Utils = {
     getUrl: Assets.getUrl,
     getIconUrl: Assets.getIconUrl,
     getImageUrl: Assets.getImageUrl,
+    getLogoUrl: Assets.getLogoUrl,
     getBufferAsync: Assets.getBufferAsync,
 
     parseString: String.parseString,

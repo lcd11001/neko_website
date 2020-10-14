@@ -35,3 +35,7 @@ export const getImageUrl = (asset) => {
     return getUrl('images/' + asset)
 }
 
+export const getLogoUrl = (asset) => {
+    return getUrl('logos/' + asset)
+}
+
