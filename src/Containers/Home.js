@@ -154,7 +154,7 @@ const styles = theme => ({
                 unit: ['px', 'px', '%']
             }
         ),
-        fontWeight: 900,
+        fontWeight: 700,
         letterSpacing: 1.5,
         textTransform: 'uppercase'
     },
