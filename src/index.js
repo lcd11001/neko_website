@@ -28,25 +28,29 @@ import { CssBaseline } from '@material-ui/core'
 const metadata = require('./metadata.json')
 console.log('metadata', metadata)
 
-const divLoading = document.getElementById('loading')
-document.body.removeChild(divLoading)
-
-i18next.init({
-    debug: process.env.NODE_ENV === 'development',
-    react: {
-        wait: true
-    },
-    interpolation: {
-        escapeValue: false
-    },
-    lng: ID.COMMON.LANGUAGE_EN,
-    fallbackLng: ID.COMMON.LANGUAGE_EN,
-    resources: {
-        [ID.COMMON.LANGUAGE_EN]: EN,
-        [ID.COMMON.LANGUAGE_VN]: VN
-    },
-    ns: Object.keys(ID)
-})
+i18next
+    // first: init multi language
+    .init({
+        debug: process.env.NODE_ENV === 'development',
+        react: {
+            wait: true
+        },
+        interpolation: {
+            escapeValue: false
+        },
+        lng: ID.COMMON.LANGUAGE_EN,
+        fallbackLng: ID.COMMON.LANGUAGE_EN,
+        resources: {
+            [ID.COMMON.LANGUAGE_EN]: EN,
+            [ID.COMMON.LANGUAGE_VN]: VN
+        },
+        ns: Object.keys(ID)
+    })
+    // then: remove loading icon
+    .then(t => {
+        const divLoading = document.getElementById('loading')
+        document.body.removeChild(divLoading)
+    })
 
 const Routes = () => {
     return (
@@ -59,10 +63,10 @@ const Routes = () => {
                             <App>
                                 <Switch>
                                     {/* Homepage === Profile because of user permission */}
-                                    <Redirect exact from='/' to={'/home'} />
+                                    <Redirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
 
                                     {/* Force login if needed by using protected route */}
-                                    <Route exact path='/home' component={Home} />
+                                    <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
 
                                     {/* invalid path */}
                                     <Route path='*' component={PageNotFound} />

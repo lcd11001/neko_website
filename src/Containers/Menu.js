@@ -154,10 +154,13 @@ class Menu extends React.Component {
             classes,
             location: {
                 pathname
-            }
+            },
+            t
         } = this.props
 
-        let isSelected = menu.link === pathname
+        let menuLink = t(menu.link)
+
+        let isSelected = menuLink === pathname
 
         let classMenuItem = clsx(classes.menuItem, {
             [classes.menuItem + '--selected']: isSelected,
@@ -165,7 +168,7 @@ class Menu extends React.Component {
         })
 
         let classMenuIcon = clsx(classes.menuIcon, {
-            [classes.menuIcon + '--hover']: this.state[`hover_${menu.link}`] === true,
+            [classes.menuIcon + '--hover']: this.state[`hover_${menuLink}`] === true,
             [classes.menuIcon + '--' + ((menu.customStyle && menu.customStyle.icon) || 'undefined')]: (menu.customStyle && menu.customStyle.icon)
         })
 
@@ -174,18 +177,18 @@ class Menu extends React.Component {
         })
 
         let classUnderline = clsx(classes.underline, {
-            [classes.underline + '--hover']: this.state[`hover_${menu.link}`] === true,
+            [classes.underline + '--hover']: this.state[`hover_${menuLink}`] === true,
             [classes.underline + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (menu.customStyle && menu.customStyle.underlineColor)
         })
 
         let classUnderbackground = clsx(classes.underbackground, {
-            [classes.underbackground + '--hover']: (this.state[`hover_${menu.link}`] === true && menu.underline === 'disable')
+            [classes.underbackground + '--hover']: (this.state[`hover_${menuLink}`] === true && menu.underline === 'disable')
         })
 
         return (
 
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
-                <Link to={menu.link} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menu.link)} onMouseLeave={this.handleMouseLeave(menu.link)}>
+                <Link to={menuLink} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
                         <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap color={'textPrimary'} >
                             <Trans i18nKey={menu.text} />

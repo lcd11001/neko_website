@@ -3,29 +3,29 @@ import ID from '../Translations/ID.json'
 
 export const DataMenu = [
     {
-        text: ID.MENU.HOMEPAGE, link: '/home',
+        text: ID.MENU.HOMEPAGE, link: ID.LINK.HOME,
     },
     {
-        text: ID.MENU.WORKS, link: '/works',
+        text: ID.MENU.WORKS, link: ID.LINK.WORKS,
     },
     {
-        text: ID.MENU.ABOUT, link: '/about',
+        text: ID.MENU.ABOUT, link: ID.LINK.ABOUT,
     },
     {
-        text: ID.MENU.CAPABILITIES, link: '/capabilities',
+        text: ID.MENU.CAPABILITIES, link: ID.LINK.CAPABILITIES,
     },
     {
-        text: ID.MENU.STREAMLINE, link: '/streamline',
+        text: ID.MENU.STREAMLINE, link: ID.LINK.STREAMLINE,
         customStyle: {
             color: 'custom-color-1',
             underlineColor: 'custom-underline-color-1'
         }
     },
     {
-        text: ID.MENU.BLOG, link: '/blog',
+        text: ID.MENU.BLOG, link: ID.LINK.BLOG,
     },
     {
-        text: ID.MENU.CONTACT, link: '/contact',
+        text: ID.MENU.CONTACT, link: ID.LINK.CONTACT,
         customStyle: {
             border: 'custom-border-1',
             icon: 'custom-icon-1'

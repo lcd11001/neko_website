@@ -291,19 +291,19 @@ class Footer extends React.Component {
                         <div>
                             <IconButton
                                 className={classes.iconButton}
-                                onClick={this.handleOpenUrl(t(ID.FOOTER.PRIMARY_SOCIAL_LINK_FACEBOOK))}
+                                onClick={this.handleOpenUrl(t(ID.LINK.FACEBOOK))}
                             >
                                 <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('facebook.png')} />
                             </IconButton>
                             <IconButton
                                 className={classes.iconButton}
-                                onClick={this.handleOpenUrl(t(ID.FOOTER.PRIMARY_SOCIAL_LINK_INSTAGRAM))}
+                                onClick={this.handleOpenUrl(t(ID.LINK.INSTAGRAM))}
                             >
                                 <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('instagram.png')} />
                             </IconButton>
                             <IconButton
                                 className={classes.iconButton}
-                                onClick={this.handleOpenUrl(t(ID.FOOTER.PRIMARY_SOCIAL_LINK_YOUTUBE))}
+                                onClick={this.handleOpenUrl(t(ID.LINK.YOUTUBE))}
                             >
                                 <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.png')} />
                             </IconButton>
