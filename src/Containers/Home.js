@@ -46,6 +46,7 @@ const styles = theme => ({
 
     section1: {
         width: '100%',
+        padding: '0 2%'
         // minHeight: '50vw'
     },
 
@@ -215,14 +216,7 @@ const styles = theme => ({
 
     section3: {
         width: '100%',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingTop'],
-                value: [10],
-                variant: [0.5],
-                unit: ['%', '%', '%']
-            }
-        ),
+        padding: '10% 2%'
     },
 
     section3_txt1: {
@@ -471,7 +465,7 @@ class Home extends React.Component {
             <div id={'section3'} className={clsx(classes.divColumn, classes.section3)}>
                 <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1} />
-                    <div className={clsx(classes.divColumn, classes.divCenter)} style={{ padding: 20 }}>
+                    <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 20 }}>
                         <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divCenter)}>
                             <Typography className={clsx(classes.textBreak, classes.section3_txt2)}>
                                 <Trans
@@ -535,7 +529,7 @@ class Home extends React.Component {
             classes
         } = this.props
 
-        console.log('=============')
+        // console.log('=============')
 
         return (
             <div key={index} className={clsx(classes.divRow, classes.divCenter, classes.fullHeight)} style={{ flex: len }}>
@@ -544,7 +538,7 @@ class Home extends React.Component {
                         .map((v, i) => {
                             let name = Utils.zeroPadding((index + i) % total, 2)
                             let path = Utils.getLogoUrl(`${name}.svg`)
-                            console.log('path', path)
+                            // console.log('path', path)
 
                             return (
                                 <div key={name} style={{ flex: 1 }}>
@@ -570,7 +564,6 @@ class Home extends React.Component {
                 {this.renderSection1()}
                 {this.renderSection2()}
                 {this.renderSection3()}
-                <PageUnderContruction />
             </div>
         );
     }

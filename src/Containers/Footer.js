@@ -18,7 +18,8 @@ import Utils from '../Utils';
 const styles = theme => ({
     root: {
         position: 'relative',
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        marginTop: '15vw'
     },
 
     rootPrimary: {
