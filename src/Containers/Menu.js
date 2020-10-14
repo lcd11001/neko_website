@@ -5,7 +5,7 @@ import compose from 'recompose/compose'
 import { Link, withRouter } from 'react-router-dom';
 import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 import { Divider, Typography } from '@material-ui/core';
-import { DataMenu } from '../Data/Defines'
+import { HeaderMenu } from '../Data/Defines'
 
 import clsx from 'clsx'
 import { Trans, withTranslation } from 'react-i18next';
@@ -161,6 +161,7 @@ class Menu extends React.Component {
         let menuLink = t(menu.link)
 
         let isSelected = menuLink === pathname
+        let isHover = this.state[`hover_${menuLink}`] === true
 
         let classMenuItem = clsx(classes.menuItem, {
             [classes.menuItem + '--selected']: isSelected,
@@ -168,7 +169,7 @@ class Menu extends React.Component {
         })
 
         let classMenuIcon = clsx(classes.menuIcon, {
-            [classes.menuIcon + '--hover']: this.state[`hover_${menuLink}`] === true,
+            [classes.menuIcon + '--hover']: isHover,
             [classes.menuIcon + '--' + ((menu.customStyle && menu.customStyle.icon) || 'undefined')]: (menu.customStyle && menu.customStyle.icon)
         })
 
@@ -177,12 +178,12 @@ class Menu extends React.Component {
         })
 
         let classUnderline = clsx(classes.underline, {
-            [classes.underline + '--hover']: this.state[`hover_${menuLink}`] === true,
+            [classes.underline + '--hover']: isHover,
             [classes.underline + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (menu.customStyle && menu.customStyle.underlineColor)
         })
 
         let classUnderbackground = clsx(classes.underbackground, {
-            [classes.underbackground + '--hover']: (this.state[`hover_${menuLink}`] === true && menu.underline === 'disable')
+            [classes.underbackground + '--hover']: (isHover && menu.underline === 'disable')
         })
 
         return (
@@ -215,7 +216,7 @@ class Menu extends React.Component {
         return (
             <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
                 {
-                    DataMenu.map(menu => (
+                    HeaderMenu.map(menu => (
                         this.renderMenu(menu)
                     ))
                 }

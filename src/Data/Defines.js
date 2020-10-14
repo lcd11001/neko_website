@@ -1,7 +1,7 @@
 import * as Icons from '../Components/NekoIcons'
 import ID from '../Translations/ID.json'
 
-export const DataMenu = [
+export const HeaderMenu = [
     {
         text: ID.MENU.HOMEPAGE, link: ID.LINK.HOME,
     },
@@ -32,6 +32,24 @@ export const DataMenu = [
         },
         icon: Icons.IconMenuArrow,
         underline: 'disable'
+    },
+]
+
+export const HomeMenu = [
+    {
+        text: ID.HOME.SECTION_2_MENU_1, link: ID.LINK.WORKS_BRAND, icon: Icons.IconMenuArrow
+    },
+    {
+        text: ID.HOME.SECTION_2_MENU_2, link: ID.LINK.WORKS_MOTION, icon: Icons.IconMenuArrow
+    },
+    {
+        text: ID.HOME.SECTION_2_MENU_3, link: ID.LINK.WORKS_INTERFACE, icon: Icons.IconMenuArrow
+    },
+    {
+        text: ID.HOME.SECTION_2_MENU_4, link: ID.LINK.WORKS_GRAPHIC, icon: Icons.IconMenuArrow
+    },
+    {
+        text: ID.HOME.SECTION_2_MENU_5, link: ID.LINK.WORKS_DIGITAL, icon: Icons.IconMenuArrow
     },
 ]
 

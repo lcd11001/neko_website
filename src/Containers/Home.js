@@ -16,6 +16,9 @@ import { Button, Typography } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
+import { HomeMenu } from '../Data/Defines'
+import { Link } from 'react-router-dom';
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -36,6 +39,11 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
+    },
+
+    section1: {
+        width: '100%',
+        // minHeight: '50vw'
     },
 
     section1_img1: {
@@ -117,15 +125,116 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
+    },
+
+    section2: {
+        width: '100%',
+        // minHeight: '50vw',
+        backgroundColor: 'rgb(195, 228, 226)',
+        backgroundImage: `url(${Utils.getImageUrl('home/specialized_digital.png')})`,
+        backgroundPosition: 'right center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop', 'paddingLeft', 'paddingBottom'],
+                value: [10, 15, 5],
+                variant: [0.5, 1.5, 0.5],
+                unit: ['%', '%', '%']
+            }
+        ),
+    },
+
+    section2_txt1: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height', 'paddingBottom'],
+                value: [15, 17, 8],
+                variant: [2, 2, 0.5],
+                unit: ['px', 'px', '%']
+            }
+        ),
+        fontWeight: 900,
+        letterSpacing: 1.5,
+        textTransform: 'uppercase'
+    },
+
+    menuLink: {
+        textDecoration: 'none',
+        color: 'white'
+    },
+
+    menuItem: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height', 'paddingBottom'],
+                value: [35, 41, 50],
+                variant: [5, 5, 10],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        fontWeight: 400,
+        textAlign: 'left',
+        color: 'inherit',
+
+        transition: theme.transitions.create(['color', 'font-weight'], {
+            duration: 300
+        }),
+
+        '&--hover': {
+            fontWeight: 700,
+            color: theme.palette.text.primary
+        }
+    },
+
+    menuIcon: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'marginLeft'],
+                value: [50, 40],
+                variant: [8, 8],
+                unit: ['px', 'px']
+            }
+        ),
+        color: 'inherit',
+        position: 'relative',
+        top: 5,
+        transition: theme.transitions.create(['color'], {
+            duration: 300
+        }),
+
+        '&--hover': {
+            color: theme.palette.text.primary
+        }
     }
 });
 
 class Home extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    handleMouseEnter = (link) => (evt) => {
+        this.setState({
+            [`hover_${link}`]: true
+        })
+    }
+
+    handleMouseLeave = (link) => (evt) => {
+        this.setState({
+            [`hover_${link}`]: false
+        })
+    }
+
     renderSection1 = () => {
-        const { classes, t, theme } = this.props
+        const { classes } = this.props
 
         return (
-            <div id={'section1'} className={clsx(classes.divColumn)}>
+            <div id={'section1'} className={clsx(classes.divColumn, classes.section1)}>
                 <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <Typography className={clsx(classes.textBreak, classes.section1_txt1)}>
@@ -186,12 +295,72 @@ class Home extends React.Component {
         )
     }
 
+    renderSection2 = () => {
+        const { classes } = this.props
+
+        return (
+            <div id={'section2'} className={clsx(classes.divColumn, classes.section2)}>
+                <div id={'section2.1'}>
+                    <Typography className={clsx(classes.textBreak, classes.section2_txt1)}>
+                        <Trans
+                            i18nKey={ID.HOME.SECTION_2_TEXT_1}
+                        />
+                    </Typography>
+                </div>
+                <div id={'section2.2'}>
+                    {
+                        HomeMenu.map(menu => (
+                            this.renderSection2Menu(menu)
+                        ))
+                    }
+                </div>
+            </div>
+        )
+    }
+
+    renderSection2Menu(menu) {
+        const {
+            classes,
+            t
+        } = this.props
+
+        let menuLink = t(menu.link)
+
+        let isHover = this.state[`hover_${menuLink}`] === true
+
+        let classMenuItem = clsx(classes.menuItem, {
+            [classes.menuItem + '--hover']: isHover
+        })
+
+        let classMenuIcon = clsx(classes.menuIcon, {
+            [classes.menuIcon + '--hover']: isHover
+        })
+
+        return (
+            <div key={menu.text} className={clsx(classes.divRow)}>
+                <Link to={menuLink} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
+                    <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
+                        <Typography className={clsx(classMenuItem)} noWrap>
+                            <Trans
+                                i18nKey={menu.text}
+                            />
+                        </Typography>
+                        {
+                            isHover && <menu.icon className={classMenuIcon} />
+                        }
+                    </div>
+                </Link>
+            </div>
+        )
+    }
+
     render() {
-        const { classes, t, i18n } = this.props;
+        const { classes } = this.props;
         // console.log('Home::render', this.props)
         return (
             <div className={classes.root}>
                 {this.renderSection1()}
+                {this.renderSection2()}
                 <PageUnderContruction />
             </div>
         );
@@ -216,7 +385,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withMultipleStyles(commonStyles, styles, { withTheme: true }),
+    withMultipleStyles(commonStyles, styles),
     withTranslation()
 )(Home);
 
