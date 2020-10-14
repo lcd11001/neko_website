@@ -142,7 +142,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingTop', 'paddingLeft', 'paddingBottom'],
-                value: [10, 15, 5],
+                value: [8, 15, 5],
                 variant: [0.5, 1.5, 0.5],
                 unit: ['%', '%', '%']
             }
@@ -153,7 +153,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height', 'paddingBottom'],
-                value: [15, 17, 8],
+                value: [15, 17, 6],
                 variant: [2, 2, 0.5],
                 unit: ['px', 'px', '%']
             }
@@ -216,7 +216,7 @@ const styles = theme => ({
 
     section3: {
         width: '100%',
-        padding: '10% 2%'
+        padding: '5% 2%'
     },
 
     section3_txt1: {
