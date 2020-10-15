@@ -53,15 +53,14 @@ const styles = theme => ({
     },
 
     subtitle: {
-        letterSpacing: 6,
-        marginRight: -6,  // remove letter-spacing for the last letter of an element in CSS
         fontWeight: 700,
+        // letterSpacing + marginRight remove letter-spacing for the last letter of an element in CSS
         ...breakpointsStyle(theme,
             {
-                key: ['font-size', 'top'],
-                value: [8, TEXT_OFFSET],
-                variant: [1, TEXT_OFFSET_DELTA],
-                unit: ['px', 'px']
+                key: ['font-size', 'top', 'letterSpacing', 'marginRight'],
+                value: [8, TEXT_OFFSET, 6, -6],
+                variant: [1, TEXT_OFFSET_DELTA, 1, -1],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
         position: 'relative',

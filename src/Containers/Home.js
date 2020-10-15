@@ -142,7 +142,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingTop', 'paddingLeft', 'paddingBottom'],
-                value: [8, 15, 5],
+                value: [10, 15, 8],
                 variant: [0.5, 1.5, 0.5],
                 unit: ['%', '%', '%']
             }
@@ -153,7 +153,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height', 'paddingBottom'],
-                value: [15, 17, 6],
+                value: [15, 17, 8],
                 variant: [2, 2, 0.5],
                 unit: ['px', 'px', '%']
             }
@@ -172,12 +172,12 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height', 'paddingBottom'],
-                value: [35, 41, 50],
-                variant: [5, 5, 10],
+                value: [30, 40, 40],
+                variant: [5, 5, 8],
                 unit: ['px', 'px', 'px']
             }
         ),
-        fontWeight: 400,
+        fontWeight: 300,
         textAlign: 'left',
         color: 'inherit',
 
@@ -186,7 +186,7 @@ const styles = theme => ({
         }),
 
         '&--hover': {
-            fontWeight: 700,
+            fontWeight: 600,
             color: theme.palette.text.primary
         }
     },
@@ -288,7 +288,7 @@ const styles = theme => ({
     },
 
     section3_divider: {
-        width: '100%',
+        width: '90%',
         height: 2,
         color: '#707070',
         margin: '10px 0'
@@ -465,7 +465,7 @@ class Home extends React.Component {
             <div id={'section3'} className={clsx(classes.divColumn, classes.section3)}>
                 <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1} />
-                    <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 20 }}>
+                    <div className={clsx(classes.divColumn, classes.divCenter)} >
                         <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divCenter)}>
                             <Typography className={clsx(classes.textBreak, classes.section3_txt2)}>
                                 <Trans
