@@ -12,7 +12,7 @@ import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
-import { Button, Divider, Typography } from '@material-ui/core';
+import { Button, Divider, IconButton, Typography } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
@@ -246,7 +246,7 @@ const styles = theme => ({
         fontWeight: 200,
     },
 
-    section3_txt2: {
+    section3_project_num: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -260,7 +260,7 @@ const styles = theme => ({
         color: 'inherit',
     },
 
-    section3_txt3: {
+    section3_txt2: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -351,7 +351,10 @@ const styles = theme => ({
     },
 
     section4_carousel_buttons: {
-
+        "&:hover": {
+            backgroundColor: "transparent",
+            color: theme.palette.primary.secondary
+        }
     },
 
     section4_logo: {
@@ -398,7 +401,8 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            caseIndex: 0,
+            caseStudyNum: props.t(ID.HOME.SECTION_4_CASE_STUDY_NUM)
         }
     }
 
@@ -412,6 +416,12 @@ class Home extends React.Component {
         this.setState({
             [`hover_${link}`]: false
         })
+    }
+
+    handleCaseStudy = (delta) => (evt) => {
+        this.setState((state, props) => ({
+            caseIndex: ((state.caseIndex + delta) + state.caseStudyNum) % state.caseStudyNum
+        }))
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -561,9 +571,9 @@ class Home extends React.Component {
                     <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1} />
                     <div className={clsx(classes.divColumn, classes.divCenter)} >
                         <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divCenter)}>
-                            <Typography className={clsx(classes.textBreak, classes.section3_txt2)}>
+                            <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
                                 <Trans
-                                    i18nKey={ID.HOME.SECTION_3_TEXT_2}
+                                    i18nKey={ID.HOME.SECTION_3_PROJECTS_NUM}
                                 />
                             </Typography>
                             <Typography className={clsx(classes.textBreak, classes.section3_txt1)}>
@@ -579,9 +589,9 @@ class Home extends React.Component {
                         <Divider className={classes.section3_divider} />
                         <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter)}>
                             <img alt={'pen.svg'} src={Utils.getImageUrl('home/pen.svg')} className={classes.section3_img2} />
-                            <Typography className={clsx(classes.textBreak, classes.section3_txt3)}>
+                            <Typography className={clsx(classes.textBreak, classes.section3_txt2)}>
                                 <Trans
-                                    i18nKey={ID.HOME.SECTION_3_TEXT_3}
+                                    i18nKey={ID.HOME.SECTION_3_TEXT_2}
                                 />
                             </Typography>
                         </div>
@@ -657,6 +667,11 @@ class Home extends React.Component {
             classes
         } = this.props
 
+        const {
+            caseIndex,
+            caseStudyNum
+        } = this.state
+
         const totalCaseStudy = 5
         // const carouselAnim = 'slide'
         const carouselAnim = 'fade'
@@ -671,6 +686,7 @@ class Home extends React.Component {
                         navButtonsAlwaysInvisible={true}
                         animation={carouselAnim}
                         interval={3000}
+                        startAt={caseIndex}
                     >
                         {
                             Array.apply(0, Array(totalCaseStudy))
@@ -690,11 +706,25 @@ class Home extends React.Component {
                 </div>
                 <div id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
                     <div className={classes.section4_carousel_indicators}>
-                        <Typography>1 / 5</Typography>
+                        <Typography>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
                     </div>
-                    <div className={clsx(classes.divRow, classes.divBetween, classes.section4_carousel_buttons)}>
-                        <Icons.IconMenuArrow className={classes.iconArrow} style={{ transform: 'scaleX(-1)' }} />
-                        <Icons.IconMenuArrow className={classes.iconArrow} />
+                    <div className={clsx(classes.divRow, classes.divBetween)}>
+                        <IconButton
+                            onClick={this.handleCaseStudy(-1)}
+                            disableRipple
+                            className={classes.section4_carousel_buttons}
+                            disabled={caseIndex === 0}
+                        >
+                            <Icons.IconMenuArrow className={classes.iconArrow} style={{ transform: 'scaleX(-1)' }} />
+                        </IconButton>
+                        <IconButton
+                            onClick={this.handleCaseStudy(1)}
+                            disableRipple
+                            className={classes.section4_carousel_buttons}
+                            disabled={caseIndex + 1 === caseStudyNum}
+                        >
+                            <Icons.IconMenuArrow className={classes.iconArrow} />
+                        </IconButton>
                     </div>
                 </div>
             </div>
