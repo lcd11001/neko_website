@@ -5,6 +5,8 @@ import * as Cryption from './Cryption'
 import * as Storage from './Storage'
 import * as Popup from './Popup'
 
+import ID from '../Translations/ID.json'
+
 const Utils = {
     getUrl: Assets.getUrl,
     getIconUrl: Assets.getIconUrl,
@@ -50,6 +52,13 @@ const Utils = {
             evt.detail = data
         }
         document.dispatchEvent(evt);
+    },
+
+    i18Link: (t, id) => {
+        const linkID = t(id)
+        const link = t(ID.LINK[linkID.replace(/LINK::/g, '')])
+
+        return link
     }
 }
 

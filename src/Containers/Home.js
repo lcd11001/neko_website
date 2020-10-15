@@ -164,7 +164,6 @@ const styles = theme => ({
     },
 
     menuLink: {
-        textDecoration: 'none',
         color: 'white'
     },
 
@@ -360,7 +359,7 @@ const styles = theme => ({
     section4_logo: {
         ...breakpointsStyle(theme,
             {
-                key: ['width'],
+                key: ['min-width'],
                 value: [40],
                 variant: [3],
                 unit: ['%']
@@ -404,6 +403,8 @@ class Home extends React.Component {
             caseIndex: 0,
             caseStudyNum: props.t(ID.HOME.SECTION_4_CASE_STUDY_NUM)
         }
+
+        this.carouselCaseStudyRef = React.createRef()
     }
 
     handleMouseEnter = (link) => (evt) => {
@@ -419,15 +420,20 @@ class Home extends React.Component {
     }
 
     handleCaseStudy = (delta) => (evt) => {
-        this.setState((state, props) => ({
-            caseIndex: ((state.caseIndex + delta) + state.caseStudyNum) % state.caseStudyNum
-        }))
+        this.setState(
+            (state, props) => ({
+                caseIndex: ((state.caseIndex + delta) + state.caseStudyNum) % state.caseStudyNum
+            }),
+            () => {
+                this.carouselCaseStudyRef.current.pressIndicator(this.state.caseIndex)
+            }
+        )
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     renderSection1 = () => {
-        const { classes } = this.props
+        const { classes, t } = this.props
 
         return (
             <div id={'section1'} className={clsx(classes.divColumn, classes.section1)}>
@@ -443,12 +449,14 @@ class Home extends React.Component {
                             />
                         </Typography>
                         <div className={classes.section1_btn1}>
-                            <Button variant={'contained'} color={'primary'}>
-                                <Trans
-                                    i18nKey={ID.HOME.SECTION_1_BUTTON_1}
-                                />
-                                <Icons.IconMenuArrow className={classes.iconArrow} />
-                            </Button>
+                            <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_1_LINK)} className={classes.textLinkHidden}>
+                                <Button variant={'contained'} color={'primary'}>
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_1_BUTTON_1}
+                                    />
+                                    <Icons.IconMenuArrow className={classes.iconArrow} />
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                     <img alt={'but_chi_nho.png'} src={Utils.getImageUrl('home/but_chi_nho.png')} className={classes.section1_img1} />
@@ -478,12 +486,14 @@ class Home extends React.Component {
                             />
                         </Typography>
                         <div className={classes.section1_btn1}>
-                            <Button variant={'contained'} color={'primary'}>
-                                <Trans
-                                    i18nKey={ID.HOME.SECTION_1_BUTTON_2}
-                                />
-                                <Icons.IconMenuArrow className={classes.iconArrow} />
-                            </Button>
+                            <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_2_LINK)} className={classes.textLinkHidden}>
+                                <Button variant={'contained'} color={'primary'}>
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_1_BUTTON_2}
+                                    />
+                                    <Icons.IconMenuArrow className={classes.iconArrow} />
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -536,7 +546,7 @@ class Home extends React.Component {
 
         return (
             <div key={menu.text} className={clsx(classes.divRow)}>
-                <Link to={menuLink} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
+                <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans
@@ -664,7 +674,8 @@ class Home extends React.Component {
 
     renderSection4() {
         const {
-            classes
+            classes,
+            t
         } = this.props
 
         const {
@@ -676,10 +687,13 @@ class Home extends React.Component {
         // const carouselAnim = 'slide'
         const carouselAnim = 'fade'
 
+        const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
+
         return (
             <div id={'section4'} className={clsx(classes.divColumn, classes.section4)}>
                 <div id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <Carousel
+                        ref={this.carouselCaseStudyRef}
                         className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
                         autoPlay={!true}
                         indicators={false}
@@ -697,16 +711,18 @@ class Home extends React.Component {
                     </Carousel>
                 </div>
                 <div id={'section4.2'} className={classes.section4_btn1}>
-                    <Button variant={'contained'} color={'primary'}>
-                        <Trans
-                            i18nKey={ID.HOME.SECTION_4_BUTTON_1}
-                        />
-                        <Icons.IconMenuArrow className={classes.iconArrow} />
-                    </Button>
+                    <Link to={Utils.i18Link(t, caseStudiLink)} className={classes.textLinkHidden}>
+                        <Button variant={'contained'} color={'primary'}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_4_BUTTON_1}
+                            />
+                            <Icons.IconMenuArrow className={classes.iconArrow} />
+                        </Button>
+                    </Link>
                 </div>
                 <div id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
                     <div className={classes.section4_carousel_indicators}>
-                        <Typography>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
+                        <Typography className={clsx(classes.textTitle)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
                     </div>
                     <div className={clsx(classes.divRow, classes.divBetween)}>
                         <IconButton

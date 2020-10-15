@@ -154,7 +154,6 @@ const styles = theme => ({
     },
 
     footerLink: {
-        textDecoration: 'none',
         color: 'white',
         transition: theme.transitions.create(['color'], {
             duration: 300
@@ -194,7 +193,7 @@ class Footer extends React.Component {
     renderSecondary() {
         const { classes } = this.props;
 
-        let classFooterLink = clsx(classes.footerLink, {
+        let classFooterLink = clsx(classes.footerLink, classes.textLinkHidden, {
             [classes.footerLink + '--hover']: this.state.isHover
         })
 

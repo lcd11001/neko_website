@@ -78,6 +78,10 @@ const styles = (theme) => ({
 
     textBreak: {
         whiteSpace: 'pre'
+    },
+
+    textLinkHidden: {
+        textDecoration: 'none'
     }
 })
 

@@ -93,7 +93,6 @@ const styles = theme => ({
     },
 
     menuLink: {
-        textDecoration: 'none',
         color: theme.palette.text.primary
     },
 
@@ -189,7 +188,7 @@ class Menu extends React.Component {
         return (
 
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
-                <Link to={menuLink} className={classes.menuLink} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
+                <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
                         <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap color={'textPrimary'} >
                             <Trans i18nKey={menu.text} />
