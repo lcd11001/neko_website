@@ -302,6 +302,94 @@ const styles = theme => ({
     section3_logo: {
         width: '100%',
         padding: '10%'
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    section4: {
+        width: '100%',
+        backgroundColor: '#f6f6f6',
+        paddingTop: '8%',
+        paddingBottom: '8%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft', 'paddingRight'],
+                value: [15, 15],
+                variant: [3, 3],
+                unit: ['%', '%']
+            }
+        ),
+    },
+
+    section4_btn1: {
+        // because section4_logo has width = 40%
+        // => section4_btn1 has marginLeft 40%
+        ...breakpointsStyle(theme,
+            {
+                key: ['padding-top', 'padding-bottom', 'marginLeft'],
+                value: [40, 40, 40],
+                variant: [5, 5, 3],
+                unit: ['px', 'px', '%']
+            }
+        ),
+    },
+
+    section4_carousel: {
+        // height: '25vw',
+        // backgroundColor: 'red'
+    },
+
+    section4_carousel_indicators: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginLeft'],
+                value: [40],
+                variant: [3],
+                unit: ['%']
+            }
+        ),
+    },
+
+    section4_carousel_buttons: {
+
+    },
+
+    section4_logo: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width'],
+                value: [40],
+                variant: [3],
+                unit: ['%']
+            }
+        ),
+        paddingRight: '10%'
+    },
+
+    section4_text: {
+        textAlign: 'justify',
+        textJustify: 'inter-word',
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [20, 32],
+                variant: [3, 3],
+                unit: ['px', 'px']
+            }
+        ),
+    },
+
+    section4_title: {
+        paddingTop: 30,
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [20, 24],
+                variant: [3, 3],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 'bold'
     }
 });
 
@@ -325,6 +413,8 @@ class Home extends React.Component {
             [`hover_${link}`]: false
         })
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     renderSection1 = () => {
         const { classes } = this.props
@@ -391,6 +481,8 @@ class Home extends React.Component {
         )
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
     renderSection2 = () => {
         const { classes } = this.props
 
@@ -450,6 +542,8 @@ class Home extends React.Component {
         )
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
     renderSection3() {
         const {
             classes
@@ -496,7 +590,7 @@ class Home extends React.Component {
 
                 <div id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
                     <Carousel
-                        className={clsx(classes.divRow, classes.divCenter, classes.section3_carousel)}
+                        className={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
                         autoPlay={true}
                         indicators={false}
                         navButtonsAlwaysInvisible={true}
@@ -556,6 +650,80 @@ class Home extends React.Component {
         return this.renderSection3LogoFade(index * len, len, total)
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    renderSection4() {
+        const {
+            classes
+        } = this.props
+
+        const totalCaseStudy = 5
+        // const carouselAnim = 'slide'
+        const carouselAnim = 'fade'
+
+        return (
+            <div id={'section4'} className={clsx(classes.divColumn, classes.section4)}>
+                <div id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <Carousel
+                        className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
+                        autoPlay={!true}
+                        indicators={false}
+                        navButtonsAlwaysInvisible={true}
+                        animation={carouselAnim}
+                        interval={3000}
+                    >
+                        {
+                            Array.apply(0, Array(totalCaseStudy))
+                                .map((value, index) => {
+                                    return this.renderSection4CaseStudy(index)
+                                })
+                        }
+                    </Carousel>
+                </div>
+                <div id={'section4.2'} className={classes.section4_btn1}>
+                    <Button variant={'contained'} color={'primary'}>
+                        <Trans
+                            i18nKey={ID.HOME.SECTION_4_BUTTON_1}
+                        />
+                        <Icons.IconMenuArrow className={classes.iconArrow} />
+                    </Button>
+                </div>
+                <div id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
+                    <div className={classes.section4_carousel_indicators}>
+                        <Typography>1 / 5</Typography>
+                    </div>
+                    <div className={clsx(classes.divRow, classes.divBetween, classes.section4_carousel_buttons)}>
+                        <Icons.IconMenuArrow className={classes.iconArrow} style={{ transform: 'scaleX(-1)' }} />
+                        <Icons.IconMenuArrow className={classes.iconArrow} />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    renderSection4CaseStudy(index) {
+        const {
+            classes,
+            t
+        } = this.props
+
+        const LOGO = t(ID.HOME[`SECTION_4_LOGO_${index + 1}`])
+        const TEXT = t(ID.HOME[`SECTION_4_TEXT_${index + 1}`])
+        const TITILE = t(ID.HOME[`SECTION_4_TITLE_${index + 1}`])
+
+        const path = Utils.getLogoUrl(LOGO)
+
+        return (
+            <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter)}>
+                <img alt={LOGO} src={path} className={classes.section4_logo} />
+                <div className={clsx(classes.divColumn, classes.divLeft)}>
+                    <Typography className={classes.section4_text}>{TEXT}</Typography>
+                    <Typography className={classes.section4_title}>{TITILE}</Typography>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         const { classes } = this.props;
         // console.log('Home::render', this.props)
@@ -564,6 +732,7 @@ class Home extends React.Component {
                 {this.renderSection1()}
                 {this.renderSection2()}
                 {this.renderSection3()}
+                {this.renderSection4()}
             </div>
         );
     }
