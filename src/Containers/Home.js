@@ -25,7 +25,11 @@ import AspectRatio from '../Components/AspectRatio'
 const styles = theme => ({
     root: {
         width: '100%',
-        height: '100%'
+        height: '100%',
+
+        '& div:first-child': {
+            paddingTop: '0 !important'
+        },
     },
 
     secondaryText: {
