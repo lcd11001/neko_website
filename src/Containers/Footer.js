@@ -242,7 +242,7 @@ class Footer extends React.Component {
                     </div>
                     <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
                         <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textTitle, classes.caption)}>
+                            <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
                             </Typography>
                         </div>
@@ -266,7 +266,7 @@ class Footer extends React.Component {
                     </div>
                     <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
                         <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textTitle, classes.caption)}>
+                            <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
                             </Typography>
                         </div>
@@ -284,7 +284,7 @@ class Footer extends React.Component {
                     </div>
                     <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
                         <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textTitle, classes.caption)}>
+                            <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
                             </Typography>
                         </div>

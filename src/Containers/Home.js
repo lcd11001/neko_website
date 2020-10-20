@@ -20,6 +20,8 @@ import { HomeMenu } from '../Data/Defines'
 import { Link } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
 
+import AspectRatio from '../Components/AspectRatio'
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -42,12 +44,24 @@ const styles = theme => ({
         ),
     },
 
+    section: {
+        width: '100%',
+        paddingTop: '8%',
+        paddingBottom: '5%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft', 'paddingRight'],
+                value: [15, 15],
+                variant: [3, 3],
+                unit: ['%', '%']
+            }
+        ),
+    },
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section1: {
-        width: '100%',
-        padding: '0 2%'
-        // minHeight: '50vw'
+
     },
 
     section1_img1: {
@@ -107,15 +121,7 @@ const styles = theme => ({
     },
 
     section1_txt3: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [15, 17],
-                variant: [2, 2],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 500
+        fontWeight: 400
     },
 
     section1_btn1: {
@@ -132,30 +138,20 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section2: {
-        width: '100%',
-        // minHeight: '50vw',
         backgroundColor: 'rgb(195, 228, 226)',
         backgroundImage: `url(${Utils.getImageUrl('home/specialized_digital.png')})`,
         backgroundPosition: 'right center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingTop', 'paddingLeft', 'paddingBottom'],
-                value: [10, 15, 8],
-                variant: [0.5, 1.5, 0.5],
-                unit: ['%', '%', '%']
-            }
-        ),
     },
 
     section2_txt1: {
         ...breakpointsStyle(theme,
             {
-                key: ['font-size', 'line-height', 'paddingBottom'],
-                value: [15, 17, 8],
-                variant: [2, 2, 0.5],
-                unit: ['px', 'px', '%']
+                key: ['paddingBottom'],
+                value: [8],
+                variant: [0.5],
+                unit: ['%']
             }
         ),
         fontWeight: 700,
@@ -214,8 +210,7 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section3: {
-        width: '100%',
-        padding: '5% 2%'
+
     },
 
     section3_txt1: {
@@ -260,14 +255,6 @@ const styles = theme => ({
     },
 
     section3_txt2: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [20, 24],
-                variant: [3, 3],
-                unit: ['px', 'px']
-            }
-        ),
         fontWeight: 400,
         textAlign: 'left',
         color: 'inherit',
@@ -306,18 +293,7 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section4: {
-        width: '100%',
         backgroundColor: '#f6f6f6',
-        paddingTop: '8%',
-        paddingBottom: '8%',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingLeft', 'paddingRight'],
-                value: [15, 15],
-                variant: [3, 3],
-                unit: ['%', '%']
-            }
-        ),
     },
 
     section4_btn1: {
@@ -334,8 +310,7 @@ const styles = theme => ({
     },
 
     section4_carousel: {
-        // height: '25vw',
-        // backgroundColor: 'red'
+
     },
 
     section4_carousel_indicators: {
@@ -373,26 +348,78 @@ const styles = theme => ({
         textJustify: 'inter-word',
         ...breakpointsStyle(theme,
             {
-                key: ['font-size', 'line-height'],
-                value: [20, 32],
-                variant: [3, 3],
-                unit: ['px', 'px']
+                key: ['line-height'],
+                value: [32],
+                variant: [3],
+                unit: ['px']
             }
         ),
     },
 
     section4_title: {
         paddingTop: 30,
+        fontWeight: 'bold'
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    section5: {
+
+    },
+
+    section5_txt1: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [20, 24],
-                variant: [3, 3],
+                value: [75, 89],
+                variant: [10, 10],
                 unit: ['px', 'px']
             }
         ),
+        fontWeight: 600
+    },
+
+    section5_btn1: {
+
+    },
+
+    section5_blogs: {
+        alignItems: 'flex-start',
+        '& div:first-child': {
+            marginLeft: '0 !important'
+        },
+
+        '& div:last-child': {
+            marginRight: '0 !important'
+        }
+    },
+
+    section5_div_img: {
+        overflow: 'hidden',
+        backgroundColor: 'red'
+    },
+
+    section5_img: {
+        width: '100%',
+        objectFit: 'cover',
+    },
+
+    section5_date: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['line-height'],
+                value: [32],
+                variant: [3],
+                unit: ['px']
+            }
+        ),
+    },
+
+    section5_title: {
+        textAlign: 'left',
+        paddingTop: 30,
         fontWeight: 'bold'
-    }
+    },
 });
 
 class Home extends React.Component {
@@ -436,7 +463,7 @@ class Home extends React.Component {
         const { classes, t } = this.props
 
         return (
-            <div id={'section1'} className={clsx(classes.divColumn, classes.section1)}>
+            <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
                 <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <Typography className={clsx(classes.textBreak, classes.section1_txt1)}>
@@ -476,7 +503,7 @@ class Home extends React.Component {
                             </Typography>
                             <img alt={'magic-wand.png'} src={Utils.getImageUrl('home/magic-wand.png')} className={classes.section1_img3} />
                         </div>
-                        <Typography className={clsx(classes.textBreak, classes.section1_txt3)}>
+                        <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section1_txt3)}>
                             <Trans
                                 i18nKey={ID.HOME.SECTION_1_TEXT_3}
                                 components={{ span: <span /> }}
@@ -507,9 +534,9 @@ class Home extends React.Component {
         const { classes } = this.props
 
         return (
-            <div id={'section2'} className={clsx(classes.divColumn, classes.section2)}>
+            <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
                 <div id={'section2.1'}>
-                    <Typography className={clsx(classes.textBreak, classes.section2_txt1)}>
+                    <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section2_txt1)}>
                         <Trans
                             i18nKey={ID.HOME.SECTION_2_TEXT_1}
                         />
@@ -576,7 +603,7 @@ class Home extends React.Component {
         const totalLogo = 20
 
         return (
-            <div id={'section3'} className={clsx(classes.divColumn, classes.section3)}>
+            <div id={'section3'} className={clsx(classes.divColumn, classes.section, classes.section3)}>
                 <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1} />
                     <div className={clsx(classes.divColumn, classes.divCenter)} >
@@ -599,7 +626,7 @@ class Home extends React.Component {
                         <Divider className={classes.section3_divider} />
                         <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter)}>
                             <img alt={'pen.svg'} src={Utils.getImageUrl('home/pen.svg')} className={classes.section3_img2} />
-                            <Typography className={clsx(classes.textBreak, classes.section3_txt2)}>
+                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section3_txt2)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_3_TEXT_2}
                                 />
@@ -690,7 +717,7 @@ class Home extends React.Component {
         const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
 
         return (
-            <div id={'section4'} className={clsx(classes.divColumn, classes.section4)}>
+            <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
                 <div id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <Carousel
                         ref={this.carouselCaseStudyRef}
@@ -722,7 +749,7 @@ class Home extends React.Component {
                 </div>
                 <div id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
                     <div className={classes.section4_carousel_indicators}>
-                        <Typography className={clsx(classes.textTitle)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
+                        <Typography className={clsx(classes.textSubTitle)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
                     </div>
                     <div className={clsx(classes.divRow, classes.divBetween)}>
                         <IconButton
@@ -763,12 +790,80 @@ class Home extends React.Component {
             <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter)}>
                 <img alt={LOGO} src={path} className={classes.section4_logo} />
                 <div className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={classes.section4_text}>{TEXT}</Typography>
-                    <Typography className={classes.section4_title}>{TITILE}</Typography>
+                    <Typography className={clsx(classes.textTitle, classes.section4_text)}>{TEXT}</Typography>
+                    <Typography className={clsx(classes.textTitle, classes.section4_title)}>{TITILE}</Typography>
                 </div>
             </div>
         )
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    renderSection5() {
+        const {
+            classes,
+            t
+        } = this.props
+
+        const totalBlogs = 3
+
+        return (
+            <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
+                <div id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
+                    <Typography className={clsx(classes.textBreak, classes.section5_txt1)}>
+                        <Trans
+                            i18nKey={ID.HOME.SECTION_5_TEXT_1}
+                        />
+                    </Typography>
+                    <div className={classes.section5_btn1}>
+                        <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
+                            <Button variant={'contained'} color={'primary'}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_5_BUTTON_1}
+                                />
+                                <Icons.IconMenuArrow className={classes.iconArrow} />
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+                <div id={'section5.2'} className={clsx(classes.divRow, classes.divBetween, classes.section5_blogs)} style={{ flex: totalBlogs }}>
+                    {
+                        Array.apply(0, Array(totalBlogs))
+                            .map((value, index) => {
+                                return this.renderSection5Blog(index)
+                            })
+                    }
+                </div>
+            </div>
+        )
+    }
+
+    renderSection5Blog(index) {
+        const {
+            classes,
+            t
+        } = this.props
+
+        const IMG = t(ID.HOME[`SECTION_5_IMG_${index + 1}`])
+        const DATE = t(ID.HOME[`SECTION_5_DATE_${index + 1}`])
+        const TITILE = t(ID.HOME[`SECTION_5_TITLE_${index + 1}`])
+
+        const path = Utils.getImageUrl(`home/${IMG}`)
+
+        return (
+            <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divCenter)} style={{ flex: 1, margin: 20 }}>
+                <AspectRatio ratio={16 / 9} classes={{ outerWrapper: classes.section5_div_img }}>
+                    <img alt={IMG} src={path} className={classes.section5_img} />
+                </AspectRatio>
+                <div className={clsx(classes.divColumn, classes.divLeft)}>
+                    <Typography className={clsx(classes.textSubTitle, classes.section5_date)}>{DATE}</Typography>
+                    <Typography className={clsx(classes.textTitle, classes.section5_title)}>{TITILE}</Typography>
+                </div>
+            </div>
+        )
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     render() {
         const { classes } = this.props;
@@ -779,6 +874,7 @@ class Home extends React.Component {
                 {this.renderSection2()}
                 {this.renderSection3()}
                 {this.renderSection4()}
+                {this.renderSection5()}
             </div>
         );
     }

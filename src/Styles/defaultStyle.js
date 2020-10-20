@@ -59,7 +59,7 @@ const defaultTheme = createMuiTheme({
                     {
                         key: ['borderRadius', 'height', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
                         value: [10, 50, 20, 20, 30, 30],
-                        variant: [1, 3, 2, 2, 2, 2],
+                        variant: [1, 5, 2, 2, 4, 4],
                         unit: ['px', 'px', 'px', 'px', 'px', 'px']
                     }
                 ),
