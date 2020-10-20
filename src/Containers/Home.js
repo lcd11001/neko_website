@@ -391,12 +391,31 @@ const styles = theme => ({
 
         '& div:last-child': {
             marginRight: '0 !important'
-        }
+        },
+        paddingTop: 20
+    },
+
+    section5_blog: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['margin'],
+                value: [20,],
+                variant: [3],
+                unit: ['px']
+            }
+        )
     },
 
     section5_div_img: {
         overflow: 'hidden',
-        backgroundColor: 'red'
+        ...breakpointsStyle(theme,
+            {
+                key: ['borderRadius'],
+                value: [20],
+                variant: [3],
+                unit: ['px']
+            }
+        )
     },
 
     section5_img: {
@@ -408,7 +427,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['line-height'],
-                value: [32],
+                value: [48],
                 variant: [3],
                 unit: ['px']
             }
@@ -417,7 +436,6 @@ const styles = theme => ({
 
     section5_title: {
         textAlign: 'left',
-        paddingTop: 30,
         fontWeight: 'bold'
     },
 });
@@ -851,7 +869,7 @@ class Home extends React.Component {
         const path = Utils.getImageUrl(`home/${IMG}`)
 
         return (
-            <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divCenter)} style={{ flex: 1, margin: 20 }}>
+            <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divCenter, classes.section5_blog)} style={{ flex: 1 }}>
                 <AspectRatio ratio={16 / 9} classes={{ outerWrapper: classes.section5_div_img }}>
                     <img alt={IMG} src={path} className={classes.section5_img} />
                 </AspectRatio>
