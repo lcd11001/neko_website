@@ -12,7 +12,7 @@ import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
-import { Button, Divider, IconButton, Typography } from '@material-ui/core';
+import { Button, Divider, Fade, IconButton, Typography } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
@@ -142,8 +142,16 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section2: {
-        backgroundColor: 'rgb(195, 228, 226)',
-        backgroundImage: `url(${Utils.getImageUrl('home/specialized_digital.png')})`,
+        position: 'relative'
+    },
+
+    section2_bg: {
+        zIndex: -1,
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
         backgroundPosition: 'right center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
@@ -285,8 +293,15 @@ const styles = theme => ({
     },
 
     section3_carousel: {
-        height: '25vw',
         // backgroundColor: 'red'
+        ...breakpointsStyle(theme,
+            {
+                key: ['height'],
+                value: [20],
+                variant: [-2],
+                unit: ['vw']
+            }
+        ),
     },
 
     section3_logo: {
@@ -450,7 +465,8 @@ class Home extends React.Component {
         super(props)
         this.state = {
             caseIndex: 0,
-            caseStudyNum: props.t(ID.HOME.SECTION_4_CASE_STUDY_NUM)
+            caseStudyNum: props.t(ID.HOME.SECTION_4_CASE_STUDY_NUM),
+            lastHover: props.t(ID.LINK.WORKS_BRAND)
         }
 
         this.carouselCaseStudyRef = React.createRef()
@@ -458,7 +474,8 @@ class Home extends React.Component {
 
     handleMouseEnter = (link) => (evt) => {
         this.setState({
-            [`hover_${link}`]: true
+            [`hover_${link}`]: true,
+            lastHover: link
         })
     }
 
@@ -556,7 +573,10 @@ class Home extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     renderSection2 = () => {
-        const { classes } = this.props
+        const {
+            classes,
+            t
+        } = this.props
 
         return (
             <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
@@ -569,8 +589,8 @@ class Home extends React.Component {
                 </div>
                 <div id={'section2.2'}>
                     {
-                        HomeMenu.map(menu => (
-                            this.renderSection2Menu(menu)
+                        HomeMenu.map((menu, index) => (
+                            this.renderSection2Menu(menu, index)
                         ))
                     }
                 </div>
@@ -578,7 +598,7 @@ class Home extends React.Component {
         )
     }
 
-    renderSection2Menu(menu) {
+    renderSection2Menu(menu, index) {
         const {
             classes,
             t
@@ -587,6 +607,7 @@ class Home extends React.Component {
         let menuLink = t(menu.link)
 
         let isHover = this.state[`hover_${menuLink}`] === true
+        let isShowBackground = this.state.lastHover === menuLink
 
         let classMenuItem = clsx(classes.menuItem, {
             [classes.menuItem + '--hover']: isHover
@@ -598,6 +619,14 @@ class Home extends React.Component {
 
         return (
             <div key={menu.text} className={clsx(classes.divRow)}>
+                <Fade in={isShowBackground} timeout={{ enter: 100, appear: 300, exit: 100 }}>
+                    <div className={classes.section2_bg}
+                        style={{
+                            backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
+                            backgroundImage: `url(${Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))})`,
+                        }}
+                    />
+                </Fade>
                 <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
