@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 import clsx from 'clsx'
 
+import WaterWave from 'react-water-wave'
+
 import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
 
@@ -146,7 +148,7 @@ const styles = theme => ({
     },
 
     section2_bg: {
-        zIndex: -1,
+        zIndex: 0,
         position: 'absolute',
         left: 0,
         top: 0,
@@ -158,6 +160,8 @@ const styles = theme => ({
     },
 
     section2_txt1: {
+        zIndex: 1,
+        position: 'relative',
         ...breakpointsStyle(theme,
             {
                 key: ['paddingBottom'],
@@ -172,7 +176,8 @@ const styles = theme => ({
     },
 
     menuLink: {
-        color: 'white'
+        color: 'white',
+        zIndex: 1,
     },
 
     menuItem: {
@@ -640,14 +645,23 @@ class Home extends React.Component {
 
         return (
             <div key={menu.text} className={clsx(classes.divRow)}>
-                <Fade in={isShowBackground} timeout={{ enter: 100, appear: 300, exit: 100 }}>
+                {/* <Fade in={isShowBackground} timeout={{ enter: 100, appear: 300, exit: 100 }}>
                     <div className={classes.section2_bg}
                         style={{
                             backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
                             backgroundImage: `url(${Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))})`,
                         }}
                     />
-                </Fade>
+                </Fade> */}
+                <WaterWave
+                    interactive={isShowBackground}
+                    imageUrl={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
+                    className={classes.section2_bg}
+                    style={{
+                        display: isShowBackground ? 'inline-block' : 'none',
+                        backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`])
+                    }}
+                />
                 <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
