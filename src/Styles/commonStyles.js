@@ -93,7 +93,8 @@ const styles = (theme) => ({
     },
 
     textLinkHidden: {
-        textDecoration: 'none'
+        textDecoration: 'none',
+        color: 'inherit'
     }
 })
 

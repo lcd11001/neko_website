@@ -440,6 +440,15 @@ const styles = theme => ({
     section5_img: {
         width: '100%',
         objectFit: 'cover',
+        transform: 'scale(1.25)',
+
+        transition: theme.transitions.create(['transform'], {
+            duration: 300
+        }),
+
+        '&--hover': {
+            transform: 'scale(1.0)',
+        }
     },
 
     section5_date: {
@@ -472,17 +481,29 @@ class Home extends React.Component {
         this.carouselCaseStudyRef = React.createRef()
     }
 
-    handleMouseEnter = (link) => (evt) => {
-        this.setState({
-            [`hover_${link}`]: true,
-            lastHover: link
-        })
+    handleMouseEnter = (type, link) => (evt) => {
+        if (type === 'menu') {
+            this.setState({
+                [`hover_${link}`]: true,
+                lastHover: link
+            })
+        } else if (type === 'blog') {
+            this.setState({
+                [`blog_${link}`]: true,
+            })
+        }
     }
 
-    handleMouseLeave = (link) => (evt) => {
-        this.setState({
-            [`hover_${link}`]: false
-        })
+    handleMouseLeave = (type, link) => (evt) => {
+        if (type === 'menu') {
+            this.setState({
+                [`hover_${link}`]: false
+            })
+        } else if (type === 'blog') {
+            this.setState({
+                [`blog_${link}`]: false,
+            })
+        }
     }
 
     handleCaseStudy = (delta) => (evt) => {
@@ -627,7 +648,7 @@ class Home extends React.Component {
                         }}
                     />
                 </Fade>
-                <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
+                <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans
@@ -904,18 +925,27 @@ class Home extends React.Component {
         const IMG = Utils.i18Image(t, ID.BLOG[`IMG_${index + 1}`])
         const DATE = t(ID.BLOG[`DATE_${index + 1}`])
         const TITILE = t(ID.BLOG[`TITLE_${index + 1}`])
+        const LINK = ID.BLOG[`LINK_${index + 1}`]
 
         const path = Utils.getUrl(IMG)
 
+        let isHover = this.state[`blog_${IMG}`] === true
+
+        let classsImage = clsx(classes.section5_img, {
+            [classes.section5_img + '--hover']: isHover
+        })
+
         return (
             <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divCenter, classes.section5_blog)} style={{ flex: 1 }}>
-                <AspectRatio ratio={16 / 9} classes={{ outerWrapper: classes.section5_div_img }}>
-                    <img alt={IMG} src={path} className={classes.section5_img} />
-                </AspectRatio>
-                <div className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={clsx(classes.textSubTitle, classes.section5_date)}>{DATE}</Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section5_title)}>{TITILE}</Typography>
-                </div>
+                <Link to={Utils.i18Link(t, LINK)} className={classes.textLinkHidden}>
+                    <AspectRatio ratio={16 / 9} classes={{ outerWrapper: classes.section5_div_img }}>
+                        <img alt={IMG} src={path} className={classsImage} onMouseEnter={this.handleMouseEnter('blog', IMG)} onMouseLeave={this.handleMouseLeave('blog', IMG)} />
+                    </AspectRatio>
+                    <div className={clsx(classes.divColumn, classes.divLeft)}>
+                        <Typography className={clsx(classes.textSubTitle, classes.section5_date)}>{DATE}</Typography>
+                        <Typography className={clsx(classes.textTitle, classes.section5_title)}>{TITILE}</Typography>
+                    </div>
+                </Link>
             </div>
         )
     }
