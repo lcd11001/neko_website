@@ -482,7 +482,10 @@ class Home extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     renderSection1 = () => {
-        const { classes, t } = this.props
+        const {
+            classes,
+            t
+        } = this.props
 
         return (
             <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
@@ -508,10 +511,10 @@ class Home extends React.Component {
                             </Link>
                         </div>
                     </div>
-                    <img alt={'but_chi_nho.png'} src={Utils.getImageUrl('home/but_chi_nho.png')} className={classes.section1_img1} />
+                    <img alt={t(ID.IMAGE.HOME_1_1)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_1))} className={classes.section1_img1} />
                 </div>
                 <div id={'section1.2'} className={clsx(classes.divRow, classes.divCenter)} style={{ paddingTop: 10 }}>
-                    <img alt={'Con_Meo0001_nho.png'} src={Utils.getImageUrl('home/Con_Meo0001_nho.png')} className={classes.section1_img2} />
+                    <img alt={t(ID.IMAGE.HOME_1_2)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_2))} className={classes.section1_img2} />
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
                             <Typography className={clsx(classes.textBreak, classes.section1_txt2)}>
@@ -523,7 +526,7 @@ class Home extends React.Component {
                                     }}
                                 />
                             </Typography>
-                            <img alt={'magic-wand.png'} src={Utils.getImageUrl('home/magic-wand.png')} className={classes.section1_img3} />
+                            <img alt={t(ID.IMAGE.HOME_1_3)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))} className={classes.section1_img3} />
                         </div>
                         <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section1_txt3)}>
                             <Trans
@@ -615,7 +618,8 @@ class Home extends React.Component {
 
     renderSection3() {
         const {
-            classes
+            classes,
+            t
         } = this.props
 
         const carouselAnim = 'slide'
@@ -627,7 +631,7 @@ class Home extends React.Component {
         return (
             <div id={'section3'} className={clsx(classes.divColumn, classes.section, classes.section3)}>
                 <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
-                    <img alt={'85.png'} src={Utils.getImageUrl('home/85.png')} className={classes.section3_img1} />
+                    <img alt={t(ID.IMAGE.HOME_3_1)} src={Utils.getUrl(t(ID.IMAGE.HOME_3_1))} className={classes.section3_img1} />
                     <div className={clsx(classes.divColumn, classes.divCenter)} >
                         <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divCenter)}>
                             <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
@@ -647,7 +651,7 @@ class Home extends React.Component {
                         </div>
                         <Divider className={classes.section3_divider} />
                         <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter)}>
-                            <img alt={'pen.svg'} src={Utils.getImageUrl('home/pen.svg')} className={classes.section3_img2} />
+                            <img alt={t(ID.IMAGE.HOME_3_2)} src={Utils.getUrl(t(ID.IMAGE.HOME_3_2))} className={classes.section3_img2} />
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section3_txt2)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_3_TEXT_2}
@@ -689,7 +693,8 @@ class Home extends React.Component {
 
     renderSection3LogoFade(index, len, total) {
         const {
-            classes
+            classes,
+            t
         } = this.props
 
         // console.log('=============')
@@ -699,13 +704,14 @@ class Home extends React.Component {
                 {
                     Array.apply(0, Array(len))
                         .map((v, i) => {
-                            let name = Utils.zeroPadding((index + i) % total, 2)
-                            let path = Utils.getLogoUrl(`${name}.svg`)
+                            // let name = Utils.zeroPadding((index + i) % total, 2)
+                            let name = t(ID.IMAGE[`LOGO_${((index + i) % total) + 1}`])
+                            let path = Utils.getUrl(name)
                             // console.log('path', path)
 
                             return (
                                 <div key={name} style={{ flex: 1 }}>
-                                    <img alt={`${name}.svg`} src={path} className={classes.section3_logo} />
+                                    <img alt={name} src={path} className={classes.section3_logo} />
                                 </div>
                             )
                         })
@@ -802,11 +808,11 @@ class Home extends React.Component {
             t
         } = this.props
 
-        const LOGO = t(ID.HOME[`SECTION_4_LOGO_${index + 1}`])
+        const LOGO = Utils.i18Image(t, ID.HOME[`SECTION_4_LOGO_${index + 1}`])
         const TEXT = t(ID.HOME[`SECTION_4_TEXT_${index + 1}`])
         const TITILE = t(ID.HOME[`SECTION_4_TITLE_${index + 1}`])
 
-        const path = Utils.getLogoUrl(LOGO)
+        const path = Utils.getUrl(LOGO)
 
         return (
             <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter)}>
@@ -866,11 +872,11 @@ class Home extends React.Component {
             t
         } = this.props
 
-        const IMG = t(ID.HOME[`SECTION_5_IMG_${index + 1}`])
-        const DATE = t(ID.HOME[`SECTION_5_DATE_${index + 1}`])
-        const TITILE = t(ID.HOME[`SECTION_5_TITLE_${index + 1}`])
+        const IMG = Utils.i18Image(t, ID.BLOG[`IMG_${index + 1}`])
+        const DATE = t(ID.BLOG[`DATE_${index + 1}`])
+        const TITILE = t(ID.BLOG[`TITLE_${index + 1}`])
 
-        const path = Utils.getImageUrl(`home/${IMG}`)
+        const path = Utils.getUrl(IMG)
 
         return (
             <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divCenter, classes.section5_blog)} style={{ flex: 1 }}>

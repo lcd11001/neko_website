@@ -59,6 +59,13 @@ const Utils = {
         const link = t(ID.LINK[linkID.replace(/LINK::/g, '')])
 
         return link
+    },
+
+    i18Image: (t, id) => {
+        const imageID = t(id)
+        const image = t(ID.IMAGE[imageID.replace(/IMAGE::/g, '')])
+
+        return image
     }
 }
 
