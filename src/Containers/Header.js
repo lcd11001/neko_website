@@ -51,14 +51,14 @@ class Header extends React.Component {
             <div className={clsx(classes.root, classes.divColumn)}>
                 <div className={clsx(classes.divRow, classes.divBetween)}>
                     <div className={clsx(classes.divRow, classes.divCenter)}>
-                        <Logo />
-                        <IconButton onClick={this.handleMenu}>
+                        <IconButton onClick={this.handleMenu} style={{ paddingLeft: 0 }}>
                             {
                                 menuOpened
                                     ? <MenuOpenIcon />
                                     : <MenuIcon />
                             }
                         </IconButton>
+                        <Logo />
                     </div>
                     <Languages />
                 </div>
