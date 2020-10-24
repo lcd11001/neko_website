@@ -24,6 +24,10 @@ import PageNotFound from './Components/PageError/PageNotFound'
 import ProtectedRoute from './Components/ProtectedRoute'
 
 import { CssBaseline } from '@material-ui/core'
+import Utils from './Utils'
+
+window.isWaterWaveSupported = Utils.isWaterWaveSupported()
+console.log('isWaterWaveSupported', window.isWaterWaveSupported)
 
 const metadata = require('./metadata.json')
 console.log('metadata', metadata)

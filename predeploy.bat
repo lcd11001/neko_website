@@ -29,6 +29,6 @@ mkdir "./deploy"
 
 xcopy /s /q /y ".\build\*.*" ".\deploy"
 
-xcopy /s /q /y ".\obfuscated\build\*.*" ".\deploy"
+xcopy /s /q /y ".\obfuscated\*.*" ".\deploy"
 
 @echo Finish at %time:~0,5%

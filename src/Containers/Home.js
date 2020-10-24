@@ -645,23 +645,27 @@ class Home extends React.Component {
 
         return (
             <div key={menu.text} className={clsx(classes.divRow)}>
-                {/* <Fade in={isShowBackground} timeout={{ enter: 100, appear: 300, exit: 100 }}>
-                    <div className={classes.section2_bg}
-                        style={{
-                            backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
-                            backgroundImage: `url(${Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))})`,
-                        }}
-                    />
-                </Fade> */}
-                <WaterWave
-                    interactive={isShowBackground}
-                    imageUrl={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
-                    className={classes.section2_bg}
-                    style={{
-                        display: isShowBackground ? 'inline-block' : 'none',
-                        backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`])
-                    }}
-                />
+                {
+                    isShowBackground
+                        ? window.isWaterWaveSupported
+                            ?
+                            <WaterWave
+                                ref={this.waterWaveRef}
+                                imageUrl={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
+                                className={classes.section2_bg}
+                                style={{
+                                    backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`])
+                                }}
+                            />
+                            :
+                            <div className={classes.section2_bg}
+                                style={{
+                                    backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
+                                    backgroundImage: `url(${Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))})`,
+                                }}
+                            />
+                        : null
+                }
                 <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
