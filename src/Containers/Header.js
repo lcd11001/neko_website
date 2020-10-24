@@ -4,6 +4,11 @@ import compose from 'recompose/compose'
 import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 import clsx from 'clsx'
 
+import { withWidth, isWidthDown, IconButton } from '@material-ui/core'
+import ListIcon from '@material-ui/icons/List'
+import MenuIcon from '@material-ui/icons/Menu';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+
 import Logo from './Logo'
 import Menu from './Menu'
 import Languages from './Languages'
@@ -26,8 +31,46 @@ const styles = theme => ({
 });
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            menuOpened: false
+        }
+    }
 
-    render() {
+    handleMenu = (evt) => {
+        this.setState((state) => ({
+            menuOpened: !state.menuOpened
+        }))
+    }
+
+    renderShortHeader() {
+        const { classes } = this.props;
+        const { menuOpened } = this.state
+        return (
+            <div className={clsx(classes.root, classes.divColumn)}>
+                <div className={clsx(classes.divRow, classes.divBetween)}>
+                    <div className={clsx(classes.divRow, classes.divCenter)}>
+                        <Logo />
+                        <IconButton onClick={this.handleMenu}>
+                            {
+                                menuOpened
+                                    ? <MenuOpenIcon />
+                                    : <MenuIcon />
+                            }
+                        </IconButton>
+                    </div>
+                    <Languages />
+                </div>
+                {
+                    menuOpened &&
+                    <Menu shortMenu={true} />
+                }
+            </div>
+        );
+    }
+
+    renderHeader() {
         const { classes } = this.props;
 
         return (
@@ -38,6 +81,15 @@ class Header extends React.Component {
             </div>
         );
     }
+
+    render() {
+        const { width } = this.props
+        if (isWidthDown('sm', width)) {
+            return this.renderShortHeader()
+        }
+
+        return this.renderHeader()
+    }
 }
 
 Header.propTypes =
@@ -45,4 +97,7 @@ Header.propTypes =
     classes: PropTypes.object.isRequired,
 };
 
-export default withMultipleStyles(commonStyles, styles)(Header);
+export default compose(
+    withMultipleStyles(commonStyles, styles),
+    withWidth()
+)(Header);

@@ -25,8 +25,8 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
-        paddingTop: 0,
-        paddingBottom: 0,
+        paddingTop: 5,
+        paddingBottom: 5,
         position: 'relative'
     },
 
@@ -154,6 +154,7 @@ class Menu extends React.Component {
             location: {
                 pathname
             },
+            shortMenu,
             t
         } = this.props
 
@@ -173,7 +174,7 @@ class Menu extends React.Component {
         })
 
         let classMenuBorder = clsx(classes.menuBorder, {
-            [classes.menuBorder + '--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (menu.customStyle && menu.customStyle.border)
+            [classes.menuBorder + '--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (!shortMenu && menu.customStyle && menu.customStyle.border)
         })
 
         let classUnderline = clsx(classes.underline, {
@@ -182,7 +183,7 @@ class Menu extends React.Component {
         })
 
         let classUnderbackground = clsx(classes.underbackground, {
-            [classes.underbackground + '--hover']: (isHover && menu.underline === 'disable')
+            [classes.underbackground + '--hover']: (!shortMenu && isHover && menu.underline === 'disable')
         })
 
         return (
@@ -194,13 +195,13 @@ class Menu extends React.Component {
                             <Trans i18nKey={menu.text} />
                         </Typography>
                         {
-                            menu.icon &&
+                            !shortMenu && menu.icon &&
                             <menu.icon className={classMenuIcon} />
                         }
                     </div>
                 </Link>
                 {
-                    menu.underline !== 'disable' &&
+                    (shortMenu || menu.underline !== 'disable') &&
                     <Divider className={classUnderline} />
                 }
             </div>
@@ -209,11 +210,16 @@ class Menu extends React.Component {
 
     render() {
         const {
-            classes
+            classes,
+            shortMenu
         } = this.props
 
+        let classRoot = shortMenu
+            ? clsx(classes.root, classes.divColumn, classes.divLeft)
+            : clsx(classes.root, classes.divRow, classes.divCenter)
+
         return (
-            <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
+            <div className={classRoot}>
                 {
                     HeaderMenu.map(menu => (
                         this.renderMenu(menu)
@@ -229,8 +235,13 @@ class Menu extends React.Component {
 Menu.propTypes =
 {
     classes: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    shortMenu: PropTypes.bool
 };
+
+Menu.defaultProps = {
+    shortMenu: false
+}
 
 export default compose(
     withMultipleStyles(commonStyles, styles),
