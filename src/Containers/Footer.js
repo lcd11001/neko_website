@@ -100,7 +100,7 @@ const styles = theme => ({
             {
                 key: ['height'],
                 value: [24],
-                variant: [2],
+                variant: [3],
                 unit: ['px']
             }
         ),
@@ -120,7 +120,7 @@ const styles = theme => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [60, 75],
-                variant: [10, 11],
+                variant: [10, 15],
                 unit: ['px', 'px']
             }
         ),
@@ -132,7 +132,7 @@ const styles = theme => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [15, 18],
-                variant: [2.5, 2.5],
+                variant: [2.0, 2.5],
                 unit: ['px', 'px']
             }
         ),
@@ -191,14 +191,19 @@ class Footer extends React.Component {
     }
 
     renderSecondary() {
-        const { classes } = this.props;
+        const { classes,
+            location: {
+                pathname
+            },
+            t
+        } = this.props;
 
         let classFooterLink = clsx(classes.footerLink, classes.textLinkHidden, {
             [classes.footerLink + '--hover']: this.state.isHover
         })
 
         return (
-            <div className={classes.rootSecondary}>
+            <div className={classes.rootSecondary} style={{ backgroundImage: pathname === t(ID.LINK.ABOUT) ? 'none' : undefined }}>
                 <div className={clsx(classes.divColumn, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ paddingRight: '4%' }}>
                     <div className={clsx(classes.divColumn, classes.divCenter)}>
                         <Typography className={clsx(classes.txtWhite, classes.title)}>

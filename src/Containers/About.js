@@ -106,7 +106,8 @@ const styles = theme => ({
     },
 
     section3_txt1: {
-        textAlign: 'center'
+        textAlign: 'center',
+        marginRight: '10%'
     },
 
     section3_txt1_custom: {

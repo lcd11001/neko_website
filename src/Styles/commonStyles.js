@@ -132,7 +132,7 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [75, 89],
-                variant: [10, 10],
+                variant: [12, 15],
                 unit: ['px', 'px']
             }
         ),
