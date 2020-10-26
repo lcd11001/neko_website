@@ -19,6 +19,7 @@ import * as serviceWorker from './serviceWorker'
 
 import App from './Containers/App'
 import Home from './Containers/Home'
+import About from './Containers/About'
 
 import PageNotFound from './Components/PageError/PageNotFound'
 import ProtectedRoute from './Components/ProtectedRoute'
@@ -71,6 +72,7 @@ const Routes = () => {
 
                                     {/* Force login if needed by using protected route */}
                                     <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
+                                    <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
 
                                     {/* invalid path */}
                                     <Route path='*' component={PageNotFound} />

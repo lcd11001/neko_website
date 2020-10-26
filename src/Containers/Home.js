@@ -25,47 +25,6 @@ import Carousel from 'react-material-ui-carousel';
 import AspectRatio from '../Components/AspectRatio'
 
 const styles = theme => ({
-    root: {
-        width: '100%',
-        height: '100%',
-
-        '& div:first-child': {
-            paddingTop: '0 !important'
-        },
-    },
-
-    secondaryText: {
-        color: theme.palette.text.secondary
-    },
-
-    iconArrow: {
-        color: 'inherit',
-        ...breakpointsStyle(theme,
-            {
-                key: ['width', 'marginLeft'],
-                value: [45, 30],
-                variant: [7, 5],
-                unit: ['px', 'px']
-            }
-        ),
-    },
-
-    section: {
-        width: '100%',
-        paddingTop: '8%',
-        paddingBottom: '5%',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingLeft', 'paddingRight'],
-                value: [15, 15],
-                variant: [3, 3],
-                unit: ['%', '%']
-            }
-        ),
-    },
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-
     section1: {
 
     },
@@ -103,15 +62,7 @@ const styles = theme => ({
     },
 
     section1_txt1: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [55, 65],
-                variant: [10, 12],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 500
+
     },
 
     section1_txt2: {
@@ -392,15 +343,7 @@ const styles = theme => ({
     },
 
     section5_txt1: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [75, 89],
-                variant: [10, 10],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 600
+
     },
 
     section5_btn1: {
@@ -534,7 +477,7 @@ class Home extends React.Component {
             <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
                 <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
-                        <Typography className={clsx(classes.textBreak, classes.section1_txt1)}>
+                        <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>
                             <Trans
                                 i18nKey={ID.HOME.SECTION_1_TEXT_1}
                                 components={{ span: <span /> }}
@@ -906,7 +849,7 @@ class Home extends React.Component {
         return (
             <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
                 <div id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
-                    <Typography className={clsx(classes.textBreak, classes.section5_txt1)}>
+                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section5_txt1)}>
                         <Trans
                             i18nKey={ID.HOME.SECTION_5_TEXT_1}
                         />

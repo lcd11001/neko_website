@@ -1,6 +1,45 @@
 import breakpointsStyle from './breakpointsStyle'
 
 const styles = (theme) => ({
+    root: {
+        width: '100%',
+        height: '100%',
+
+        '& div:first-child': {
+            paddingTop: '0 !important'
+        },
+    },
+
+    secondaryText: {
+        color: theme.palette.text.secondary
+    },
+
+    iconArrow: {
+        color: 'inherit',
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'marginLeft'],
+                value: [45, 30],
+                variant: [7, 5],
+                unit: ['px', 'px']
+            }
+        ),
+    },
+
+    section: {
+        width: '100%',
+        paddingTop: '8%',
+        paddingBottom: '5%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft', 'paddingRight'],
+                value: [15, 15],
+                variant: [3, 3],
+                unit: ['%', '%']
+            }
+        ),
+    },
+
     divRow: {
         display: 'flex',
         flexDirection: 'row'
@@ -86,6 +125,42 @@ const styles = (theme) => ({
             }
         ),
         fontWeight: 500
+    },
+
+    textHeader: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [75, 89],
+                variant: [10, 10],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600
+    },
+
+    textSubHeader: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [55, 65],
+                variant: [10, 12],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600
+    },
+
+    textCaption: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [50, 59],
+                variant: [8, 8],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600
     },
 
     textBreak: {
