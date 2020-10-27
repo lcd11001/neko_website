@@ -4,7 +4,7 @@ import compose from 'recompose/compose'
 import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 import clsx from 'clsx'
 
-import { withWidth, isWidthDown, IconButton } from '@material-ui/core'
+import { withWidth, isWidthDown, IconButton, Collapse } from '@material-ui/core'
 import ListIcon from '@material-ui/icons/List'
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
@@ -62,10 +62,10 @@ class Header extends React.Component {
                     </div>
                     <Languages />
                 </div>
-                {
-                    menuOpened &&
+
+                <Collapse in={menuOpened}>
                     <Menu shortMenu={true} />
-                }
+                </Collapse>
             </div>
         );
     }
