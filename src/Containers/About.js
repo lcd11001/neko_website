@@ -14,11 +14,12 @@ import Utils from '../Utils'
 
 import { Link } from 'react-router-dom';
 
-import { Button, Divider, Fade, IconButton, Typography } from '@material-ui/core';
+import { Button, Divider, Fade, IconButton, Typography, withWidth, isWidthUp } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
 import AspectRatio from '../Components/AspectRatio';
+import { isMatchWith } from 'lodash';
 
 const styles = theme => ({
     section1: {
@@ -147,10 +148,10 @@ const styles = theme => ({
     section4_box: {
         ...breakpointsStyle(theme,
             {
-                key: ['borderRadius', 'padding'],
-                value: [25, 30],
-                variant: [3, 3],
-                unit: ['px', 'px']
+                key: ['borderRadius', 'padding', 'margin'],
+                value: [25, 30, 20],
+                variant: [3, 5, 4],
+                unit: ['px', 'px', 'px']
             }
         ),
         background: '#FFFFFF 0% 0% no-repeat padding-box',
@@ -275,7 +276,7 @@ class About extends React.Component {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     renderSection4() {
-        const { classes } = this.props;
+        const { classes, width } = this.props;
         return (
             <div id={'section4'} className={clsx(classes.divRow, classes.divBetween, classes.section, classes.section4)} style={{ flex: 6 }}>
                 <div id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween)} style={{ flex: 2 }}>
@@ -291,7 +292,7 @@ class About extends React.Component {
                 </div>
                 <div id={'section4.2'} className={clsx(classes.divRow, classes.divRight, classes.divBetween)} style={{ flex: 4 }}>
                     <div id={'cheat'} />
-                    <div id={'section4.2a'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_box)} style={{ flex: 1, margin: 20 }}>
+                    <div id={'section4.2a'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_box)} style={{ flex: 1 }}>
                         <AspectRatio ratio={1}>
                             <div className={clsx(classes.section4_avatar)}>
 
@@ -304,7 +305,7 @@ class About extends React.Component {
                             <Trans i18nKey={ID.ABOUT.CONTACT_1_POSITION} />
                         </Typography>
                     </div>
-                    <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_box)} style={{ flex: 1, margin: 20 }}>
+                    <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_box)} style={{ flex: 1 }}>
                         <AspectRatio ratio={1}>
                             <div className={clsx(classes.section4_avatar)}>
 
@@ -317,13 +318,16 @@ class About extends React.Component {
                             <Trans i18nKey={ID.ABOUT.CONTACT_2_POSITION} />
                         </Typography>
                     </div>
-                    <div id={'section4.2c'} style={{ flex: 0.4 }}>
-                        <AspectRatio ratio={1}>
-                            <div className={clsx(classes.section4_avatar)} style={{ borderColor: 'green', backgroundColor: 'antiquewhite' }}>
+                    {
+                        isWidthUp('md', width) &&
+                        <div id={'section4.2c'} style={{ flex: 0.4 }}>
+                            <AspectRatio ratio={1}>
+                                <div className={clsx(classes.section4_avatar)} style={{ borderColor: 'green', backgroundColor: 'antiquewhite' }}>
 
-                            </div>
-                        </AspectRatio>
-                    </div>
+                                </div>
+                            </AspectRatio>
+                        </div>
+                    }
                 </div>
             </div>
         )
@@ -368,5 +372,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(commonStyles, styles),
-    withTranslation()
+    withTranslation(),
+    withWidth()
 )(About);
