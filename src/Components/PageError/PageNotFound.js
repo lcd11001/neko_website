@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
+import { motion } from 'framer-motion'
 
-import { withMultipleStyles, breakpointsStyle } from '../../Styles'
+import { withMultipleStyles, breakpointsStyle, commonMotion } from '../../Styles'
 import { Typography } from '@material-ui/core'
 import Utils from '../../Utils'
 import { PageNotFoundLogo } from '../../Data/Defines'
@@ -53,10 +54,17 @@ class PageNotFound extends React.Component {
         } = this.props
 
         return (
-            <div className={classes.container}>
+            <motion.div
+                className={classes.container}
+                initial={'in'}
+                animate={'in'}
+                exit={'out'}
+                transition={commonMotion.transition}
+                variants={commonMotion.pageTransition}
+            >
                 <Typography className={classes.text} color={'textPrimary'}>The link you followed probaly not correct.</Typography>
                 <div className={classes.imageBackground}></div>
-            </div>
+            </motion.div>
         )
     }
 }

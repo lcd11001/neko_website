@@ -1,6 +1,7 @@
 import withMultipleStyles from './multipleStyles'
 import breakpointsStyle from './breakpointsStyle'
 import commonStyles from './commonStyles'
+import commonMotion from './commonMotion'
 
 import defaultTheme from './defaultStyle'
 
@@ -9,5 +10,7 @@ export {
 
     withMultipleStyles,
     breakpointsStyle,
-    commonStyles
+    commonStyles,
+    
+    commonMotion
 }

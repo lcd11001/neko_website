@@ -8,9 +8,11 @@ import ID from './Translations/ID.json'
 import EN from './Translations/EN.json'
 import VN from './Translations/VN.json'
 
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { defaultTheme } from './Styles'
+
+import { AnimatePresence } from 'framer-motion'
 
 import store from './Redux/Store'
 import { Provider } from 'react-redux'
@@ -66,17 +68,21 @@ const Routes = () => {
                         <React.Fragment>
                             <CssBaseline />
                             <App>
-                                <Switch>
-                                    {/* Homepage === Profile because of user permission */}
-                                    <Redirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
+                                <Route render={({ location }) => (
+                                    <AnimatePresence initial={false} exitBeforeEnter={true}>
+                                        <Switch location={location} key={location.pathname}>
+                                            {/* Homepage === Profile because of user permission */}
+                                            <Redirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
 
-                                    {/* Force login if needed by using protected route */}
-                                    <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
-                                    <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
+                                            {/* Force login if needed by using protected route */}
+                                            <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
+                                            <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
 
-                                    {/* invalid path */}
-                                    <Route path='*' component={PageNotFound} />
-                                </Switch>
+                                            {/* invalid path */}
+                                            <Route path='*' component={PageNotFound} />
+                                        </Switch>
+                                    </AnimatePresence>
+                                )} />
                             </App>
                         </React.Fragment>
                     </Router>

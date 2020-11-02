@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 
 import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
@@ -339,7 +340,14 @@ class About extends React.Component {
         const { classes } = this.props;
         // console.log('About::render', this.props)
         return (
-            <div className={classes.root}>
+            <motion.div
+                className={classes.root}
+                initial={'in'}
+                animate={'in'}
+                exit={'out'}
+                transition={commonMotion.transition}
+                variants={commonMotion.pageTransition}
+            >
                 {
                     // cheat for removing '& div:first-child'
                 }
@@ -348,7 +356,7 @@ class About extends React.Component {
                 {this.renderSection2()}
                 {this.renderSection3()}
                 {this.renderSection4()}
-            </div>
+            </motion.div>
         );
     }
 }

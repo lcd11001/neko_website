@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 
 import WaterWave from 'react-water-wave'
 
@@ -23,6 +24,7 @@ import { Link } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
 
 import AspectRatio from '../Components/AspectRatio'
+import { duration } from 'moment';
 
 const styles = theme => ({
     section1: {
@@ -397,6 +399,11 @@ const styles = theme => ({
         '&--hover': {
             transform: 'scale(1.0)',
         }
+    },
+
+    section5_img_motion: {
+        width: '100%',
+        objectFit: 'cover',
     },
 
     section5_date: {
@@ -900,7 +907,21 @@ class Home extends React.Component {
             <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divCenter, classes.section5_blog)} style={{ flex: 1 }}>
                 <Link to={Utils.i18Link(t, LINK)} className={classes.textLinkHidden}>
                     <AspectRatio ratio={16 / 9} classes={{ outerWrapper: classes.section5_div_img }}>
-                        <img alt={IMG} src={path} className={classsImage} onMouseEnter={this.handleMouseEnter('blog', IMG)} onMouseLeave={this.handleMouseLeave('blog', IMG)} />
+                        {
+                            // <img alt={IMG} src={path} className={classsImage} onMouseEnter={this.handleMouseEnter('blog', IMG)} onMouseLeave={this.handleMouseLeave('blog', IMG)} />
+                        }
+                        <motion.img
+                            alt={IMG}
+                            src={path}
+                            className={classes.section5_img_motion}
+                            whileHover={{
+                                scale: 1.1
+                            }}
+                            // transition={{
+                            //     duration: 0.3
+                            // }}
+                            transition={commonMotion.transition}
+                        />
                     </AspectRatio>
                     <div className={clsx(classes.divColumn, classes.divLeft)}>
                         <Typography className={clsx(classes.textSubTitle, classes.section5_date)}>{DATE}</Typography>
@@ -917,13 +938,20 @@ class Home extends React.Component {
         const { classes } = this.props;
         // console.log('Home::render', this.props)
         return (
-            <div className={classes.root}>
+            <motion.div
+                className={classes.root}
+                initial={'in'}
+                animate={'in'}
+                exit={'out'}
+                transition={commonMotion.transition}
+                variants={commonMotion.pageTransition}
+            >
                 {this.renderSection1()}
                 {this.renderSection2()}
                 {this.renderSection3()}
                 {this.renderSection4()}
                 {this.renderSection5()}
-            </div>
+            </motion.div>
         );
     }
 }

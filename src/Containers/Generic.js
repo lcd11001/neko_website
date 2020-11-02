@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import { withRouter } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
@@ -33,9 +34,15 @@ class Generic extends React.Component {
         const { classes, t } = this.props;
         // console.log('Generic::render', this.props)
         return (
-            <div className={classes.root}>
+            <motion.div
+                className={classes.root}
+                exit={{
+                    opacity: 0
+                }}
+                transition={commonMotion.transition}
+            >
                 <PageUnderContruction />
-            </div>
+            </motion.div>
         );
     }
 }

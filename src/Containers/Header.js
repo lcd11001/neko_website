@@ -60,7 +60,6 @@ class Header extends React.Component {
                         </IconButton>
                         <Logo />
                     </div>
-                    <Languages />
                 </div>
 
                 <Collapse in={menuOpened}>
@@ -77,7 +76,6 @@ class Header extends React.Component {
             <div className={clsx(classes.root, classes.divRow, classes.divBetween)}>
                 <Logo />
                 <Menu />
-                <Languages />
             </div>
         );
     }
