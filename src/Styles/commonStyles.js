@@ -11,6 +11,22 @@ const styles = (theme) => ({
         },
     },
 
+    appbar: {
+        backgroundColor: 'transparent'
+    },
+
+    toolbar: {
+        backgroundColor: 'transparent',
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginLeft', 'marginRight', 'marginTop', 'marginBottom'],
+                value: [10, 10, 3, 3],
+                variant: [2, 2, 0.5, 0.5],
+                unit: ['%', '%', '%', '%']
+            }
+        ),
+    },
+
     secondaryText: {
         color: theme.palette.text.secondary
     },

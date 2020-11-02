@@ -7,8 +7,8 @@ import compose from 'recompose/compose'
 
 import { withRouter } from 'react-router-dom'
 
-import { withMultipleStyles, breakpointsStyle } from '../Styles'
-import { Toolbar, Typography } from '@material-ui/core'
+import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
 import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
@@ -38,7 +38,11 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <div className={classes.root}>
-                    <Header />
+                    <AppBar elevation={0} className={classes.appbar}>
+                        <Toolbar disableGutters={true} className={classes.toolbar}>
+                            <Header />
+                        </Toolbar>
+                    </AppBar>
                     {children}
                     <Footer />
                 </div>
@@ -71,6 +75,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withMultipleStyles(styles),
+    withMultipleStyles(commonStyles, styles),
     withRouter
 )(App);

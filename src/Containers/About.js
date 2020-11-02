@@ -15,7 +15,7 @@ import Utils from '../Utils'
 
 import { Link } from 'react-router-dom';
 
-import { Button, Divider, Fade, IconButton, Typography, withWidth, isWidthUp } from '@material-ui/core';
+import { Button, Divider, Fade, IconButton, Typography, withWidth, isWidthUp, Toolbar } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
@@ -347,10 +347,7 @@ class About extends React.Component {
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                {
-                    // cheat for removing '& div:first-child'
-                }
-                <div id={'cheat'} />
+                <Toolbar disableGutters={true} className={classes.toolbar} />
                 {this.renderSection1()}
                 {this.renderSection2()}
                 {this.renderSection3()}

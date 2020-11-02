@@ -115,7 +115,7 @@ const styles = theme => ({
     },
 
     underbackground: {
-        backgroundColor: 'white',
+        backgroundColor: 'inherit',
         transition: theme.transitions.create(['background-color', 'color'], {
             duration: 300
         }),
