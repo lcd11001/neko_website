@@ -5,8 +5,9 @@ const styles = (theme) => ({
         width: '100%',
         height: '100%',
 
-        '& div:first-child': {
-            paddingTop: '0 !important'
+        // > means only apply to div.root instead of all div
+        '& > div:first-child': {
+            paddingTop: 0
         },
     },
 

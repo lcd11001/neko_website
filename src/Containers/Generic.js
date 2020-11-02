@@ -36,10 +36,11 @@ class Generic extends React.Component {
         return (
             <motion.div
                 className={classes.root}
-                exit={{
-                    opacity: 0
-                }}
+                initial={'in'}
+                animate={'in'}
+                exit={'out'}
                 transition={commonMotion.transition}
+                variants={commonMotion.pageTransition}
             >
                 <PageUnderContruction />
             </motion.div>

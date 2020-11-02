@@ -292,7 +292,6 @@ class About extends React.Component {
                     </Typography>
                 </div>
                 <div id={'section4.2'} className={clsx(classes.divRow, classes.divRight, classes.divBetween)} style={{ flex: 4 }}>
-                    <div id={'cheat'} />
                     <div id={'section4.2a'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_box)} style={{ flex: 1 }}>
                         <AspectRatio ratio={1}>
                             <div className={clsx(classes.section4_avatar)}>
@@ -351,7 +350,7 @@ class About extends React.Component {
                 {
                     // cheat for removing '& div:first-child'
                 }
-                <div key={'cheat'} />
+                <div id={'cheat'} />
                 {this.renderSection1()}
                 {this.renderSection2()}
                 {this.renderSection3()}
