@@ -28,7 +28,7 @@ import { duration } from 'moment';
 
 const styles = theme => ({
     section1: {
-
+        backgroundImage: `linear-gradient(${theme.palette.primary.secondary}, ${theme.palette.primary.main})`
     },
 
     section1_img1: {
@@ -64,10 +64,11 @@ const styles = theme => ({
     },
 
     section1_txt1: {
-
+        color: 'white'
     },
 
     section1_txt2: {
+        color: 'white',
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -80,6 +81,7 @@ const styles = theme => ({
     },
 
     section1_txt3: {
+        color: 'white',
         fontWeight: 400
     },
 
@@ -487,10 +489,6 @@ class Home extends React.Component {
                         <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>
                             <Trans
                                 i18nKey={ID.HOME.SECTION_1_TEXT_1}
-                                components={{ span: <span /> }}
-                                values={{
-                                    custom: clsx(classes.secondaryText)
-                                }}
                             />
                         </Typography>
                         <div className={classes.section1_btn1}>
@@ -513,10 +511,6 @@ class Home extends React.Component {
                             <Typography className={clsx(classes.textBreak, classes.section1_txt2)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_1_TEXT_2}
-                                    components={{ span: <span /> }}
-                                    values={{
-                                        custom: clsx(classes.secondaryText)
-                                    }}
                                 />
                             </Typography>
                             <img alt={t(ID.IMAGE.HOME_1_3)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))} className={classes.section1_img3} />
@@ -524,10 +518,6 @@ class Home extends React.Component {
                         <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section1_txt3)}>
                             <Trans
                                 i18nKey={ID.HOME.SECTION_1_TEXT_3}
-                                components={{ span: <span /> }}
-                                values={{
-                                    custom: clsx(classes.secondaryText)
-                                }}
                             />
                         </Typography>
                         <div className={classes.section1_btn1}>

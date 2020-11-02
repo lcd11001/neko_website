@@ -65,14 +65,15 @@ const defaultTheme = createMuiTheme({
                 ),
             },
             contained: {
-                backgroundColor: '#4A58B2',
+                backgroundColor: '#4E5496',
                 color: '#FFFFFF',
+                boxShadow: 'none !important',
                 '&:hover': {
-                    backgroundColor: '#3C499A',
-                    color: '#FFFFFF',
+                    backgroundColor: '#555593',
+                    color: '#FFFFFF'
                 },
                 '&:active': {
-                    backgroundColor: '#24307E',
+                    backgroundColor: '#606593',
                     color: '#FFFFFF',
                 },
                 '&.Mui-disabled': {
