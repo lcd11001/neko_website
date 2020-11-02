@@ -54,8 +54,6 @@ export const HomeMenu = [
 ]
 
 export const AppLogo = 'neko_logo.png'
-export const ENFlag = 'uk.png'
-export const VNFlag = 'vn.png'
 
 export const PageNotFoundLogo = 'WebPageNotFound.jpg'
 export const PageUnderConstructionLogo = 'WebPageConstruction.jpg'

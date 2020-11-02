@@ -41,7 +41,6 @@ const styles = theme => ({
         width: '83%',
         height: '25vw',
         backgroundColor: theme.palette.primary.secondary,
-        backgroundImage: `url(${Utils.getImageUrl('footer/Make_It_Live.png')})`,
         backgroundPosition: 'left top',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
@@ -202,8 +201,11 @@ class Footer extends React.Component {
             [classes.footerLink + '--hover']: this.state.isHover
         })
 
+        const img = t(ID.IMAGE.FOOTER_1)
+        const imgUrl = pathname === t(ID.LINK.ABOUT) ? 'none' : `url(${Utils.getUrl(img)})`
+
         return (
-            <div className={classes.rootSecondary} style={{ backgroundImage: pathname === t(ID.LINK.ABOUT) ? 'none' : undefined }}>
+            <div className={classes.rootSecondary} style={{ backgroundImage: imgUrl }}>
                 <div className={clsx(classes.divColumn, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ paddingRight: '4%' }}>
                     <div className={clsx(classes.divColumn, classes.divCenter)}>
                         <Typography className={clsx(classes.txtWhite, classes.title)}>
@@ -315,7 +317,7 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div style={{ padding: '10vw 0' }}>
+                <div style={{ padding: '20px 0' }}>
                     <Typography className={clsx(classes.txtWhite, classes.copyright)}>
                         <Trans i18nKey={ID.FOOTER.PRIMARY_COPYRIGHT} />
                     </Typography>

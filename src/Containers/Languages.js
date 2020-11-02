@@ -4,7 +4,6 @@ import compose from 'recompose/compose'
 
 import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
 
-import { ENFlag, VNFlag } from '../Data/Defines'
 import ID from '../Translations/ID.json'
 import Utils from '../Utils'
 
@@ -42,8 +41,12 @@ class Languages extends React.Component {
     render() {
         const {
             classes,
-            i18n
+            i18n,
+            t
         } = this.props
+
+        const ENFlag = Utils.getUrl(t(ID.IMAGE.LANGUAGE_EN))
+        const VNFlag = Utils.getUrl(t(ID.IMAGE.LANGUAGE_VN))
 
         return (
             <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
@@ -51,13 +54,13 @@ class Languages extends React.Component {
                     classes={{ root: classes.buttonRoot }}
                     onClick={() => i18n.changeLanguage(ID.COMMON.LANGUAGE_EN)}
                 >
-                    <img className={classes.icon} alt={'EN'} src={Utils.getImageUrl(ENFlag)} />
+                    <img className={classes.icon} alt={'EN'} src={ENFlag} />
                 </IconButton>
                 <IconButton
                     classes={{ root: classes.buttonRoot }}
                     onClick={() => i18n.changeLanguage(ID.COMMON.LANGUAGE_VN)}
                 >
-                    <img className={classes.icon} alt={'VN'} src={Utils.getImageUrl(VNFlag)} />
+                    <img className={classes.icon} alt={'VN'} src={VNFlag} />
                 </IconButton>
             </div>
         );
