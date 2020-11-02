@@ -21,14 +21,8 @@ const styles = theme => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingLeft', 'paddingRight'],
-                value: [10, 10],
-                variant: [2.5, 2.5],
-                unit: ['%', '%']
-            }
-        ),
+        paddingLeft: 0,
+        paddingRight: 0
     }
 });
 
