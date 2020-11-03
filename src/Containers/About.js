@@ -347,7 +347,6 @@ class About extends React.Component {
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                <Toolbar disableGutters={true} className={classes.toolbar} />
                 {this.renderSection1()}
                 {this.renderSection2()}
                 {this.renderSection3()}

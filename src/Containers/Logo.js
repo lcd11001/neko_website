@@ -46,7 +46,8 @@ const styles = theme => ({
             }
         ),
         position: 'relative',
-
+        
+        color: theme.palette.text.primary,
         '&--secondary': {
             color: 'white'
         }
@@ -65,6 +66,7 @@ const styles = theme => ({
         ),
         position: 'relative',
 
+        color: theme.palette.text.primary,
         '&--secondary': {
             color: 'white'
         }

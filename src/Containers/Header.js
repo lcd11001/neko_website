@@ -12,6 +12,10 @@ import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import Logo from './Logo'
 import Menu from './Menu'
 import Languages from './Languages'
+import { withRouter } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
+
+import ID from '../Translations/ID.json'
 
 const styles = theme => ({
     root: {
@@ -37,7 +41,7 @@ class Header extends React.Component {
         }))
     }
 
-    renderShortHeader() {
+    renderShortHeader(isHome) {
         const { classes } = this.props;
         const { menuOpened } = this.state
         return (
@@ -51,35 +55,44 @@ class Header extends React.Component {
                                     : <MenuIcon />
                             }
                         </IconButton>
-                        <Logo />
+                        <Logo secondary={isHome} />
                     </div>
                 </div>
 
                 <Collapse in={menuOpened}>
-                    <Menu shortMenu={true} />
+                    <Menu shortMenu={true} secondary={isHome} />
                 </Collapse>
             </div>
         );
     }
 
-    renderHeader() {
+    renderHeader(isHome) {
         const { classes } = this.props;
 
         return (
             <div className={clsx(classes.root, classes.divRow, classes.divBetween)}>
-                <Logo />
-                <Menu />
+                <Logo secondary={isHome} />
+                <Menu secondary={isHome} />
             </div>
         );
     }
 
     render() {
-        const { width } = this.props
+        const {
+            width,
+            t,
+            location: {
+                pathname
+            }
+        } = this.props
+
+        const isHome = t(ID.LINK.HOME) === pathname
+
         if (isWidthDown('sm', width)) {
-            return this.renderShortHeader()
+            return this.renderShortHeader(isHome)
         }
 
-        return this.renderHeader()
+        return this.renderHeader(isHome)
     }
 }
 
@@ -90,5 +103,7 @@ Header.propTypes =
 
 export default compose(
     withMultipleStyles(commonStyles, styles),
-    withWidth()
+    withWidth(),
+    withTranslation(),
+    withRouter
 )(Header);

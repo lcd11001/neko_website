@@ -38,10 +38,6 @@ const styles = theme => ({
 
         '&--selected': {
             fontWeight: 600
-        },
-
-        '&--custom-color-1': {
-            color: theme.palette.primary.secondary
         }
     },
 
@@ -93,7 +89,19 @@ const styles = theme => ({
     },
 
     menuLink: {
-        color: theme.palette.text.primary
+        color: theme.palette.text.primary,
+
+        '&--custom-color-1': {
+            color: theme.palette.primary.secondary
+        },
+
+        '&--secondary': {
+            color: 'white',
+
+            '&--custom-color-1': {
+                color: theme.palette.primary.main
+            }
+        },
     },
 
     underline: {
@@ -111,7 +119,15 @@ const styles = theme => ({
 
         '&--custom-underline-color-1': {
             backgroundColor: theme.palette.primary.secondary
-        }
+        },
+
+        '&--secondary': {
+            backgroundColor: 'white',
+
+            '&--custom-underline-color-1': {
+                backgroundColor: theme.palette.primary.main
+            }
+        },
     },
 
     underbackground: {
@@ -155,7 +171,8 @@ class Menu extends React.Component {
                 pathname
             },
             shortMenu,
-            t
+            t,
+            secondary
         } = this.props
 
         let menuLink = t(menu.link)
@@ -164,8 +181,7 @@ class Menu extends React.Component {
         let isHover = this.state[`hover_${menuLink}`] === true
 
         let classMenuItem = clsx(classes.menuItem, {
-            [classes.menuItem + '--selected']: isSelected,
-            [classes.menuItem + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (menu.customStyle && menu.customStyle.color)
+            [classes.menuItem + '--selected']: isSelected
         })
 
         let classMenuIcon = clsx(classes.menuIcon, {
@@ -178,6 +194,9 @@ class Menu extends React.Component {
         })
 
         let classUnderline = clsx(classes.underline, {
+            [classes.underline + '--secondary']: secondary,
+            [classes.underline + '--secondary' + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: secondary && (menu.customStyle && menu.customStyle.underlineColor),
+
             [classes.underline + '--hover']: isHover,
             [classes.underline + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (menu.customStyle && menu.customStyle.underlineColor)
         })
@@ -186,10 +205,17 @@ class Menu extends React.Component {
             [classes.underbackground + '--hover']: (!shortMenu && isHover && menu.underline === 'disable')
         })
 
+        let classMenuLink = clsx(classes.menuLink, {
+            [classes.menuLink + '--secondary']: secondary,
+            [classes.menuLink + '--secondary' + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: secondary && (menu.customStyle && menu.customStyle.color),
+
+            [classes.menuLink + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (menu.customStyle && menu.customStyle.color)
+        })
+
         return (
 
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
-                <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
+                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
                         <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap color={'textPrimary'} >
                             <Trans i18nKey={menu.text} />
@@ -236,11 +262,13 @@ Menu.propTypes =
 {
     classes: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    shortMenu: PropTypes.bool
+    shortMenu: PropTypes.bool,
+    secondary: PropTypes.bool
 };
 
 Menu.defaultProps = {
-    shortMenu: false
+    shortMenu: false,
+    secondary: false
 }
 
 export default compose(

@@ -15,7 +15,7 @@ import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
-import { Button, Divider, Fade, IconButton, Typography } from '@material-ui/core';
+import { Button, Divider, Fade, IconButton, Toolbar, Typography } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
@@ -24,11 +24,10 @@ import { Link } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
 
 import AspectRatio from '../Components/AspectRatio'
-import { duration } from 'moment';
 
 const styles = theme => ({
     section1: {
-        backgroundImage: `linear-gradient(${theme.palette.primary.secondary}, ${theme.palette.primary.main})`
+        backgroundImage: `linear-gradient(${theme.palette.primary.secondary}, ${theme.palette.primary.main})`,
     },
 
     section1_img1: {
@@ -484,6 +483,7 @@ class Home extends React.Component {
 
         return (
             <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
+                <Toolbar disableGutters={true} className={classes.toolbar} style={{ backgroundColor: 'transparent' }} />
                 <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>
