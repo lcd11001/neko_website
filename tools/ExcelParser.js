@@ -39,9 +39,14 @@ const main = (input, output) => {
             }
         }
 
-        //drop those first two rows which are empty
-        while (!data[0]) {
-            data.shift();
+        //drop those rows which are empty
+        let emptyRow = 0
+        while (emptyRow < data.length) {
+            if (!data[emptyRow]) {
+                data.splice(emptyRow, 1);
+            } else {
+                emptyRow++
+            }
         }
 
         // translate id-text
@@ -60,11 +65,7 @@ const main = (input, output) => {
                 i18[language] = {}
             }
 
-            if (i === 0) {
-                i18[language][namespace] = define
-            } else {
-                i18[language][namespace] = define
-            }
+            i18[language][namespace] = define
         }
     })
 
@@ -72,6 +73,7 @@ const main = (input, output) => {
         let define = JSON.stringify(i18[language], null, 4)
         let file = path.join(output, `${language}.json`)
         console.log(`Writing ${file}`)
+        fs.mkdirSync(output, {recursive: true})
         fs.writeFileSync(`${file}`, define)
     })
 };
