@@ -12,7 +12,8 @@ const styles = (theme) => ({
     },
 
     appbar: {
-        backgroundColor: 'transparent'
+        // backgroundColor: 'transparent'
+        width: '100%'
     },
 
     toolbar: {

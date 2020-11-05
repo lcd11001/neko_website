@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
 
 import { I18nextProvider } from 'react-i18next'
@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { defaultTheme } from './Styles'
 
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import store from './Redux/Store'
 import { Provider } from 'react-redux'
@@ -59,20 +59,27 @@ i18next
         document.body.removeChild(divLoading)
     })
 
+// https://github.com/framer/motion/issues/466
+const MotionRedirect = ({ children, ...props }) => (
+    <motion.div exit={'undefined'}>
+        <Redirect {...props} />
+    </motion.div>
+)
+
 const Routes = () => {
     return (
         <MuiThemeProvider theme={defaultTheme}>
             <Provider store={store}>
                 <I18nextProvider i18n={i18next}>
                     <Router>
-                        <React.Fragment>
+                        <Fragment>
                             <CssBaseline />
                             <App>
                                 <Route render={({ location }) => (
                                     <AnimatePresence initial={false} exitBeforeEnter={true}>
                                         <Switch location={location} key={location.pathname}>
                                             {/* Homepage === Profile because of user permission */}
-                                            <Redirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
+                                            <MotionRedirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
 
                                             {/* Force login if needed by using protected route */}
                                             <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
@@ -84,7 +91,7 @@ const Routes = () => {
                                     </AnimatePresence>
                                 )} />
                             </App>
-                        </React.Fragment>
+                        </Fragment>
                     </Router>
                 </I18nextProvider>
             </Provider>
@@ -95,9 +102,9 @@ const Routes = () => {
 // remove React.StrictMode to fix findDOMNode is deprecated
 // https://stackoverflow.com/questions/61220424/material-ui-drawer-finddomnode-is-deprecated-in-strictmode
 ReactDOM.render(
-    <React.Fragment>
+    <Fragment>
         <Routes />
-    </React.Fragment>,
+    </Fragment>,
     document.getElementById('root')
 )
 
