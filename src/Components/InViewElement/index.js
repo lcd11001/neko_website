@@ -16,7 +16,7 @@ const InViewElement = (props) => {
         } else {
             controls.start(props.exit)
         }
-    }, [controls, inView])
+    }, [controls, inView, props.animate, props.exit])
 
     return (
         <div

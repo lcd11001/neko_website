@@ -195,7 +195,7 @@ class Menu extends React.Component {
 
         let classUnderline = clsx(classes.underline, {
             [classes.underline + '--secondary']: secondary,
-            [classes.underline + '--secondary' + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: secondary && (menu.customStyle && menu.customStyle.underlineColor),
+            [classes.underline + '--secondary--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.underlineColor),
 
             [classes.underline + '--hover']: isHover,
             [classes.underline + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (menu.customStyle && menu.customStyle.underlineColor)
@@ -207,7 +207,7 @@ class Menu extends React.Component {
 
         let classMenuLink = clsx(classes.menuLink, {
             [classes.menuLink + '--secondary']: secondary,
-            [classes.menuLink + '--secondary' + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: secondary && (menu.customStyle && menu.customStyle.color),
+            [classes.menuLink + '--secondary--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.color),
 
             [classes.menuLink + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (menu.customStyle && menu.customStyle.color)
         })
