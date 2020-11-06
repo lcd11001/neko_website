@@ -71,7 +71,7 @@ const Routes = () => {
         <MuiThemeProvider theme={defaultTheme}>
             <Provider store={store}>
                 <I18nextProvider i18n={i18next}>
-                    <Router>
+                    <Router basename={process.env.PUBLIC_URL}>
                         <Fragment>
                             <CssBaseline />
                             <App>
