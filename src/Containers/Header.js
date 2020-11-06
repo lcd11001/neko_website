@@ -41,8 +41,8 @@ class Header extends React.Component {
         }))
     }
 
-    renderShortHeader(isHome) {
-        const { classes } = this.props;
+    renderShortHeader() {
+        const { classes, secondary } = this.props;
         const { menuOpened } = this.state
         return (
             <div className={clsx(classes.root, classes.divColumn)}>
@@ -55,24 +55,24 @@ class Header extends React.Component {
                                     : <MenuIcon />
                             }
                         </IconButton>
-                        <Logo secondary={isHome} />
+                        <Logo secondary={secondary} />
                     </div>
                 </div>
 
                 <Collapse in={menuOpened}>
-                    <Menu shortMenu={true} secondary={isHome} />
+                    <Menu shortMenu={true} secondary={secondary} />
                 </Collapse>
             </div>
         );
     }
 
-    renderHeader(isHome) {
-        const { classes } = this.props;
+    renderHeader() {
+        const { classes, secondary } = this.props;
 
         return (
             <div className={clsx(classes.root, classes.divRow, classes.divBetween)}>
-                <Logo secondary={isHome} />
-                <Menu secondary={isHome} />
+                <Logo secondary={secondary} />
+                <Menu secondary={secondary} />
             </div>
         );
     }
@@ -80,30 +80,30 @@ class Header extends React.Component {
     render() {
         const {
             width,
-            t,
-            location: {
-                pathname
-            }
+            t
         } = this.props
 
-        const isHome = t(ID.LINK.HOME) === pathname
-
         if (isWidthDown('sm', width)) {
-            return this.renderShortHeader(isHome)
+            return this.renderShortHeader()
         }
 
-        return this.renderHeader(isHome)
+        return this.renderHeader()
     }
 }
 
 Header.propTypes =
 {
     classes: PropTypes.object.isRequired,
+    secondary: PropTypes.bool
 };
+
+
+Header.defaultProps = {
+    secondary: false
+}
 
 export default compose(
     withMultipleStyles(commonStyles, styles),
     withWidth(),
-    withTranslation(),
-    withRouter
+    withTranslation()
 )(Header);

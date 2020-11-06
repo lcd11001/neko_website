@@ -30,12 +30,12 @@ const styles = theme => ({
 });
 
 class App extends React.Component {
-    renderAppbar(position, backgroundColor) {
+    renderAppbar(position, backgroundColor, secondary) {
         const { classes } = this.props
         return (
             <AppBar elevation={0} className={classes.appbar} position={position} style={{ backgroundColor: backgroundColor }}>
                 <Toolbar disableGutters={true} className={classes.toolbar}>
-                    <Header />
+                    <Header secondary={secondary}/>
                 </Toolbar>
             </AppBar>
         )
@@ -59,15 +59,15 @@ class App extends React.Component {
             <React.Fragment>
                 <div className={classes.root}>
                     {
-                        this.renderAppbar('absolute', 'transparent')
+                        this.renderAppbar('absolute', 'transparent', isHome)
                     }
                     {
                         !isHome &&
                         <Toolbar disableGutters={true} className={classes.toolbar} />
                     }
-                    <HideOnScroll offsetY={-400}>
+                    <HideOnScroll offsetY={0} timeout={0}>
                         {
-                            this.renderAppbar('fixed', 'white')
+                            this.renderAppbar('fixed', 'white', false)
                         }
                     </HideOnScroll>
                     {children}
