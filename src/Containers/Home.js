@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import clsx from 'clsx'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import WaterWave from 'react-water-wave'
 
@@ -109,9 +109,14 @@ const styles = theme => ({
         top: 0,
         right: 0,
         bottom: 0,
-        backgroundPosition: 'right center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain',
+    },
+
+    section2_img_bg: {
+        width: 'auto',
+        height: '100%',
+        position: 'absolute',
+        right: 0,
+        objectFit: 'cover',
     },
 
     section2_txt1: {
@@ -131,8 +136,12 @@ const styles = theme => ({
     },
 
     menuLink: {
-        color: 'white',
         zIndex: 1,
+        color: 'black',
+
+        '&--not-hover': {
+            color: 'grey'
+        }
     },
 
     menuItem: {
@@ -144,17 +153,19 @@ const styles = theme => ({
                 unit: ['px', 'px', 'px']
             }
         ),
-        fontWeight: 300,
+        fontWeight: 400,
         textAlign: 'left',
         color: 'inherit',
+        marginLeft: 0,
 
-        transition: theme.transitions.create(['color', 'font-weight'], {
+        transition: theme.transitions.create(['color', 'font-weight', 'margin-left'], {
             duration: 300
         }),
 
         '&--hover': {
             fontWeight: 600,
-            color: theme.palette.text.primary
+            color: theme.palette.text.primary,
+            marginLeft: 50
         }
     },
 
@@ -432,7 +443,8 @@ class Home extends React.Component {
         this.state = {
             caseIndex: 0,
             caseStudyNum: props.t(ID.HOME.SECTION_4_CASE_STUDY_NUM),
-            lastHover: props.t(ID.LINK.WORKS_BRAND)
+            lastHover: props.t(ID.LINK.WORKS_BRAND),
+            countHover: 0
         }
 
         this.carouselCaseStudyRef = React.createRef()
@@ -440,10 +452,11 @@ class Home extends React.Component {
 
     handleMouseEnter = (type, link) => (evt) => {
         if (type === 'menu') {
-            this.setState({
+            this.setState((prevState) => ({
                 [`hover_${link}`]: true,
-                lastHover: link
-            })
+                lastHover: link,
+                countHover: prevState.countHover + 1
+            }))
         } else if (type === 'blog') {
             this.setState({
                 [`blog_${link}`]: true,
@@ -453,9 +466,10 @@ class Home extends React.Component {
 
     handleMouseLeave = (type, link) => (evt) => {
         if (type === 'menu') {
-            this.setState({
-                [`hover_${link}`]: false
-            })
+            this.setState((prevState) => ({
+                [`hover_${link}`]: false,
+                countHover: prevState.countHover - 1
+            }))
         } else if (type === 'blog') {
             this.setState({
                 [`blog_${link}`]: false,
@@ -548,7 +562,7 @@ class Home extends React.Component {
         return (
             <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
                 <div id={'section2.1'}>
-                    <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section2_txt1)}>
+                    <Typography className={clsx(classes.textBreak, classes.textNormal, classes.section2_txt1)}>
                         <Trans
                             i18nKey={ID.HOME.SECTION_2_TEXT_1}
                         />
@@ -574,7 +588,12 @@ class Home extends React.Component {
         let menuLink = t(menu.link)
 
         let isHover = this.state[`hover_${menuLink}`] === true
+        let notHover = this.state.countHover !== 0
         let isShowBackground = this.state.lastHover === menuLink
+
+        let classMenuLink = clsx(classes.menuLink, {
+            [classes.menuLink + '--not-hover']: notHover
+        })
 
         let classMenuItem = clsx(classes.menuItem, {
             [classes.menuItem + '--hover']: isHover
@@ -586,28 +605,35 @@ class Home extends React.Component {
 
         return (
             <div key={menu.text} className={clsx(classes.divRow)}>
-                {
-                    isShowBackground
-                        ? window.isWaterWaveSupported
-                            ?
-                            <WaterWave
-                                ref={this.waterWaveRef}
-                                imageUrl={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
-                                className={classes.section2_bg}
-                                style={{
-                                    backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`])
-                                }}
-                            />
-                            :
-                            <div className={classes.section2_bg}
-                                style={{
-                                    backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
-                                    backgroundImage: `url(${Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))})`,
-                                }}
-                            />
-                        : null
-                }
-                <Link to={menuLink} className={clsx(classes.menuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
+                <AnimatePresence initial={false} exitBeforeEnter={true}>
+                    {
+                        isShowBackground &&
+
+                        <motion.div className={classes.section2_bg}
+                            key={`bg-${menu.text}`}
+                            style={{
+                                backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
+                            }}
+                            variants={commonMotion.backgroundTransition}
+                            initial={'out'}
+                            animate={'in'}
+                            exit={'out'}
+                        >
+                            <motion.img
+                                key={`img-${menu.text}`}
+                                alt={`img-${menu.text}`}
+                                className={classes.section2_img_bg}
+                                src={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
+                                // transition={{ duration: 3 }}
+                                variants={commonMotion.specializeTransition}
+                                // initial={'out'}
+                                // animate={'in'}
+                                // exit={'out'}
+                            /> 
+                        </motion.div>
+                    }
+                </AnimatePresence>
+                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans

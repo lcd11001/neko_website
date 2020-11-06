@@ -45,9 +45,45 @@ const inViewTransition = {
     }
 }
 
+const specializeTransition = {
+    out: {
+        opacity: 0,
+        right: '-100vw',
+        scale: 0.5,
+        transition: {
+            duration: .3
+        }
+    },
+    in: {
+        opacity: 1,
+        right: 0,
+        scale: 1,
+        transition: {
+            duration: .3
+        }
+    },
+}
+
+const backgroundTransition = {
+    in: {
+        opacity: 1,
+        transition: {
+            when: 'beforeChildren'
+        }
+    },
+    out: {
+        opacity: 0,
+        transition: {
+            when: 'afterChildren'
+        }
+    }
+}
+
 export default {
     transition,
     pageTransition,
     elementTransition,
-    inViewTransition
+    inViewTransition,
+    specializeTransition,
+    backgroundTransition
 }
