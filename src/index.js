@@ -8,7 +8,7 @@ import ID from './Translations/ID.json'
 import EN from './Translations/EN.json'
 import VN from './Translations/VN.json'
 
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { defaultTheme } from './Styles'
 
@@ -71,7 +71,7 @@ const Routes = () => {
         <MuiThemeProvider theme={defaultTheme}>
             <Provider store={store}>
                 <I18nextProvider i18n={i18next}>
-                    <Router basename={process.env.PUBLIC_URL}>
+                    <Router>
                         <Fragment>
                             <CssBaseline />
                             <App>
