@@ -24,6 +24,7 @@ import { Link } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
 
 import AspectRatio from '../Components/AspectRatio'
+import VizElement from '../Components/VizElement';
 
 const styles = theme => ({
     section1: {
@@ -936,11 +937,21 @@ class Home extends React.Component {
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                {this.renderSection1()}
-                {this.renderSection2()}
-                {this.renderSection3()}
-                {this.renderSection4()}
-                {this.renderSection5()}
+                <VizElement>
+                    {this.renderSection1()}
+                </VizElement>
+                <VizElement>
+                    {this.renderSection2()}
+                </VizElement>
+                <VizElement>
+                    {this.renderSection3()}
+                </VizElement>
+                <VizElement>
+                    {this.renderSection4()}
+                </VizElement>
+                <VizElement>
+                    {this.renderSection5()}
+                </VizElement>
             </motion.div>
         );
     }

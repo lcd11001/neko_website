@@ -12,7 +12,26 @@ const pageTransition = {
     }
 }
 
+const elementTransition = {
+    hidden: {
+        opacity: 0,
+        top: '-100vh',
+        position: 'relative'
+    },
+    in: {
+        position: 'relative',
+        opacity: 1,
+        top: 0
+    },
+    out: {
+        position: 'relative',
+        opacity: 0.2,
+        top: 0
+    }
+}
+
 export default {
     transition,
-    pageTransition
+    pageTransition,
+    elementTransition
 }
