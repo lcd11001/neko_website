@@ -28,7 +28,7 @@ function HideOnScroll(props) {
     }, [isShow])
 
     useEffect(() => {
-        setTimer(props.timeout)
+        props.timeout && setTimer(props.timeout)
     }, [props.timeout, isShow])
 
     return (
