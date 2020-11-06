@@ -30,8 +30,24 @@ const elementTransition = {
     }
 }
 
+const inViewTransition = {
+    hidden: {
+        opacity: 0,
+        y: '50px'
+    },
+    visible: {
+        opacity: 1,
+        y: 0
+    },
+    invisible: {
+        opacity: 0.2,
+        y: '50px'
+    }
+}
+
 export default {
     transition,
     pageTransition,
-    elementTransition
+    elementTransition,
+    inViewTransition
 }

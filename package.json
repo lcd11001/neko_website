@@ -17,6 +17,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-i18next": "^11.7.3",
+    "react-intersection-observer": "^8.30.1",
     "react-material-ui-carousel": "^2.0.2",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
