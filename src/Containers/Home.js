@@ -529,13 +529,11 @@ const styles = theme => ({
     },
 
     section6_dialog1_pos: {
-        // position: 'relative',
-        // left: '25%',
         marginLeft: '15%',
 
-        // [theme.breakpoints.down('sm')]: {
-        //     left: '5%'
-        // }
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '25%',
+        }
     },
 
     section6_dialog2: {
@@ -552,14 +550,12 @@ const styles = theme => ({
     },
 
     section6_dialog2_pos: {
-        // position: 'relative',
-        // left: '30%',
-
-        // [theme.breakpoints.down('sm')]: {
-        //     left: '15%'
-        // }
         marginLeft: '30%',
-        marginTop: '10%'
+        marginTop: '5%',
+
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '30%',
+        },
     },
 
     section6_dialog3: {
@@ -576,14 +572,11 @@ const styles = theme => ({
     },
 
     section6_dialog3_pos: {
-        // position: 'relative',
-        // left: '20%',
-
-        // [theme.breakpoints.down('sm')]: {
-        //     left: '0%'
-        // }
         marginLeft: '10%',
-        marginTop: '-5%'
+        marginTop: '-5%',
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '20%',
+        }
     },
 
     section6_dialog1_txt: {
