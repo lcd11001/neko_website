@@ -511,7 +511,8 @@ const styles = theme => ({
     },
 
     section6_dialog_root: {
-        overflow: 'unset'
+        overflow: 'unset',
+        width: '100%'
     },
 
     section6_dialog1: {
@@ -528,21 +529,22 @@ const styles = theme => ({
     },
 
     section6_dialog1_pos: {
-        position: 'relative',
-        right: '60%',
+        // position: 'relative',
+        // left: '25%',
+        marginLeft: '15%',
 
-        [theme.breakpoints.down('sm')]: {
-            left: '5%'
-        }
+        // [theme.breakpoints.down('sm')]: {
+        //     left: '5%'
+        // }
     },
 
     section6_dialog2: {
         ...breakpointsStyle(theme,
             {
-                key: ['width', 'height', 'top'],
-                value: [600, 245, 50],
-                variant: [90, 35, 5],
-                unit: ['px', 'px', 'px']
+                key: ['width', 'height'],
+                value: [600, 245],
+                variant: [90, 35],
+                unit: ['px', 'px']
             }
         ),
         borderRadius: 15,
@@ -550,12 +552,14 @@ const styles = theme => ({
     },
 
     section6_dialog2_pos: {
-        position: 'relative',
-        right: '40%',
+        // position: 'relative',
+        // left: '30%',
 
-        [theme.breakpoints.down('sm')]: {
-            left: '15%'
-        }
+        // [theme.breakpoints.down('sm')]: {
+        //     left: '15%'
+        // }
+        marginLeft: '30%',
+        marginTop: '10%'
     },
 
     section6_dialog3: {
@@ -572,12 +576,14 @@ const styles = theme => ({
     },
 
     section6_dialog3_pos: {
-        position: 'relative',
-        right: '70%',
+        // position: 'relative',
+        // left: '20%',
 
-        [theme.breakpoints.down('sm')]: {
-            left: '0%'
-        }
+        // [theme.breakpoints.down('sm')]: {
+        //     left: '0%'
+        // }
+        marginLeft: '10%',
+        marginTop: '-5%'
     },
 
     section6_dialog1_txt: {
@@ -689,7 +695,9 @@ class Home extends React.Component {
                 caseIndex: ((state.caseIndex + delta) + state.caseStudyNum) % state.caseStudyNum
             }),
             () => {
-                this.carouselCaseStudyRef.current.pressIndicator(this.state.caseIndex)
+                delta > 0
+                    ? this.carouselCaseStudyRef.current.next()
+                    : this.carouselCaseStudyRef.current.prev()
             }
         )
     }
@@ -1193,10 +1201,10 @@ class Home extends React.Component {
         } = this.props
 
         return (
-            <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divBetween, classes.section, classes.section6)}>
+            <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divLeft, classes.section, classes.section6)}>
                 <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, -200, 3, 1)}
+                        variants={commonMotion.dialogTransition(0, -200, 2, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
                             <Trans
@@ -1206,7 +1214,7 @@ class Home extends React.Component {
                     </InViewElement>
 
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, -200, 3.5, 1)}
+                        variants={commonMotion.dialogTransition(0, -200, 2.5, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
                             <Trans
@@ -1215,12 +1223,12 @@ class Home extends React.Component {
                         </Typography>
                     </InViewElement>
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, -200, 3.5, 1)}
+                        variants={commonMotion.dialogTransition(0, 200, 2.5, 1)}
                     >
                         <div id={'down-arrow'} className={classes.section6_arrow} />
                     </InViewElement>
                 </div>
-                <div id={'section6.2'} className={clsx(classes.divColumn, classes.divLeft)}>
+                <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
                     <InViewElement
                         classes={{
                             root: classes.section6_dialog_root
