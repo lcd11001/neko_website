@@ -21,9 +21,9 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['marginLeft', 'marginRight', 'marginTop', 'marginBottom'],
-                value: [10, 10, 3, 3],
-                variant: [2, 2, 0.5, 0.5],
-                unit: ['%', '%', '%', '%']
+                value: [100, 100, 50, 50],
+                variant: [22, 22, 10, 10],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
     },
@@ -46,14 +46,12 @@ const styles = (theme) => ({
 
     section: {
         width: '100%',
-        paddingTop: '8%',
-        paddingBottom: '5%',
         ...breakpointsStyle(theme,
             {
-                key: ['paddingLeft', 'paddingRight'],
-                value: [15, 15],
-                variant: [3, 3],
-                unit: ['%', '%']
+                key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
+                value: [150, 150, 100, 60],
+                variant: [35, 35, 10, 6],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
     },
@@ -65,6 +63,20 @@ const styles = (theme) => ({
     divColumn: {
         display: 'flex',
         flexDirection: 'column'
+    },
+    divRow2Column: {
+        display: 'flex',
+        flexDirection: 'row',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+        }
+    },
+    divRow2ColumnRevert: {
+        display: 'flex',
+        flexDirection: 'row',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column-reverse',
+        }
     },
     divCenter: {
         justifyContent: 'center',

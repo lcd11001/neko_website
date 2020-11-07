@@ -28,6 +28,10 @@ import "react-multi-carousel/lib/styles.css"
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement';
+import { relative } from 'path';
+
+const MAX_LINE_HEIGHT = 3
+const DOT_SIZE = 80
 
 const styles = theme => ({
     section1: {
@@ -112,11 +116,13 @@ const styles = theme => ({
         top: 0,
         right: 0,
         bottom: 0,
+        display: 'flex',
+        alignItems: 'center'
     },
 
     section2_img_bg: {
-        width: 'auto',
-        height: '100%',
+        width: '100%',
+        height: 'auto',
         position: 'absolute',
         right: 0,
         objectFit: 'cover',
@@ -271,9 +277,9 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['height'],
-                value: [20],
-                variant: [-2],
-                unit: ['vw']
+                value: [220],
+                variant: [10],
+                unit: ['px']
             }
         ),
         width: '100%',
@@ -343,12 +349,16 @@ const styles = theme => ({
         textJustify: 'inter-word',
         ...breakpointsStyle(theme,
             {
-                key: ['line-height'],
-                value: [32],
-                variant: [3],
-                unit: ['px']
+                key: ['line-height', 'max-height'],
+                value: [32, 32 * MAX_LINE_HEIGHT],
+                variant: [3, 3 * MAX_LINE_HEIGHT],
+                unit: ['px', 'px']
             }
         ),
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        wordWrap: 'break-word',
+        wordBreak: 'break-word'
     },
 
     section4_title: {
@@ -439,6 +449,146 @@ const styles = theme => ({
         textAlign: 'left',
         fontWeight: 'bold'
     },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    section6: {
+        // https://dev.to/clairecodes/how-to-create-a-polka-dot-background-with-css-23m0
+        backgroundImage: 'radial-gradient(#EEEEEE 10%, #ffffff 10%)',
+        // width: DOT_SIZE,
+        // height: DOT_SIZE,
+        backgroundPosition: '0 0',
+        backgroundSize: `${DOT_SIZE}px ${DOT_SIZE}px`
+    },
+
+    section6_txt1: {
+        color: 'white',
+        textShadow: `
+            #555593 2px 2px 0px,
+            #555593 -1px 1px 0px,
+            #555593 1px -1px 0px,
+            #555593 -1px -1px 0px
+        `,
+        '-webkit-font-smoothing': 'antialiased',
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [80, 120],
+                variant: [10, 10],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 500
+    },
+
+    section6_txt2: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height', 'paddingTop', 'paddingBottom'],
+                value: [180, 140, 50, 50],
+                variant: [20, 20, 5, 5],
+                unit: ['px', 'px', 'px', 'px']
+            }
+        ),
+        fontWeight: 'bold'
+    },
+
+    section6_arrow: {
+        // https://css-tricks.com/snippets/css/css-triangle/        
+        width: 0,
+        height: 0,
+        borderLeft: 'solid transparent',
+        borderRight: 'solid transparent',
+        borderTop: `solid ${theme.palette.primary.main}`,
+        ...breakpointsStyle(theme,
+            {
+                key: ['borderTopWidth', 'borderLeftWidth', 'borderRightWidth'],
+                value: [35, 35, 35],
+                variant: [5, 5, 5],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+    },
+
+    section6_dialog1: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [550, 150],
+                variant: [80, 20],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        border: '2px solid #707070',
+        borderRadius: 15,
+    },
+
+    section6_dialog1_pos: {
+        position: 'relative',
+        right: '60%',
+
+        [theme.breakpoints.down('sm')]: {
+            left: '5%'
+        }
+    },
+
+    section6_dialog2: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'top'],
+                value: [600, 245, 50],
+                variant: [90, 35, 5],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        borderRadius: 15,
+        backgroundColor: '#EC6966',
+    },
+
+    section6_dialog2_pos: {
+        position: 'relative',
+        right: '40%',
+
+        [theme.breakpoints.down('sm')]: {
+            left: '15%'
+        }
+    },
+
+    section6_dialog3: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [550, 250],
+                variant: [80, 40],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        borderRadius: 15,
+        backgroundColor: '#555593',
+    },
+
+    section6_dialog3_pos: {
+        position: 'relative',
+        right: '70%',
+
+        [theme.breakpoints.down('sm')]: {
+            left: '0%'
+        }
+    },
+
+    section6_dialog1_txt: {
+        paddingLeft: '15%'
+    },
+
+    section6_dialog2_txt: {
+        paddingLeft: '15%',
+        color: 'white'
+    },
+
+    section6_dialog3_txt: {
+        paddingLeft: '15%',
+        color: 'white'
+    }
 });
 
 // {xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920}
@@ -795,10 +945,10 @@ class Home extends React.Component {
                             autoPlaySpeed={3000}
                         >
                             {
-                            Array.apply(0, Array(totalLogo))
-                            .map((value, index) => {
-                                return this.renderSection3LogoFade(index, 1, totalLogo)
-                                })
+                                Array.apply(0, Array(totalLogo))
+                                    .map((value, index) => {
+                                        return this.renderSection3LogoFade(index, 1, totalLogo)
+                                    })
                             }
                         </CarouselMulti>
                     }
@@ -1032,6 +1182,56 @@ class Home extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+    renderSection6() {
+        const {
+            classes,
+            t
+        } = this.props
+
+        return (
+            <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divBetween, classes.section, classes.section6)}>
+                <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
+                    <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
+                        <Trans
+                            i18nKey={ID.HOME.SECTION_6_TEXT_1}
+                        />
+                    </Typography>
+                    <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
+                        <Trans
+                            i18nKey={ID.HOME.SECTION_6_TEXT_2}
+                        />
+                    </Typography>
+                    <div id={'down-arrow'} className={classes.section6_arrow} />
+                </div>
+                <div id={'section6.2'} className={clsx(classes.divColumn, classes.divLeft)}>
+                    <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
+                        <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog1_txt)}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_6_TEXT_3}
+                            />
+                        </Typography>
+                    </div>
+                    <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
+                        <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog2_txt)}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_6_TEXT_4}
+                            />
+                        </Typography>
+                    </div>
+                    <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
+                        <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog3_txt)}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_6_TEXT_5}
+                            />
+                        </Typography>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
     render() {
         const { classes } = this.props;
         // console.log('Home::render', this.props)
@@ -1046,6 +1246,9 @@ class Home extends React.Component {
             >
                 <InViewElement>
                     {this.renderSection1()}
+                </InViewElement>
+                <InViewElement>
+                    {this.renderSection6()}
                 </InViewElement>
                 <InViewElement>
                     {this.renderSection2()}

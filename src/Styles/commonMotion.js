@@ -47,7 +47,7 @@ const inViewTransition = {
 
 const specializeTransition = {
     out: {
-        opacity: 0,
+        // opacity: 0,
         right: '-100vw',
         scale: 0.5,
         transition: {
@@ -55,7 +55,7 @@ const specializeTransition = {
         }
     },
     in: {
-        opacity: 1,
+        // opacity: 1,
         right: 0,
         scale: 1,
         transition: {
