@@ -15,13 +15,16 @@ import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
-import { Button, Divider, Fade, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { Button, Divider, Fade, IconButton, Toolbar, Typography, withWidth } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
 import { HomeMenu } from '../Data/Defines'
 import { Link } from 'react-router-dom';
+
 import Carousel from 'react-material-ui-carousel';
+import CarouselMulti from 'react-multi-carousel'
+import "react-multi-carousel/lib/styles.css"
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement';
@@ -273,6 +276,8 @@ const styles = theme => ({
                 unit: ['vw']
             }
         ),
+        width: '100%',
+        alignItems: 'flex-start'
     },
 
     section3_logo: {
@@ -435,6 +440,53 @@ const styles = theme => ({
         fontWeight: 'bold'
     },
 });
+
+// {xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920}
+const carouselMultiResponsive = {
+    xl: {
+        breakpoint: { max: Number.MAX_SAFE_INTEGER, min: 1920 },
+        items: 6,
+        partialVisibilityGutter: 0
+    },
+    lg: {
+        breakpoint: { max: 1920 - 1, min: 1280 },
+        items: 5,
+        partialVisibilityGutter: 0
+    },
+    md: {
+        breakpoint: { max: 1280 - 1, min: 960 },
+        items: 4,
+        partialVisibilityGutter: 0
+    },
+    sm: {
+        breakpoint: { max: 960 - 1, min: 600 },
+        items: 3,
+        partialVisibilityGutter: 0
+    },
+    xs: {
+        breakpoint: { max: 600 - 1, min: 0 },
+        items: 2,
+        partialVisibilityGutter: 0
+    }
+}
+
+const responsive = {
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3,
+        slidesToSlide: 3 // optional, default to 1.
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2,
+        slidesToSlide: 2 // optional, default to 1.
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1,
+        slidesToSlide: 1 // optional, default to 1.
+    }
+};
 
 class Home extends React.Component {
 
@@ -626,10 +678,10 @@ class Home extends React.Component {
                                 src={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
                                 // transition={{ duration: 3 }}
                                 variants={commonMotion.specializeTransition}
-                                // initial={'out'}
-                                // animate={'in'}
-                                // exit={'out'}
-                            /> 
+                            // initial={'out'}
+                            // animate={'in'}
+                            // exit={'out'}
+                            />
                         </motion.div>
                     }
                 </AnimatePresence>
@@ -654,7 +706,8 @@ class Home extends React.Component {
     renderSection3() {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
         const carouselAnim = 'slide'
@@ -697,30 +750,58 @@ class Home extends React.Component {
                 </div>
 
                 <div id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
-                    <Carousel
-                        className={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
-                        autoPlay={true}
-                        indicators={false}
-                        navButtonsAlwaysInvisible={true}
-                        animation={carouselAnim}
-                        interval={3000}
-                    >
-                        {
+                    {/*
+                        <Carousel
+                            className={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
+                            autoPlay={true}
+                            indicators={false}
+                            navButtonsAlwaysInvisible={true}
+                            animation={carouselAnim}
+                            interval={3000}
+                        >
+                            {
+                                Array.apply(0, Array(totalLogo))
+                                    .filter((value, index) => {
+                                        if (carouselAnim === 'slide') {
+                                            return index % numLogo === 0
+                                        }
+                                        return true
+                                    })
+                                    .map((value, index) => {
+                                        if (carouselAnim === 'slide') {
+                                            return this.renderSection3LogoSlide(index, numLogo, totalLogo)
+                                        }
+                                        return this.renderSection3LogoFade(index, numLogo, totalLogo)
+                                    })
+                            }
+                        </Carousel>
+                    */}
+                    {
+                        <CarouselMulti
+                            containerClass={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
+                            // dotListClass="custom-dot-list-style"
+                            // itemClass="carousel-item-padding-40-px"
+                            responsive={carouselMultiResponsive}
+                            // deviceType={width}
+                            ssr={false}
+                            partialVisible={false}
+                            centerMode={false}
+                            infinite={true}
+                            showDots={false}
+                            arrows={false}
+                            draggable={false}
+                            swipeable={false}
+                            autoPlay={true}
+                            autoPlaySpeed={3000}
+                        >
+                            {
                             Array.apply(0, Array(totalLogo))
-                                .filter((value, index) => {
-                                    if (carouselAnim === 'slide') {
-                                        return index % numLogo === 0
-                                    }
-                                    return true
+                            .map((value, index) => {
+                                return this.renderSection3LogoFade(index, 1, totalLogo)
                                 })
-                                .map((value, index) => {
-                                    if (carouselAnim === 'slide') {
-                                        return this.renderSection3LogoSlide(index, numLogo, totalLogo)
-                                    }
-                                    return this.renderSection3LogoFade(index, numLogo, totalLogo)
-                                })
-                        }
-                    </Carousel>
+                            }
+                        </CarouselMulti>
+                    }
                 </div>
             </div>
         )
@@ -1002,6 +1083,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(commonStyles, styles),
-    withTranslation()
+    withTranslation(),
+    withWidth()
 )(Home);
 
