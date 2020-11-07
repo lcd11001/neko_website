@@ -79,11 +79,41 @@ const backgroundTransition = {
     }
 }
 
+const dialogTransition = (x, y, delay, duration) => ({
+    hidden: {
+        opacity: 0,
+        x: `${x}px`,
+        y: `${y}px`,
+        transition: {
+            delay: 0
+        }
+    },
+    visible: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: {
+            duration,
+            delay
+        }
+    },
+    invisible: {
+        opacity: 0,
+        x: `${x}px`,
+        y: `${y}px`,
+        transition: {
+            delay: 0,
+            duration: 0.1
+        }
+    }
+})
+
 export default {
     transition,
     pageTransition,
     elementTransition,
     inViewTransition,
     specializeTransition,
-    backgroundTransition
+    backgroundTransition,
+    dialogTransition
 }

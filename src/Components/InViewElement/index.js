@@ -1,28 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 
-import { commonMotion } from '../../Styles'
+import { withMultipleStyles, commonMotion } from '../../Styles'
+
+const styles = theme => ({
+    root: {
+        overflow: 'hidden'
+    }
+})
 
 const InViewElement = (props) => {
+    const [isVisible, setVisible] = useState(false)
     const controls = useAnimation()
     const [ref, inView] = useInView()
 
     useEffect(() => {
-        if (inView) {
+        if (inView && !isVisible) {
+            setVisible(true)
             controls.start(props.animate)
-        } else {
+        } else if (!inView && isVisible) {
+            setVisible(false)
             controls.start(props.exit)
         }
-    }, [controls, inView, props.animate, props.exit])
+    }, [controls, inView, isVisible, props.animate, props.exit])
 
     return (
         <div
-            style={{
-                overflow: "hidden"
-            }}
+            className={props.classes.root}
             ref={ref}
         >
             <motion.div
@@ -56,4 +63,4 @@ InViewElement.defaultProps = {
     exit: 'invisible'
 }
 
-export default InViewElement
+export default withMultipleStyles(styles)(InViewElement)

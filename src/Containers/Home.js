@@ -510,6 +510,10 @@ const styles = theme => ({
         ),
     },
 
+    section6_dialog_root: {
+        overflow: 'unset'
+    },
+
     section6_dialog1: {
         ...breakpointsStyle(theme,
             {
@@ -1191,40 +1195,76 @@ class Home extends React.Component {
         return (
             <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divBetween, classes.section, classes.section6)}>
                 <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
-                        <Trans
-                            i18nKey={ID.HOME.SECTION_6_TEXT_1}
-                        />
-                    </Typography>
-                    <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
-                        <Trans
-                            i18nKey={ID.HOME.SECTION_6_TEXT_2}
-                        />
-                    </Typography>
-                    <div id={'down-arrow'} className={classes.section6_arrow} />
+                    <InViewElement
+                        variants={commonMotion.dialogTransition(0, -200, 3, 1)}
+                    >
+                        <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_6_TEXT_1}
+                            />
+                        </Typography>
+                    </InViewElement>
+
+                    <InViewElement
+                        variants={commonMotion.dialogTransition(0, -200, 3.5, 1)}
+                    >
+                        <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_6_TEXT_2}
+                            />
+                        </Typography>
+                    </InViewElement>
+                    <InViewElement
+                        variants={commonMotion.dialogTransition(0, -200, 3.5, 1)}
+                    >
+                        <div id={'down-arrow'} className={classes.section6_arrow} />
+                    </InViewElement>
                 </div>
                 <div id={'section6.2'} className={clsx(classes.divColumn, classes.divLeft)}>
-                    <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
-                        <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog1_txt)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_6_TEXT_3}
-                            />
-                        </Typography>
-                    </div>
-                    <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
-                        <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog2_txt)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_6_TEXT_4}
-                            />
-                        </Typography>
-                    </div>
-                    <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
-                        <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog3_txt)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_6_TEXT_5}
-                            />
-                        </Typography>
-                    </div>
+                    <InViewElement
+                        classes={{
+                            root: classes.section6_dialog_root
+                        }}
+                        variants={commonMotion.dialogTransition(-200, 0, 0, 1)}
+                    >
+                        <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
+                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog1_txt)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_6_TEXT_3}
+                                />
+                            </Typography>
+                        </div>
+                    </InViewElement>
+
+                    <InViewElement
+                        classes={{
+                            root: classes.section6_dialog_root
+                        }}
+                        variants={commonMotion.dialogTransition(200, 0, 0.5, 1)}
+                    >
+                        <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
+                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog2_txt)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_6_TEXT_4}
+                                />
+                            </Typography>
+                        </div>
+                    </InViewElement>
+
+                    <InViewElement
+                        classes={{
+                            root: classes.section6_dialog_root
+                        }}
+                        variants={commonMotion.dialogTransition(0, 200, 1, 1)}
+                    >
+                        <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
+                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog3_txt)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_6_TEXT_5}
+                                />
+                            </Typography>
+                        </div>
+                    </InViewElement>
                 </div>
             </div>
         )
