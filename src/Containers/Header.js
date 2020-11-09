@@ -20,10 +20,6 @@ import ID from '../Translations/ID.json'
 const styles = theme => ({
     root: {
         width: '100%'
-    },
-    logo: {
-        color: '#FFF',
-        width: 53
     }
 });
 
