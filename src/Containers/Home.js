@@ -28,10 +28,11 @@ import "react-multi-carousel/lib/styles.css"
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement';
-import { relative } from 'path';
 
 const MAX_LINE_HEIGHT = 3
-const DOT_SIZE = 80
+const DOT_SIZE = 7
+const DOT_VSPACE = 50
+const DOT_HSPACE = 50
 
 const styles = theme => ({
     section1: {
@@ -117,7 +118,8 @@ const styles = theme => ({
         right: 0,
         bottom: 0,
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        overflow: 'hidden'
     },
 
     section2_img_bg: {
@@ -454,17 +456,17 @@ const styles = theme => ({
 
     section6: {
         // https://dev.to/clairecodes/how-to-create-a-polka-dot-background-with-css-23m0
-        backgroundImage: 'radial-gradient(#EEEEEE 10%, #ffffff 10%)',
+        backgroundImage: `radial-gradient(#EEEEEE ${DOT_SIZE}%, #ffffff ${DOT_SIZE}%)`,
         // width: DOT_SIZE,
         // height: DOT_SIZE,
         backgroundPosition: '0 0',
-        backgroundSize: `${DOT_SIZE}px ${DOT_SIZE}px`
+        backgroundSize: `${DOT_HSPACE}px ${DOT_VSPACE}px`
     },
 
     section6_txt1: {
         color: 'white',
         textShadow: `
-            #555593 2px 2px 0px,
+            #555593 1px 1px 0px,
             #555593 -1px 1px 0px,
             #555593 1px -1px 0px,
             #555593 -1px -1px 0px
@@ -524,7 +526,7 @@ const styles = theme => ({
             }
         ),
         border: '2px solid #707070',
-        borderRadius: 15,
+        borderRadius: 5,
     },
 
     section6_dialog1_pos: {
@@ -544,7 +546,7 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
-        borderRadius: 15,
+        borderRadius: 5,
         backgroundColor: '#EC6966',
     },
 
@@ -561,12 +563,12 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
-                value: [550, 250],
+                value: [550, 190],
                 variant: [80, 40],
                 unit: ['px', 'px', 'px']
             }
         ),
-        borderRadius: 15,
+        borderRadius: 5,
         backgroundColor: '#555593',
     },
 
@@ -707,11 +709,15 @@ class Home extends React.Component {
                 <Toolbar disableGutters={true} className={classes.toolbarHome} style={{ backgroundColor: 'transparent' }} />
                 <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
-                        <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_1_TEXT_1}
-                            />
-                        </Typography>
+                        <InViewElement
+                            variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                        >
+                            <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_1_TEXT_1}
+                                />
+                            </Typography>
+                        </InViewElement>
                         <div className={classes.section1_btn1}>
                             <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_1_LINK)} className={classes.textLinkHidden}>
                                 <Button variant={'contained'} color={'primary'}>
@@ -729,11 +735,15 @@ class Home extends React.Component {
                     <img alt={t(ID.IMAGE.HOME_1_2)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_2))} className={classes.section1_img2} />
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
-                            <Typography className={clsx(classes.textBreak, classes.section1_txt2)}>
-                                <Trans
-                                    i18nKey={ID.HOME.SECTION_1_TEXT_2}
-                                />
-                            </Typography>
+                            <InViewElement
+                                variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                            >
+                                <Typography className={clsx(classes.textBreak, classes.section1_txt2)}>
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_1_TEXT_2}
+                                    />
+                                </Typography>
+                            </InViewElement>
                             <img alt={t(ID.IMAGE.HOME_1_3)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))} className={classes.section1_img3} />
                         </div>
                         <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section1_txt3)}>
@@ -1196,7 +1206,7 @@ class Home extends React.Component {
             <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divLeft, classes.section, classes.section6)}>
                 <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, -200, 2, 1)}
+                        variants={commonMotion.dialogTransition(0, 200, 0, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
                             <Trans
@@ -1206,7 +1216,7 @@ class Home extends React.Component {
                     </InViewElement>
 
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, -200, 2.5, 1)}
+                        variants={commonMotion.dialogTransition(0, 200, 1, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
                             <Trans
@@ -1214,8 +1224,9 @@ class Home extends React.Component {
                             />
                         </Typography>
                     </InViewElement>
+
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, 200, 2.5, 1)}
+                        variants={commonMotion.dialogTransition(0, 200, 2, 1)}
                     >
                         <div id={'down-arrow'} className={classes.section6_arrow} />
                     </InViewElement>
@@ -1225,7 +1236,7 @@ class Home extends React.Component {
                         classes={{
                             root: classes.section6_dialog_root
                         }}
-                        variants={commonMotion.dialogTransition(-200, 0, 0, 1)}
+                        variants={commonMotion.dialogTransition(0, 200, 0, 1)}
                     >
                         <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog1_txt)}>
@@ -1240,7 +1251,7 @@ class Home extends React.Component {
                         classes={{
                             root: classes.section6_dialog_root
                         }}
-                        variants={commonMotion.dialogTransition(200, 0, 0.5, 1)}
+                        variants={commonMotion.dialogTransition(0, 200, 1, 1)}
                     >
                         <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog2_txt)}>
@@ -1255,7 +1266,7 @@ class Home extends React.Component {
                         classes={{
                             root: classes.section6_dialog_root
                         }}
-                        variants={commonMotion.dialogTransition(0, 200, 1, 1)}
+                        variants={commonMotion.dialogTransition(0, 200, 2, 1)}
                     >
                         <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog3_txt)}>
@@ -1284,24 +1295,18 @@ class Home extends React.Component {
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                <InViewElement>
-                    {this.renderSection1()}
-                </InViewElement>
-                <InViewElement>
-                    {this.renderSection6()}
-                </InViewElement>
-                <InViewElement>
-                    {this.renderSection2()}
-                </InViewElement>
-                <InViewElement>
-                    {this.renderSection3()}
-                </InViewElement>
-                <InViewElement>
-                    {this.renderSection4()}
-                </InViewElement>
-                <InViewElement>
-                    {this.renderSection5()}
-                </InViewElement>
+                {this.renderSection1()}
+
+                {this.renderSection6()}
+
+                {this.renderSection2()}
+
+                {this.renderSection3()}
+
+                {this.renderSection4()}
+
+                {this.renderSection5()}
+
             </motion.div>
         );
     }
