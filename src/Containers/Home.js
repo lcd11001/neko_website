@@ -505,7 +505,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [80, 120],
+                value: [80, 80],
                 variant: [10, 10],
                 unit: ['px', 'px']
             }
@@ -540,6 +540,18 @@ const styles = theme => ({
                 unit: ['px', 'px', 'px']
             }
         ),
+    },
+
+    section6_bg_arrow: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [70, 70],
+                variant: [5, 5],
+                unit: ['px', 'px']
+            }
+        ),
+        backgroundRepeat: 'no-repeat'
     },
 
     section6_dialog_root: {
@@ -1264,7 +1276,12 @@ class Home extends React.Component {
                     <InViewElement
                         variants={commonMotion.dialogTransition(0, 200, 2, 1)}
                     >
-                        <div id={'down-arrow'} className={classes.section6_arrow} />
+                        <div id={'down-arrow'}
+                            className={classes.section6_bg_arrow}
+                            style={{
+                                backgroundImage: `url('${Utils.getUrl(t(ID.IMAGE.HOME_6_1))}')`
+                            }}
+                        />
                     </InViewElement>
                 </div>
                 <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
