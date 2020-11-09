@@ -13,19 +13,29 @@ const styles = theme => ({
 })
 
 const InViewElement = (props) => {
-    const [isVisible, setVisible] = useState(false)
+    const [isDidMount, setDidMount] = useState(false)
+    useEffect(() => {
+        setDidMount(true)
+
+        return () => {
+            setDidMount(false)
+        }
+    }, [])
+
     const controls = useAnimation()
-    const [ref, inView] = useInView()
+    const [ref, inView] = useInView(props.options)
 
     useEffect(() => {
-        if (inView && !isVisible) {
-            setVisible(true)
-            controls.start(props.animate)
-        } else if (!inView && isVisible) {
-            setVisible(false)
-            controls.start(props.exit)
+        if (isDidMount) {
+            if (inView) {
+                controls.start(props.animate)
+            } else {
+                controls.start(props.exit)
+            }
+        } else {
+            controls.stop()
         }
-    }, [controls, inView, isVisible, props.animate, props.exit])
+    }, [controls, inView, isDidMount, props.animate, props.exit])
 
     return (
         <div
@@ -52,7 +62,17 @@ InViewElement.propTypes = {
     transition: PropTypes.object,
     initial: PropTypes.string,
     animate: PropTypes.string,
-    exit: PropTypes.string
+    exit: PropTypes.string,
+    options: PropTypes.shape({
+        root: PropTypes.element,
+        rootMargin: PropTypes.string,
+        threshold: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+        triggerOnce: PropTypes.bool,
+        skip: PropTypes.bool,
+        initialInView: PropTypes.bool,
+        trackVisibility: PropTypes.bool,
+        delay: PropTypes.number
+    })
 }
 
 InViewElement.defaultProps = {
@@ -60,7 +80,8 @@ InViewElement.defaultProps = {
     transition: commonMotion.transition,
     initial: 'hidden',
     animate: 'visible',
-    exit: 'invisible'
+    exit: 'invisible',
+    options: {}
 }
 
 export default withMultipleStyles(styles)(InViewElement)
