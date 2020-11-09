@@ -68,7 +68,7 @@ const styles = theme => ({
         objectFit: 'contain',
         backgroundColor: `${theme.palette.primary.secondary}1E`, // 1E = 12%
         borderRadius: '50%',
-        transform: 'translateX(-25%) scaleX(-1)'
+        // transform: 'translateX(-25%) scaleX(-1)'
     },
 
     section1_txt1: {
@@ -119,7 +119,7 @@ const styles = theme => ({
     },
 
     section2_bg: {
-        zIndex: 0,
+        zIndex: -1,
         position: 'absolute',
         left: 0,
         top: 0,
@@ -139,7 +139,6 @@ const styles = theme => ({
     },
 
     section2_txt1: {
-        zIndex: 1,
         position: 'relative',
         ...breakpointsStyle(theme,
             {
@@ -155,7 +154,6 @@ const styles = theme => ({
     },
 
     menuLink: {
-        zIndex: 1,
         color: 'black',
 
         '&--not-hover': {
@@ -212,7 +210,7 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section3: {
-
+        paddingBottom: 0
     },
 
     section3_txt1: {
@@ -301,8 +299,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['height'],
-                value: [220],
-                variant: [10],
+                value: [200],
+                variant: [20],
                 unit: ['px']
             }
         ),
@@ -310,9 +308,20 @@ const styles = theme => ({
         alignItems: 'flex-start'
     },
 
+    section3_carousel_slider: {
+        height: '100%'
+    },
+
     section3_logo: {
         width: '100%',
-        padding: '10%'
+        ...breakpointsStyle(theme,
+            {
+                key: ['padding'],
+                value: [20],
+                variant: [-2],
+                unit: ['%']
+            }
+        ),
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -621,27 +630,27 @@ const styles = theme => ({
 const carouselMultiResponsive = {
     xl: {
         breakpoint: { max: Number.MAX_SAFE_INTEGER, min: 1920 },
-        items: 6,
+        items: 8,
         partialVisibilityGutter: 0
     },
     lg: {
         breakpoint: { max: 1920 - 1, min: 1280 },
-        items: 5,
+        items: 7,
         partialVisibilityGutter: 0
     },
     md: {
         breakpoint: { max: 1280 - 1, min: 960 },
-        items: 4,
+        items: 6,
         partialVisibilityGutter: 0
     },
     sm: {
         breakpoint: { max: 960 - 1, min: 600 },
-        items: 3,
+        items: 5,
         partialVisibilityGutter: 0
     },
     xs: {
         breakpoint: { max: 600 - 1, min: 0 },
-        items: 2,
+        items: 4,
         partialVisibilityGutter: 0
     }
 }
@@ -800,11 +809,15 @@ class Home extends React.Component {
         return (
             <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
                 <div id={'section2.1'}>
-                    <Typography className={clsx(classes.textBreak, classes.textNormal, classes.section2_txt1)}>
-                        <Trans
-                            i18nKey={ID.HOME.SECTION_2_TEXT_1}
-                        />
-                    </Typography>
+                    <InViewElement
+                        variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                    >
+                        <Typography className={clsx(classes.textBreak, classes.textNormal, classes.section2_txt1)}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_2_TEXT_1}
+                            />
+                        </Typography>
+                    </InViewElement>
                 </div>
                 <div id={'section2.2'}>
                     {
@@ -965,6 +978,7 @@ class Home extends React.Component {
                     {
                         <CarouselMulti
                             containerClass={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
+                            sliderClass={clsx(classes.section3_carousel_slider)}
                             // dotListClass="custom-dot-list-style"
                             // itemClass="carousel-item-padding-40-px"
                             responsive={carouselMultiResponsive}
@@ -977,7 +991,7 @@ class Home extends React.Component {
                             arrows={false}
                             draggable={false}
                             swipeable={false}
-                            autoPlay={true}
+                            autoPlay={!true}
                             autoPlaySpeed={3000}
                         >
                             {
