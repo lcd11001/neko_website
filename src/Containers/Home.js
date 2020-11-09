@@ -107,7 +107,15 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section2: {
-        position: 'relative'
+        position: 'relative',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop', 'paddingBottom'],
+                value: [130, 130],
+                variant: [10, 10],
+                unit: ['px', 'px']
+            }
+        ),
     },
 
     section2_bg: {
@@ -123,11 +131,11 @@ const styles = theme => ({
     },
 
     section2_img_bg: {
-        width: '100%',
-        height: 'auto',
+        width: 'auto',
+        height: '100%',
         position: 'absolute',
         right: 0,
-        objectFit: 'cover',
+        objectFit: 'contain',
     },
 
     section2_txt1: {
@@ -136,12 +144,12 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingBottom'],
-                value: [8],
-                variant: [0.5],
-                unit: ['%']
+                value: [100],
+                variant: [10],
+                unit: ['px']
             }
         ),
-        fontWeight: 700,
+        fontWeight: 'bold',
         letterSpacing: 1.5,
         textTransform: 'uppercase'
     },
@@ -159,12 +167,12 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height', 'paddingBottom'],
-                value: [30, 40, 40],
-                variant: [5, 5, 8],
+                value: [40, 40, 70],
+                variant: [5, 5, 10],
                 unit: ['px', 'px', 'px']
             }
         ),
-        fontWeight: 400,
+        fontWeight: 'bold',
         textAlign: 'left',
         color: 'inherit',
         marginLeft: 0,
@@ -174,7 +182,7 @@ const styles = theme => ({
         }),
 
         '&--hover': {
-            fontWeight: 600,
+            fontWeight: 'bold',
             color: theme.palette.text.primary,
             marginLeft: 50
         }
@@ -831,7 +839,7 @@ class Home extends React.Component {
                                 backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
                             }}
                             variants={commonMotion.backgroundTransition}
-                            initial={'out'}
+                            initial={'hidden'}
                             animate={'in'}
                             exit={'out'}
                         >
@@ -840,11 +848,7 @@ class Home extends React.Component {
                                 alt={`img-${menu.text}`}
                                 className={classes.section2_img_bg}
                                 src={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
-                                // transition={{ duration: 3 }}
                                 variants={commonMotion.specializeTransition}
-                            // initial={'out'}
-                            // animate={'in'}
-                            // exit={'out'}
                             />
                         </motion.div>
                     }

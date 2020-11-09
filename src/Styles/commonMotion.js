@@ -46,17 +46,22 @@ const inViewTransition = {
 }
 
 const specializeTransition = {
+    hidden: {
+        // x: '5px',
+        opacity: 0.5,
+        scale: 1.01
+    },
     out: {
-        // opacity: 0,
-        right: '-100vw',
-        scale: 0.5,
+        opacity: 0.5,
+        // x: '5px',
+        scale: 0.99,
         transition: {
-            duration: .3
+            duration: .1
         }
     },
     in: {
-        // opacity: 1,
-        right: 0,
+        opacity: 1,
+        // x: 0,
         scale: 1,
         transition: {
             duration: .3
@@ -65,6 +70,9 @@ const specializeTransition = {
 }
 
 const backgroundTransition = {
+    hidden: {
+        opacity: 0
+    },
     in: {
         opacity: 1,
         transition: {
