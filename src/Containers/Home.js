@@ -257,29 +257,43 @@ const styles = theme => ({
     },
 
     section3_txt2: {
-        fontWeight: 400,
+        fontWeight: 500,
         textAlign: 'left',
         color: 'inherit',
     },
 
     section3_img1: {
         objectFit: 'contain',
-        width: '30%'
+        width: 'auto',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingRight', 'height'],
+                value: [40, 250],
+                variant: [5, 30],
+                unit: ['px', 'px']
+            }
+        ),
     },
 
     section3_img2: {
         objectFit: 'contain',
-        width: '15%',
         backgroundColor: `${theme.palette.primary.secondary}1E`,
         borderRadius: '50%',
-        marginRight: 10
+        marginRight: 10,
+        ...breakpointsStyle(theme,
+            {
+                key: ['width'],
+                value: [50],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
     },
 
     section3_divider: {
-        width: '90%',
         height: 2,
         color: '#707070',
-        margin: '10px 0'
+        margin: '20px 0'
     },
 
     section3_carousel: {
@@ -888,27 +902,31 @@ class Home extends React.Component {
             <div id={'section3'} className={clsx(classes.divColumn, classes.section, classes.section3)}>
                 <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <img alt={t(ID.IMAGE.HOME_3_1)} src={Utils.getUrl(t(ID.IMAGE.HOME_3_1))} className={classes.section3_img1} />
-                    <div className={clsx(classes.divColumn, classes.divCenter)} >
-                        <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divCenter)}>
-                            <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
-                                <Trans
-                                    i18nKey={ID.HOME.SECTION_3_PROJECTS_NUM}
-                                />
-                            </Typography>
-                            <Typography className={clsx(classes.textBreak, classes.section3_txt1)}>
-                                <Trans
-                                    i18nKey={ID.HOME.SECTION_3_TEXT_1}
-                                    components={{ span: <span /> }}
-                                    values={{
-                                        custom: clsx(classes.secondaryText, classes.section3_txt1_plus)
-                                    }}
-                                />
-                            </Typography>
-                        </div>
+                    <div className={clsx(classes.divColumn, classes.divTop)} >
+                        <InViewElement
+                            variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                        >
+                            <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divTop)}>
+                                <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_3_PROJECTS_NUM}
+                                    />
+                                </Typography>
+                                <Typography className={clsx(classes.textBreak, classes.section3_txt1)}>
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_3_TEXT_1}
+                                        components={{ span: <span /> }}
+                                        values={{
+                                            custom: clsx(classes.secondaryText, classes.section3_txt1_plus)
+                                        }}
+                                    />
+                                </Typography>
+                            </div>
+                        </InViewElement>
                         <Divider className={classes.section3_divider} />
-                        <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter)}>
+                        <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
                             <img alt={t(ID.IMAGE.HOME_3_2)} src={Utils.getUrl(t(ID.IMAGE.HOME_3_2))} className={classes.section3_img2} />
-                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section3_txt2)}>
+                            <Typography component={'div'} className={clsx(classes.textBreak, classes.textSubTitle, classes.section3_txt2)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_3_TEXT_2}
                                 />
