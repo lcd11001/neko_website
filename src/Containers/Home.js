@@ -469,7 +469,6 @@ const styles = theme => ({
             #555593 1px -1px 0px,
             #555593 -1px -1px 0px
         `,
-        '-webkit-font-smoothing': 'antialiased',
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],

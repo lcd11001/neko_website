@@ -33,7 +33,7 @@ const styles = (theme) => ({
             {
                 key: 'minHeight',
                 value: 30,
-                variant: 5,
+                variant: 2,
                 unit: 'px'
             }
         )
@@ -137,7 +137,7 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [13, 15],
-                variant: [1.5, 1.5],
+                variant: [1.0, 1.0],
                 unit: ['px', 'px']
             }
         ),

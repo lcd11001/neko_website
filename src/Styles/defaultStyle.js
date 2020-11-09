@@ -180,7 +180,8 @@ const defaultTheme = createMuiTheme({
         MuiTypography: {
             root: {
                 userSelect: 'none',
-                fontFamily: '"Raleway", sans-serif !important'
+                fontFamily: '"Raleway", sans-serif !important',
+                '-webkit-font-smoothing': 'antialiased',
             },
             caption: {
                 color: '#525252'
