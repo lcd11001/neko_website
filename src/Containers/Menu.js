@@ -31,13 +31,14 @@ const styles = theme => ({
     },
 
     menuItem: {
-        fontWeight: 400,
+        fontWeight: 'bold',
         textAlign: 'left',
         textTransform: 'uppercase',
         color: 'inherit',
 
         '&--selected': {
-            fontWeight: 600
+            fontWeight: 'bolder',
+            fontStyle: 'italic'
         }
     },
 
@@ -85,11 +86,20 @@ const styles = theme => ({
                     unit: ['px', 'px', 'px', 'px', 'px']
                 }
             )
+        },
+
+        '&--secondary': {
+            '&--custom-border-1': {
+                border: '1px solid #FFFFFF',
+            }
         }
     },
 
     menuLink: {
         color: theme.palette.text.primary,
+        transition: theme.transitions.create(['color'], {
+            duration: 300
+        }),
 
         '&--custom-color-1': {
             color: theme.palette.primary.secondary
@@ -99,7 +109,7 @@ const styles = theme => ({
             color: 'white',
 
             '&--custom-color-1': {
-                color: theme.palette.primary.main
+                color: 'black'
             }
         },
     },
@@ -112,6 +122,7 @@ const styles = theme => ({
         transition: theme.transitions.create(['width'], {
             duration: 300
         }),
+        userEvents: 'none',
 
         '&--hover': {
             width: '100%'
@@ -125,7 +136,7 @@ const styles = theme => ({
             backgroundColor: 'white',
 
             '&--custom-underline-color-1': {
-                backgroundColor: theme.palette.primary.main
+                backgroundColor: 'black'
             }
         },
     },
@@ -139,6 +150,13 @@ const styles = theme => ({
         '&--hover': {
             color: 'white',
             backgroundColor: theme.palette.primary.main
+        },
+
+        '&--secondary': {
+            '&--hover': {
+                color: 'white',
+                backgroundColor: 'black'
+            },
         }
     }
 
@@ -190,26 +208,32 @@ class Menu extends React.Component {
         })
 
         let classMenuBorder = clsx(classes.menuBorder, {
-            [classes.menuBorder + '--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (!shortMenu && menu.customStyle && menu.customStyle.border)
+            [classes.menuBorder + '--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (!shortMenu && menu.customStyle && menu.customStyle.border),
+
+            [classes.menuBorder + '--secondary']: secondary,
+            [classes.menuBorder + '--secondary--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.border)
         })
 
         let classUnderline = clsx(classes.underline, {
+            [classes.underline + '--hover']: isHover,
+            [classes.underline + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (menu.customStyle && menu.customStyle.underlineColor),
+
             [classes.underline + '--secondary']: secondary,
             [classes.underline + '--secondary--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.underlineColor),
-
-            [classes.underline + '--hover']: isHover,
-            [classes.underline + '--' + ((menu.customStyle && menu.customStyle.underlineColor) || 'undefined')]: (menu.customStyle && menu.customStyle.underlineColor)
         })
 
         let classUnderbackground = clsx(classes.underbackground, {
-            [classes.underbackground + '--hover']: (!shortMenu && isHover && menu.underline === 'disable')
+            [classes.underbackground + '--hover']: (!shortMenu && isHover && menu.underline === 'disable'),
+
+            [classes.underbackground + '--secondary']: !shortMenu && secondary,
+            [classes.underbackground + '--secondary--hover']: (!shortMenu && secondary && isHover && menu.underline === 'disable')
         })
 
         let classMenuLink = clsx(classes.menuLink, {
-            [classes.menuLink + '--secondary']: secondary,
-            [classes.menuLink + '--secondary--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.color),
+            [classes.menuLink + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (menu.customStyle && menu.customStyle.color),
 
-            [classes.menuLink + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (menu.customStyle && menu.customStyle.color)
+            [classes.menuLink + '--secondary']: secondary,
+            [classes.menuLink + '--secondary--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.color)
         })
 
         return (
