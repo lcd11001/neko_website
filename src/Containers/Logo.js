@@ -10,8 +10,8 @@ import ID from '../Translations/ID.json'
 
 import clsx from 'clsx'
 
-const TEXT_OFFSET = -5
-const TEXT_OFFSET_DELTA = -1
+const TEXT_OFFSET = -3
+const TEXT_OFFSET_DELTA = 0
 
 const styles = theme => ({
     root: {
@@ -36,11 +36,11 @@ const styles = theme => ({
 
     title: {
         letterSpacing: 0,
-        fontWeight: 700,
+        fontWeight: 600,
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'bottom'],
-                value: [30, TEXT_OFFSET],
+                value: [40, TEXT_OFFSET],
                 variant: [5, TEXT_OFFSET_DELTA],
                 unit: ['px', 'px']
             }
@@ -54,12 +54,12 @@ const styles = theme => ({
     },
 
     subtitle: {
-        fontWeight: 700,
+        fontWeight: 600,
         // letterSpacing + marginRight remove letter-spacing for the last letter of an element in CSS
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'top', 'letterSpacing', 'marginRight'],
-                value: [8, TEXT_OFFSET, 6, -6],
+                value: [10, TEXT_OFFSET, 6, -6],
                 variant: [1, TEXT_OFFSET_DELTA, 1, -1],
                 unit: ['px', 'px', 'px', 'px']
             }
@@ -97,7 +97,7 @@ class Logo extends React.Component {
         return (
             <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
                 <AppLogo className={classLogo} />
-                <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 10 }}>
+                <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 15 }}>
                     <Typography className={clsx(classTitle, classes.divRow, classes.divCenter)} >
                         <Trans i18nKey={ID.COMMON.LOGO_TITLE} />
                     </Typography>

@@ -705,7 +705,7 @@ class Home extends React.Component {
 
         return (
             <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
-                <Toolbar disableGutters={true} className={classes.toolbar} style={{ backgroundColor: 'transparent' }} />
+                <Toolbar disableGutters={true} className={classes.toolbarHome} style={{ backgroundColor: 'transparent' }} />
                 <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>

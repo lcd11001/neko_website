@@ -21,11 +21,22 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['marginLeft', 'marginRight', 'marginTop', 'marginBottom'],
-                value: [100, 100, 50, 50],
-                variant: [22, 22, 10, 10],
+                value: [100, 100, 50, 25],
+                variant: [22, 22, 10, 5],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
+    },
+
+    toolbarHome: {
+        ...breakpointsStyle(theme,
+            {
+                key: 'minHeight',
+                value: 30,
+                variant: 5,
+                unit: 'px'
+            }
+        )
     },
 
     secondaryText: {
