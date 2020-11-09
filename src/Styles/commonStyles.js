@@ -21,8 +21,8 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['marginLeft', 'marginRight', 'marginTop', 'marginBottom'],
-                value: [100, 100, 50, 25],
-                variant: [22, 22, 10, 5],
+                value: [100, 100, 15, 15],
+                variant: [22, 22, 2, 2],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -32,8 +32,8 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: 'minHeight',
-                value: 50,
-                variant: 5,
+                value: 150,
+                variant: 15,
                 unit: 'px'
             }
         )

@@ -35,7 +35,7 @@ class App extends React.Component {
         return (
             <AppBar elevation={0} className={classes.appbar} position={position} style={{ backgroundColor: backgroundColor }}>
                 <Toolbar disableGutters={true} className={classes.toolbar}>
-                    <Header secondary={secondary}/>
+                    <Header secondary={secondary} />
                 </Toolbar>
             </AppBar>
         )
@@ -59,11 +59,7 @@ class App extends React.Component {
             <React.Fragment>
                 <div className={classes.root}>
                     {
-                        this.renderAppbar('absolute', 'transparent', isHome)
-                    }
-                    {
-                        !isHome &&
-                        <Toolbar disableGutters={true} className={classes.toolbar} />
+                        this.renderAppbar(isHome ? 'absolute' : 'relative', 'transparent', isHome)
                     }
                     <HideOnScroll offsetY={0} timeout={0}>
                         {
