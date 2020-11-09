@@ -55,7 +55,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['padding-right', 'width'],
-                value: [50, 65],
+                value: [50, 55],
                 variant: [10, 3],
                 unit: ['px', '%']
             }

@@ -32,8 +32,8 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: 'minHeight',
-                value: 30,
-                variant: 2,
+                value: 50,
+                variant: 5,
                 unit: 'px'
             }
         )
