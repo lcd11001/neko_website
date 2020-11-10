@@ -15,7 +15,7 @@ import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
-import { Button, Divider, Fade, IconButton, Toolbar, Typography, withWidth } from '@material-ui/core';
+import { Button, Divider, Fade, IconButton, isWidthDown, Paper, Toolbar, Typography, withWidth } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
@@ -29,6 +29,7 @@ import "react-multi-carousel/lib/styles.css"
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement';
 
+const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
 const DOT_SIZE = 7
 const DOT_VSPACE = 50
@@ -304,12 +305,12 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
-        width: '100%',
-        alignItems: 'flex-start'
+        width: '100%'
     },
 
     section3_carousel_slider: {
-        height: '100%'
+        height: '100%',
+        minWidth: '100%'
     },
 
     section3_logo: {
@@ -378,8 +379,6 @@ const styles = theme => ({
     },
 
     section4_text: {
-        textAlign: 'justify',
-        textJustify: 'inter-word',
         ...breakpointsStyle(theme,
             {
                 key: ['line-height', 'max-height'],
@@ -388,10 +387,6 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        wordWrap: 'break-word',
-        wordBreak: 'break-word'
     },
 
     section4_title: {
@@ -413,39 +408,52 @@ const styles = theme => ({
 
     },
 
-    section5_blogs: {
-        alignItems: 'flex-start',
-        '& div:first-child': {
-            marginLeft: '0 !important'
+    section5_carousel: {
+        // backgroundColor: 'red'
+        ...breakpointsStyle(theme,
+            {
+                key: ['height'],
+                value: [500],
+                variant: [20],
+                unit: ['px']
+            }
+        ),
+        width: '100%',
+    },
+
+    section5_carousel_slider: {
+        height: '100%',
+        minWidth: '100%',
+
+        '& > li:first-child': {
+            paddingLeft: '2px !important'
         },
 
-        '& div:last-child': {
-            marginRight: '0 !important'
-        },
+        '& > li:last-child': {
+            paddingRight: '2px !important'
+        }
+    },
+
+    section5_carousel_item: {
+        padding: 10,
+        height: '100%'
+    },
+
+    section5_blogs: {
         paddingTop: 20
     },
 
     section5_blog: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['margin'],
-                value: [20,],
-                variant: [3],
-                unit: ['px']
-            }
-        )
+        borderRadius: 7,
+        height: '100%'
     },
 
     section5_div_img: {
         overflow: 'hidden',
-        ...breakpointsStyle(theme,
-            {
-                key: ['borderRadius'],
-                value: [20],
-                variant: [3],
-                unit: ['px']
-            }
-        )
+        maxHeight: '40%',
+        height: '40%',
+        borderTopLeftRadius: 7,
+        borderTopRightRadius: 7,
     },
 
     section5_img: {
@@ -476,11 +484,38 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
+        marginLeft: 20,
+        color: '#B3B3B3'
     },
 
     section5_title: {
         textAlign: 'left',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginRight: 20,
+        ...breakpointsStyle(theme,
+            {
+                key: ['line-height', 'max-height'],
+                value: [25, 25 * MAX_BLOG_LINE_HEIGHT],
+                variant: [1, 1 * MAX_BLOG_LINE_HEIGHT],
+                unit: ['px', 'px']
+            }
+        ),
+    },
+
+    section5_content: {
+        textAlign: 'left',
+        paddingTop: 20,
+        marginLeft: 20,
+        marginRight: 20,
+        ...breakpointsStyle(theme,
+            {
+                key: ['line-height', 'max-height'],
+                value: [20, 20 * MAX_BLOG_LINE_HEIGHT],
+                variant: [1, 1 * MAX_BLOG_LINE_HEIGHT],
+                unit: ['px', 'px']
+            }
+        ),
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -569,7 +604,7 @@ const styles = theme => ({
             }
         ),
         border: '2px solid #707070',
-        borderRadius: 5,
+        borderRadius: 7,
     },
 
     section6_dialog1_pos: {
@@ -589,7 +624,7 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
-        borderRadius: 5,
+        borderRadius: 7,
         backgroundColor: '#EC6966',
     },
 
@@ -611,7 +646,7 @@ const styles = theme => ({
                 unit: ['px', 'px', 'px']
             }
         ),
-        borderRadius: 5,
+        borderRadius: 7,
         backgroundColor: '#555593',
     },
 
@@ -667,23 +702,33 @@ const carouselMultiResponsive = {
     }
 }
 
-const responsive = {
-    desktop: {
-        breakpoint: { max: 3000, min: 1024 },
+const carouselMultiResponsiveBlogs = {
+    xl: {
+        breakpoint: { max: Number.MAX_SAFE_INTEGER, min: 1920 },
         items: 3,
-        slidesToSlide: 3 // optional, default to 1.
+        partialVisibilityGutter: 0
     },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2,
-        slidesToSlide: 2 // optional, default to 1.
+    lg: {
+        breakpoint: { max: 1920 - 1, min: 1280 },
+        items: 3,
+        partialVisibilityGutter: 0
     },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
+    md: {
+        breakpoint: { max: 1280 - 1, min: 960 },
+        items: 3,
+        partialVisibilityGutter: 0
+    },
+    sm: {
+        breakpoint: { max: 960 - 1, min: 600 },
         items: 1,
-        slidesToSlide: 1 // optional, default to 1.
+        partialVisibilityGutter: 80
+    },
+    xs: {
+        breakpoint: { max: 600 - 1, min: 0 },
+        items: 1,
+        partialVisibilityGutter: 80
     }
-};
+}
 
 class Home extends React.Component {
 
@@ -892,7 +937,8 @@ class Home extends React.Component {
                         </motion.div>
                     }
                 </AnimatePresence>
-                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
+
+                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden, classes.divRow, classes.fullWidth, classes.divTop)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans
@@ -913,8 +959,7 @@ class Home extends React.Component {
     renderSection3() {
         const {
             classes,
-            t,
-            width
+            t
         } = this.props
 
         const carouselAnim = 'slide'
@@ -989,12 +1034,9 @@ class Home extends React.Component {
                     */}
                     {
                         <CarouselMulti
-                            containerClass={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
+                            containerClass={clsx(classes.divColumn, classes.divLeft, classes.section3_carousel)}
                             sliderClass={clsx(classes.section3_carousel_slider)}
-                            // dotListClass="custom-dot-list-style"
-                            // itemClass="carousel-item-padding-40-px"
                             responsive={carouselMultiResponsive}
-                            // deviceType={width}
                             ssr={false}
                             partialVisible={false}
                             centerMode={false}
@@ -1003,7 +1045,7 @@ class Home extends React.Component {
                             arrows={false}
                             draggable={false}
                             swipeable={false}
-                            autoPlay={!true}
+                            autoPlay={true}
                             autoPlaySpeed={3000}
                         >
                             {
@@ -1146,7 +1188,7 @@ class Home extends React.Component {
             <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter)}>
                 <img alt={LOGO} src={path} className={classes.section4_logo} />
                 <div className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={clsx(classes.textTitle, classes.section4_text)}>{TEXT}</Typography>
+                    <Typography className={clsx(classes.textTitle, classes.section4_text, classes.textLimitMultiline)}>{TEXT}</Typography>
                     <Typography className={clsx(classes.textTitle, classes.section4_title)}>{TITILE}</Typography>
                 </div>
             </div>
@@ -1158,19 +1200,25 @@ class Home extends React.Component {
     renderSection5() {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
         const totalBlogs = 3
+        const isAutoPlay = isWidthDown('sm', width)
 
         return (
             <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
                 <div id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
-                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section5_txt1)}>
-                        <Trans
-                            i18nKey={ID.HOME.SECTION_5_TEXT_1}
-                        />
-                    </Typography>
+                    <InViewElement
+                        variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                    >
+                        <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section5_txt1)}>
+                            <Trans
+                                i18nKey={ID.HOME.SECTION_5_TEXT_1}
+                            />
+                        </Typography>
+                    </InViewElement>
                     <div className={classes.section5_btn1}>
                         <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
                             <Button variant={'contained'} color={'primary'}>
@@ -1182,13 +1230,30 @@ class Home extends React.Component {
                         </Link>
                     </div>
                 </div>
-                <div id={'section5.2'} className={clsx(classes.divRow, classes.divBetween, classes.section5_blogs)} style={{ flex: totalBlogs }}>
-                    {
-                        Array.apply(0, Array(totalBlogs))
-                            .map((value, index) => {
-                                return this.renderSection5Blog(index)
-                            })
-                    }
+                <div id={'section5.2'} className={clsx(classes.divRow, classes.divCenter, classes.section5_blogs)}>
+                    <CarouselMulti
+                        responsive={carouselMultiResponsiveBlogs}
+                        containerClass={clsx(classes.divColumn, classes.divLeft, classes.section5_carousel)}
+                        sliderClass={clsx(classes.section5_carousel_slider)}
+                        itemClass={clsx(classes.section5_carousel_item)}
+                        ssr={false}
+                        partialVisible={isAutoPlay}
+                        centerMode={false}
+                        infinite={isAutoPlay}
+                        showDots={false}
+                        arrows={false}
+                        draggable={false}
+                        swipeable={false}
+                        autoPlay={isAutoPlay}
+                        autoPlaySpeed={3000}
+                    >
+                        {
+                            Array.apply(0, Array(totalBlogs))
+                                .map((value, index) => {
+                                    return this.renderSection5Blog(index)
+                                })
+                        }
+                    </CarouselMulti>
                 </div>
             </div>
         )
@@ -1203,23 +1268,21 @@ class Home extends React.Component {
         const IMG = Utils.i18Image(t, ID.BLOG[`IMG_${index + 1}`])
         const DATE = t(ID.BLOG[`DATE_${index + 1}`])
         const TITILE = t(ID.BLOG[`TITLE_${index + 1}`])
+        const CONTENT = t(ID.BLOG[`CONTENT_${index + 1}`])
         const LINK = ID.BLOG[`LINK_${index + 1}`]
 
         const path = Utils.getUrl(IMG)
 
         let isHover = this.state[`blog_${IMG}`] === true
 
-        let classsImage = clsx(classes.section5_img, {
-            [classes.section5_img + '--hover']: isHover
-        })
+        // let classsImage = clsx(classes.section5_img, {
+        //     [classes.section5_img + '--hover']: isHover
+        // })
 
         return (
-            <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divCenter, classes.section5_blog)} style={{ flex: 1 }}>
-                <Link to={Utils.i18Link(t, LINK)} className={classes.textLinkHidden}>
-                    <AspectRatio ratio={16 / 9} classes={{ outerWrapper: classes.section5_div_img }}>
-                        {
-                            // <img alt={IMG} src={path} className={classsImage} onMouseEnter={this.handleMouseEnter('blog', IMG)} onMouseLeave={this.handleMouseLeave('blog', IMG)} />
-                        }
+            <Paper elevation={3} key={`blog-${index}`} className={clsx(classes.divColumn, classes.divTop, classes.section5_blog)}>
+                <Link to={Utils.i18Link(t, LINK)} className={clsx(classes.textLinkHidden, classes.divColumn, classes.fullHeight)}>
+                    <div className={classes.section5_div_img}>
                         <motion.img
                             alt={IMG}
                             src={path}
@@ -1227,18 +1290,23 @@ class Home extends React.Component {
                             whileHover={{
                                 scale: 1.1
                             }}
-                            // transition={{
-                            //     duration: 0.3
-                            // }}
                             transition={commonMotion.transition}
                         />
-                    </AspectRatio>
-                    <div className={clsx(classes.divColumn, classes.divLeft)}>
-                        <Typography className={clsx(classes.textSubTitle, classes.section5_date)}>{DATE}</Typography>
-                        <Typography className={clsx(classes.textTitle, classes.section5_title)}>{TITILE}</Typography>
+                    </div>
+
+                    <div className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 10 }}>
+                        <div style={{ flex: 1 }}>
+                            <Typography className={clsx(classes.textSubTitle, classes.section5_date)}>{DATE}</Typography>
+                        </div>
+                        <div style={{ flex: 3 }}>
+                            <Typography className={clsx(classes.textSubTitle, classes.section5_title)}>{TITILE}</Typography>
+                        </div>
+                        <div style={{ flex: 6 }}>
+                            <Typography className={clsx(classes.textNormal, classes.section5_content, classes.textLimitMultiline)}>{CONTENT}</Typography>
+                        </div>
                     </div>
                 </Link>
-            </div>
+            </Paper>
         )
     }
 

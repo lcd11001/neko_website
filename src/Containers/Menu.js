@@ -80,12 +80,13 @@ const styles = theme => ({
             border: '1px solid #707070',
             ...breakpointsStyle(theme,
                 {
-                    key: ['borderRadius', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
-                    value: [10, 10, 10, 25, 25],
-                    variant: [1, 2, 2, 2, 2],
-                    unit: ['px', 'px', 'px', 'px', 'px']
+                    key: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
+                    value: [10, 10, 25, 25],
+                    variant: [2, 2, 2, 2],
+                    unit: ['px', 'px', 'px', 'px']
                 }
-            )
+            ),
+            borderRadius: 7
         },
 
         '&--secondary': {

@@ -137,7 +137,7 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [13, 15],
-                variant: [1.0, 1.0],
+                variant: [1, 1],
                 unit: ['px', 'px']
             }
         ),
@@ -149,7 +149,7 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [20, 24],
-                variant: [3, 3],
+                variant: [2, 2],
                 unit: ['px', 'px']
             }
         ),
@@ -161,7 +161,7 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [15, 18],
-                variant: [2, 2],
+                variant: [1, 1],
                 unit: ['px', 'px']
             }
         ),
@@ -206,6 +206,15 @@ const styles = (theme) => ({
 
     textBreak: {
         whiteSpace: 'pre'
+    },
+
+    textLimitMultiline: {
+        textAlign: 'justify',
+        textJustify: 'inter-word',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        wordWrap: 'break-word',
+        wordBreak: 'break-word'
     },
 
     textLinkHidden: {

@@ -55,7 +55,7 @@ const defaultTheme = createMuiTheme({
         MuiButton: {
             root: {
                 minWidth: 135,
-                borderRadius: 5,
+                borderRadius: 7,
                 ...breakpointsStyle(defaultMuiTheme,
                     {
                         key: ['height', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
@@ -116,7 +116,7 @@ const defaultTheme = createMuiTheme({
         MuiOutlinedInput: {
             root: {
                 backgroundColor: 'white',
-                borderRadius: 5,
+                borderRadius: 7,
                 '& fieldset': {
                     borderColor: '#D6D6D6',
                 },
