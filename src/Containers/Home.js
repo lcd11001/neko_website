@@ -413,8 +413,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['height'],
-                value: [500],
-                variant: [20],
+                value: [700],
+                variant: [70],
                 unit: ['px']
             }
         ),
@@ -435,7 +435,14 @@ const styles = theme => ({
     },
 
     section5_carousel_item: {
-        padding: 10,
+        ...breakpointsStyle(theme,
+            {
+                key: ['padding'],
+                value: [30],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
         height: '100%'
     },
 
