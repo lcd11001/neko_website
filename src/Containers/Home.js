@@ -537,7 +537,8 @@ const styles = theme => ({
         // width: DOT_SIZE,
         // height: DOT_SIZE,
         backgroundPosition: '0 0',
-        backgroundSize: `${DOT_HSPACE}px ${DOT_VSPACE}px`
+        backgroundSize: `${DOT_HSPACE}px ${DOT_VSPACE}px`,
+        overflow: 'hidden'
     },
 
     section6_txt1: {
