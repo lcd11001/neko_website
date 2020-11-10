@@ -12,51 +12,84 @@ import ID from '../Translations/ID.json'
 import Logo from './Logo'
 import * as Icons from '../Components/NekoIcons'
 
-import { IconButton, Typography } from '@material-ui/core';
+import { IconButton, isWidthDown, withWidth, Typography } from '@material-ui/core';
 import Utils from '../Utils';
+
+const SECONDARY_HEIGHT = 500
+const SECONDARY_HEIGHT_VARIANT = 50
+
+const PRIMARY_PADDING = Math.floor(SECONDARY_HEIGHT * 2 / 3)
+const PRIMARY_PADDING_VARIANT = Math.floor(SECONDARY_HEIGHT_VARIANT / 2)
+
+const COPYRIGHT_PADDING = Math.floor((SECONDARY_HEIGHT - PRIMARY_PADDING) / 2)
+const COPYRIGHT_PADDING_VARIANT = Math.floor((SECONDARY_HEIGHT_VARIANT - PRIMARY_PADDING_VARIANT) / 2)
 
 const styles = theme => ({
     root: {
         position: 'relative',
         backgroundColor: '#FFFFFF',
-        marginTop: '15vw'
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginTop'],
+                value: [PRIMARY_PADDING],
+                variant: [PRIMARY_PADDING_VARIANT],
+                unit: ['px']
+            }
+        ),
     },
 
     rootPrimary: {
         backgroundColor: theme.palette.primary.main,
         width: '100%',
-        minHeight: '50vw',
-        paddingTop: '30vw',
         ...breakpointsStyle(theme,
             {
-                key: ['paddingLeft', 'paddingRight', 'paddingBottom'],
-                value: [8, 8, 5],
-                variant: [1, 1, 1],
-                unit: ['vw', 'vw', 'vw']
+                key: ['paddingLeft', 'paddingRight', 'paddingTop'],
+                value: [150, 150, PRIMARY_PADDING],
+                variant: [35, 35, PRIMARY_PADDING_VARIANT],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
+        paddingBottom: 0
     },
 
     rootSecondary: {
-        width: '83%',
-        height: '25vw',
-        backgroundColor: theme.palette.primary.secondary,
-        backgroundPosition: 'left top',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain',
         position: 'absolute',
         top: 0,
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        padding: 0,
+        width: '100%',
         ...breakpointsStyle(theme,
             {
-                key: ['borderRadius'],
-                value: [30],
-                variant: [5],
+                key: ['borderRadius', 'height', 'paddingRight', 'paddingLeft'],
+                value: [30, SECONDARY_HEIGHT, 150, 150],
+                variant: [5, SECONDARY_HEIGHT_VARIANT, 35, 35],
+                unit: ['px', 'px', 'px', 'px']
+            }
+        ),
+    },
+
+    bgSecondary: {
+        borderRadius: 14,
+        backgroundColor: theme.palette.primary.secondary,
+        backgroundPosition: 'left top',
+        backgroundRepeat: 'no-repeat',
+
+        ...breakpointsStyle(theme,
+            {
+                key: ['padding'],
+                value: [50],
+                variant: [10],
                 unit: ['px']
             }
         ),
+    },
+
+    bgSecondarySize: {
+        backgroundSize: 'cover',
+
+        [theme.breakpoints.down('sm')]: {
+            backgroundSize: 'contain'
+        }
     },
 
     txtWhite: {
@@ -64,13 +97,29 @@ const styles = theme => ({
         padding: '5px 0'
     },
 
+    copyrightContainer: {
+        backgroundColor: theme.palette.primary.main,
+        // ...breakpointsStyle(theme,
+        //     {
+        //         key: ['paddingTop'],
+        //         value: [COPYRIGHT_PADDING],
+        //         variant: [COPYRIGHT_PADDING_VARIANT],
+        //         unit: ['px']
+        //     }
+        // ),
+    },
+
     copyright: {
+        width: '100%',
+        backgroundColor: '#3C4570',
+        paddingTop: 10,
+        paddingBottom: 10,
         ...breakpointsStyle(theme,
             {
-                key: ['fontSize'],
-                value: [10],
-                variant: [1],
-                unit: ['px']
+                key: ['fontSize', 'marginTop'],
+                value: [10, COPYRIGHT_PADDING],
+                variant: [1, COPYRIGHT_PADDING_VARIANT],
+                unit: ['px', 'px']
             }
         ),
     },
@@ -194,7 +243,8 @@ class Footer extends React.Component {
             location: {
                 pathname
             },
-            t
+            t,
+            width
         } = this.props;
 
         let classFooterLink = clsx(classes.footerLink, classes.textLinkHidden, {
@@ -204,21 +254,28 @@ class Footer extends React.Component {
         const img = t(ID.IMAGE.FOOTER_1)
         const imgUrl = pathname === t(ID.LINK.ABOUT) ? 'none' : `url(${Utils.getUrl(img)})`
 
+        const isSmall = isWidthDown('sm', width)
+        const classTitleContainer = clsx(classes.divColumn, classes.divCenter, classes.fullHeight, classes.fullWidth,
+            isSmall ? classes.divBottom : classes.divRight
+        )
+
         return (
-            <div className={classes.rootSecondary} style={{ backgroundImage: imgUrl }}>
-                <div className={clsx(classes.divColumn, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ paddingRight: '4%' }}>
-                    <div className={clsx(classes.divColumn, classes.divCenter)}>
-                        <Typography className={clsx(classes.txtWhite, classes.title)}>
-                            <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
-                        </Typography>
-                        <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-                            <div className={clsx(classes.divRow, classes.divCenter)}>
-                                <Typography className={clsx(classes.txtWhite, classes.subTitle)}>
-                                    <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
-                                </Typography>
-                                <Icons.IconMenuArrow className={classes.iconArrow} />
-                            </div>
-                        </Link>
+            <div className={classes.rootSecondary}>
+                <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
+                    <div className={classTitleContainer}>
+                        <div className={clsx(classes.divColumn, classes.divCenter)}>
+                            <Typography className={clsx(classes.txtWhite, classes.title)}>
+                                <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
+                            </Typography>
+                            <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+                                <div className={clsx(classes.divRow, classes.divCenter)}>
+                                    <Typography className={clsx(classes.txtWhite, classes.subTitle)}>
+                                        <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
+                                    </Typography>
+                                    <Icons.IconMenuArrow className={classes.iconArrow} />
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -317,8 +374,17 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div style={{ padding: '20px 0' }}>
-                    <Typography className={clsx(classes.txtWhite, classes.copyright)}>
+            </div>
+        )
+    }
+
+    renderCopyright() {
+        const { classes, t } = this.props;
+
+        return (
+            <div className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth, classes.copyrightContainer)}>
+                <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
+                    <Typography className={clsx(classes.txtWhite, classes.copyright)} align={'center'}>
                         <Trans i18nKey={ID.FOOTER.PRIMARY_COPYRIGHT} />
                     </Typography>
                 </div>
@@ -330,9 +396,12 @@ class Footer extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div className={clsx(classes.root, classes.divRow, classes.divBetween)}>
+            <div className={clsx(classes.root, classes.divColumn, classes.divBetween)}>
                 {
                     this.renderPrimary()
+                }
+                {
+                    this.renderCopyright()
                 }
                 {
                     this.renderSecondary()
@@ -350,5 +419,6 @@ Footer.propTypes =
 export default compose(
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
-    withRouter
+    withRouter,
+    withWidth()
 )(Footer);
