@@ -501,6 +501,9 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
+        '&:hover': {
+            color: theme.palette.primary.main
+        }
     },
 
     section5_content: {
