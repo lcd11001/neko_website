@@ -259,6 +259,7 @@ const styles = theme => ({
         fontWeight: 500,
         textAlign: 'left',
         color: 'inherit',
+        whiteSpace: 'pre-wrap'
     },
 
     section3_img1: {
@@ -300,8 +301,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['height'],
-                value: [200],
-                variant: [20],
+                value: [300],
+                variant: [40],
                 unit: ['px']
             }
         ),
