@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose'
 import { Link, withRouter } from 'react-router-dom'
 
-import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import clsx from 'clsx'
 
 import { Trans, withTranslation } from 'react-i18next'
@@ -14,6 +14,7 @@ import * as Icons from '../Components/NekoIcons'
 
 import { IconButton, isWidthDown, withWidth, Typography } from '@material-ui/core';
 import Utils from '../Utils';
+import InViewElement from '../Components/InViewElement';
 
 const SECONDARY_HEIGHT = 500
 const SECONDARY_HEIGHT_VARIANT = 50
@@ -178,15 +179,28 @@ const styles = theme => ({
     subTitle: {
         ...breakpointsStyle(theme,
             {
-                key: ['font-size', 'line-height'],
-                value: [15, 18],
-                variant: [2.0, 2.5],
-                unit: ['px', 'px']
+                key: ['font-size', 'line-height', 'paddingLeft'],
+                value: [15, 18, 35],
+                variant: [2.0, 2.5, 5],
+                unit: ['px', 'px', 'px']
             }
         ),
         fontWeight: 400,
         textTransform: 'uppercase',
         color: 'inherit',
+        letterSpacing: 'inherit'
+    },
+
+    iconContainer: {
+        borderRadius: '50%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [63, 60],
+                variant: [10, 10],
+                unit: ['px', 'px']
+            }
+        ),
     },
 
     iconArrow: {
@@ -199,16 +213,32 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
-    },
 
-    footerLink: {
-        color: 'white',
-        transition: theme.transitions.create(['color'], {
+        transition: theme.transitions.create(['width'], {
             duration: 300
         }),
 
         '&--hover': {
-            color: theme.palette.primary.main,
+            ...breakpointsStyle(theme,
+                {
+                    key: ['width'],
+                    value: [43],
+                    variant: [5],
+                    unit: ['px']
+                }
+            ),
+        }
+    },
+
+    footerLink: {
+        color: 'white',
+        letterSpacing: '2px',
+        transition: theme.transitions.create(['letter-spacing'], {
+            duration: 300
+        }),
+
+        '&--hover': {
+            letterSpacing: '3px',
         }
     }
 });
@@ -251,6 +281,10 @@ class Footer extends React.Component {
             [classes.footerLink + '--hover']: this.state.isHover
         })
 
+        let classIconArrow = clsx(classes.iconArrow, {
+            [classes.iconArrow + '--hover']: this.state.isHover
+        })
+
         const img = t(ID.IMAGE.FOOTER_1)
         const imgUrl = pathname === t(ID.LINK.ABOUT) ? 'none' : `url(${Utils.getUrl(img)})`
 
@@ -263,16 +297,21 @@ class Footer extends React.Component {
             <div className={classes.rootSecondary}>
                 <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
                     <div className={classTitleContainer}>
-                        <div className={clsx(classes.divColumn, classes.divCenter)}>
-                            <Typography className={clsx(classes.txtWhite, classes.title)}>
-                                <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
-                            </Typography>
+                        <div className={clsx(classes.divColumn, classes.divLeft)}>
+                            <InViewElement
+                                variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                            >
+                                <Typography className={clsx(classes.txtWhite, classes.title)}>
+                                    <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
+                                </Typography>
+                            </InViewElement>
+
                             <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                                 <div className={clsx(classes.divRow, classes.divCenter)}>
                                     <Typography className={clsx(classes.txtWhite, classes.subTitle)}>
                                         <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
                                     </Typography>
-                                    <Icons.IconMenuArrow className={classes.iconArrow} />
+                                    <Icons.IconMenuArrow className={classIconArrow} />
                                 </div>
                             </Link>
                         </div>
@@ -290,7 +329,11 @@ class Footer extends React.Component {
                 <div className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
                     <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3 }}>
                         <div className={classes.logo}>
-                            <Logo secondary />
+                            <InViewElement
+                                variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                            >
+                                <Logo secondary />
+                            </InViewElement>
                         </div>
                         <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)}>
                             <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
