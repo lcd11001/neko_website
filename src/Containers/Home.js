@@ -810,7 +810,7 @@ class Home extends React.Component {
                 <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <InViewElement
-                            variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                            variants={commonMotion.dialogTransition(0, 50, 0, 1)}
                         >
                             <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>
                                 <Trans
@@ -836,7 +836,7 @@ class Home extends React.Component {
                     <div className={clsx(classes.divColumn, classes.divColumn)}>
                         <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
                             <InViewElement
-                                variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                                variants={commonMotion.dialogTransition(0, 50, 0, 1)}
                             >
                                 <Typography className={clsx(classes.textBreak, classes.section1_txt2)}>
                                     <Trans
@@ -879,7 +879,7 @@ class Home extends React.Component {
             <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
                 <div id={'section2.1'}>
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                        variants={commonMotion.dialogTransition(0, 50, 0, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.textNormal, classes.section2_txt1)}>
                             <Trans
@@ -986,7 +986,7 @@ class Home extends React.Component {
                     <img alt={t(ID.IMAGE.HOME_3_1)} src={Utils.getUrl(t(ID.IMAGE.HOME_3_1))} className={classes.section3_img1} />
                     <div className={clsx(classes.divColumn, classes.divTop)} >
                         <InViewElement
-                            variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                            variants={commonMotion.dialogTransition(0, 50, 0, 1)}
                         >
                             <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divTop)}>
                                 <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
@@ -1223,7 +1223,7 @@ class Home extends React.Component {
             <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
                 <div id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                        variants={commonMotion.dialogTransition(0, 50, 0, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section5_txt1)}>
                             <Trans
@@ -1334,7 +1334,7 @@ class Home extends React.Component {
             <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divLeft, classes.section, classes.section6)}>
                 <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, 200, 0, 1)}
+                        variants={commonMotion.dialogTransition(0, 100, 0, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
                             <Trans
@@ -1344,7 +1344,7 @@ class Home extends React.Component {
                     </InViewElement>
 
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, 200, 1, 1)}
+                        variants={commonMotion.dialogTransition(0, 100, 0.5, 1)}
                     >
                         <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
                             <Trans
@@ -1354,7 +1354,7 @@ class Home extends React.Component {
                     </InViewElement>
 
                     <InViewElement
-                        variants={commonMotion.dialogTransition(0, 200, 2, 1)}
+                        variants={commonMotion.dialogTransition(0, 100, 1, 1)}
                     >
                         <div id={'down-arrow'}
                             className={classes.section6_bg_arrow}
@@ -1369,7 +1369,7 @@ class Home extends React.Component {
                         classes={{
                             root: classes.section6_dialog_root
                         }}
-                        variants={commonMotion.dialogTransition(0, 200, 0, 1)}
+                        variants={commonMotion.dialogTransition(0, 100, 0, 1)}
                     >
                         <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog1_txt)}>
@@ -1384,7 +1384,7 @@ class Home extends React.Component {
                         classes={{
                             root: classes.section6_dialog_root
                         }}
-                        variants={commonMotion.dialogTransition(0, 200, 1, 1)}
+                        variants={commonMotion.dialogTransition(0, 100, 0.5, 1)}
                     >
                         <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog2_txt)}>
@@ -1399,7 +1399,7 @@ class Home extends React.Component {
                         classes={{
                             root: classes.section6_dialog_root
                         }}
-                        variants={commonMotion.dialogTransition(0, 200, 2, 1)}
+                        variants={commonMotion.dialogTransition(0, 100, 1, 1)}
                     >
                         <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog3_txt)}>

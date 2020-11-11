@@ -299,7 +299,7 @@ class Footer extends React.Component {
                     <div className={classTitleContainer}>
                         <div className={clsx(classes.divColumn, classes.divLeft)}>
                             <InViewElement
-                                variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                                variants={commonMotion.dialogTransition(0, 50, 0, 1)}
                             >
                                 <Typography className={clsx(classes.txtWhite, classes.title)}>
                                     <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
@@ -330,7 +330,7 @@ class Footer extends React.Component {
                     <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3 }}>
                         <div className={classes.logo}>
                             <InViewElement
-                                variants={commonMotion.dialogTransition(0, 100, 0, 1)}
+                                variants={commonMotion.dialogTransition(0, 50, 0, 1)}
                             >
                                 <Logo secondary />
                             </InViewElement>
