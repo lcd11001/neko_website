@@ -8,7 +8,7 @@ import { withMultipleStyles, commonMotion } from '../../Styles'
 
 const styles = theme => ({
     root: {
-        overflow: 'hidden'
+        // overflow: 'hidden'
     }
 })
 
