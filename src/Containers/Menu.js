@@ -10,6 +10,7 @@ import { HeaderMenu } from '../Data/Defines'
 import clsx from 'clsx'
 import { Trans, withTranslation } from 'react-i18next';
 
+const OPACITY = '7F'
 
 const styles = theme => ({
     root: {
@@ -34,12 +35,7 @@ const styles = theme => ({
         fontWeight: 'bold',
         textAlign: 'left',
         textTransform: 'uppercase',
-        color: 'inherit',
-
-        '&--selected': {
-            fontWeight: 'bolder',
-            fontStyle: 'italic'
-        }
+        color: 'inherit'
     },
 
     menuIcon: {
@@ -102,15 +98,31 @@ const styles = theme => ({
             duration: 300
         }),
 
+        '&--selected': {
+            color: `${theme.palette.text.primary}${OPACITY}`,
+        },
+
         '&--custom-color-1': {
-            color: theme.palette.primary.secondary
+            color: theme.palette.primary.secondary,
+
+            '&--selected': {
+                color: `${theme.palette.primary.secondary}${OPACITY}`,
+            },
         },
 
         '&--secondary': {
-            color: 'white',
+            color: '#FFFFFF',
+
+            '&--selected': {
+                color: `#FFFFFF${OPACITY}`,
+            },
 
             '&--custom-color-1': {
-                color: 'black'
+                color: '#000000',
+
+                '&--selected': {
+                    color: `#000000${OPACITY}`,
+                },
             }
         },
     },
@@ -199,9 +211,7 @@ class Menu extends React.Component {
         let isSelected = menuLink === pathname
         let isHover = this.state[`hover_${menuLink}`] === true
 
-        let classMenuItem = clsx(classes.menuItem, {
-            [classes.menuItem + '--selected']: isSelected
-        })
+        let classMenuItem = clsx(classes.menuItem)
 
         let classMenuIcon = clsx(classes.menuIcon, {
             [classes.menuIcon + '--hover']: isHover,
@@ -231,10 +241,16 @@ class Menu extends React.Component {
         })
 
         let classMenuLink = clsx(classes.menuLink, {
+            [classes.menuLink + '--selected']: isSelected,
+
             [classes.menuLink + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (menu.customStyle && menu.customStyle.color),
+            [classes.menuLink + '--' + ((menu.customStyle && menu.customStyle.color) || 'undefined') + '--selected']: (isSelected && menu.customStyle && menu.customStyle.color),
 
             [classes.menuLink + '--secondary']: secondary,
-            [classes.menuLink + '--secondary--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.color)
+            [classes.menuLink + '--secondary--selected']: (isSelected && secondary),
+
+            [classes.menuLink + '--secondary--' + ((menu.customStyle && menu.customStyle.color) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.color),
+            [classes.menuLink + '--secondary--' + ((menu.customStyle && menu.customStyle.color) || 'undefined') + '--selected']: (isSelected && secondary && menu.customStyle && menu.customStyle.color)
         })
 
         return (
@@ -242,7 +258,7 @@ class Menu extends React.Component {
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
-                        <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap color={'textPrimary'} >
+                        <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap >
                             <Trans i18nKey={menu.text} />
                         </Typography>
                         {
