@@ -71,18 +71,18 @@ const styles = theme => ({
 
     menuBorder: {
         border: 'none',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
+                value: [10, 10, 25, 25],
+                variant: [2, 2, 2, 2],
+                unit: ['px', 'px', 'px', 'px']
+            }
+        ),
+        borderRadius: 7,
 
         '&--custom-border-1': {
-            border: '1px solid #707070',
-            ...breakpointsStyle(theme,
-                {
-                    key: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
-                    value: [10, 10, 25, 25],
-                    variant: [2, 2, 2, 2],
-                    unit: ['px', 'px', 'px', 'px']
-                }
-            ),
-            borderRadius: 7
+            border: `1px solid ${theme.palette.text.primary}`,
         },
 
         '&--secondary': {
@@ -162,13 +162,15 @@ const styles = theme => ({
 
         '&--hover': {
             color: 'white',
-            backgroundColor: theme.palette.primary.main
+            backgroundColor: theme.palette.primary.main,
+            border: `1px solid ${theme.palette.primary.main}`
         },
 
         '&--secondary': {
             '&--hover': {
                 color: 'white',
-                backgroundColor: 'black'
+                backgroundColor: 'black',
+                border: '1px solid black'
             },
         }
     }
