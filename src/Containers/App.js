@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next';
 
 import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles'
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, isWidthDown, Toolbar, Typography, withWidth } from '@material-ui/core'
 
 import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 import ID from '../Translations/ID.json'
@@ -51,16 +51,19 @@ class App extends React.Component {
             },
             t,
             isLoading,
-            loadingMessage
+            loadingMessage,
+            width
         } = this.props;
 
         const isHome = t(ID.LINK.HOME) === pathname
+        const shortMenu = isWidthDown('sm', width)
+        const isSecondary = isHome && !shortMenu
 
         return (
             <React.Fragment>
                 <div className={classes.root}>
                     {
-                        this.renderAppbar(isHome ? 'absolute' : 'relative', 'transparent', isHome)
+                        this.renderAppbar(isSecondary ? 'absolute' : 'relative', 'transparent', isSecondary)
                     }
                     <HideOnScroll offsetY={0} timeout={0}>
                         {
@@ -101,5 +104,6 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
-    withRouter
+    withRouter,
+    withWidth()
 )(App);
