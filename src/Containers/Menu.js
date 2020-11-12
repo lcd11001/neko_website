@@ -12,6 +12,23 @@ import { Trans, withTranslation } from 'react-i18next';
 
 const OPACITY = '7F'
 
+const diagonalFrames = (color1 = 'black', color2 = 'transparent', angle = 'to right top', step = 1) => {
+    let result = Array.apply(0, Array((100 * step) + 1))
+        .reduce((frames, _, index) => {
+            let key = `${index / step}%`
+            let value = {
+                backgroundImage: `linear-gradient(${angle}, ${color1} ${key}, ${color2} 0%)`
+            }
+            frames[key] = value
+
+            return frames
+        }, {})
+
+    console.log('diagonalFrames', result)
+    return result
+}
+
+
 const styles = theme => ({
     root: {
 
@@ -71,18 +88,18 @@ const styles = theme => ({
 
     menuBorder: {
         border: 'none',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
-                value: [10, 10, 25, 25],
-                variant: [2, 2, 2, 2],
-                unit: ['px', 'px', 'px', 'px']
-            }
-        ),
-        borderRadius: 7,
 
         '&--custom-border-1': {
             border: `1px solid ${theme.palette.text.primary}`,
+            ...breakpointsStyle(theme,
+                {
+                    key: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
+                    value: [10, 10, 25, 25],
+                    variant: [2, 2, 2, 2],
+                    unit: ['px', 'px', 'px', 'px']
+                }
+            ),
+            borderRadius: 7,
         },
 
         '&--secondary': {
@@ -155,25 +172,62 @@ const styles = theme => ({
     },
 
     underbackground: {
-        backgroundColor: 'inherit',
-        transition: theme.transitions.create(['background-color', 'color'], {
+        overflow: 'hidden',
+        position: 'relative',
+        transition: theme.transitions.create(['color', 'border-top-color', 'border-left-color', 'border-right-color', 'border-bottom-color'], {
             duration: 300
         }),
 
         '&--hover': {
             color: 'white',
-            backgroundColor: theme.palette.primary.main,
             border: `1px solid ${theme.palette.primary.main}`
         },
 
         '&--secondary': {
             '&--hover': {
                 color: 'white',
-                backgroundColor: 'black',
                 border: '1px solid black'
             },
         }
-    }
+    },
+
+    diagonalBackground: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundImage: `linear-gradient(to right top, ${theme.palette.primary.main} 0%, transparent 0%)`,
+        zIndex: -1,
+
+        '&--hover-forward': {
+            animationName: '$diagonal-hover',
+            animationDuration: '0.3s',
+            animationTimingFunction: 'linear',
+            animationIterationCount: '1',
+            animationFillMode: 'forwards',
+            animationDirection: 'alternate'
+        },
+
+        '&--hover-backward': {
+            animationName: '$diagonal-hover',
+            animationDuration: '0.3s',
+            animationTimingFunction: 'linear',
+            animationIterationCount: '1',
+            animationFillMode: 'forwards',
+            animationDirection: 'reverse'
+        },
+
+        '&--secondary': {
+            '&--hover-forward': {
+                animationName: '$diagonal-hover-secondary',
+            },
+            '&--hover-backward': {
+                animationName: '$diagonal-hover-secondary',
+            }
+        }
+    },
+
+    '@keyframes diagonal-hover': diagonalFrames(theme.palette.primary.main, 'transparent', 'to right top', 10),
+    '@keyframes diagonal-hover-secondary': diagonalFrames('black', 'transparent', 'to right top', 10),
 
 });
 
@@ -181,20 +235,30 @@ class Menu extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            last_hover_link: ''
         }
+    }
+
+    handleMouseClick = (link) => (evt) => {
+        this.setState((state) => ({
+            // fixed: after change menu, anim diagonal-hover still play
+            last_hover_link: ''
+        }))
     }
 
     handleMouseEnter = (link) => (evt) => {
         this.setState({
-            [`hover_${link}`]: true
+            [`hover_${link}`]: true,
         })
     }
 
     handleMouseLeave = (link) => (evt) => {
-        this.setState({
-            [`hover_${link}`]: false
-        })
+        this.setState(
+            {
+                [`hover_${link}`]: false,
+                last_hover_link: link
+            }
+        )
     }
 
     renderMenu(menu) {
@@ -212,6 +276,7 @@ class Menu extends React.Component {
 
         let isSelected = menuLink === pathname
         let isHover = this.state[`hover_${menuLink}`] === true
+        let isLastHover = this.state.last_hover_link === menuLink
 
         let classMenuItem = clsx(classes.menuItem)
 
@@ -238,8 +303,16 @@ class Menu extends React.Component {
         let classUnderbackground = clsx(classes.underbackground, {
             [classes.underbackground + '--hover']: (!shortMenu && isHover && menu.underline === 'disable'),
 
-            [classes.underbackground + '--secondary']: !shortMenu && secondary,
+            [classes.underbackground + '--secondary']: !shortMenu && secondary && menu.underline === 'disable',
             [classes.underbackground + '--secondary--hover']: (!shortMenu && secondary && isHover && menu.underline === 'disable')
+        })
+
+        let classDiagonalBackground = clsx(classes.diagonalBackground, {
+            [classes.diagonalBackground + '--hover-forward']: (!shortMenu && isHover && menu.underline === 'disable'),
+            [classes.diagonalBackground + '--hover-backward']: (!shortMenu && !isHover && isLastHover && menu.underline === 'disable'),
+
+            [classes.diagonalBackground + '--secondary--hover-forward']: (!shortMenu && secondary && isHover && menu.underline === 'disable'),
+            [classes.diagonalBackground + '--secondary--hover-backward']: (!shortMenu && secondary && !isHover && isLastHover && menu.underline === 'disable'),
         })
 
         let classMenuLink = clsx(classes.menuLink, {
@@ -258,8 +331,12 @@ class Menu extends React.Component {
         return (
 
             <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
-                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
+                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onClick={this.handleMouseClick(menuLink)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
+                        {
+                            menu.underline === 'disable' &&
+                            <div key={`${menuLink}-${isHover}`} className={classDiagonalBackground} />
+                        }
                         <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap >
                             <Trans i18nKey={menu.text} />
                         </Typography>
