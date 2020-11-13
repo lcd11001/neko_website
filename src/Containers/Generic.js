@@ -21,8 +21,10 @@ const styles = theme => ({
     }
 });
 
-class Generic extends React.Component {
-    componentDidMount() {
+class Generic extends React.Component
+{
+    componentDidMount()
+    {
         const {
             SetTitle
         } = this.props
@@ -30,7 +32,8 @@ class Generic extends React.Component {
         SetTitle(TEXT.MENU_GENERIC)
     }
 
-    render() {
+    render()
+    {
         const { classes, t } = this.props;
         // console.log('Generic::render', this.props)
         return (
@@ -59,7 +62,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    SetTitle: (title) => {
+    SetTitle: (title) =>
+    {
         dispatch(ActionGlobal.SetTitle(title))
     }
 })

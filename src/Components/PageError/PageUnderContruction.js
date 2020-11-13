@@ -44,11 +44,14 @@ const styles = theme => ({
     }
 })
 
-class PageUnderContruction extends React.Component {
-    componentDidMount() {
+class PageUnderContruction extends React.Component
+{
+    componentDidMount()
+    {
         this.props.SetTitle(Utils.parseString(this.props.pageName, this.props.location.pathname))
     }
-    render() {
+    render()
+    {
         const {
             classes
         } = this.props
@@ -78,7 +81,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    SetTitle: (title) => {
+    SetTitle: (title) =>
+    {
         dispatch(ActionGlobal.SetTitle(title))
     }
 })

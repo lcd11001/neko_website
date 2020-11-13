@@ -26,22 +26,27 @@ const styles = (theme) => ({
     }
 })
 
-class AspectRatio extends React.Component {
-    constructor(props) {
+class AspectRatio extends React.Component
+{
+    constructor(props)
+    {
         super(props)
 
         this.refOuterDiv = React.createRef()
     }
 
-    componentDidMount() {
+    componentDidMount()
+    {
         window.addEventListener("resize", this._rescale)
     }
 
-    componentWillUnmount() {
+    componentWillUnmount()
+    {
         window.removeEventListener("resize", this._rescale)
     }
 
-    render() {
+    render()
+    {
         const {
             classes,
             children,
@@ -71,24 +76,31 @@ class AspectRatio extends React.Component {
         )
     }
 
-    componentDidUpdate() {
+    componentDidUpdate()
+    {
         this._rescale()
     }
 
-    _rescale = () => {
+    _rescale = () =>
+    {
         let div = this.refOuterDiv.current
-        if (div) {
+        if (div)
+        {
             let parent = div.parentNode
 
-            if (parent) {
+            if (parent)
+            {
                 let pS = window.getComputedStyle(parent)
                 let pH = parent.clientHeight - parseInt(pS.paddingTop) - parseInt(pS.paddingBottom)
                 let H = div.clientHeight
 
-                if (H > pH) {
+                if (H > pH)
+                {
                     // Fixed: outer div overflow parent div
                     div.style.transform = `scale(${(pH / H).toFixed(3)})`
-                } else {
+                } 
+                else
+                {
                     div.style.transform = `scale(1.0)`
                 }
             }

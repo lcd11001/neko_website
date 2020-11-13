@@ -742,9 +742,11 @@ const carouselMultiResponsiveBlogs = {
     }
 }
 
-class Home extends React.Component {
+class Home extends React.Component
+{
 
-    constructor(props) {
+    constructor(props)
+    {
         super(props)
         this.state = {
             caseIndex: 0,
@@ -756,39 +758,49 @@ class Home extends React.Component {
         this.carouselCaseStudyRef = React.createRef()
     }
 
-    handleMouseEnter = (type, link) => (evt) => {
-        if (type === 'menu') {
+    handleMouseEnter = (type, link) => (evt) =>
+    {
+        if (type === 'menu')
+        {
             this.setState((prevState) => ({
                 [`hover_${link}`]: true,
                 lastHover: link,
                 countHover: prevState.countHover + 1
             }))
-        } else if (type === 'blog') {
+        } 
+        else if (type === 'blog')
+        {
             this.setState({
                 [`blog_${link}`]: true,
             })
         }
     }
 
-    handleMouseLeave = (type, link) => (evt) => {
-        if (type === 'menu') {
+    handleMouseLeave = (type, link) => (evt) =>
+    {
+        if (type === 'menu')
+        {
             this.setState((prevState) => ({
                 [`hover_${link}`]: false,
                 countHover: prevState.countHover - 1
             }))
-        } else if (type === 'blog') {
+        } 
+        else if (type === 'blog')
+        {
             this.setState({
                 [`blog_${link}`]: false,
             })
         }
     }
 
-    handleCaseStudy = (delta) => (evt) => {
+    handleCaseStudy = (delta) => (evt) =>
+    {
         this.setState(
             (state, props) => ({
                 caseIndex: ((state.caseIndex + delta) + state.caseStudyNum) % state.caseStudyNum
             }),
-            () => {
+            () =>
+            {
                 delta > 0
                     ? this.carouselCaseStudyRef.current.next()
                     : this.carouselCaseStudyRef.current.prev()
@@ -798,7 +810,8 @@ class Home extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection1 = () => {
+    renderSection1 = () =>
+    {
         const {
             classes,
             t
@@ -869,7 +882,8 @@ class Home extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection2 = () => {
+    renderSection2 = () =>
+    {
         const {
             classes,
             t
@@ -899,7 +913,8 @@ class Home extends React.Component {
         )
     }
 
-    renderSection2Menu(menu, index) {
+    renderSection2Menu(menu, index)
+    {
         const {
             classes,
             t
@@ -968,7 +983,8 @@ class Home extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection3() {
+    renderSection3()
+    {
         const {
             classes,
             t
@@ -1062,7 +1078,8 @@ class Home extends React.Component {
                         >
                             {
                                 Array.apply(0, Array(totalLogo))
-                                    .map((value, index) => {
+                                    .map((value, index) =>
+                                    {
                                         return this.renderSection3LogoFade(index, 1, totalLogo)
                                     })
                             }
@@ -1073,7 +1090,8 @@ class Home extends React.Component {
         )
     }
 
-    renderSection3LogoFade(index, len, total) {
+    renderSection3LogoFade(index, len, total)
+    {
         const {
             classes,
             t
@@ -1085,7 +1103,8 @@ class Home extends React.Component {
             <div key={index} className={clsx(classes.divRow, classes.divCenter, classes.fullHeight)} style={{ flex: len }}>
                 {
                     Array.apply(0, Array(len))
-                        .map((v, i) => {
+                        .map((v, i) =>
+                        {
                             // let name = Utils.zeroPadding((index + i) % total, 2)
                             let name = t(ID.IMAGE[`LOGO_${((index + i) % total) + 1}`])
                             let path = Utils.getUrl(name)
@@ -1103,13 +1122,15 @@ class Home extends React.Component {
 
     }
 
-    renderSection3LogoSlide(index, len, total) {
+    renderSection3LogoSlide(index, len, total)
+    {
         return this.renderSection3LogoFade(index * len, len, total)
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection4() {
+    renderSection4()
+    {
         const {
             classes,
             t
@@ -1141,7 +1162,8 @@ class Home extends React.Component {
                     >
                         {
                             Array.apply(0, Array(totalCaseStudy))
-                                .map((value, index) => {
+                                .map((value, index) =>
+                                {
                                     return this.renderSection4CaseStudy(index)
                                 })
                         }
@@ -1184,7 +1206,8 @@ class Home extends React.Component {
         )
     }
 
-    renderSection4CaseStudy(index) {
+    renderSection4CaseStudy(index)
+    {
         const {
             classes,
             t
@@ -1209,7 +1232,8 @@ class Home extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection5() {
+    renderSection5()
+    {
         const {
             classes,
             t,
@@ -1261,7 +1285,8 @@ class Home extends React.Component {
                     >
                         {
                             Array.apply(0, Array(totalBlogs))
-                                .map((value, index) => {
+                                .map((value, index) =>
+                                {
                                     return this.renderSection5Blog(index)
                                 })
                         }
@@ -1271,7 +1296,8 @@ class Home extends React.Component {
         )
     }
 
-    renderSection5Blog(index) {
+    renderSection5Blog(index)
+    {
         const {
             classes,
             t
@@ -1324,7 +1350,8 @@ class Home extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection6() {
+    renderSection6()
+    {
         const {
             classes,
             t
@@ -1416,7 +1443,8 @@ class Home extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    render() {
+    render()
+    {
         const { classes } = this.props;
         // console.log('Home::render', this.props)
         return (
@@ -1456,7 +1484,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    SetTitle: (title) => {
+    SetTitle: (title) =>
+    {
         dispatch(ActionGlobal.SetTitle(title))
     }
 })

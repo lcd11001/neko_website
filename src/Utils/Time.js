@@ -1,9 +1,11 @@
 // https://gist.github.com/vankasteelj/74ab7793133f4b257ea3
-export const zeroPadding = (num, size) => {
+export const zeroPadding = (num, size) =>
+{
     return ('000' + num).slice(size * -1);
 }
 
-export const sec2time = (timeInSeconds) => {
+export const sec2time = (timeInSeconds) =>
+{
 
 
     var time = parseFloat(timeInSeconds).toFixed(2),
@@ -20,7 +22,8 @@ export const sec2time = (timeInSeconds) => {
     // return zeroPadding(hours, 2) + ':' + zeroPadding(minutes, 2) + ':' + zeroPadding(seconds, 2);
 }
 
-export const getCurrentTime = (separatorDate = '/', separatorTime = ':', separatorDateTime = ' ') => {
+export const getCurrentTime = (separatorDate = '/', separatorTime = ':', separatorDateTime = ' ') =>
+{
     let now = new Date()
 
     let date = now.getDate()
@@ -37,7 +40,8 @@ export const getCurrentTime = (separatorDate = '/', separatorTime = ':', separat
     return `${DATE}${separatorDateTime}${TIME}`
 }
 
-export const sec2FullTime = (timeInMiliSeconds, separatorDate = '/', separatorTime = ':', separatorDateTime = ' ') => {
+export const sec2FullTime = (timeInMiliSeconds, separatorDate = '/', separatorTime = ':', separatorDateTime = ' ') =>
+{
 
     if (isNaN(timeInMiliSeconds))
         return ''

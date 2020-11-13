@@ -37,8 +37,10 @@ const styles = theme => ({
     }
 });
 
-class Languages extends React.Component {
-    render() {
+class Languages extends React.Component
+{
+    render()
+    {
         const {
             classes,
             i18n,

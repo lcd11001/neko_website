@@ -12,9 +12,11 @@ import { Trans, withTranslation } from 'react-i18next';
 
 const OPACITY = '7F'
 
-const diagonalFrames = (color1 = 'black', color2 = 'transparent', angle = 'to right top', step = 1) => {
+const diagonalFrames = (color1 = 'black', color2 = 'transparent', angle = 'to right top', step = 1) =>
+{
     let result = Array.apply(0, Array((100 * step) + 1))
-        .reduce((frames, _, index) => {
+        .reduce((frames, _, index) =>
+        {
             let key = `${index / step}%`
             let value = {
                 backgroundImage: `linear-gradient(${angle}, ${color1} ${key}, ${color2} 0%)`
@@ -231,28 +233,33 @@ const styles = theme => ({
 
 });
 
-class Menu extends React.Component {
-    constructor(props) {
+class Menu extends React.Component
+{
+    constructor(props)
+    {
         super(props)
         this.state = {
             last_hover_link: ''
         }
     }
 
-    handleMouseClick = (link) => (evt) => {
+    handleMouseClick = (link) => (evt) =>
+    {
         this.setState((state) => ({
             // fixed: after change menu, anim diagonal-hover still play
             last_hover_link: ''
         }))
     }
 
-    handleMouseEnter = (link) => (evt) => {
+    handleMouseEnter = (link) => (evt) =>
+    {
         this.setState({
             [`hover_${link}`]: true,
         })
     }
 
-    handleMouseLeave = (link) => (evt) => {
+    handleMouseLeave = (link) => (evt) =>
+    {
         this.setState(
             {
                 [`hover_${link}`]: false,
@@ -261,7 +268,8 @@ class Menu extends React.Component {
         )
     }
 
-    renderMenu(menu) {
+    renderMenu(menu)
+    {
         const {
             classes,
             location: {
@@ -354,7 +362,8 @@ class Menu extends React.Component {
         )
     }
 
-    render() {
+    render()
+    {
         const {
             classes,
             shortMenu

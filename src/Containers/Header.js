@@ -23,21 +23,25 @@ const styles = theme => ({
     }
 });
 
-class Header extends React.Component {
-    constructor(props) {
+class Header extends React.Component
+{
+    constructor(props)
+    {
         super(props)
         this.state = {
             menuOpened: false
         }
     }
 
-    handleMenu = (evt) => {
+    handleMenu = (evt) =>
+    {
         this.setState((state) => ({
             menuOpened: !state.menuOpened
         }))
     }
 
-    renderShortHeader() {
+    renderShortHeader()
+    {
         const { classes, secondary } = this.props;
         const { menuOpened } = this.state
         return (
@@ -62,7 +66,8 @@ class Header extends React.Component {
         );
     }
 
-    renderHeader() {
+    renderHeader()
+    {
         const { classes, secondary } = this.props;
 
         return (
@@ -73,13 +78,15 @@ class Header extends React.Component {
         );
     }
 
-    render() {
+    render()
+    {
         const {
             width,
             t
         } = this.props
 
-        if (isWidthDown('sm', width)) {
+        if (isWidthDown('sm', width))
+        {
             return this.renderShortHeader()
         }
 

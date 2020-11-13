@@ -7,15 +7,17 @@ const defaultState = {
     notifyErrorMessage: '',
 }
 
-const ReducerGlobal = (state = defaultState, action) => {
-    switch (action.type) {
+const ReducerGlobal = (state = defaultState, action) =>
+{
+    switch (action.type)
+    {
         case 'GLOBAL_TITLE': {
             return {
                 ...state,
                 title: action.payload
             }
         }
-        
+
         case 'GLOBAL_CLEAR_ERROR': {
             return {
                 ...state,

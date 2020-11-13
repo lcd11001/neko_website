@@ -62,9 +62,11 @@ const styles = theme => ({
     },
 })
 
-class ModalDialog extends React.Component {
+class ModalDialog extends React.Component
+{
 
-    render() {
+    render()
+    {
         const {
             classes,
             open,

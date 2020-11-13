@@ -1,11 +1,14 @@
-import {
-    EncryptData,
-    DecryptData,
-    Hash
-} from './Cryption'
+import
+    {
+        EncryptData,
+        DecryptData,
+        Hash
+    } from './Cryption'
 
-class CmsStorage {
-    constructor() {
+class CmsStorage
+{
+    constructor()
+    {
         this.REMEMBER_ME = Hash('remember_me')
         this.LOGIN_TOKEN = Hash('login_token')
         this.EMAIL = Hash('email')
@@ -14,12 +17,15 @@ class CmsStorage {
         console.log('CmsStorage::constructor', this.isRememberMe)
     }
 
-    encryptValue(value) {
-        if (value === null) {
+    encryptValue(value)
+    {
+        if (value === null)
+        {
             value = 'null'
         }
 
-        if (value === undefined) {
+        if (value === undefined)
+        {
             value = 'undefined'
         }
 
@@ -28,26 +34,33 @@ class CmsStorage {
         }))
     }
 
-    decryptValue(value) {
-        if (value === null || value === undefined) {
+    decryptValue(value)
+    {
+        if (value === null || value === undefined)
+        {
             return value
         }
 
-        if (value === 'null') {
+        if (value === 'null')
+        {
             return null
         }
 
-        if (value === 'undefined') {
+        if (value === 'undefined')
+        {
             return undefined
         }
 
         let decryptData = DecryptData(value)
-        if (decryptData) {
+        if (decryptData)
+        {
             let obj = JSON.parse(decryptData)
-            if (obj.value === 'null') {
+            if (obj.value === 'null')
+            {
                 return null
             }
-            if (obj.value === 'undefined') {
+            if (obj.value === 'undefined')
+            {
                 return undefined
             }
             return obj.value
@@ -56,46 +69,57 @@ class CmsStorage {
         return decryptData
     }
 
-    setLocal = (key, value) => {
+    setLocal = (key, value) =>
+    {
         localStorage.setItem(key, this.encryptValue(value))
     }
 
-    getLocal = (key) => {
+    getLocal = (key) =>
+    {
         return this.decryptValue(localStorage.getItem(key))
     }
 
-    clearLocal = (key) => {
+    clearLocal = (key) =>
+    {
         let encryptValue = this.getLocal(key)
         localStorage.removeItem(key)
         return this.decryptValue(encryptValue)
     }
 
-    setSession = (key, value) => {
+    setSession = (key, value) =>
+    {
         sessionStorage.setItem(key, this.encryptValue(value))
     }
 
-    getSession = (key) => {
+    getSession = (key) =>
+    {
         return this.decryptValue(sessionStorage.getItem(key))
     }
 
-    clearSession = (key) => {
+    clearSession = (key) =>
+    {
         let encryptValue = this.getSession(key)
         sessionStorage.removeItem(key)
         return this.decryptValue(encryptValue)
     }
 
-    setItem(key, value) {
-        if (key === this.REMEMBER_ME) {
+    setItem(key, value)
+    {
+        if (key === this.REMEMBER_ME)
+        {
             this.setLocal(key, value)
             this.isRememberMe = value
 
-            if (value === false) {
+            if (value === false)
+            {
                 let login_token = this.clearLocal(this.LOGIN_TOKEN)
                 this.setSession(this.LOGIN_TOKEN, login_token)
 
                 let email = this.clearLocal(this.EMAIL)
                 this.setSession(this.EMAIL, email)
-            } else {
+            } 
+            else
+            {
                 let login_token = this.clearSession(this.LOGIN_TOKEN)
                 this.setLocal(this.LOGIN_TOKEN, login_token)
 
@@ -106,21 +130,27 @@ class CmsStorage {
             return
         }
 
-        if (this.isRememberMe) {
+        if (this.isRememberMe)
+        {
             this.setLocal(key, value)
-        } else {
+        } 
+        else
+        {
             this.setSession(key, value)
         }
     }
 
-    getItem(key) {
-        if (this.isRememberMe) {
+    getItem(key)
+    {
+        if (this.isRememberMe)
+        {
             return this.getLocal(key)
         }
         return this.getSession(key)
     }
 
-    clearAllItems() {
+    clearAllItems()
+    {
         localStorage.clear()
         sessionStorage.clear()
         this.isRememberMe = false
@@ -131,15 +161,18 @@ class CmsStorage {
 
 const storage = new CmsStorage()
 
-export const getItem = (key) => {
+export const getItem = (key) =>
+{
     return storage.getItem(key)
 }
 
-export const setItem = (key, value) => {
+export const setItem = (key, value) =>
+{
     storage.setItem(key, value)
 }
 
-export const clearAllItems = () => {
+export const clearAllItems = () =>
+{
     storage.clearAllItems()
 }
 

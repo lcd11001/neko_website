@@ -24,7 +24,6 @@ import Home from './Containers/Home'
 import About from './Containers/About'
 
 import PageNotFound from './Components/PageError/PageNotFound'
-import ProtectedRoute from './Components/ProtectedRoute'
 
 import { CssBaseline } from '@material-ui/core'
 import Utils from './Utils'
@@ -54,7 +53,8 @@ i18next
         ns: Object.keys(ID)
     })
     // then: remove loading icon
-    .then(t => {
+    .then(t =>
+    {
         const divLoading = document.getElementById('loading')
         document.body.removeChild(divLoading)
     })
@@ -66,7 +66,8 @@ const MotionRedirect = ({ children, ...props }) => (
     </motion.div>
 )
 
-const Routes = () => {
+const Routes = () =>
+{
     return (
         <MuiThemeProvider theme={defaultTheme}>
             <Provider store={store}>
