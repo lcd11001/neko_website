@@ -54,7 +54,7 @@ const InViewElement = (props) =>
         >
             <AnimatePresence key={`${isDidMount}-${inView}`}>
                 {
-                    inView &&
+                    // inView &&
                     <motion.div
                         animate={controls}
                         initial={props.initial}
