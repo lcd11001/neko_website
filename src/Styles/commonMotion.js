@@ -12,21 +12,42 @@ const pageTransition = {
     }
 }
 
+const groupTransition = {
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            when: 'beforeChildren',
+            staggerChildren: 0.5
+        }
+    },
+    invisible: {
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0.5
+        }
+    }
+}
+
 const elementTransition = {
     hidden: {
         opacity: 0,
-        top: '-100vh',
-        position: 'relative'
+        y: '50px'
     },
-    in: {
-        position: 'relative',
+    visible: {
         opacity: 1,
-        top: 0
+        y: 0,
+        transition: {
+            ease: 'easeOut',
+            duration: 1
+        }
     },
-    out: {
-        position: 'relative',
-        opacity: 0.2,
-        top: 0
+    invisible: {
+        opacity: 0,
+        y: '50px'
     }
 }
 
@@ -87,7 +108,7 @@ const backgroundTransition = {
     }
 }
 
-const dialogTransition = (x, y, delay, duration) => ({
+const posTransition = (x, y, delay, duration) => ({
     hidden: {
         opacity: 0,
         x: `${x}px`,
@@ -119,9 +140,10 @@ const dialogTransition = (x, y, delay, duration) => ({
 export default {
     transition,
     pageTransition,
+    groupTransition,
     elementTransition,
     inViewTransition,
     specializeTransition,
     backgroundTransition,
-    dialogTransition
+    posTransition
 }
