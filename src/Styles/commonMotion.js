@@ -12,6 +12,27 @@ const pageTransition = {
     }
 }
 
+const delayTransition = (delay) => ({
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            when: 'beforeChildren',
+            delay: delay,
+            staggerChildren: 0.5
+        }
+    },
+    invisible: {
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0.5
+        }
+    }
+})
+
 const groupTransition = {
     hidden: {
         opacity: 0
@@ -140,6 +161,7 @@ const posTransition = (x, y, delay, duration) => ({
 export default {
     transition,
     pageTransition,
+    delayTransition,
     groupTransition,
     elementTransition,
     inViewTransition,

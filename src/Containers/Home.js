@@ -819,17 +819,10 @@ class Home extends React.Component
             <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
                 <Toolbar disableGutters={true} className={classes.toolbarHome} style={{ backgroundColor: 'transparent' }} />
 
-                <InViewElement
-                    variants={commonMotion.groupTransition}
-                    initial={'hidden'}
-                    animate={'visible'}
-                    exit={'invisible'}
-                >
-                    <div id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
+                <InViewElement variants={commonMotion.groupTransition}>
+                    <motion.div variants={commonMotion.delayTransition(0)} id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                         <div className={clsx(classes.divColumn, classes.divColumn)}>
-                            <motion.div
-                                variants={commonMotion.elementTransition}
-                            >
+                            <motion.div variants={commonMotion.elementTransition}>
                                 <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_1_TEXT_1}
@@ -837,10 +830,7 @@ class Home extends React.Component
                                 </Typography>
                             </motion.div>
 
-                            <motion.div
-                                className={classes.section1_btn1}
-                                variants={commonMotion.elementTransition}
-                            >
+                            <motion.div variants={commonMotion.elementTransition} className={classes.section1_btn1}>
                                 <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_1_LINK)} className={classes.textLinkHidden}>
                                     <Button variant={'contained'} color={'primary'}>
                                         <Trans
@@ -858,41 +848,56 @@ class Home extends React.Component
                             src={Utils.getUrl(t(ID.IMAGE.HOME_1_1))}
                             className={classes.section1_img1}
                         />
-                    </div>
+                    </motion.div>
                 </InViewElement>
 
-                <div id={'section1.2'} className={clsx(classes.divRow, classes.divCenter)} style={{ paddingTop: 10 }}>
-                    <img alt={t(ID.IMAGE.HOME_1_2)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_2))} className={classes.section1_img2} />
-                    <div className={clsx(classes.divColumn, classes.divColumn)}>
-                        <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
-                            <InViewElement
-                                variants={commonMotion.posTransition(0, 50, 0, 1)}
-                            >
-                                <Typography className={clsx(classes.textBreak, classes.section1_txt2)}>
+                <InViewElement variants={commonMotion.groupTransition}>
+                    <motion.div variants={commonMotion.delayTransition(2)} id={'section1.2'} className={clsx(classes.divRow, classes.divCenter)} style={{ paddingTop: 10 }}>
+                        <motion.img
+                            variants={commonMotion.elementTransition}
+                            alt={t(ID.IMAGE.HOME_1_2)}
+                            src={Utils.getUrl(t(ID.IMAGE.HOME_1_2))}
+                            className={classes.section1_img2}
+                        />
+
+                        <div className={clsx(classes.divColumn, classes.divColumn)}>
+                            <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
+                                <motion.div variants={commonMotion.elementTransition}>
+                                    <Typography className={clsx(classes.textBreak, classes.section1_txt2)}>
+                                        <Trans
+                                            i18nKey={ID.HOME.SECTION_1_TEXT_2}
+                                        />
+                                    </Typography>
+                                </motion.div>
+                                <motion.img
+                                    variants={commonMotion.elementTransition}
+                                    alt={t(ID.IMAGE.HOME_1_3)}
+                                    src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))}
+                                    className={classes.section1_img3}
+                                />
+                            </div>
+
+                            <motion.div variants={commonMotion.elementTransition}>
+                                <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section1_txt3)}>
                                     <Trans
-                                        i18nKey={ID.HOME.SECTION_1_TEXT_2}
+                                        i18nKey={ID.HOME.SECTION_1_TEXT_3}
                                     />
                                 </Typography>
-                            </InViewElement>
-                            <img alt={t(ID.IMAGE.HOME_1_3)} src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))} className={classes.section1_img3} />
+                            </motion.div>
+
+                            <motion.div variants={commonMotion.elementTransition} className={classes.section1_btn1}>
+                                <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_2_LINK)} className={classes.textLinkHidden}>
+                                    <Button variant={'contained'} color={'primary'}>
+                                        <Trans
+                                            i18nKey={ID.HOME.SECTION_1_BUTTON_2}
+                                        />
+                                        <Icons.IconMenuArrow className={classes.iconArrow} />
+                                    </Button>
+                                </Link>
+                            </motion.div>
                         </div>
-                        <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section1_txt3)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_1_TEXT_3}
-                            />
-                        </Typography>
-                        <div className={classes.section1_btn1}>
-                            <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_2_LINK)} className={classes.textLinkHidden}>
-                                <Button variant={'contained'} color={'primary'}>
-                                    <Trans
-                                        i18nKey={ID.HOME.SECTION_1_BUTTON_2}
-                                    />
-                                    <Icons.IconMenuArrow className={classes.iconArrow} />
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </InViewElement>
             </div >
         )
     }
