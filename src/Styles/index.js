@@ -5,12 +5,13 @@ import commonMotion from './commonMotion'
 
 import defaultTheme from './defaultStyle'
 
-export {
+export
+{
     defaultTheme,
 
     withMultipleStyles,
     breakpointsStyle,
     commonStyles,
-    
+
     commonMotion
 }

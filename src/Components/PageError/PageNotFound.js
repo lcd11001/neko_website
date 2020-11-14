@@ -44,11 +44,14 @@ const styles = theme => ({
     }
 })
 
-class PageNotFound extends React.Component {
-    componentDidMount() {
+class PageNotFound extends React.Component
+{
+    componentDidMount()
+    {
         this.props.SetTitle('Sorry, the page not found!')
     }
-    render() {
+    render()
+    {
         const {
             classes
         } = this.props
@@ -79,7 +82,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    SetTitle: (title) => {
+    SetTitle: (title) =>
+    {
         dispatch(ActionGlobal.SetTitle(title))
     }
 })

@@ -243,32 +243,38 @@ const styles = theme => ({
     }
 });
 
-class Footer extends React.Component {
-    constructor(props) {
+class Footer extends React.Component
+{
+    constructor(props)
+    {
         super(props)
         this.state = {
             isHover: false
         }
     }
 
-    handleOpenUrl = (url) => (evt) => {
+    handleOpenUrl = (url) => (evt) =>
+    {
         console.log(url)
         window.open(url, '_blank', undefined, false)
     }
 
-    handleMouseEnter = (evt) => {
+    handleMouseEnter = (evt) =>
+    {
         this.setState({
             isHover: true
         })
     }
 
-    handleMouseLeave = (evt) => {
+    handleMouseLeave = (evt) =>
+    {
         this.setState({
             isHover: false
         })
     }
 
-    renderSecondary() {
+    renderSecondary()
+    {
         const { classes,
             location: {
                 pathname
@@ -321,7 +327,8 @@ class Footer extends React.Component {
         )
     }
 
-    renderPrimary() {
+    renderPrimary()
+    {
         const { classes, t } = this.props;
 
         return (
@@ -421,7 +428,8 @@ class Footer extends React.Component {
         )
     }
 
-    renderCopyright() {
+    renderCopyright()
+    {
         const { classes, t } = this.props;
 
         return (
@@ -435,7 +443,8 @@ class Footer extends React.Component {
         )
     }
 
-    render() {
+    render()
+    {
         const { classes } = this.props;
 
         return (

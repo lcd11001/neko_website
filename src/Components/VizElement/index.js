@@ -2,8 +2,10 @@ import { Fade } from '@material-ui/core'
 import React from 'react'
 import VizSensor from 'react-visibility-sensor'
 
-class VizElement extends React.Component {
-    constructor(props) {
+class VizElement extends React.Component
+{
+    constructor(props)
+    {
         super(props)
 
         this.state = {
@@ -11,12 +13,14 @@ class VizElement extends React.Component {
         }
     }
 
-    render() {
+    render()
+    {
         return (
             <VizSensor
                 partialVisibility
                 minTopValue={150}
-                onChange={(isVisible) => {
+                onChange={(isVisible) =>
+                {
                     this.setState({
                         eletViz: isVisible
                     })

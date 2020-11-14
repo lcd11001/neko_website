@@ -44,8 +44,10 @@ const styles = theme => ({
     }
 })
 
-class CircularLoading extends React.Component {
-    render() {
+class CircularLoading extends React.Component
+{
+    render()
+    {
         const { classes, backgroundColor, color, message } = this.props
         return (
             <div className={classes.loading} style={{ backgroundColor }}>

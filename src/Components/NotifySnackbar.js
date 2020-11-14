@@ -32,7 +32,7 @@ const styles = theme => ({
         padding: 0,
         whiteSpace: 'pre-line'
     },
-    
+
     bottomLevitation: {
         bottom: '2vh'
     }
@@ -45,8 +45,10 @@ const variantIcon = {
     info: InfoIcon,
 };
 
-class NotifySnackbar extends React.Component {
-    render() {
+class NotifySnackbar extends React.Component
+{
+    render()
+    {
         const { classes, message, variant, open, handleClose } = this.props;
 
         const Icon = variantIcon[variant];

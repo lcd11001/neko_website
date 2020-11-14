@@ -46,7 +46,7 @@ const styles = theme => ({
             }
         ),
         position: 'relative',
-        
+
         color: theme.palette.text.primary,
         '&--secondary': {
             color: 'white'
@@ -73,10 +73,12 @@ const styles = theme => ({
     }
 });
 
-class Logo extends React.Component {
+class Logo extends React.Component
+{
 
 
-    render() {
+    render()
+    {
         const {
             classes,
             secondary

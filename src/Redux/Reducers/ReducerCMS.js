@@ -18,8 +18,10 @@ const defaultState = {
     currentLang: 'EN'
 }
 
-const ReducerCMS = (state = defaultState, action) => {
-    switch (action.type) {
+const ReducerCMS = (state = defaultState, action) =>
+{
+    switch (action.type)
+    {
         case `CHANGE_LANGUAGE_${ActionType.Fulfilled}`: {
             return {
                 ...state,

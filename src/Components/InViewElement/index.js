@@ -12,12 +12,15 @@ const styles = theme => ({
     }
 })
 
-const InViewElement = (props) => {
+const InViewElement = (props) =>
+{
     const [isDidMount, setDidMount] = useState(false)
-    useEffect(() => {
+    useEffect(() =>
+    {
         setDidMount(true)
 
-        return () => {
+        return () =>
+        {
             setDidMount(false)
         }
     }, [])
@@ -25,14 +28,21 @@ const InViewElement = (props) => {
     const controls = useAnimation()
     const [ref, inView] = useInView(props.options)
 
-    useEffect(() => {
-        if (isDidMount) {
-            if (inView) {
+    useEffect(() =>
+    {
+        if (isDidMount)
+        {
+            if (inView)
+            {
                 controls.start(props.animate)
-            } else {
+            } 
+            else
+            {
                 controls.start(props.exit)
             }
-        } else {
+        } 
+        else
+        {
             controls.stop()
         }
     }, [controls, inView, isDidMount, props.animate, props.exit])

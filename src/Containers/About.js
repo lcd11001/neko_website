@@ -190,10 +190,12 @@ const styles = theme => ({
     }
 })
 
-class About extends React.Component {
+class About extends React.Component
+{
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    renderSection1() {
+    renderSection1()
+    {
         const { classes } = this.props;
         return (
             <div id={'section1'} className={clsx(classes.section, classes.section1)}>
@@ -211,7 +213,8 @@ class About extends React.Component {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    renderSection2() {
+    renderSection2()
+    {
         const { classes } = this.props;
         const totalColumn = 2
         return (
@@ -226,7 +229,8 @@ class About extends React.Component {
         )
     }
 
-    renderSection2Contact(index) {
+    renderSection2Contact(index)
+    {
         const {
             classes,
             t
@@ -257,7 +261,8 @@ class About extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection3() {
+    renderSection3()
+    {
         const { classes } = this.props;
         return (
             <div id={'section3'} className={clsx(classes.section, classes.section3)}>
@@ -276,7 +281,8 @@ class About extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    renderSection4() {
+    renderSection4()
+    {
         const { classes, width } = this.props;
         return (
             <div id={'section4'} className={clsx(classes.divRow, classes.divBetween, classes.section, classes.section4)} style={{ flex: 6 }}>
@@ -335,7 +341,8 @@ class About extends React.Component {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    render() {
+    render()
+    {
         const { classes } = this.props;
         // console.log('About::render', this.props)
         return (
@@ -367,7 +374,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    SetTitle: (title) => {
+    SetTitle: (title) =>
+    {
         dispatch(ActionGlobal.SetTitle(title))
     }
 })

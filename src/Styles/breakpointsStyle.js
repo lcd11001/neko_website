@@ -6,7 +6,8 @@ const screenSizes = [
     'xs', // extra small
 ]
 
-const createStyleForScreenSize = (theme, options, screen, multiply) => {
+const createStyleForScreenSize = (theme, options, screen, multiply) =>
+{
     const key = options.key
     const value = options.value || 3.0
     const variant = options.variant || 0.5
@@ -14,8 +15,10 @@ const createStyleForScreenSize = (theme, options, screen, multiply) => {
 
     let styleDetail = {}
 
-    if (Array.isArray(key)) {
-        key.forEach((key0, i) => {
+    if (Array.isArray(key))
+    {
+        key.forEach((key0, i) =>
+        {
             const value0 = Array.isArray(value) ? value[i] : value
             const variant0 = Array.isArray(variant) ? variant[i] : variant
             const unit0 = Array.isArray(unit) ? unit[i] : unit
@@ -24,13 +27,15 @@ const createStyleForScreenSize = (theme, options, screen, multiply) => {
                 [key0]: `${value0 - multiply * variant0}${unit0}`
             })
         })
-    } else {
+    } else
+    {
         styleDetail = Object.assign(styleDetail, {
             [key]: `${value - multiply * variant}${unit}`
         })
     }
 
-    if (screen === 'default') {
+    if (screen === 'default')
+    {
         // console.log('createStyleForScreenSize ' + screen, styleDetail)
         return styleDetail
     }
@@ -44,14 +49,16 @@ const createStyleForScreenSize = (theme, options, screen, multiply) => {
     return style
 }
 
-const createStyle = (theme, options) => {
+const createStyle = (theme, options) =>
+{
 
     let style = {}
 
-    screenSizes.forEach((screen, index) => {
+    screenSizes.forEach((screen, index) =>
+    {
         let styleForScreen = createStyleForScreenSize(theme, options, screen, index)
 
-        style = Object.assign(style, {...styleForScreen})
+        style = Object.assign(style, { ...styleForScreen })
     })
 
     // console.log('createStyle', style)
@@ -59,7 +66,8 @@ const createStyle = (theme, options) => {
     return style
 }
 
-const styles = (theme, options) => {
+const styles = (theme, options) =>
+{
     // console.log('-----------------', options)
 
     return createStyle(theme, options)

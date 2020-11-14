@@ -30,8 +30,10 @@ const styles = theme => ({
     }
 });
 
-class App extends React.Component {
-    renderAppbar(position, backgroundColor, secondary) {
+class App extends React.Component
+{
+    renderAppbar(position, backgroundColor, secondary)
+    {
         const { classes } = this.props
         return (
             <AppBar elevation={0} className={classes.appbar} position={position} style={{ backgroundColor: backgroundColor }}>
@@ -42,7 +44,8 @@ class App extends React.Component {
         )
     }
 
-    render() {
+    render()
+    {
         const {
             classes,
             children,
@@ -92,10 +95,12 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    ClearError: () => {
+    ClearError: () =>
+    {
         dispatch(ActionGlobal.ClearError())
     },
-    ClearNotify: () => {
+    ClearNotify: () =>
+    {
         dispatch(ActionGlobal.ClearNotify())
     }
 })
