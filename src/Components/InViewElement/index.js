@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { useInView } from 'react-intersection-observer'
-import { motion, useAnimation } from 'framer-motion'
+import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
 import { withMultipleStyles, commonMotion } from '../../Styles'
 
@@ -34,13 +34,13 @@ const InViewElement = (props) =>
         {
             if (inView)
             {
-                controls.start(props.animate)
-            } 
+                controls.start(props.animate, props.transition)
+            }
             else
             {
-                controls.start(props.exit)
+                controls.start(props.exit, props.transition)
             }
-        } 
+        }
         else
         {
             controls.stop()
@@ -52,16 +52,21 @@ const InViewElement = (props) =>
             className={props.classes.root}
             ref={ref}
         >
-            <motion.div
-                animate={controls}
-                initial={props.initial}
-                variants={props.variants}
-                transition={props.transition}
-            >
+            <AnimatePresence key={`${isDidMount}-${inView}`}>
                 {
-                    props.children
+                    inView &&
+                    <motion.div
+                        animate={controls}
+                        initial={props.initial}
+                        variants={props.variants}
+                        // transition={props.transition}
+                    >
+                        {
+                            props.children
+                        }
+                    </motion.div>
                 }
-            </motion.div>
+            </AnimatePresence>
         </div>
     )
 }
