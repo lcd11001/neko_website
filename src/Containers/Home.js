@@ -1197,61 +1197,63 @@ class Home extends React.Component
         const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
 
         return (
-            <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
-                <div id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)}>
-                    <Carousel
-                        ref={this.carouselCaseStudyRef}
-                        className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
-                        autoPlay={!true}
-                        indicators={false}
-                        navButtonsAlwaysInvisible={true}
-                        animation={carouselAnim}
-                        interval={3000}
-                        startAt={caseIndex}
-                    >
-                        {
-                            Array.apply(0, Array(totalCaseStudy))
-                                .map((value, index) =>
-                                {
-                                    return this.renderSection4CaseStudy(index)
-                                })
-                        }
-                    </Carousel>
-                </div>
-                <div id={'section4.2'} className={classes.section4_btn1}>
-                    <Link to={Utils.i18Link(t, caseStudiLink)} className={classes.textLinkHidden}>
-                        <Button variant={'contained'} color={'primary'}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_4_BUTTON_1}
-                            />
-                            <Icons.IconMenuArrow className={classes.iconArrow} />
-                        </Button>
-                    </Link>
-                </div>
-                <div id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
-                    <div className={classes.section4_carousel_indicators}>
-                        <Typography className={clsx(classes.textSubTitle)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
-                    </div>
-                    <div className={clsx(classes.divRow, classes.divBetween)}>
-                        <IconButton
-                            onClick={this.handleCaseStudy(-1)}
-                            disableRipple
-                            className={classes.section4_carousel_buttons}
-                            disabled={caseIndex === 0}
+            <InViewElement variants={commonMotion.groupTransition}>
+                <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)}>
+                        <Carousel
+                            ref={this.carouselCaseStudyRef}
+                            className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
+                            autoPlay={!true}
+                            indicators={false}
+                            navButtonsAlwaysInvisible={true}
+                            animation={carouselAnim}
+                            interval={3000}
+                            startAt={caseIndex}
                         >
-                            <Icons.IconMenuArrow className={classes.iconArrow} style={{ transform: 'scaleX(-1)' }} />
-                        </IconButton>
-                        <IconButton
-                            onClick={this.handleCaseStudy(1)}
-                            disableRipple
-                            className={classes.section4_carousel_buttons}
-                            disabled={caseIndex + 1 === caseStudyNum}
-                        >
-                            <Icons.IconMenuArrow className={classes.iconArrow} />
-                        </IconButton>
-                    </div>
+                            {
+                                Array.apply(0, Array(totalCaseStudy))
+                                    .map((value, index) =>
+                                    {
+                                        return this.renderSection4CaseStudy(index)
+                                    })
+                            }
+                        </Carousel>
+                    </motion.div>
+                    <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={classes.section4_btn1}>
+                        <Link to={Utils.i18Link(t, caseStudiLink)} className={classes.textLinkHidden}>
+                            <Button variant={'contained'} color={'primary'}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_4_BUTTON_1}
+                                />
+                                <Icons.IconMenuArrow className={classes.iconArrow} />
+                            </Button>
+                        </Link>
+                    </motion.div>
+                    <motion.div variants={commonMotion.elementTransition} id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
+                        <div className={classes.section4_carousel_indicators}>
+                            <Typography className={clsx(classes.textSubTitle)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
+                        </div>
+                        <div className={clsx(classes.divRow, classes.divBetween)}>
+                            <IconButton
+                                onClick={this.handleCaseStudy(-1)}
+                                disableRipple
+                                className={classes.section4_carousel_buttons}
+                                disabled={caseIndex === 0}
+                            >
+                                <Icons.IconMenuArrow className={classes.iconArrow} style={{ transform: 'scaleX(-1)' }} />
+                            </IconButton>
+                            <IconButton
+                                onClick={this.handleCaseStudy(1)}
+                                disableRipple
+                                className={classes.section4_carousel_buttons}
+                                disabled={caseIndex + 1 === caseStudyNum}
+                            >
+                                <Icons.IconMenuArrow className={classes.iconArrow} />
+                            </IconButton>
+                        </div>
+                    </motion.div>
                 </div>
-            </div>
+            </InViewElement>
         )
     }
 
@@ -1272,8 +1274,8 @@ class Home extends React.Component
             <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter)}>
                 <img alt={LOGO} src={path} className={classes.section4_logo} />
                 <div className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={clsx(classes.textTitle, classes.section4_text, classes.textLimitMultiline)}>{TEXT}</Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section4_title)}>{TITILE}</Typography>
+                    <Typography className={clsx(classes.textSubTitle, classes.section4_text, classes.textLimitMultiline)}>{TEXT}</Typography>
+                    <Typography className={clsx(classes.textSubTitle, classes.section4_title)}>{TITILE}</Typography>
                 </div>
             </div>
         )
