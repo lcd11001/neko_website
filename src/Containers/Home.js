@@ -1381,84 +1381,64 @@ class Home extends React.Component
 
         return (
             <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divLeft, classes.section, classes.section6)}>
-                <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
-                    <InViewElement
-                        variants={commonMotion.posTransition(0, 100, 0, 1)}
-                    >
-                        <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_6_TEXT_1}
-                            />
-                        </Typography>
-                    </InViewElement>
+                <InViewElement variants={commonMotion.groupTransition}>
+                    <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
+                        <motion.div variants={commonMotion.elementTransition}>
+                            <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_6_TEXT_1}
+                                />
+                            </Typography>
+                        </motion.div>
 
-                    <InViewElement
-                        variants={commonMotion.posTransition(0, 100, 0.5, 1)}
-                    >
-                        <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_6_TEXT_2}
-                            />
-                        </Typography>
-                    </InViewElement>
+                        <motion.div variants={commonMotion.elementTransition}>
+                            <Typography className={clsx(classes.textBreak, classes.section6_txt2, classes.secondaryText)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_6_TEXT_2}
+                                />
+                            </Typography>
+                        </motion.div>
 
-                    <InViewElement
-                        variants={commonMotion.posTransition(0, 100, 1, 1)}
-                    >
-                        <div id={'down-arrow'}
-                            className={classes.section6_bg_arrow}
-                            style={{
-                                backgroundImage: `url('${Utils.getUrl(t(ID.IMAGE.HOME_6_1))}')`
-                            }}
-                        />
-                    </InViewElement>
-                </div>
-                <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
-                    <InViewElement
-                        classes={{
-                            root: classes.section6_dialog_root
-                        }}
-                        variants={commonMotion.posTransition(0, 100, 0, 1)}
-                    >
-                        <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
+                        <motion.div variants={commonMotion.elementTransition}>
+                            <div id={'down-arrow'}
+                                className={classes.section6_bg_arrow}
+                                style={{
+                                    backgroundImage: `url('${Utils.getUrl(t(ID.IMAGE.HOME_6_1))}')`
+                                }}
+                            />
+                        </motion.div>
+                    </div>
+                </InViewElement>
+
+
+                <InViewElement variants={commonMotion.groupTransition}>
+                    <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
+
+                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog1_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
                                 />
                             </Typography>
-                        </div>
-                    </InViewElement>
+                        </motion.div>
 
-                    <InViewElement
-                        classes={{
-                            root: classes.section6_dialog_root
-                        }}
-                        variants={commonMotion.posTransition(0, 100, 0.5, 1)}
-                    >
-                        <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
+                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog2_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_4}
                                 />
                             </Typography>
-                        </div>
-                    </InViewElement>
+                        </motion.div>
 
-                    <InViewElement
-                        classes={{
-                            root: classes.section6_dialog_root
-                        }}
-                        variants={commonMotion.posTransition(0, 100, 1, 1)}
-                    >
-                        <div className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
+                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog3_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
                                 />
                             </Typography>
-                        </div>
-                    </InViewElement>
-                </div>
+                        </motion.div>
+                    </div>
+                </InViewElement>
             </div>
         )
     }
