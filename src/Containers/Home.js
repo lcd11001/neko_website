@@ -471,8 +471,8 @@ const styles = theme => ({
 
     section5_div_img: {
         overflow: 'hidden',
-        maxHeight: '40%',
-        height: '40%',
+        maxHeight: '60%',
+        height: '60%',
         borderTopLeftRadius: 7,
         borderTopRightRadius: 7,
     },
