@@ -15,6 +15,7 @@ import * as Icons from '../Components/NekoIcons'
 import { IconButton, isWidthDown, withWidth, Typography } from '@material-ui/core';
 import Utils from '../Utils';
 import InViewElement from '../Components/InViewElement';
+import { motion } from 'framer-motion'
 
 const SECONDARY_HEIGHT = 500
 const SECONDARY_HEIGHT_VARIANT = 50
@@ -61,16 +62,16 @@ const styles = theme => ({
         width: '100%',
         ...breakpointsStyle(theme,
             {
-                key: ['borderRadius', 'height', 'paddingRight', 'paddingLeft'],
-                value: [30, SECONDARY_HEIGHT, 150, 150],
-                variant: [5, SECONDARY_HEIGHT_VARIANT, 35, 35],
-                unit: ['px', 'px', 'px', 'px']
+                key: ['height', 'paddingRight', 'paddingLeft'],
+                value: [SECONDARY_HEIGHT, 150, 150],
+                variant: [SECONDARY_HEIGHT_VARIANT, 35, 35],
+                unit: ['px', 'px', 'px']
             }
         ),
     },
 
     bgSecondary: {
-        borderRadius: 14,
+        borderRadius: 9,
         backgroundColor: theme.palette.primary.secondary,
         backgroundPosition: 'left top',
         backgroundRepeat: 'no-repeat',
@@ -98,6 +99,10 @@ const styles = theme => ({
         padding: '5px 0'
     },
 
+    txtContact: {
+        padding: '10px 0'
+    },
+
     copyrightContainer: {
         backgroundColor: theme.palette.primary.main,
         // ...breakpointsStyle(theme,
@@ -113,16 +118,17 @@ const styles = theme => ({
     copyright: {
         width: '100%',
         backgroundColor: '#3C4570',
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: 15,
+        paddingBottom: 15,
         ...breakpointsStyle(theme,
             {
-                key: ['fontSize', 'marginTop'],
-                value: [10, COPYRIGHT_PADDING],
-                variant: [1, COPYRIGHT_PADDING_VARIANT],
-                unit: ['px', 'px']
+                key: ['marginTop'],
+                value: [COPYRIGHT_PADDING],
+                variant: [COPYRIGHT_PADDING_VARIANT],
+                unit: ['px']
             }
         ),
+        color: '#FFFFFF7F'
     },
 
     caption: {
@@ -140,7 +146,7 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'flex-start',
         position: 'relative',
-        transform: 'translate(0, -50%) scale(1.5)',
+        transform: 'translate(0, -30%) scale(1.2)',
         transformOrigin: 'left'
     },
 
@@ -169,7 +175,7 @@ const styles = theme => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [60, 75],
-                variant: [10, 15],
+                variant: [8, 15],
                 unit: ['px', 'px']
             }
         ),
@@ -180,7 +186,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height', 'paddingLeft'],
-                value: [15, 18, 35],
+                value: [15, 18, 45],
                 variant: [2.0, 2.5, 5],
                 unit: ['px', 'px', 'px']
             }
@@ -223,7 +229,7 @@ const styles = theme => ({
                 {
                     key: ['width'],
                     value: [43],
-                    variant: [5],
+                    variant: [8],
                     unit: ['px']
                 }
             ),
@@ -232,7 +238,7 @@ const styles = theme => ({
 
     footerLink: {
         color: 'white',
-        letterSpacing: '2px',
+        letterSpacing: '1px',
         transition: theme.transitions.create(['letter-spacing'], {
             duration: 300
         }),
@@ -301,16 +307,12 @@ class Footer extends React.Component
 
         return (
             <div className={classes.rootSecondary}>
-                <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
+                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
                     <div className={classTitleContainer}>
                         <div className={clsx(classes.divColumn, classes.divLeft)}>
-                            <InViewElement
-                                variants={commonMotion.posTransition(0, 50, 0, 1)}
-                            >
-                                <Typography className={clsx(classes.txtWhite, classes.title)}>
-                                    <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
-                                </Typography>
-                            </InViewElement>
+                            <Typography className={clsx(classes.txtWhite, classes.title)}>
+                                <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
+                            </Typography>
 
                             <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                                 <div className={clsx(classes.divRow, classes.divCenter)}>
@@ -322,7 +324,7 @@ class Footer extends React.Component
                             </Link>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         )
     }
@@ -333,28 +335,24 @@ class Footer extends React.Component
 
         return (
             <div className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
-                <div className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
-                    <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3 }}>
-                        <div className={classes.logo}>
-                            <InViewElement
-                                variants={commonMotion.posTransition(0, 50, 0, 1)}
-                            >
-                                <Logo secondary />
-                            </InViewElement>
+                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
+                    <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3, minHeight: 200 }}>
+                        <div className={classes.logo} style={{ flex: 2 }}>
+                            <Logo secondary />
                         </div>
-                        <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)}>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                        <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)} style={{ flex: 1 }}>
+                            <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
                             </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                            <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_EMAIL} />
                             </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                            <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_PHONE} />
                             </Typography>
                         </div>
                     </div>
-                    <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
+                    <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                         <div>
                             <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
@@ -378,7 +376,7 @@ class Footer extends React.Component
                             </Typography>
                         </div>
                     </div>
-                    <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
+                    <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                         <div>
                             <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
@@ -396,7 +394,7 @@ class Footer extends React.Component
                             </Typography>
                         </div>
                     </div>
-                    <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1 }}>
+                    <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                         <div>
                             <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
                                 <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
@@ -423,7 +421,7 @@ class Footer extends React.Component
                             </IconButton>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         )
     }
@@ -435,7 +433,7 @@ class Footer extends React.Component
         return (
             <div className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth, classes.copyrightContainer)}>
                 <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
-                    <Typography className={clsx(classes.txtWhite, classes.copyright)} align={'center'}>
+                    <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.copyright)} align={'center'}>
                         <Trans i18nKey={ID.FOOTER.PRIMARY_COPYRIGHT} />
                     </Typography>
                 </div>
@@ -448,17 +446,19 @@ class Footer extends React.Component
         const { classes } = this.props;
 
         return (
-            <div className={clsx(classes.root, classes.divColumn, classes.divBetween)}>
-                {
-                    this.renderPrimary()
-                }
-                {
-                    this.renderCopyright()
-                }
-                {
-                    this.renderSecondary()
-                }
-            </div>
+            <InViewElement variants={commonMotion.groupTransition}>
+                <div className={clsx(classes.root, classes.divColumn, classes.divBetween)}>
+                    {
+                        this.renderSecondary()
+                    }
+                    {
+                        this.renderPrimary()
+                    }
+                    {
+                        this.renderCopyright()
+                    }
+                </div>
+            </InViewElement>
         );
     }
 }

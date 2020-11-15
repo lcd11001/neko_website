@@ -60,8 +60,8 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
-                value: [150, 150, 100, 60],
-                variant: [35, 35, 10, 6],
+                value: [150, 150, 100, 80],
+                variant: [35, 35, 10, 10],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
