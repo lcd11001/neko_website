@@ -51,6 +51,7 @@ const InViewElement = (props) =>
         <div
             className={props.classes.root}
             ref={ref}
+            style={{ ...props.style }}
         >
             <AnimatePresence key={`${isDidMount}-${inView}`}>
                 {
@@ -59,7 +60,7 @@ const InViewElement = (props) =>
                         animate={controls}
                         initial={props.initial}
                         variants={props.variants}
-                        // transition={props.transition}
+                    // transition={props.transition}
                     >
                         {
                             props.children
