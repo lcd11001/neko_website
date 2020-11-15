@@ -424,8 +424,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['height'],
-                value: [700],
-                variant: [70],
+                value: [500],
+                variant: [50],
                 unit: ['px']
             }
         ),
@@ -437,11 +437,11 @@ const styles = theme => ({
         minWidth: '100%',
 
         '& > li:first-child': {
-            paddingLeft: '2px !important'
+            paddingLeft: '5px !important'
         },
 
         '& > li:last-child': {
-            paddingRight: '2px !important'
+            paddingRight: '5px !important'
         }
     },
 
@@ -463,7 +463,10 @@ const styles = theme => ({
 
     section5_blog: {
         borderRadius: 7,
-        height: '100%'
+        height: '100%',
+        // border: '1px solid #EAEAEA',
+        border: 'none',
+        boxShadow: '2px 5px 10px #EAEAEAEA'
     },
 
     section5_div_img: {
@@ -472,20 +475,6 @@ const styles = theme => ({
         height: '40%',
         borderTopLeftRadius: 7,
         borderTopRightRadius: 7,
-    },
-
-    section5_img: {
-        width: '100%',
-        objectFit: 'cover',
-        transform: 'scale(1.25)',
-
-        transition: theme.transitions.create(['transform'], {
-            duration: 300
-        }),
-
-        '&--hover': {
-            transform: 'scale(1.0)',
-        }
     },
 
     section5_img_motion: {
@@ -1295,55 +1284,56 @@ class Home extends React.Component
         const isAutoPlay = isWidthDown('sm', width)
 
         return (
-            <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
-                <div id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
-                    <InViewElement
-                        variants={commonMotion.posTransition(0, 50, 0, 1)}
-                    >
+            <InViewElement variants={commonMotion.groupTransition}>
+                <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
+
                         <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section5_txt1)}>
                             <Trans
                                 i18nKey={ID.HOME.SECTION_5_TEXT_1}
                             />
                         </Typography>
-                    </InViewElement>
-                    <div className={classes.section5_btn1}>
-                        <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
-                            <Button variant={'contained'} color={'primary'}>
-                                <Trans
-                                    i18nKey={ID.HOME.SECTION_5_BUTTON_1}
-                                />
-                                <Icons.IconMenuArrow className={classes.iconArrow} />
-                            </Button>
-                        </Link>
-                    </div>
+
+                        <div className={classes.section5_btn1}>
+                            <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
+                                <Button variant={'contained'} color={'primary'}>
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_5_BUTTON_1}
+                                    />
+                                    <Icons.IconMenuArrow className={classes.iconArrow} />
+                                </Button>
+                            </Link>
+                        </div>
+                    </motion.div>
+
+                    <motion.div variants={commonMotion.elementTransition} id={'section5.2'} className={clsx(classes.divRow, classes.divCenter, classes.section5_blogs)}>
+                        <CarouselMulti
+                            responsive={carouselMultiResponsiveBlogs}
+                            containerClass={clsx(classes.divColumn, classes.divLeft, classes.section5_carousel)}
+                            sliderClass={clsx(classes.section5_carousel_slider)}
+                            itemClass={clsx(classes.section5_carousel_item)}
+                            ssr={false}
+                            partialVisible={isAutoPlay}
+                            centerMode={false}
+                            infinite={isAutoPlay}
+                            showDots={false}
+                            arrows={false}
+                            draggable={false}
+                            swipeable={false}
+                            autoPlay={isAutoPlay}
+                            autoPlaySpeed={3000}
+                        >
+                            {
+                                Array.apply(0, Array(totalBlogs))
+                                    .map((value, index) =>
+                                    {
+                                        return this.renderSection5Blog(index)
+                                    })
+                            }
+                        </CarouselMulti>
+                    </motion.div>
                 </div>
-                <div id={'section5.2'} className={clsx(classes.divRow, classes.divCenter, classes.section5_blogs)}>
-                    <CarouselMulti
-                        responsive={carouselMultiResponsiveBlogs}
-                        containerClass={clsx(classes.divColumn, classes.divLeft, classes.section5_carousel)}
-                        sliderClass={clsx(classes.section5_carousel_slider)}
-                        itemClass={clsx(classes.section5_carousel_item)}
-                        ssr={false}
-                        partialVisible={isAutoPlay}
-                        centerMode={false}
-                        infinite={isAutoPlay}
-                        showDots={false}
-                        arrows={false}
-                        draggable={false}
-                        swipeable={false}
-                        autoPlay={isAutoPlay}
-                        autoPlaySpeed={3000}
-                    >
-                        {
-                            Array.apply(0, Array(totalBlogs))
-                                .map((value, index) =>
-                                {
-                                    return this.renderSection5Blog(index)
-                                })
-                        }
-                    </CarouselMulti>
-                </div>
-            </div>
+            </InViewElement>
         )
     }
 
@@ -1357,19 +1347,12 @@ class Home extends React.Component
         const IMG = Utils.i18Image(t, ID.BLOG[`IMG_${index + 1}`])
         const DATE = t(ID.BLOG[`DATE_${index + 1}`])
         const TITILE = t(ID.BLOG[`TITLE_${index + 1}`])
-        const CONTENT = t(ID.BLOG[`CONTENT_${index + 1}`])
         const LINK = ID.BLOG[`LINK_${index + 1}`]
 
         const path = Utils.getUrl(IMG)
 
-        let isHover = this.state[`blog_${IMG}`] === true
-
-        // let classsImage = clsx(classes.section5_img, {
-        //     [classes.section5_img + '--hover']: isHover
-        // })
-
         return (
-            <Paper elevation={3} key={`blog-${index}`} className={clsx(classes.divColumn, classes.divTop, classes.section5_blog)}>
+            <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divTop, classes.section5_blog)}>
                 <Link to={Utils.i18Link(t, LINK)} className={clsx(classes.textLinkHidden, classes.divColumn, classes.fullHeight)}>
                     <div className={classes.section5_div_img}>
                         <motion.img
@@ -1384,18 +1367,15 @@ class Home extends React.Component
                     </div>
 
                     <div className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 10 }}>
-                        <div style={{ flex: 1 }}>
+                        <div style={{ flex: 3 }}>
                             <Typography className={clsx(classes.textSubTitle, classes.section5_date)}>{DATE}</Typography>
                         </div>
-                        <div style={{ flex: 3 }}>
+                        <div style={{ flex: 7 }}>
                             <Typography className={clsx(classes.textSubTitle, classes.section5_title)}>{TITILE}</Typography>
-                        </div>
-                        <div style={{ flex: 6 }}>
-                            <Typography className={clsx(classes.textNormal, classes.section5_content, classes.textLimitMultiline)}>{CONTENT}</Typography>
                         </div>
                     </div>
                 </Link>
-            </Paper>
+            </div>
         )
     }
 
