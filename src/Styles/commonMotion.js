@@ -89,42 +89,48 @@ const inViewTransition = {
 
 const specializeTransition = {
     hidden: {
-        // x: '5px',
-        opacity: 0.5,
-        scale: 1.01
+        x: '3%',
+        // opacity: 0,
+        scale: 0.97
     },
     out: {
-        opacity: 0.5,
-        // x: '5px',
-        scale: 0.99,
+        // opacity: 0,
+        x: '3%',
+        scale: 0.97,
         transition: {
-            duration: .1
+            duration: .5,
+            ease: 'easeOut'
         }
     },
     in: {
-        opacity: 1,
-        // x: 0,
+        // opacity: 1,
+        x: 0,
         scale: 1,
         transition: {
-            duration: .3
+            duration: .5,
+            ease: 'easeIn'
         }
     },
 }
 
 const backgroundTransition = {
     hidden: {
-        opacity: 0
+        opacity: 0,
     },
     in: {
         opacity: 1,
         transition: {
-            when: 'beforeChildren'
+            // when: 'beforeChildren',
+            duration: .5,
+            ease: 'linear'
         }
     },
     out: {
         opacity: 0,
         transition: {
-            when: 'afterChildren'
+            // when: 'afterChildren',
+            duration: .5,
+            ease: 'linear'
         }
     }
 }

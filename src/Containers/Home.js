@@ -151,14 +151,15 @@ const styles = theme => ({
         ),
         fontWeight: 'bold',
         letterSpacing: 1.5,
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        color: '#A2A3A7'
     },
 
     menuLink: {
         color: 'black',
 
         '&--not-hover': {
-            color: 'grey'
+            color: '#A2A3A7'
         }
     },
 
@@ -171,40 +172,49 @@ const styles = theme => ({
                 unit: ['px', 'px', 'px']
             }
         ),
-        fontWeight: 'bold',
+        fontWeight: '600',
         textAlign: 'left',
         color: 'inherit',
         marginLeft: 0,
 
         transition: theme.transitions.create(['color', 'font-weight', 'margin-left'], {
-            duration: 300
+            duration: 500
         }),
 
         '&--hover': {
-            fontWeight: 'bold',
+            fontWeight: '600',
             color: theme.palette.text.primary,
-            marginLeft: 50
+            marginLeft: 30
         }
     },
 
     menuIcon: {
         ...breakpointsStyle(theme,
             {
-                key: ['width', 'marginLeft'],
-                value: [50, 40],
-                variant: [8, 8],
-                unit: ['px', 'px']
+                key: ['marginLeft'],
+                value: [40],
+                variant: [8],
+                unit: ['px']
             }
         ),
-        color: 'inherit',
+        color: 'transparent',
+        width: 0,
         position: 'relative',
         top: 5,
-        transition: theme.transitions.create(['color'], {
+        transition: theme.transitions.create(['color', 'width'], {
             duration: 300
         }),
 
         '&--hover': {
-            color: theme.palette.text.primary
+            color: theme.palette.text.primary,
+            ...breakpointsStyle(theme,
+                {
+                    key: ['width'],
+                    value: [50],
+                    variant: [8],
+                    unit: ['px']
+                }
+            ),
         }
     },
 
@@ -914,22 +924,24 @@ class Home extends React.Component
         return (
             <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
                 <div id={'section2.1'}>
-                    <InViewElement
-                        variants={commonMotion.posTransition(0, 50, 0, 1)}
-                    >
-                        <Typography className={clsx(classes.textBreak, classes.textNormal, classes.section2_txt1)}>
-                            <Trans
-                                i18nKey={ID.HOME.SECTION_2_TEXT_1}
-                            />
-                        </Typography>
+                    <InViewElement variants={commonMotion.groupTransition}>
+                        <motion.div variants={commonMotion.elementTransition}>
+                            <Typography className={clsx(classes.textBreak, classes.textNormal, classes.section2_txt1)}>
+                                <Trans
+                                    i18nKey={ID.HOME.SECTION_2_TEXT_1}
+                                />
+                            </Typography>
+                        </motion.div>
                     </InViewElement>
                 </div>
                 <div id={'section2.2'}>
-                    {
-                        HomeMenu.map((menu, index) => (
-                            this.renderSection2Menu(menu, index)
-                        ))
-                    }
+                    <InViewElement variants={commonMotion.groupTransition}>
+                        {
+                            HomeMenu.map((menu, index) => (
+                                this.renderSection2Menu(menu, index)
+                            ))
+                        }
+                    </InViewElement>
                 </div>
             </div>
         )
@@ -962,7 +974,7 @@ class Home extends React.Component
 
         return (
             <div key={menu.text} className={clsx(classes.divRow)}>
-                <AnimatePresence initial={false} exitBeforeEnter={true}>
+                <AnimatePresence initial={!false} exitBeforeEnter={true}>
                     {
                         isShowBackground &&
 
@@ -988,16 +1000,14 @@ class Home extends React.Component
                 </AnimatePresence>
 
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden, classes.divRow, classes.fullWidth, classes.divTop)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
-                    <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
+                    <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans
                                 i18nKey={menu.text}
                             />
                         </Typography>
-                        {
-                            isHover && <menu.icon className={classMenuIcon} />
-                        }
-                    </div>
+                        <menu.icon className={classMenuIcon} />
+                    </motion.div>
                 </Link>
             </div>
         )
