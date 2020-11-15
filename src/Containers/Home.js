@@ -653,7 +653,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [550, 190],
-                variant: [80, 40],
+                variant: [80, 30],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -1389,8 +1389,8 @@ class Home extends React.Component
         } = this.props
 
         return (
-            <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divLeft, classes.section, classes.section6)}>
-                <InViewElement variants={commonMotion.groupTransition}>
+            <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divCenter, classes.section, classes.section6)} style={{ flex: 3 }}>
+                <InViewElement variants={commonMotion.groupTransition} style={{ flex: 1 }}>
                     <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
                         <motion.div variants={commonMotion.elementTransition}>
                             <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
@@ -1420,7 +1420,7 @@ class Home extends React.Component
                 </InViewElement>
 
 
-                <InViewElement variants={commonMotion.groupTransition}>
+                <InViewElement variants={commonMotion.groupTransition} style={{ flex: 2 }}>
                     <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
