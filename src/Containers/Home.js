@@ -287,8 +287,7 @@ const styles = theme => ({
 
     section3_img2: {
         objectFit: 'contain',
-        backgroundColor: `${theme.palette.primary.secondary}1E`,
-        borderRadius: '50%',
+        backgroundColor: 'transparent',
         marginRight: 10,
         ...breakpointsStyle(theme,
             {
@@ -298,6 +297,7 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
+        height: 'auto'
     },
 
     section3_divider: {
@@ -1030,13 +1030,17 @@ class Home extends React.Component
 
         return (
             <div id={'section3'} className={clsx(classes.divColumn, classes.section, classes.section3)}>
-                <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
-                    <img alt={t(ID.IMAGE.HOME_3_1)} src={Utils.getUrl(t(ID.IMAGE.HOME_3_1))} className={classes.section3_img1} />
-                    <div className={clsx(classes.divColumn, classes.divTop)} >
-                        <InViewElement
-                            variants={commonMotion.posTransition(0, 50, 0, 1)}
-                        >
-                            <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divTop)}>
+                <InViewElement variants={commonMotion.groupTransition}>
+                    <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
+                        <motion.img
+                            variants={commonMotion.elementTransition}
+                            alt={t(ID.IMAGE.HOME_3_1)}
+                            src={Utils.getUrl(t(ID.IMAGE.HOME_3_1))}
+                            className={classes.section3_img1}
+                        />
+                        <motion.div variants={commonMotion.groupTransition} className={clsx(classes.divColumn, classes.divTop)} >
+
+                            <motion.div variants={commonMotion.elementTransition} id={'section3.1.a'} className={clsx(classes.divRow, classes.divTop)}>
                                 <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_3_PROJECTS_NUM}
@@ -1051,22 +1055,33 @@ class Home extends React.Component
                                         }}
                                     />
                                 </Typography>
-                            </div>
-                        </InViewElement>
-                        <Divider className={classes.section3_divider} />
-                        <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
-                            <img alt={t(ID.IMAGE.HOME_3_2)} src={Utils.getUrl(t(ID.IMAGE.HOME_3_2))} className={classes.section3_img2} />
-                            <Typography component={'div'} className={clsx(classes.textBreak, classes.textSubTitle, classes.section3_txt2)}>
-                                <Trans
-                                    i18nKey={ID.HOME.SECTION_3_TEXT_2}
-                                />
-                            </Typography>
-                        </div>
-                    </div>
-                </div>
+                            </motion.div>
 
-                <div id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
-                    {/*
+                            <motion.hr variants={commonMotion.elementTransition} className={classes.section3_divider} />
+
+                            <motion.div variants={commonMotion.groupTransition} id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
+                                <motion.img
+                                    variants={commonMotion.elementTransition}
+                                    alt={t(ID.IMAGE.HOME_3_2)}
+                                    src={Utils.getUrl(t(ID.IMAGE.HOME_3_2))}
+                                    className={classes.section3_img2}
+                                />
+                                <motion.div variants={commonMotion.elementTransition}>
+                                    <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section3_txt2)}>
+                                        <Trans
+                                            i18nKey={ID.HOME.SECTION_3_TEXT_2}
+                                        />
+                                    </Typography>
+                                </motion.div>
+                            </motion.div>
+
+                        </motion.div>
+                    </div>
+                </InViewElement>
+
+                <InViewElement variants={commonMotion.groupTransition}>
+                    <motion.div variants={commonMotion.delayTransition(3)} id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
+                        {/*
                         <Carousel
                             className={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
                             autoPlay={true}
@@ -1092,32 +1107,34 @@ class Home extends React.Component
                             }
                         </Carousel>
                     */}
-                    {
-                        <CarouselMulti
-                            containerClass={clsx(classes.divColumn, classes.divLeft, classes.section3_carousel)}
-                            sliderClass={clsx(classes.section3_carousel_slider)}
-                            responsive={carouselMultiResponsive}
-                            ssr={false}
-                            partialVisible={false}
-                            centerMode={false}
-                            infinite={true}
-                            showDots={false}
-                            arrows={false}
-                            draggable={false}
-                            swipeable={false}
-                            autoPlay={true}
-                            autoPlaySpeed={3000}
-                        >
-                            {
-                                Array.apply(0, Array(totalLogo))
-                                    .map((value, index) =>
-                                    {
-                                        return this.renderSection3LogoFade(index, 1, totalLogo)
-                                    })
-                            }
-                        </CarouselMulti>
-                    }
-                </div>
+                        {
+                            <CarouselMulti
+                                containerClass={clsx(classes.divColumn, classes.divLeft, classes.section3_carousel)}
+                                sliderClass={clsx(classes.section3_carousel_slider)}
+                                responsive={carouselMultiResponsive}
+                                ssr={false}
+                                partialVisible={false}
+                                centerMode={false}
+                                infinite={true}
+                                showDots={false}
+                                arrows={false}
+                                draggable={false}
+                                swipeable={false}
+                                autoPlay={true}
+                                autoPlaySpeed={3000}
+                            >
+                                {
+                                    Array.apply(0, Array(totalLogo))
+                                        .map((value, index) =>
+                                        {
+                                            return this.renderSection3LogoFade(index, 1, totalLogo)
+                                        })
+                                }
+                            </CarouselMulti>
+                        }
+                    </motion.div>
+                </InViewElement>
+
             </div>
         )
     }
