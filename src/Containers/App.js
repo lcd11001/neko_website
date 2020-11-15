@@ -25,8 +25,7 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         paddingLeft: 0,
-        paddingRight: 0,
-        overflowX: 'hidden'
+        paddingRight: 0
     }
 });
 
