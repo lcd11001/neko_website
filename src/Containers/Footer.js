@@ -18,7 +18,7 @@ import InViewElement from '../Components/InViewElement';
 import { motion } from 'framer-motion'
 
 const SECONDARY_HEIGHT = 500
-const SECONDARY_HEIGHT_VARIANT = 50
+const SECONDARY_HEIGHT_VARIANT = 80
 
 const PRIMARY_PADDING = Math.floor(SECONDARY_HEIGHT * 2 / 3)
 const PRIMARY_PADDING_VARIANT = Math.floor(SECONDARY_HEIGHT_VARIANT / 2)
@@ -33,7 +33,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['marginTop'],
-                value: [PRIMARY_PADDING],
+                value: [SECONDARY_HEIGHT / 2],
                 variant: [PRIMARY_PADDING_VARIANT],
                 unit: ['px']
             }
