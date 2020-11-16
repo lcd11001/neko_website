@@ -1,5 +1,9 @@
 import breakpointsStyle from './breakpointsStyle'
 
+const DOT_SIZE = 7
+const DOT_VSPACE = 50
+const DOT_HSPACE = 50
+
 const styles = (theme) => ({
     root: {
         width: '100%',
@@ -112,6 +116,24 @@ const styles = (theme) => ({
 
     divRight: {
         alignItems: 'flex-end'
+    },
+
+    divDot: {
+        // https://dev.to/clairecodes/how-to-create-a-polka-dot-background-with-css-23m0
+        backgroundImage: `radial-gradient(#EEEEEE ${DOT_SIZE}%, #ffffff ${DOT_SIZE}%)`,
+        // width: DOT_SIZE,
+        // height: DOT_SIZE,
+        backgroundPosition: '0 0',
+        backgroundSize: `${DOT_HSPACE}px ${DOT_VSPACE}px`,
+        overflow: 'hidden'
+    },
+
+    divBox: {
+        borderRadius: 7,
+        height: '100%',
+        // border: '1px solid #EAEAEA',
+        border: 'none',
+        boxShadow: '2px 5px 10px #EAEAEAEA'
     },
 
     fullWidth: {

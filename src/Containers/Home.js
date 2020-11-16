@@ -31,9 +31,6 @@ import InViewElement from '../Components/InViewElement';
 
 const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
-const DOT_SIZE = 7
-const DOT_VSPACE = 50
-const DOT_HSPACE = 50
 
 const styles = theme => ({
     section1: {
@@ -462,11 +459,6 @@ const styles = theme => ({
     },
 
     section5_blog: {
-        borderRadius: 7,
-        height: '100%',
-        // border: '1px solid #EAEAEA',
-        border: 'none',
-        boxShadow: '2px 5px 10px #EAEAEAEA'
     },
 
     section5_div_img: {
@@ -531,13 +523,7 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section6: {
-        // https://dev.to/clairecodes/how-to-create-a-polka-dot-background-with-css-23m0
-        backgroundImage: `radial-gradient(#EEEEEE ${DOT_SIZE}%, #ffffff ${DOT_SIZE}%)`,
-        // width: DOT_SIZE,
-        // height: DOT_SIZE,
-        backgroundPosition: '0 0',
-        backgroundSize: `${DOT_HSPACE}px ${DOT_VSPACE}px`,
-        overflow: 'hidden'
+        
     },
 
     section6_txt1: {
@@ -1352,7 +1338,7 @@ class Home extends React.Component
         const path = Utils.getUrl(IMG)
 
         return (
-            <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divTop, classes.section5_blog)}>
+            <div key={`blog-${index}`} className={clsx(classes.divColumn, classes.divTop, classes.section5_blog, classes.divBox)}>
                 <Link to={Utils.i18Link(t, LINK)} className={clsx(classes.textLinkHidden, classes.divColumn, classes.fullHeight)}>
                     <div className={classes.section5_div_img}>
                         <motion.img
@@ -1389,7 +1375,7 @@ class Home extends React.Component
         } = this.props
 
         return (
-            <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divCenter, classes.section, classes.section6)} style={{ flex: 3 }}>
+            <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divCenter, classes.section, classes.section6, classes.divDot)} style={{ flex: 3 }}>
                 <InViewElement variants={commonMotion.groupTransition} style={{ flex: 1 }}>
                     <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
                         <motion.div variants={commonMotion.elementTransition}>
