@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { withMultipleStyles } from '../Styles'
+import { transform } from 'lodash'
 
 const styles = (theme) => ({
     outerWrapper: {
@@ -31,6 +32,10 @@ class AspectRatio extends React.Component
     constructor(props)
     {
         super(props)
+
+        this.state = {
+            transform: ''
+        }
 
         this.refOuterDiv = React.createRef()
     }
@@ -93,15 +98,24 @@ class AspectRatio extends React.Component
                 let pS = window.getComputedStyle(parent)
                 let pH = parent.clientHeight - parseInt(pS.paddingTop) - parseInt(pS.paddingBottom)
                 let H = div.clientHeight
+                let transform = ''
 
                 if (H > pH)
                 {
                     // Fixed: outer div overflow parent div
-                    div.style.transform = `scale(${(pH / H).toFixed(3)})`
-                } 
+                    transform = `scale(${(pH / H).toFixed(3)})`
+                }
                 else
                 {
-                    div.style.transform = `scale(1.0)`
+                    transform = `scale(1.0)`
+                }
+
+                if (transform !== this.state.transform)
+                {
+                    div.style.transform = transform
+                    this.setState({
+                        transform
+                    })
                 }
             }
         }

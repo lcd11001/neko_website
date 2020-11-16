@@ -75,12 +75,13 @@ const styles = theme => ({
         backgroundColor: theme.palette.primary.secondary,
         ...breakpointsStyle(theme,
             {
-                key: ['height', 'width', 'borderRadius'],
-                value: [150, 150, 10],
-                variant: [20, 20, 0],
-                unit: ['px', 'px', 'px']
+                key: ['height', 'width'],
+                value: [150, 150],
+                variant: [20, 20],
+                unit: ['px', 'px']
             }
         ),
+        borderRadius: 10,
         transform: 'rotate(-20deg)',
         marginBottom: '10%'
     },
@@ -149,25 +150,25 @@ const styles = theme => ({
     section4_box: {
         ...breakpointsStyle(theme,
             {
-                key: ['borderRadius', 'padding', 'margin'],
-                value: [25, 30, 20],
-                variant: [3, 5, 4],
-                unit: ['px', 'px', 'px']
+                key: ['padding', 'margin'],
+                value: [30, 20],
+                variant: [5, 4],
+                unit: ['px', 'px']
             }
         ),
-        background: '#FFFFFF 0% 0% no-repeat padding-box',
-        boxShadow: '15px 15px 50px #00000014'
+        backgroundColor: 'white'
+    },
+
+    section4_avatar_outer: {
+        minWidth: 150
+    },
+
+    section4_avatar_inner: {
+
     },
 
     section4_avatar: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['borderRadius'],
-                value: [25],
-                variant: [3],
-                unit: ['px']
-            }
-        ),
+        borderRadius: 10,
         border: '1px solid #707070',
         height: '100%',
         width: '100%'
@@ -285,8 +286,8 @@ class About extends React.Component
     {
         const { classes, width } = this.props;
         return (
-            <div id={'section4'} className={clsx(classes.divRow, classes.divBetween, classes.section, classes.section4)} style={{ flex: 6 }}>
-                <div id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween)} style={{ flex: 2 }}>
+            <div id={'section4'} className={clsx(classes.divRow, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 6 }}>
+                <div id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 2 }}>
                     <Typography className={clsx(classes.textTitle, classes.section4_txt1)} color={'textSecondary'} >
                         <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_1} />
                     </Typography>
@@ -297,13 +298,22 @@ class About extends React.Component
                         <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_3} />
                     </Typography>
                 </div>
-                <div id={'section4.2'} className={clsx(classes.divRow, classes.divRight, classes.divBetween)} style={{ flex: 4 }}>
-                    <div id={'section4.2a'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_box)} style={{ flex: 1 }}>
-                        <AspectRatio ratio={1}>
-                            <div className={clsx(classes.section4_avatar)}>
 
-                            </div>
-                        </AspectRatio>
+                <div id={'section4.2'} className={clsx(classes.divRow, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ flex: 4 }}>
+                    <div id={'section4.2a'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
+                        <div>
+                            <AspectRatio
+                                ratio={1}
+                                classes={{
+                                    outerWrapper: classes.section4_avatar_outer,
+                                    innerWrapper: classes.section4_avatar_inner,
+                                }}
+                            >
+                                <div className={clsx(classes.section4_avatar)}>
+
+                                </div>
+                            </AspectRatio>
+                        </div>
                         <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
                             <Trans i18nKey={ID.ABOUT.CONTACT_1} />
                         </Typography>
@@ -311,12 +321,21 @@ class About extends React.Component
                             <Trans i18nKey={ID.ABOUT.CONTACT_1_POSITION} />
                         </Typography>
                     </div>
-                    <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_box)} style={{ flex: 1 }}>
-                        <AspectRatio ratio={1}>
-                            <div className={clsx(classes.section4_avatar)}>
 
-                            </div>
-                        </AspectRatio>
+                    <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
+                        <div>
+                            <AspectRatio
+                                ratio={1}
+                                classes={{
+                                    outerWrapper: classes.section4_avatar_outer,
+                                    innerWrapper: classes.section4_avatar_inner,
+                                }}
+                            >
+                                <div className={clsx(classes.section4_avatar)}>
+
+                                </div>
+                            </AspectRatio>
+                        </div>
                         <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
                             <Trans i18nKey={ID.ABOUT.CONTACT_2} />
                         </Typography>
@@ -324,17 +343,20 @@ class About extends React.Component
                             <Trans i18nKey={ID.ABOUT.CONTACT_2_POSITION} />
                         </Typography>
                     </div>
-                    {
-                        isWidthUp('md', width) &&
-                        <div id={'section4.2c'} style={{ flex: 0.4 }}>
-                            <AspectRatio ratio={1}>
-                                <div className={clsx(classes.section4_avatar)} style={{ borderColor: 'green', backgroundColor: 'antiquewhite' }}>
 
-                                </div>
-                            </AspectRatio>
-                        </div>
-                    }
                 </div>
+
+                {
+                    // use MUI popover
+                    // isWidthUp('md', width) &&
+                    // <div id={'section4.2c'}>
+                    //     <AspectRatio ratio={1}>
+                    //         <div className={clsx(classes.section4_avatar)} style={{ borderColor: 'green', backgroundColor: 'antiquewhite' }}>
+
+                    //         </div>
+                    //     </AspectRatio>
+                    // </div>
+                }
             </div>
         )
     }
