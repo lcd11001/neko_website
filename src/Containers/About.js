@@ -15,7 +15,7 @@ import Utils from '../Utils'
 
 import { Link } from 'react-router-dom';
 
-import { Button, Divider, Fade, IconButton, Typography, withWidth, isWidthUp, Toolbar } from '@material-ui/core';
+import { Button, Divider, Fade, IconButton, Typography, withWidth, isWidthUp, Toolbar, Popover, Tooltip, Avatar, isWidthDown } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
@@ -121,7 +121,6 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section4: {
-
     },
 
     section4_txt1: {
@@ -140,6 +139,7 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
+        fontWeight: 'bold'
     },
 
     section4_txt3: {
@@ -147,20 +147,51 @@ const styles = theme => ({
         whiteSpace: 'pre-wrap',
     },
 
+    section4_box_container_top: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop'],
+                value: [100],
+                variant: [10],
+                unit: ['px']
+            }
+        ),
+    },
+
+    section4_box_container_bottom: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingBottom'],
+                value: [100],
+                variant: [10],
+                unit: ['px']
+            }
+        ),
+    },
+
     section4_box: {
         ...breakpointsStyle(theme,
             {
-                key: ['padding', 'margin'],
-                value: [30, 20],
-                variant: [5, 4],
-                unit: ['px', 'px']
+                key: ['paddingTop', 'paddingLeft', 'paddingRight', 'margin'],
+                value: [30, 30, 30, 30],
+                variant: [5, 5, 5, 5],
+                unit: ['px', 'px', 'px', 'px', 'px']
             }
         ),
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        paddingBottom: 0,
+        borderRadius: 14
     },
 
     section4_avatar_outer: {
-        minWidth: 150
+        ...breakpointsStyle(theme,
+            {
+                key: ['minWidth'],
+                value: [250],
+                variant: [40],
+                unit: ['px']
+            }
+        ),
     },
 
     section4_avatar_inner: {
@@ -168,7 +199,7 @@ const styles = theme => ({
     },
 
     section4_avatar: {
-        borderRadius: 10,
+        borderRadius: 14,
         border: '1px solid #707070',
         height: '100%',
         width: '100%'
@@ -179,21 +210,94 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingTop'],
-                value: [25],
-                variant: [3],
+                value: [40],
+                variant: [5],
                 unit: ['px']
             }
         )
     },
 
     section4_contact_position: {
-        color: '#C3C3C3'
-    }
+        color: '#C3C3C3',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingBottom'],
+                value: [40],
+                variant: [5],
+                unit: ['px']
+            }
+        )
+    },
+
+    section4_icon_outer: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['minWidth'],
+                value: [75],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
+    },
+
+    section4_icon_inner: {
+
+    },
+
+    section4_icon_1: {
+        position: 'absolute',
+        top: '20%',
+        left: '10%',
+
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [80, 80],
+                variant: [10, 10],
+                unit: ['px', 'px']
+            }
+        )
+    },
+
+    section4_icon_2: {
+        position: 'absolute',
+        bottom: '0%',
+        left: '35%',
+
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [60, 60],
+                variant: [10, 10],
+                unit: ['px', 'px']
+            }
+        )
+    },
+
+    section4_icon_3: {
+        position: 'absolute',
+        right: '5%',
+        bottom: '25%',
+
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height'],
+                value: [150, 150],
+                variant: [10, 10],
+                unit: ['px', 'px']
+            }
+        )
+    },
 })
 
 class About extends React.Component
 {
+    constructor(props)
+    {
+        super(props)
 
+        this.refContactBox1 = React.createRef()
+    }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     renderSection1()
     {
@@ -284,10 +388,10 @@ class About extends React.Component
 
     renderSection4()
     {
-        const { classes, width } = this.props;
+        const { classes, width, t } = this.props;
         return (
-            <div id={'section4'} className={clsx(classes.divRow, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 6 }}>
-                <div id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 2 }}>
+            <div id={'section4'} className={clsx(classes.divRow2Column, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 5 }}>
+                <div id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 1.2 }}>
                     <Typography className={clsx(classes.textTitle, classes.section4_txt1)} color={'textSecondary'} >
                         <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_1} />
                     </Typography>
@@ -299,64 +403,71 @@ class About extends React.Component
                     </Typography>
                 </div>
 
-                <div id={'section4.2'} className={clsx(classes.divRow, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ flex: 4 }}>
-                    <div id={'section4.2a'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
-                        <div>
-                            <AspectRatio
-                                ratio={1}
-                                classes={{
-                                    outerWrapper: classes.section4_avatar_outer,
-                                    innerWrapper: classes.section4_avatar_inner,
-                                }}
-                            >
-                                <div className={clsx(classes.section4_avatar)}>
-
-                                </div>
-                            </AspectRatio>
-                        </div>
-                        <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
-                            <Trans i18nKey={ID.ABOUT.CONTACT_1} />
-                        </Typography>
-                        <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
-                            <Trans i18nKey={ID.ABOUT.CONTACT_1_POSITION} />
-                        </Typography>
-                    </div>
-
-                    <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
-                        <div>
-                            <AspectRatio
-                                ratio={1}
-                                classes={{
-                                    outerWrapper: classes.section4_avatar_outer,
-                                    innerWrapper: classes.section4_avatar_inner,
-                                }}
-                            >
-                                <div className={clsx(classes.section4_avatar)}>
-
-                                </div>
-                            </AspectRatio>
-                        </div>
-                        <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
-                            <Trans i18nKey={ID.ABOUT.CONTACT_2} />
-                        </Typography>
-                        <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
-                            <Trans i18nKey={ID.ABOUT.CONTACT_2_POSITION} />
-                        </Typography>
-                    </div>
-
-                </div>
-
                 {
-                    // use MUI popover
-                    // isWidthUp('md', width) &&
-                    // <div id={'section4.2c'}>
-                    //     <AspectRatio ratio={1}>
-                    //         <div className={clsx(classes.section4_avatar)} style={{ borderColor: 'green', backgroundColor: 'antiquewhite' }}>
-
-                    //         </div>
-                    //     </AspectRatio>
-                    // </div>
+                    isWidthDown('sm', width) &&
+                    <div style={{ padding: 20 }} />
                 }
+
+                <div id={'section4.2'} className={clsx(classes.divRow, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ flex: 3.8, position: 'relative' }}>
+                    <div className={clsx(classes.fullHeight, classes.section4_box_container_bottom)} >
+                        <div id={'section4.2a'} ref={this.refContactBox1} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
+                            <div>
+                                <AspectRatio
+                                    ratio={1}
+                                    classes={{
+                                        outerWrapper: classes.section4_avatar_outer,
+                                        innerWrapper: classes.section4_avatar_inner,
+                                    }}
+                                >
+                                    <div className={clsx(classes.section4_avatar)}>
+
+                                    </div>
+                                </AspectRatio>
+                            </div>
+                            <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
+                                <Trans i18nKey={ID.ABOUT.CONTACT_1} />
+                            </Typography>
+                            <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
+                                <Trans i18nKey={ID.ABOUT.CONTACT_1_POSITION} />
+                            </Typography>
+                        </div>
+                    </div>
+
+
+
+                    <div className={clsx(classes.fullHeight, classes.section4_box_container_top)} >
+                        <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
+                            <div>
+                                <AspectRatio
+                                    ratio={1}
+                                    classes={{
+                                        outerWrapper: classes.section4_avatar_outer,
+                                        innerWrapper: classes.section4_avatar_inner,
+                                    }}
+                                >
+                                    <div className={clsx(classes.section4_avatar)}>
+
+                                    </div>
+                                </AspectRatio>
+                            </div>
+                            <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
+                                <Trans i18nKey={ID.ABOUT.CONTACT_2} />
+                            </Typography>
+                            <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
+                                <Trans i18nKey={ID.ABOUT.CONTACT_2_POSITION} />
+                            </Typography>
+                        </div>
+                    </div>
+
+                    {
+                        isWidthUp('md', width) &&
+                        <div className={clsx(classes.fullHeight, classes.fullWidth)} style={{ position: 'absolute', zIndex: 1 }}>
+                            <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_1} />
+                            <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_2} />
+                            <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_3} variant={'square'} />
+                        </div>
+                    }
+                </div>
             </div>
         )
     }
