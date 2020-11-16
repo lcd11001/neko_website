@@ -1157,7 +1157,8 @@ class Home extends React.Component
     {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
         const {
@@ -1176,6 +1177,7 @@ class Home extends React.Component
                 <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
                     <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)}>
                         <Carousel
+                            key={width}
                             ref={this.carouselCaseStudyRef}
                             className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
                             autoPlay={!true}
@@ -1294,6 +1296,7 @@ class Home extends React.Component
 
                     <motion.div variants={commonMotion.elementTransition} id={'section5.2'} className={clsx(classes.divRow, classes.divCenter, classes.section5_blogs)}>
                         <CarouselMulti
+                            key={width}
                             responsive={carouselMultiResponsiveBlogs}
                             containerClass={clsx(classes.divColumn, classes.divLeft, classes.section5_carousel)}
                             sliderClass={clsx(classes.section5_carousel_slider)}
