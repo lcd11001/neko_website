@@ -70,7 +70,6 @@ const MotionRedirect = ({ children, ...props }) => (
 
 const Routes = () =>
 {
-    console.log('WORKS_ALL', i18next.t(ID.LINK.WORKS_ALL))
     return (
         <MuiThemeProvider theme={defaultTheme}>
             <Provider store={store}>
@@ -90,16 +89,10 @@ const Routes = () =>
                                             <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
                                             <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
 
-                                            {/* has sub page */}
-                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_CATEGORY)} component={({match}) => <Works category={match.params.category} />} />
-                                            {/* <Route exact path={i18next.t(ID.LINK.WORKS_ALL)} render={(props) => <Works category={'all'} />} />
-                                            <Route exact path={i18next.t(ID.LINK.WORKS_BRAND)} component={Works} />
-                                            <Route exact path={i18next.t(ID.LINK.WORKS_MOTION)} component={Works} />
-                                            <Route exact path={i18next.t(ID.LINK.WORKS_INTERFACE)} component={Works} />
-                                            <Route exact path={i18next.t(ID.LINK.WORKS_GRAPHIC)} component={Works} />
-                                            <Route exact path={i18next.t(ID.LINK.WORKS_DIGITAL)} component={Works} /> */}
-
-                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({match}) => <WorksDetail id={match.params.id}/>} />
+                                            {/* has sub page "detail" MUST before "category" */}
+                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
+                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_CATEGORY)} component={({ match }) => <Works {...match.params} />} />
+                                            
 
                                             {/* invalid path */}
                                             <Route path='*' component={PageNotFound} />

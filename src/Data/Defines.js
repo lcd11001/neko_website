@@ -37,19 +37,40 @@ export const HeaderMenu = [
 
 export const HomeMenu = [
     {
-        text: ID.HOME.SECTION_2_MENU_1, link: ID.LINK.WORKS_BRAND, icon: Icons.IconMenuArrow
+        text: ID.MENU.WORKS_BRAND, link: ID.LINK.WORKS_BRAND, icon: Icons.IconMenuArrow, bg: ID.MENU.WORKS_BRAND_BG
     },
     {
-        text: ID.HOME.SECTION_2_MENU_2, link: ID.LINK.WORKS_MOTION, icon: Icons.IconMenuArrow
+        text: ID.MENU.WORKS_MOTION, link: ID.LINK.WORKS_MOTION, icon: Icons.IconMenuArrow, bg: ID.MENU.WORKS_MOTION_BG
     },
     {
-        text: ID.HOME.SECTION_2_MENU_3, link: ID.LINK.WORKS_INTERFACE, icon: Icons.IconMenuArrow
+        text: ID.MENU.WORKS_INTERFACE, link: ID.LINK.WORKS_INTERFACE, icon: Icons.IconMenuArrow, bg: ID.MENU.WORKS_INTERFACE_BG
     },
     {
-        text: ID.HOME.SECTION_2_MENU_4, link: ID.LINK.WORKS_GRAPHIC, icon: Icons.IconMenuArrow
+        text: ID.MENU.WORKS_GRAPHICS, link: ID.LINK.WORKS_GRAPHICS, icon: Icons.IconMenuArrow, bg: ID.MENU.WORKS_GRAPHICS_BG
     },
     {
-        text: ID.HOME.SECTION_2_MENU_5, link: ID.LINK.WORKS_DIGITAL, icon: Icons.IconMenuArrow
+        text: ID.MENU.WORKS_DIGITAL, link: ID.LINK.WORKS_DIGITAL, icon: Icons.IconMenuArrow, bg: ID.MENU.WORKS_DIGITAL_BG
+    },
+]
+
+export const WorksMenu = [
+    {
+        text: ID.MENU.WORKS_ALL, link: ID.LINK.WORKS_ALL
+    },
+    {
+        text: ID.MENU.WORKS_BRAND, link: ID.LINK.WORKS_BRAND
+    },
+    {
+        text: ID.MENU.WORKS_MOTION, link: ID.LINK.WORKS_MOTION
+    },
+    {
+        text: ID.MENU.WORKS_INTERFACE, link: ID.LINK.WORKS_INTERFACE
+    },
+    {
+        text: ID.MENU.WORKS_GRAPHICS, link: ID.LINK.WORKS_GRAPHICS
+    },
+    {
+        text: ID.MENU.WORKS_DIGITAL, link: ID.LINK.WORKS_DIGITAL
     },
 ]
 

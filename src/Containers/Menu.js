@@ -154,7 +154,8 @@ const styles = theme => ({
         transition: theme.transitions.create(['width'], {
             duration: 300
         }),
-        userEvents: 'none',
+        pointerEvents: 'none',
+        userSelect: 'none',
 
         '&--hover': {
             width: '100%'
@@ -282,7 +283,7 @@ class Menu extends React.Component
 
         let menuLink = t(menu.link)
 
-        let isSelected = menuLink === pathname
+        let isSelected = pathname.includes(menuLink)
         let isHover = this.state[`hover_${menuLink}`] === true
         let isLastHover = this.state.last_hover_link === menuLink
 

@@ -956,7 +956,7 @@ class Home extends React.Component
                         <motion.div className={classes.section2_bg}
                             key={`bg-${menu.text}`}
                             style={{
-                                backgroundColor: t(ID.HOME[`SECTION_2_MENU_BG_${index + 1}`]),
+                                backgroundColor: t(menu.bg),
                             }}
                             variants={commonMotion.backgroundTransition}
                             initial={'hidden'}
