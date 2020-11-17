@@ -13,18 +13,24 @@ import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
-import { withWidth } from '@material-ui/core';
 
 const styles = theme => ({
-    
+
 });
 
-class Generic extends React.Component
+class WorksDetail extends React.Component
 {
+
+
     render()
     {
-        const { classes, t } = this.props;
-        // console.log('Generic::render', this.props)
+        const {
+            classes,
+            t,
+            id
+        } = this.props;
+        console.log('WorksDetail::render', this.props, 'id', id)
+
         return (
             <motion.div
                 className={classes.root}
@@ -34,20 +40,23 @@ class Generic extends React.Component
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                <PageUnderContruction />
+                <div>
+                    <h3 >WorksDetail - {id}</h3>
+                </div>
             </motion.div>
         );
     }
 }
 
-Generic.propTypes =
+WorksDetail.propTypes =
 {
     classes: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired
 };
+
 
 export default compose(
     withMultipleStyles(commonStyles, styles),
-    withTranslation(),
-    withWidth()
-)(Generic);
+    withTranslation()
+)(WorksDetail);
 

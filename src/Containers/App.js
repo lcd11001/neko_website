@@ -89,7 +89,6 @@ App.propTypes =
 };
 
 const mapStateToProps = (state) => ({
-    ...state.cms,
     ...state.global
 })
 

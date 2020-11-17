@@ -22,11 +22,13 @@ import * as serviceWorker from './serviceWorker'
 import App from './Containers/App'
 import Home from './Containers/Home'
 import About from './Containers/About'
+import Works from './Containers/Works'
 
 import PageNotFound from './Components/PageError/PageNotFound'
 
 import { CssBaseline } from '@material-ui/core'
 import Utils from './Utils'
+import WorksDetail from './Containers/WorksDetail'
 
 window.isWaterWaveSupported = false; // Utils.isWaterWaveSupported()
 console.log('isWaterWaveSupported', window.isWaterWaveSupported)
@@ -68,6 +70,7 @@ const MotionRedirect = ({ children, ...props }) => (
 
 const Routes = () =>
 {
+    console.log('WORKS_ALL', i18next.t(ID.LINK.WORKS_ALL))
     return (
         <MuiThemeProvider theme={defaultTheme}>
             <Provider store={store}>
@@ -81,10 +84,22 @@ const Routes = () =>
                                         <Switch location={location} key={location.pathname}>
                                             {/* Homepage === Profile because of user permission */}
                                             <MotionRedirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
+                                            <MotionRedirect exact from={i18next.t(ID.LINK.WORKS)} to={i18next.t(ID.LINK.WORKS_ALL)} />
 
-                                            {/* Force login if needed by using protected route */}
+                                            {/* single page */}
                                             <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
                                             <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
+
+                                            {/* has sub page */}
+                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_CATEGORY)} component={({match}) => <Works category={match.params.category} />} />
+                                            {/* <Route exact path={i18next.t(ID.LINK.WORKS_ALL)} render={(props) => <Works category={'all'} />} />
+                                            <Route exact path={i18next.t(ID.LINK.WORKS_BRAND)} component={Works} />
+                                            <Route exact path={i18next.t(ID.LINK.WORKS_MOTION)} component={Works} />
+                                            <Route exact path={i18next.t(ID.LINK.WORKS_INTERFACE)} component={Works} />
+                                            <Route exact path={i18next.t(ID.LINK.WORKS_GRAPHIC)} component={Works} />
+                                            <Route exact path={i18next.t(ID.LINK.WORKS_DIGITAL)} component={Works} /> */}
+
+                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({match}) => <WorksDetail id={match.params.id}/>} />
 
                                             {/* invalid path */}
                                             <Route path='*' component={PageNotFound} />

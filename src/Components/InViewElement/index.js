@@ -21,6 +21,7 @@ const InViewElement = (props) =>
 
         return () =>
         {
+            controls.stop()
             setDidMount(false)
         }
     }, [])
@@ -73,7 +74,7 @@ const InViewElement = (props) =>
 }
 
 InViewElement.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     variants: PropTypes.object,
     transition: PropTypes.object,
     initial: PropTypes.string,

@@ -501,20 +501,8 @@ About.propTypes =
     classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    ...state.global,
-    ...state.cms
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    SetTitle: (title) =>
-    {
-        dispatch(ActionGlobal.SetTitle(title))
-    }
-})
 
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
     withWidth()
