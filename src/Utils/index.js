@@ -21,7 +21,7 @@ const Utils = {
     i18Link: (t, id) =>
     {
         const linkID = t(id)
-        const link = t(ID.LINK[linkID.replace(/LINK::/g, '')])
+        const link = t(ID.LINK[linkID.replace(/LINK::/g, '').trim()])
 
         return link
     },
@@ -29,9 +29,17 @@ const Utils = {
     i18Image: (t, id) =>
     {
         const imageID = t(id)
-        const image = t(ID.IMAGE[imageID.replace(/IMAGE::/g, '')])
+        const image = t(ID.IMAGE[imageID.replace(/IMAGE::/g, '').trim()])
 
         return image
+    },
+
+    i18Menu: (t, id) =>
+    {
+        const menuID = t(id)
+        const menu = t(ID.MENU[menuID.replace(/MENU::/g, '').trim()])
+
+        return menu
     },
 
     isWaterWaveSupported: () =>

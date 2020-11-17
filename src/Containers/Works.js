@@ -76,15 +76,58 @@ class Works extends React.Component
     {
         return {
             allCategory: this.getAllCategory(),
-
+            category: this.getCurrentCategory()
         }
     }
 
     getAllCategory()
     {
-        return {
+        const { t } = this.props
 
-        }
+        let totalWorks = 20
+        let allCategory = Array.apply(0, Array(totalWorks))
+            .map((value, index) =>
+            {
+                let IMG = Utils.i18Image(t, ID.WORKS[`IMG_${index + 1}`])
+                let CATEGORY = t(ID.WORKS[`CATEGORY_${index + 1}`]).split(',')
+                    .map(item =>
+                    {
+                        return t(ID.MENU[item.replace(/MENU::/g, '').trim()])
+                    })
+                let TITLE = t(ID.WORKS[`TITLE_${index + 1}`])
+                let LINK = Utils.i18Link(t, ID.WORKS[`LINK_${index + 1}`])
+
+                return {
+                    img: IMG,
+                    category: CATEGORY,
+                    title: TITLE,
+                    link: LINK
+                }
+            })
+
+        return allCategory
+    }
+
+    getCurrentCategory()
+    {
+        const {
+            location: {
+                pathname
+            },
+            t
+        } = this.props
+
+        let category = WorksMenu
+            .filter(item =>
+            {
+                return t(item.link) === pathname
+            })
+            .reduce((name, item) =>
+            {
+                return t(item.text)
+            }, '')
+
+        return category
     }
 
     handleMouseEnter = (link) => (evt) =>
