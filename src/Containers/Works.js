@@ -17,7 +17,8 @@ import PageNotFound from '../Components/PageError/PageNotFound';
 
 import { WorksMenu } from '../Data/Defines'
 import { Link, withRouter } from 'react-router-dom';
-import { Typography, Divider } from '@material-ui/core';
+import { Typography, Divider, withWidth, isWidthUp, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const OPACITY = '7F'
 
@@ -44,6 +45,13 @@ const styles = theme => ({
 
         '&--selected': {
             color: `${theme.palette.text.primary}${OPACITY}`,
+        },
+
+        '&--secondary': {
+            color: `${theme.palette.text.primary}${OPACITY}`,
+            '&--selected': {
+                color: theme.palette.text.primary,
+            }
         }
     },
 
@@ -146,7 +154,54 @@ class Works extends React.Component
         )
     }
 
-    renderMenu(menu)
+    renderMenu()
+    {
+        const {
+            classes,
+        } = this.props
+
+        return (
+            <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
+                {
+                    WorksMenu.map(menu => this.renderMenuItem(menu, false))
+                }
+            </div>
+        )
+    }
+
+    renderShortMenu()
+    {
+        const {
+            classes,
+            location: {
+                pathname
+            },
+            t
+        } = this.props
+
+        const {
+            category
+        } = this.state
+
+        return (
+            <Accordion elevation={0}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    {
+                        WorksMenu.filter(menu => t(menu.link) === pathname).map(menu => this.renderMenuItem(menu, true))
+                    }
+                </AccordionSummary>
+                <AccordionDetails>
+                    <div className={clsx(classes.divColumn, classes.divLeft, classes.fullWidth)}>
+                        {
+                            WorksMenu.filter(menu => t(menu.link) !== pathname).map(menu => this.renderMenuItem(menu, true))
+                        }
+                    </div>
+                </AccordionDetails>
+            </Accordion>
+        )
+    }
+
+    renderMenuItem(menu, isSecondary)
     {
         const {
             classes,
@@ -161,7 +216,10 @@ class Works extends React.Component
         let isHover = this.state[`hover_${menuLink}`] === true
 
         let classMenuLink = clsx(classes.menuLink, {
-            [classes.menuLink + '--selected']: isSelected
+            [classes.menuLink + '--selected']: isSelected,
+
+            [classes.menuLink + '--secondary']: isSecondary,
+            [classes.menuLink + '--secondary--selected']: isSecondary && isSelected,
         })
 
         let classUnderline = clsx(classes.underline, {
@@ -183,7 +241,8 @@ class Works extends React.Component
         const {
             classes,
             t,
-            category
+            category,
+            width
         } = this.props;
 
         console.log('Works::render', this.props, 'category', category)
@@ -197,11 +256,11 @@ class Works extends React.Component
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
-                    {
-                        WorksMenu.map(menu => this.renderMenu(menu))
-                    }
-                </div>
+                {
+                    isWidthUp('md', width)
+                        ? this.renderMenu()
+                        : this.renderShortMenu()
+                }
             </motion.div>
         )
     }
@@ -218,6 +277,7 @@ Works.propTypes =
 export default compose(
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
-    withRouter
+    withRouter,
+    withWidth()
 )(Works);
 
