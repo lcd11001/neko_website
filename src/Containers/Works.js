@@ -19,10 +19,21 @@ import { WorksMenu } from '../Data/Defines'
 import { Link, withRouter } from 'react-router-dom';
 import { Typography, Divider, withWidth, isWidthUp, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import InViewElement from '../Components/InViewElement';
 
 const OPACITY = '7F'
 
 const styles = theme => ({
+    menuContainer: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop', 'paddingBottom'],
+                value: [80, 50],
+                variant: [10, 5],
+                unit: ['px', 'px']
+            }
+        ),
+    },
     menu: {
         ...breakpointsStyle(theme,
             {
@@ -161,7 +172,7 @@ class Works extends React.Component
         } = this.props
 
         return (
-            <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
+            <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth, classes.menuContainer)}>
                 {
                     WorksMenu.map(menu => this.renderMenuItem(menu, false))
                 }
@@ -227,7 +238,7 @@ class Works extends React.Component
         })
 
         return (
-            <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
+            <div key={`${menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <Typography>{t(menu.text)}</Typography>
                 </Link>
@@ -256,11 +267,15 @@ class Works extends React.Component
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                {
-                    isWidthUp('md', width)
-                        ? this.renderMenu()
-                        : this.renderShortMenu()
-                }
+                <InViewElement variants={commonMotion.groupTransition} key={width}>
+                    <motion.div variants={commonMotion.elementTransition}>
+                        {
+                            isWidthUp('md', width)
+                                ? this.renderMenu()
+                                : this.renderShortMenu()
+                        }
+                    </motion.div>
+                </InViewElement>
             </motion.div>
         )
     }
