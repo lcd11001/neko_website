@@ -101,7 +101,7 @@ const styles = theme => ({
                     unit: ['px', 'px', 'px', 'px']
                 }
             ),
-            borderRadius: 7,
+            borderRadius: 0,
         },
 
         '&--secondary': {

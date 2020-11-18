@@ -35,7 +35,7 @@ class App extends React.Component
     {
         const { classes } = this.props
         return (
-            <AppBar elevation={0} className={classes.appbar} position={position} style={{ backgroundColor: backgroundColor }}>
+            <AppBar id={`appbar-${position}`} elevation={0} className={classes.appbar} position={position} style={{ backgroundColor: backgroundColor }}>
                 <Toolbar disableGutters={true} className={classes.toolbar}>
                     <Header secondary={secondary} />
                 </Toolbar>
@@ -65,13 +65,18 @@ class App extends React.Component
             <React.Fragment>
                 <div className={classes.root}>
                     {
-                        this.renderAppbar(isSecondary ? 'absolute' : 'relative', 'transparent', isSecondary)
+                        this.renderAppbar('absolute', isHome ? 'transparent' : 'white', isSecondary)
                     }
                     <HideOnScroll offsetY={0} timeout={0}>
                         {
                             this.renderAppbar('fixed', 'white', false)
                         }
                     </HideOnScroll>
+                    {
+                        // Fixed: missing menu when page transition
+                        !isHome &&
+                        this.renderAppbar('relative', 'transparent', false)
+                    }
                     {children}
                     <Footer />
                 </div>

@@ -90,9 +90,9 @@ const Routes = () =>
                                             <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
 
                                             {/* has sub page "detail" MUST before "category" */}
-                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
-                                            <Route key={location.pathname} path={i18next.t(ID.LINK.WORKS_CATEGORY)} component={({ match }) => <Works {...match.params} />} />
-                                            
+                                            <Route path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
+                                            <Route path={i18next.t(ID.LINK.WORKS_CATEGORY)} component={({ match }) => <Works {...match.params} />} />
+
 
                                             {/* invalid path */}
                                             <Route path='*' component={PageNotFound} />
