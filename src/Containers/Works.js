@@ -93,17 +93,18 @@ class Works extends React.Component
 
     resetState()
     {
+        let totalWorks = 20
         return {
-            allCategory: this.getAllCategory(),
+            totalWorks: totalWorks,
+            allCategory: this.getAllCategory(totalWorks),
             category: this.getCurrentCategory()
         }
     }
 
-    getAllCategory()
+    getAllCategory(totalWorks)
     {
         const { t } = this.props
 
-        let totalWorks = 20
         let allCategory = Array.apply(0, Array(totalWorks))
             .map((value, index) =>
             {
@@ -190,10 +191,6 @@ class Works extends React.Component
             t
         } = this.props
 
-        const {
-            category
-        } = this.state
-
         return (
             <Accordion elevation={0}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -247,6 +244,49 @@ class Works extends React.Component
         )
     }
 
+    renderWorksList()
+    {
+        const {
+            classes,
+            t
+        } = this.props
+
+        const {
+            allCategory,
+            category
+        } = this.state
+
+        let subCategory = allCategory.filter(item =>
+        {
+            if (category === t(ID.MENU.WORKS_ALL))
+            {
+                return true
+            }
+            return item.category.includes(category)
+        })
+
+        return (
+            <div className={clsx(classes.divColumn)}>
+                {
+                    subCategory.map(item => (
+                        <div className={clsx(classes.divColumn)} style={{ margin: 20 }}>
+                            <Typography>
+                                {
+                                    item.title
+                                }
+                            </Typography>
+                            <Typography color={'secondary'}>
+                                {
+                                    item.category.join(', ')
+                                }
+                            </Typography>
+                        </div>
+                    ))
+                }
+            </div>
+        )
+    }
+
     render()
     {
         const {
@@ -276,6 +316,9 @@ class Works extends React.Component
                         }
                     </motion.div>
                 </InViewElement>
+                {
+                    this.renderWorksList()
+                }
             </motion.div>
         )
     }
