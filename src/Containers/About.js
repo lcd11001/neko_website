@@ -217,7 +217,7 @@ const styles = theme => ({
     },
 
     section4_contact_position: {
-        color: '#C3C3C3',
+        color: theme.palette.text.disabled,
         ...breakpointsStyle(theme,
             {
                 key: ['paddingBottom'],

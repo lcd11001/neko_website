@@ -135,8 +135,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['margin', 'paddingLeft', 'paddingRight'],
-                value: [0, 150, 150],
-                variant: [0, 35, 35],
+                value: [-CELL_PADDING, 150, 150],
+                variant: [-CELL_PADDING_VARIANT, 35, 35],
                 unit: ['px !important', 'px', 'px']
             }
         ),
@@ -179,7 +179,11 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
-        marginTop: 'calc(var(--paddingWidth))',
+        paddingTop: 'calc(var(--paddingWidth))',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center'
     },
 
     section3_container_des_big: {
@@ -188,14 +192,19 @@ const styles = theme => ({
     },
 
     section3_img: {
-        objectFit: 'cover',
-        objectPosition: 'center',
-        width: 'auto',
+        // objectFit: 'cover',
+        // objectPosition: 'center',
+        // minWidth: '100%',
+        // minHeight: '100%',
+        // width: 'auto',
+        // height: 'auto',
+        // transform: 'translate(-50%, -50%)',
+        // left: '50%',
+        // top: '50%',
+        // position: 'absolute'
+        width: '100%',
         height: '100%',
-        transform: 'translate(-50%, -50%)',
-        left: '50%',
-        top: '50%',
-        position: 'absolute'
+        objectFit: 'cover',
     },
 
     section3_container_img_small: {
@@ -204,6 +213,30 @@ const styles = theme => ({
 
     section3_container_des_small: {
         width: '100%',
+    },
+
+    section3_text_title: {
+        color: 'inherit',
+        fontWeight: 'bold'
+    },
+
+    section3_text_category: {
+        color: theme.palette.text.disabled,
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginTop'],
+                value: [30],
+                variant: [4],
+                unit: ['px']
+            }
+        ),
+    },
+
+    section3_cell_link: {
+        color: theme.palette.text.primary,
+        '&--hover': {
+            color: theme.palette.primary.main
+        }
     }
 });
 
@@ -343,9 +376,9 @@ class Works extends React.Component
             t
         } = this.props
 
-        let section2_menu_link = t(section2_menu.link)
-        let isSelected = section2_menu_link === pathname
-        let isHover = this.state[`hover_${section2_menu_link}`] === true
+        let menuLink = t(section2_menu.link)
+        let isSelected = menuLink === pathname
+        let isHover = this.state[`hover_${menuLink}`] === true
 
         let classMenuLink = clsx(classes.section2_menu_link, {
             [classes.section2_menu_link + '--selected']: isSelected,
@@ -363,7 +396,7 @@ class Works extends React.Component
 
         return (
             <div key={`${section2_menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.section2_menu)}>
-                <Link to={section2_menu_link} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(section2_menu_link)} onMouseLeave={this.handleMouseLeave(section2_menu_link)}>
+                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <Typography className={classes.textTitle}>{t(section2_menu.text)}</Typography>
                 </Link>
                 <Divider className={classUnderline} />
@@ -415,15 +448,24 @@ class Works extends React.Component
         let maxColumns = isWidthUp('md', width) ? 2 : 1
         let cellColumns = index % 3 === 0 ? maxColumns : 1
 
+        let cellLink = item.link
+
+        let isHover = this.state[`hover_${cellLink}`] === true
+
+        let classCellLink = clsx(classes.section3_cell_link, {
+            [classes.section3_cell_link + '--hover']: isHover
+        })
+
         return (
             <GridListTile key={index} cols={cellColumns} className={classes.section3_grid_list_title}>
                 <InViewElement variants={commonMotion.groupTransition} key={`section3-${index}-${width}`}>
-                    {
-                        cellColumns === maxColumns && maxColumns > 1
-                            ? this.renderBigCell(item, index)
-                            : this.renderSmallCell(item, index)
-                    }
-
+                    <Link to={cellLink} className={clsx(classCellLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(cellLink)} onMouseLeave={this.handleMouseLeave(cellLink)}>
+                        {
+                            cellColumns === maxColumns && maxColumns > 1
+                                ? this.renderBigCell(item, index)
+                                : this.renderSmallCell(item, index)
+                        }
+                    </Link>
                 </InViewElement>
             </GridListTile>
         )
@@ -441,19 +483,26 @@ class Works extends React.Component
             ? index % 2 === 0 ? 'row' : 'row-reverse'
             : null
 
+        const styleDes = isWidthUp('md', width)
+            ? index % 2 === 0 ? { paddingLeft: 'calc(var(--paddingWidth))' } : { paddingRight: 'calc(var(--paddingWidth))' }
+            : null
 
         return (
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.fullWidth, classes.fullHeight)} style={{ flexDirection: flexContainer }}>
                 <div className={clsx(classes.section3_container_img, classes.section3_container_img_big)}>
-                    <img
+                    <motion.img
                         className={classes.section3_img}
                         alt={item.img}
                         src={Utils.getUrl(item.img)}
+                        whileHover={{
+                            scale: 1.1
+                        }}
+                        transition={commonMotion.transition}
                     />
                 </div>
-                <div className={clsx(classes.section3_container_des, classes.section3_container_des_big)}>
-                    <Typography>{item.title}</Typography>
-                    <Typography>{item.category.join(', ')}</Typography>
+                <div className={clsx(classes.section3_container_des, classes.section3_container_des_big)} style={styleDes}>
+                    <Typography className={clsx(classes.textTitle2x, classes.section3_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.textSubTitle2x, classes.section3_text_category)}>{item.category.join(', ')}</Typography>
                 </div>
             </motion.div>
         )
@@ -470,15 +519,19 @@ class Works extends React.Component
         return (
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight)}>
                 <div className={clsx(classes.section3_container_img, classes.section3_container_img_small)}>
-                    <img
+                    <motion.img
                         className={classes.section3_img}
                         alt={item.img}
                         src={Utils.getUrl(item.img)}
+                        whileHover={{
+                            scale: 1.1
+                        }}
+                        transition={commonMotion.transition}
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section3_container_des, classes.section3_container_des_small)}>
-                    <Typography>{item.title}</Typography>
-                    <Typography>{item.category.join(', ')}</Typography>
+                    <Typography className={clsx(classes.textTitle, classes.section3_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.textSubTitle, classes.section3_text_category)}>{item.category.join(', ')}</Typography>
                 </div>
             </motion.div>
         )

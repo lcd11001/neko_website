@@ -190,6 +190,30 @@ const styles = (theme) => ({
         fontWeight: 500
     },
 
+    textTitle2x: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [30, 36],
+                variant: [4, 4],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 500
+    },
+
+    textSubTitle2x: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [22, 27],
+                variant: [2, 2],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 500
+    },
+
     textHeader: {
         ...breakpointsStyle(theme,
             {
