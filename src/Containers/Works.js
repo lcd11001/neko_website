@@ -22,7 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import InViewElement from '../Components/InViewElement';
 
 const OPACITY = '7F'
-const CELL_HEIGHT = 600
+const CELL_HEIGHT = 400
 const CELL_HEIGHT_VARIANT = 25
 const CELL_PADDING = 60
 const CELL_PADDING_VARIANT = 10
@@ -135,8 +135,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['margin', 'paddingLeft', 'paddingRight'],
-                value: [-CELL_PADDING, 150, 150],
-                variant: [-CELL_PADDING_VARIANT, 35, 35],
+                value: [0, 150, 150],
+                variant: [0, 35, 35],
                 unit: ['px !important', 'px', 'px']
             }
         ),
@@ -145,15 +145,32 @@ const styles = theme => ({
     section3_grid_list_title: {
         ...breakpointsStyle(theme,
             {
-                key: ['height', 'padding'],
-                value: [CELL_HEIGHT, CELL_PADDING],
-                variant: [CELL_HEIGHT_VARIANT, CELL_PADDING_VARIANT],
-                unit: ['px !important', 'px !important']
+                key: ['padding'],
+                value: [CELL_PADDING],
+                variant: [CELL_PADDING_VARIANT],
+                unit: ['px !important']
             }
         ),
     },
 
+    section3_container_img: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['--paddingWidth', 'height'],
+                value: [CELL_PADDING, CELL_HEIGHT],
+                variant: [CELL_PADDING_VARIANT, CELL_HEIGHT_VARIANT],
+                unit: ['px', 'px']
+            }
+        ),
+        overflow: 'hidden',
+        position: 'relative'
+    },
+
     section3_container_img_big: {
+        width: 'calc(50% + var(--paddingWidth))',
+    },
+
+    section3_container_des: {
         ...breakpointsStyle(theme,
             {
                 key: ['--paddingWidth'],
@@ -162,26 +179,15 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
-        width: 'calc(50% + var(--paddingWidth))',
-        height: '100%',
-        overflow: 'hidden',
-        position: 'relative'
+        marginTop: 'calc(var(--paddingWidth))',
     },
 
     section3_container_des_big: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['--paddingWidth'],
-                value: [CELL_PADDING],
-                variant: [CELL_PADDING_VARIANT],
-                unit: ['px', 'px']
-            }
-        ),
+        height: '100%',
         width: 'calc(50% - var(--paddingWidth))',
-        height: '100%'
     },
 
-    section3_img_big: {
+    section3_img: {
         objectFit: 'cover',
         objectPosition: 'center',
         width: 'auto',
@@ -194,25 +200,10 @@ const styles = theme => ({
 
     section3_container_img_small: {
         width: '100%',
-        height: '60%',
-        overflow: 'hidden',
-        position: 'relative'
     },
 
     section3_container_des_small: {
         width: '100%',
-        height: '40%'
-    },
-
-    section3_img_small: {
-        objectFit: 'cover',
-        objectPosition: 'center',
-        width: 'auto',
-        height: '100%',
-        transform: 'translate(-50%, -50%)',
-        left: '50%',
-        top: '50%',
-        position: 'absolute'
     }
 });
 
@@ -405,7 +396,7 @@ class Works extends React.Component
         let maxColumns = isWidthUp('md', width) ? 2 : 1
 
         return (
-            <GridList className={classes.section3_grid_list} cols={maxColumns} >
+            <GridList className={classes.section3_grid_list} cols={maxColumns} cellHeight={'auto'}>
                 {
                     subCategory.map((item, index) => this.renderGridCell(item, index))
                 }
@@ -453,14 +444,14 @@ class Works extends React.Component
 
         return (
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.fullWidth, classes.fullHeight)} style={{ flexDirection: flexContainer }}>
-                <div className={classes.section3_container_img_big}>
+                <div className={clsx(classes.section3_container_img, classes.section3_container_img_big)}>
                     <img
-                        className={classes.section3_img_big}
+                        className={classes.section3_img}
                         alt={item.img}
                         src={Utils.getUrl(item.img)}
                     />
                 </div>
-                <div className={classes.section3_container_des_big}>
+                <div className={clsx(classes.section3_container_des, classes.section3_container_des_big)}>
                     <Typography>{item.title}</Typography>
                     <Typography>{item.category.join(', ')}</Typography>
                 </div>
@@ -478,14 +469,14 @@ class Works extends React.Component
 
         return (
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight)}>
-                <div className={classes.section3_container_img_small}>
+                <div className={clsx(classes.section3_container_img, classes.section3_container_img_small)}>
                     <img
-                        className={classes.section3_img_small}
+                        className={classes.section3_img}
                         alt={item.img}
                         src={Utils.getUrl(item.img)}
                     />
                 </div>
-                <div className={classes.section3_container_des_small}>
+                <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section3_container_des, classes.section3_container_des_small)}>
                     <Typography>{item.title}</Typography>
                     <Typography>{item.category.join(', ')}</Typography>
                 </div>
