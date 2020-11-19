@@ -22,6 +22,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import InViewElement from '../Components/InViewElement';
 
 const OPACITY = '7F'
+const GRID_LIST_SPACING = {
+    'xl': 120,// extra-large
+    'lg': 100, // large
+    'md': 80, // medium
+    'sm': 60, // small
+    'xs': 40, // extra small
+}
 
 const styles = theme => ({
     section1: {
@@ -118,6 +125,17 @@ const styles = theme => ({
 
     gridList: {
 
+    },
+
+    gridListTitle: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['height'],
+                value: [400],
+                variant: [20],
+                unit: ['px !important']
+            }
+        ),
     }
 });
 
@@ -310,7 +328,7 @@ class Works extends React.Component
         let maxColumns = isWidthUp('md', width) ? 2 : 1
 
         return (
-            <GridList className={clsx(classes.gridList, classes.fullWidth)} cols={maxColumns}>
+            <GridList className={classes.gridList} cols={maxColumns} spacing={GRID_LIST_SPACING[width] || 50} >
                 {
                     subCategory.map((item, index) => this.renderGridCell(item, index))
                 }
@@ -330,7 +348,7 @@ class Works extends React.Component
         let cellColumns = index % 3 === 0 ? maxColumns : 1
 
         return (
-            <GridListTile key={index} cols={cellColumns}>
+            <GridListTile key={index} cols={cellColumns} className={classes.gridListTitle}>
                 <InViewElement variants={commonMotion.groupTransition} key={`section3-${index}-${width}`}>
                     {
                         cellColumns === maxColumns
@@ -362,7 +380,7 @@ class Works extends React.Component
             : 1
 
         return (
-            <div className={clsx(classes.divRow2Column, classes.fullWidth)} style={{ flex: containerFlex }}>
+            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.fullWidth)} style={{ flex: containerFlex }}>
                 <div style={{ flex: imageFlex }}>
                     <img alt={item.img} src={Utils.getUrl(item.img)} />
                 </div>
@@ -370,7 +388,7 @@ class Works extends React.Component
                     <Typography>{item.title}</Typography>
                     <Typography>{item.category.join(', ')}</Typography>
                 </div>
-            </div>
+            </motion.div>
         )
     }
 
@@ -383,7 +401,7 @@ class Works extends React.Component
         } = this.props
 
         return (
-            <div className={clsx(classes.divColumn, classes.fullWidth)}>
+            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth)}>
                 <div >
                     <img alt={item.img} src={Utils.getUrl(item.img)} />
                 </div>
@@ -391,7 +409,7 @@ class Works extends React.Component
                     <Typography>{item.title}</Typography>
                     <Typography>{item.category.join(', ')}</Typography>
                 </div>
-            </div>
+            </motion.div>
         )
     }
 
@@ -429,7 +447,7 @@ class Works extends React.Component
 
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section2-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.section, classes.section2)}>
+                <motion.div variants={commonMotion.elementTransition} id={'section2'} className={clsx(classes.section, classes.section2)}>
                     {
                         isWidthUp('md', width)
                             ? this.renderMenu()
@@ -448,14 +466,14 @@ class Works extends React.Component
         } = this.props;
 
         return (
-            <InViewElement variants={commonMotion.groupTransition} key={`section3-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.section, classes.section3)}>
-                    {
 
-                        this.renderWorksList()
-                    }
-                </motion.div>
-            </InViewElement>
+            <div id={'section3'} className={clsx(classes.section, classes.section3)}>
+                {
+
+                    this.renderWorksList()
+                }
+            </div>
+
         )
     }
 
