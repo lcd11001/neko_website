@@ -335,90 +335,94 @@ class Footer extends React.Component
 
         return (
             <div className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
-                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
-                    <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3, minHeight: 200 }}>
-                        <div className={classes.logo} style={{ flex: 2 }}>
-                            <Logo secondary />
-                        </div>
-                        <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)} style={{ flex: 1 }}>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_EMAIL} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_PHONE} />
-                            </Typography>
-                        </div>
-                    </div>
-                    <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
-                        <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
-                            </Typography>
-                        </div>
-                        <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_BRAND} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_MOTION} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_WEB} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_2D} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_DIGITAL} />
-                            </Typography>
+                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)}>
+                    <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
+                        <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3, minHeight: 200 }}>
+                            <div className={classes.logo} style={{ flex: 2 }}>
+                                <Logo secondary />
+                            </div>
+                            <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)} style={{ flex: 1 }}>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_EMAIL} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_PHONE} />
+                                </Typography>
+                            </div>
                         </div>
                     </div>
-                    <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
-                        <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
-                            </Typography>
+                    <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
+                        <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
+                            <div>
+                                <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
+                                </Typography>
+                            </div>
+                            <div>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_BRAND} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_MOTION} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_WEB} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_2D} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_DIGITAL} />
+                                </Typography>
+                            </div>
                         </div>
-                        <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_CONTACT} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_POLICY} />
-                            </Typography>
-                            <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_TERMS} />
-                            </Typography>
+                        <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
+                            <div>
+                                <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
+                                </Typography>
+                            </div>
+                            <div>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_CONTACT} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_POLICY} />
+                                </Typography>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_TERMS} />
+                                </Typography>
+                            </div>
                         </div>
-                    </div>
-                    <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
-                        <div>
-                            <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
-                                <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
-                            </Typography>
-                        </div>
-                        <div>
-                            <IconButton
-                                className={classes.iconButton}
-                                onClick={this.handleOpenUrl(t(ID.LINK.FACEBOOK))}
-                            >
-                                <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('fb.svg')} />
-                            </IconButton>
-                            <IconButton
-                                className={classes.iconButton}
-                                onClick={this.handleOpenUrl(t(ID.LINK.INSTAGRAM))}
-                            >
-                                <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('IG.svg')} />
-                            </IconButton>
-                            <IconButton
-                                className={classes.iconButton}
-                                onClick={this.handleOpenUrl(t(ID.LINK.YOUTUBE))}
-                            >
-                                <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.svg')} />
-                            </IconButton>
+                        <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
+                            <div>
+                                <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
+                                    <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
+                                </Typography>
+                            </div>
+                            <div>
+                                <IconButton
+                                    className={classes.iconButton}
+                                    onClick={this.handleOpenUrl(t(ID.LINK.FACEBOOK))}
+                                >
+                                    <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('fb.svg')} />
+                                </IconButton>
+                                <IconButton
+                                    className={classes.iconButton}
+                                    onClick={this.handleOpenUrl(t(ID.LINK.INSTAGRAM))}
+                                >
+                                    <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('IG.svg')} />
+                                </IconButton>
+                                <IconButton
+                                    className={classes.iconButton}
+                                    onClick={this.handleOpenUrl(t(ID.LINK.YOUTUBE))}
+                                >
+                                    <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.svg')} />
+                                </IconButton>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
