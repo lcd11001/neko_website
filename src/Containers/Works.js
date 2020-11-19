@@ -17,7 +17,7 @@ import PageNotFound from '../Components/PageError/PageNotFound';
 
 import { WorksMenu } from '../Data/Defines'
 import { Link, withRouter } from 'react-router-dom';
-import { Typography, Divider, withWidth, isWidthUp, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
+import { Typography, Divider, withWidth, isWidthUp, Accordion, AccordionSummary, AccordionDetails, GridList, GridListTile } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import InViewElement from '../Components/InViewElement';
 
@@ -248,7 +248,8 @@ class Works extends React.Component
     {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
         const {
@@ -265,25 +266,35 @@ class Works extends React.Component
             return item.category.includes(category)
         })
 
+        let maxColumns = isWidthUp('md', width) ? 2 : 1
+
         return (
             <div className={clsx(classes.divColumn)}>
-                {
-                    subCategory.map(item => (
-                        <div className={clsx(classes.divColumn)} style={{ margin: 20 }}>
-                            <Typography>
-                                {
-                                    item.title
-                                }
-                            </Typography>
-                            <Typography color={'secondary'}>
-                                {
-                                    item.category.join(', ')
-                                }
-                            </Typography>
-                        </div>
-                    ))
-                }
+                <GridList className={classes.gridList} cols={maxColumns}>
+                    {
+                        subCategory.map((item, index) => this.renderGridCell(item, index))
+                    }
+                </GridList>
             </div>
+        )
+    }
+
+    renderGridCell(item, index)
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props
+
+        let maxColumns = isWidthUp('md', width) ? 2 : 1
+        let cellColumns = index % 3 === 0 ? maxColumns : 1
+
+        return (
+            <GridListTile key={index} cols={cellColumns}>
+                <Typography>{item.title}</Typography>
+                <Typography>{item.category.join(', ')}</Typography>
+            </GridListTile>
         )
     }
 
