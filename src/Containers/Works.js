@@ -22,8 +22,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import InViewElement from '../Components/InViewElement';
 
 const OPACITY = '7F'
+const CELL_HEIGHT = 600
+const CELL_HEIGHT_VARIANT = 25
+const CELL_PADDING = 60
+const CELL_PADDING_VARIANT = 10
 
 const styles = theme => ({
+
+
     section1: {
         backgroundColor: theme.palette.primary.main,
         ...breakpointsStyle(theme,
@@ -53,15 +59,15 @@ const styles = theme => ({
 
     },
 
-    shortMenuRoot: {
+    section2_short_menu_root: {
         justifyContent: 'flex-start'
     },
 
-    shortMenuContent: {
+    section2_short_menu_content: {
         flexGrow: 0
     },
 
-    menuContainer: {
+    section2_menu_container: {
         ...breakpointsStyle(theme,
             {
                 key: ['paddingTop'],
@@ -71,7 +77,7 @@ const styles = theme => ({
             }
         ),
     },
-    menu: {
+    section2_menu: {
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'paddingRight'],
@@ -85,7 +91,7 @@ const styles = theme => ({
         position: 'relative'
     },
 
-    menuLink: {
+    section2_menu_link: {
         color: `${theme.palette.text.primary}${OPACITY}`,
         transition: theme.transitions.create(['color'], {
             duration: 300
@@ -104,7 +110,7 @@ const styles = theme => ({
         // }
     },
 
-    underline: {
+    section2_menu_underline: {
         width: 0,
         height: 2,
         maxWidth: '100%',
@@ -125,26 +131,88 @@ const styles = theme => ({
         paddingTop: '0 !important'
     },
 
-    gridList: {
+    section3_grid_list: {
         ...breakpointsStyle(theme,
             {
                 key: ['margin', 'paddingLeft', 'paddingRight'],
-                value: [-60, 150, 150],
-                variant: [-10, 35, 35],
+                value: [-CELL_PADDING, 150, 150],
+                variant: [-CELL_PADDING_VARIANT, 35, 35],
                 unit: ['px !important', 'px', 'px']
             }
         ),
     },
 
-    gridListTitle: {
+    section3_grid_list_title: {
         ...breakpointsStyle(theme,
             {
                 key: ['height', 'padding'],
-                value: [600, 60],
-                variant: [25, 10],
+                value: [CELL_HEIGHT, CELL_PADDING],
+                variant: [CELL_HEIGHT_VARIANT, CELL_PADDING_VARIANT],
                 unit: ['px !important', 'px !important']
             }
         ),
+    },
+
+    section3_container_img_big: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['--paddingWidth'],
+                value: [CELL_PADDING],
+                variant: [CELL_PADDING_VARIANT],
+                unit: ['px']
+            }
+        ),
+        width: 'calc(50% + var(--paddingWidth))',
+        height: '100%',
+        overflow: 'hidden',
+        position: 'relative'
+    },
+
+    section3_container_des_big: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['--paddingWidth'],
+                value: [CELL_PADDING],
+                variant: [CELL_PADDING_VARIANT],
+                unit: ['px', 'px']
+            }
+        ),
+        width: 'calc(50% - var(--paddingWidth))',
+        height: '100%'
+    },
+
+    section3_img_big: {
+        objectFit: 'cover',
+        objectPosition: 'center',
+        width: 'auto',
+        height: '100%',
+        transform: 'translate(-50%, -50%)',
+        left: '50%',
+        top: '50%',
+        position: 'absolute'
+    },
+
+    section3_container_img_small: {
+        width: '100%',
+        height: '60%',
+        overflow: 'hidden',
+        position: 'relative'
+    },
+
+    section3_container_des_small: {
+        width: '100%',
+        height: '40%'
+    },
+
+    section3_img_small: {
+        objectFit: 'cover',
+        objectPosition: 'center',
+        width: 'auto',
+        height: '100%',
+        transform: 'translate(-50%, -50%)',
+        left: '50%',
+        top: '50%',
+        position: 'absolute'
     }
 });
 
@@ -238,9 +306,9 @@ class Works extends React.Component
         } = this.props
 
         return (
-            <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth, classes.menuContainer)}>
+            <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth, classes.section2_menu_container)}>
                 {
-                    WorksMenu.map(menu => this.renderMenuItem(menu, false))
+                    WorksMenu.map(section2_menu => this.renderMenuItem(section2_menu, false))
                 }
             </div>
         )
@@ -258,15 +326,15 @@ class Works extends React.Component
 
         return (
             <Accordion elevation={0}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} classes={{ content: classes.shortMenuContent, root: classes.shortMenuRoot }}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} classes={{ content: classes.section2_short_menu_content, root: classes.section2_short_menu_root }}>
                     {
-                        WorksMenu.filter(menu => t(menu.link) === pathname).map(menu => this.renderMenuItem(menu, true))
+                        WorksMenu.filter(section2_menu => t(section2_menu.link) === pathname).map(section2_menu => this.renderMenuItem(section2_menu, true))
                     }
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className={clsx(classes.divColumn, classes.divLeft, classes.fullWidth)}>
                         {
-                            WorksMenu.filter(menu => t(menu.link) !== pathname).map(menu => this.renderMenuItem(menu, true))
+                            WorksMenu.filter(section2_menu => t(section2_menu.link) !== pathname).map(section2_menu => this.renderMenuItem(section2_menu, true))
                         }
                     </div>
                 </AccordionDetails>
@@ -274,7 +342,7 @@ class Works extends React.Component
         )
     }
 
-    renderMenuItem(menu, isSecondary)
+    renderMenuItem(section2_menu, isSecondary)
     {
         const {
             classes,
@@ -284,28 +352,28 @@ class Works extends React.Component
             t
         } = this.props
 
-        let menuLink = t(menu.link)
-        let isSelected = menuLink === pathname
-        let isHover = this.state[`hover_${menuLink}`] === true
+        let section2_menu_link = t(section2_menu.link)
+        let isSelected = section2_menu_link === pathname
+        let isHover = this.state[`hover_${section2_menu_link}`] === true
 
-        let classMenuLink = clsx(classes.menuLink, {
-            [classes.menuLink + '--selected']: isSelected,
+        let classMenuLink = clsx(classes.section2_menu_link, {
+            [classes.section2_menu_link + '--selected']: isSelected,
 
-            [classes.menuLink + '--secondary']: isSecondary,
-            [classes.menuLink + '--secondary--selected']: isSecondary && isSelected,
+            [classes.section2_menu_link + '--secondary']: isSecondary,
+            [classes.section2_menu_link + '--secondary--selected']: isSecondary && isSelected,
         })
 
-        let classUnderline = clsx(classes.underline, {
-            [classes.underline + '--hover']: isHover,
+        let classUnderline = clsx(classes.section2_menu_underline, {
+            [classes.section2_menu_underline + '--hover']: isHover,
 
-            // [classes.underline + '--secondary']: isSecondary,
-            // [classes.underline + '--secondary--selected']: isSecondary && isSelected,
+            // [classes.section2_menu_underline + '--secondary']: isSecondary,
+            // [classes.section2_menu_underline + '--secondary--selected']: isSecondary && isSelected,
         })
 
         return (
-            <div key={`${menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
-                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
-                    <Typography className={classes.textTitle}>{t(menu.text)}</Typography>
+            <div key={`${section2_menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.section2_menu)}>
+                <Link to={section2_menu_link} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(section2_menu_link)} onMouseLeave={this.handleMouseLeave(section2_menu_link)}>
+                    <Typography className={classes.textTitle}>{t(section2_menu.text)}</Typography>
                 </Link>
                 <Divider className={classUnderline} />
             </div>
@@ -337,7 +405,7 @@ class Works extends React.Component
         let maxColumns = isWidthUp('md', width) ? 2 : 1
 
         return (
-            <GridList className={classes.gridList} cols={maxColumns} >
+            <GridList className={classes.section3_grid_list} cols={maxColumns} >
                 {
                     subCategory.map((item, index) => this.renderGridCell(item, index))
                 }
@@ -357,10 +425,10 @@ class Works extends React.Component
         let cellColumns = index % 3 === 0 ? maxColumns : 1
 
         return (
-            <GridListTile key={index} cols={cellColumns} className={classes.gridListTitle}>
+            <GridListTile key={index} cols={cellColumns} className={classes.section3_grid_list_title}>
                 <InViewElement variants={commonMotion.groupTransition} key={`section3-${index}-${width}`}>
                     {
-                        cellColumns === maxColumns
+                        cellColumns === maxColumns && maxColumns > 1
                             ? this.renderBigCell(item, index)
                             : this.renderSmallCell(item, index)
                     }
@@ -378,22 +446,21 @@ class Works extends React.Component
             width
         } = this.props
 
-        const containerFlex = isWidthUp('md', width) ? 2 : 1
-        const imageFlex = isWidthUp('md', width)
-            ? index % 2 === 0
-                ? containerFlex * 0.6
-                : 0.4
-            : 1
-        const textFlex = isWidthUp('md', width)
-            ? containerFlex - imageFlex
-            : 1
+        const flexContainer = isWidthUp('md', width)
+            ? index % 2 === 0 ? 'row' : 'row-reverse'
+            : null
+
 
         return (
-            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.fullWidth)} style={{ flex: containerFlex }}>
-                <div style={{ flex: imageFlex }}>
-                    <img alt={item.img} src={Utils.getUrl(item.img)} />
+            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.fullWidth, classes.fullHeight)} style={{ flexDirection: flexContainer }}>
+                <div className={classes.section3_container_img_big}>
+                    <img
+                        className={classes.section3_img_big}
+                        alt={item.img}
+                        src={Utils.getUrl(item.img)}
+                    />
                 </div>
-                <div style={{ flex: textFlex }}>
+                <div className={classes.section3_container_des_big}>
                     <Typography>{item.title}</Typography>
                     <Typography>{item.category.join(', ')}</Typography>
                 </div>
@@ -410,11 +477,15 @@ class Works extends React.Component
         } = this.props
 
         return (
-            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth)}>
-                <div >
-                    <img alt={item.img} src={Utils.getUrl(item.img)} />
+            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight)}>
+                <div className={classes.section3_container_img_small}>
+                    <img
+                        className={classes.section3_img_small}
+                        alt={item.img}
+                        src={Utils.getUrl(item.img)}
+                    />
                 </div>
-                <div >
+                <div className={classes.section3_container_des_small}>
                     <Typography>{item.title}</Typography>
                     <Typography>{item.category.join(', ')}</Typography>
                 </div>

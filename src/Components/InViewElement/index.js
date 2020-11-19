@@ -9,6 +9,8 @@ import { withMultipleStyles, commonMotion } from '../../Styles'
 const styles = theme => ({
     root: {
         // overflow: 'hidden'
+        width: '100%',
+        height: '100%'
     }
 })
 
@@ -58,6 +60,7 @@ const InViewElement = (props) =>
                 {
                     // inView &&
                     <motion.div
+                        className={props.classes.root}
                         animate={controls}
                         initial={props.initial}
                         variants={props.variants}
