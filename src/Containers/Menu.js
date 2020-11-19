@@ -119,6 +119,7 @@ const styles = theme => ({
 
         '&--selected': {
             color: `${theme.palette.text.primary}${OPACITY}`,
+            pointerEvents: 'none'
         },
 
         '&--custom-color-1': {

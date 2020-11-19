@@ -53,6 +53,14 @@ const styles = theme => ({
 
     },
 
+    shortMenuRoot: {
+        justifyContent: 'flex-start'
+    },
+
+    shortMenuContent: {
+        flexGrow: 0
+    },
+
     menuContainer: {
         ...breakpointsStyle(theme,
             {
@@ -85,6 +93,7 @@ const styles = theme => ({
 
         '&--selected': {
             color: theme.palette.text.primary,
+            pointerEvents: 'none'
         },
 
         // '&--secondary': {
@@ -119,10 +128,10 @@ const styles = theme => ({
     gridList: {
         ...breakpointsStyle(theme,
             {
-                key: ['margin'],
-                value: [-60],
-                variant: [-10],
-                unit: ['px !important']
+                key: ['margin', 'paddingLeft', 'paddingRight'],
+                value: [-60, 150, 150],
+                variant: [-10, 35, 35],
+                unit: ['px !important', 'px', 'px']
             }
         ),
     },
@@ -131,8 +140,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['height', 'padding'],
-                value: [400, 60],
-                variant: [20, 10],
+                value: [600, 60],
+                variant: [25, 10],
                 unit: ['px !important', 'px !important']
             }
         ),
@@ -249,7 +258,7 @@ class Works extends React.Component
 
         return (
             <Accordion elevation={0}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} classes={{ content: classes.shortMenuContent, root: classes.shortMenuRoot }}>
                     {
                         WorksMenu.filter(menu => t(menu.link) === pathname).map(menu => this.renderMenuItem(menu, true))
                     }
@@ -328,7 +337,7 @@ class Works extends React.Component
         let maxColumns = isWidthUp('md', width) ? 2 : 1
 
         return (
-            <GridList className={classes.gridList} cols={maxColumns} spacing={GRID_LIST_SPACING[width] || 50} >
+            <GridList className={classes.gridList} cols={maxColumns} >
                 {
                     subCategory.map((item, index) => this.renderGridCell(item, index))
                 }
