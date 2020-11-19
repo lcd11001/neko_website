@@ -63,12 +63,19 @@ const elementTransition = {
         y: 0,
         transition: {
             ease: 'easeOut',
-            duration: 1
+            duration: 1,
+
+            when: 'beforeChildren',
+            staggerChildren: 0.5
         }
     },
     invisible: {
         opacity: 0,
-        y: '50px'
+        y: '50px',
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0.5
+        }
     }
 }
 

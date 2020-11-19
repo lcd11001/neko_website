@@ -24,13 +24,42 @@ import InViewElement from '../Components/InViewElement';
 const OPACITY = '7F'
 
 const styles = theme => ({
+    section1: {
+        backgroundColor: theme.palette.primary.main,
+        ...breakpointsStyle(theme,
+            {
+                key: ['height'],
+                value: [25],
+                variant: [-2],
+                unit: ['vw']
+            }
+        ),
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        // paddingTop: '5% !important'
+    },
+
+    section1_txt1: {
+        color: '#FFFFFF'
+    },
+
+    section1_txt1_dim: {
+        color: '#FFFFFF40'
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    section2: {
+
+    },
+
     menuContainer: {
         ...breakpointsStyle(theme,
             {
-                key: ['paddingTop', 'paddingBottom'],
-                value: [80, 50],
-                variant: [10, 5],
-                unit: ['px', 'px']
+                key: ['paddingTop'],
+                value: [50],
+                variant: [5],
+                unit: ['px']
             }
         ),
     },
@@ -49,21 +78,21 @@ const styles = theme => ({
     },
 
     menuLink: {
-        color: theme.palette.text.primary,
+        color: `${theme.palette.text.primary}${OPACITY}`,
         transition: theme.transitions.create(['color'], {
             duration: 300
         }),
 
         '&--selected': {
-            color: `${theme.palette.text.primary}${OPACITY}`,
+            color: theme.palette.text.primary,
         },
 
-        '&--secondary': {
-            color: `${theme.palette.text.primary}${OPACITY}`,
-            '&--selected': {
-                color: theme.palette.text.primary,
-            }
-        }
+        // '&--secondary': {
+        //     color: `${theme.palette.text.primary}${OPACITY}`,
+        //     '&--selected': {
+        //         color: theme.palette.text.primary,
+        //     }
+        // }
     },
 
     underline: {
@@ -80,6 +109,15 @@ const styles = theme => ({
         '&--hover': {
             width: '100%'
         },
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    section3: {
+        paddingTop: '0 !important'
+    },
+
+    gridList: {
+
     }
 });
 
@@ -231,13 +269,16 @@ class Works extends React.Component
         })
 
         let classUnderline = clsx(classes.underline, {
-            [classes.underline + '--hover']: isHover
+            [classes.underline + '--hover']: isHover,
+
+            // [classes.underline + '--secondary']: isSecondary,
+            // [classes.underline + '--secondary--selected']: isSecondary && isSelected,
         })
 
         return (
             <div key={`${menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
-                    <Typography>{t(menu.text)}</Typography>
+                    <Typography className={classes.textTitle}>{t(menu.text)}</Typography>
                 </Link>
                 <Divider className={classUnderline} />
             </div>
@@ -269,13 +310,11 @@ class Works extends React.Component
         let maxColumns = isWidthUp('md', width) ? 2 : 1
 
         return (
-            <div className={clsx(classes.divColumn)}>
-                <GridList className={classes.gridList} cols={maxColumns}>
-                    {
-                        subCategory.map((item, index) => this.renderGridCell(item, index))
-                    }
-                </GridList>
-            </div>
+            <GridList className={clsx(classes.gridList, classes.fullWidth)} cols={maxColumns}>
+                {
+                    subCategory.map((item, index) => this.renderGridCell(item, index))
+                }
+            </GridList>
         )
     }
 
@@ -295,6 +334,70 @@ class Works extends React.Component
                 <Typography>{item.title}</Typography>
                 <Typography>{item.category.join(', ')}</Typography>
             </GridListTile>
+        )
+    }
+
+    renderSection1()
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props;
+
+        return (
+            <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
+                    <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                        <Trans
+                            i18nKey={ID.WORKS.SECTION_1_TEXT_1}
+                            components={{ span: <span /> }}
+                            values={{
+                                custom: clsx(classes.section1_txt1)
+                            }}
+                        />
+                    </Typography>
+                </motion.div>
+            </InViewElement>
+        )
+    }
+
+    renderSection2()
+    {
+        const {
+            classes,
+            width
+        } = this.props;
+
+        return (
+            <InViewElement variants={commonMotion.groupTransition} key={`section2-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.section, classes.section2)}>
+                    {
+                        isWidthUp('md', width)
+                            ? this.renderMenu()
+                            : this.renderShortMenu()
+                    }
+                </motion.div>
+            </InViewElement>
+        )
+    }
+
+    renderSection3()
+    {
+        const {
+            classes,
+            width
+        } = this.props;
+
+        return (
+            <InViewElement variants={commonMotion.groupTransition} key={`section3-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.section, classes.section3)}>
+                    {
+
+                        this.renderWorksList()
+                    }
+                </motion.div>
+            </InViewElement>
         )
     }
 
@@ -318,17 +421,14 @@ class Works extends React.Component
                 transition={commonMotion.transition}
                 variants={commonMotion.pageTransition}
             >
-                <InViewElement variants={commonMotion.groupTransition} key={width}>
-                    <motion.div variants={commonMotion.elementTransition}>
-                        {
-                            isWidthUp('md', width)
-                                ? this.renderMenu()
-                                : this.renderShortMenu()
-                        }
-                    </motion.div>
-                </InViewElement>
                 {
-                    this.renderWorksList()
+                    this.renderSection1()
+                }
+                {
+                    this.renderSection2()
+                }
+                {
+                    this.renderSection3()
                 }
             </motion.div>
         )

@@ -10,9 +10,9 @@ const styles = (theme) => ({
         height: '100%',
 
         // > means only apply to div.root instead of all div
-        '& > div:first-child': {
-            paddingTop: 0
-        },
+        // '& > div:first-child': {
+        //     paddingTop: 0
+        // },
     },
 
     appbar: {
@@ -64,7 +64,7 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
-                value: [150, 150, 100, 80],
+                value: [150, 150, 100, 100],
                 variant: [35, 35, 10, 10],
                 unit: ['px', 'px', 'px', 'px']
             }

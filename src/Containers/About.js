@@ -20,7 +20,7 @@ import { Button, Divider, Fade, IconButton, Typography, withWidth, isWidthUp, To
 import * as Icons from '../Components/NekoIcons'
 
 import AspectRatio from '../Components/AspectRatio';
-import { isMatchWith } from 'lodash';
+import InViewElement from '../Components/InViewElement';
 
 const styles = theme => ({
     section1: {
@@ -35,8 +35,7 @@ const styles = theme => ({
         ),
         display: 'flex',
         justifyContent: 'flex-start',
-        alignItems: 'center',
-        paddingTop: '5% !important'
+        alignItems: 'center'
     },
 
     section1_txt1: {
@@ -301,36 +300,40 @@ class About extends React.Component
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     renderSection1()
     {
-        const { classes } = this.props;
+        const { classes, width } = this.props;
         return (
-            <div id={'section1'} className={clsx(classes.section, classes.section1)}>
-                <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
-                    <Trans
-                        i18nKey={ID.ABOUT.SECTION_1_TEXT_1}
-                        components={{ span: <span /> }}
-                        values={{
-                            custom: clsx(classes.section1_txt1)
-                        }}
-                    />
-                </Typography>
-            </div>
+            <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
+                    <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                        <Trans
+                            i18nKey={ID.ABOUT.SECTION_1_TEXT_1}
+                            components={{ span: <span /> }}
+                            values={{
+                                custom: clsx(classes.section1_txt1)
+                            }}
+                        />
+                    </Typography>
+                </motion.div>
+            </InViewElement>
         )
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     renderSection2()
     {
-        const { classes } = this.props;
+        const { classes, width } = this.props;
         const totalColumn = 2
         return (
-            <div id={'section2'} className={clsx(classes.divRow, classes.divCenter, classes.section, classes.section2)} style={{ flex: totalColumn }}>
-                {
-                    Array.apply(0, Array(totalColumn))
-                        .map((value, index) => (
-                            this.renderSection2Contact(index)
-                        ))
-                }
-            </div>
+            <InViewElement variants={commonMotion.groupTransition} key={`section2-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} id={'section2'} className={clsx(classes.divRow, classes.divCenter, classes.section, classes.section2)} style={{ flex: totalColumn }}>
+                    {
+                        Array.apply(0, Array(totalColumn))
+                            .map((value, index) => (
+                                this.renderSection2Contact(index)
+                            ))
+                    }
+                </motion.div>
+            </InViewElement>
         )
     }
 
@@ -347,7 +350,7 @@ class About extends React.Component
         const BUTTON = t(ID.ABOUT[`SECTION_2_BUTTON_${index + 1}`])
 
         return (
-            <div key={index} id={`section2.${index + 1}`} className={clsx(classes.divColumn, classes.divBetween)} style={{ flex: 1 }}>
+            <motion.div variants={commonMotion.elementTransition} key={index} id={`section2.${index + 1}`} className={clsx(classes.divColumn, classes.divBetween)} style={{ flex: 1 }}>
                 <div className={classes.section2_img} />
                 <Typography className={clsx(classes.textTitle, classes.section2_title)}>{TITILE}</Typography>
                 <Typography className={clsx(classes.textSubTitle, classes.section2_subtitle)}>{SUB_TITILE}</Typography>
@@ -360,7 +363,7 @@ class About extends React.Component
                     </Link>
                 </div>
 
-            </div>
+            </motion.div>
         )
     }
 
@@ -368,19 +371,21 @@ class About extends React.Component
 
     renderSection3()
     {
-        const { classes } = this.props;
+        const { classes, width } = this.props;
         return (
-            <div id={'section3'} className={clsx(classes.section, classes.section3)}>
-                <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section3_txt1)} color={'textSecondary'} >
-                    <Trans
-                        i18nKey={ID.ABOUT.SECTION_3_TEXT_1}
-                        components={{ span: <span /> }}
-                        values={{
-                            custom: clsx(classes.section3_txt1_custom)
-                        }}
-                    />
-                </Typography>
-            </div>
+            <InViewElement variants={commonMotion.groupTransition} key={`section3-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} id={'section3'} className={clsx(classes.section, classes.section3)}>
+                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section3_txt1)} color={'textSecondary'} >
+                        <Trans
+                            i18nKey={ID.ABOUT.SECTION_3_TEXT_1}
+                            components={{ span: <span /> }}
+                            values={{
+                                custom: clsx(classes.section3_txt1_custom)
+                            }}
+                        />
+                    </Typography>
+                </motion.div>
+            </InViewElement>
         )
     }
 
@@ -390,85 +395,87 @@ class About extends React.Component
     {
         const { classes, width, t } = this.props;
         return (
-            <div id={'section4'} className={clsx(classes.divRow2Column, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 5 }}>
-                <div id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 1.2 }}>
-                    <Typography className={clsx(classes.textTitle, classes.section4_txt1)} color={'textSecondary'} >
-                        <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_1} />
-                    </Typography>
-                    <Typography className={clsx(classes.textCaption, classes.section4_txt2)} >
-                        <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_2} />
-                    </Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section4_txt3)} >
-                        <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_3} />
-                    </Typography>
-                </div>
-
-                {
-                    isWidthDown('sm', width) &&
-                    <div style={{ padding: 20 }} />
-                }
-
-                <div id={'section4.2'} className={clsx(classes.divRow, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ flex: 3.8, position: 'relative' }}>
-                    <div className={clsx(classes.fullHeight, classes.section4_box_container_bottom)} >
-                        <div id={'section4.2a'} ref={this.refContactBox1} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
-                            <div>
-                                <AspectRatio
-                                    ratio={1}
-                                    classes={{
-                                        outerWrapper: classes.section4_avatar_outer,
-                                        innerWrapper: classes.section4_avatar_inner,
-                                    }}
-                                >
-                                    <div className={clsx(classes.section4_avatar)}>
-
-                                    </div>
-                                </AspectRatio>
-                            </div>
-                            <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
-                                <Trans i18nKey={ID.ABOUT.CONTACT_1} />
-                            </Typography>
-                            <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
-                                <Trans i18nKey={ID.ABOUT.CONTACT_1_POSITION} />
-                            </Typography>
-                        </div>
-                    </div>
-
-
-
-                    <div className={clsx(classes.fullHeight, classes.section4_box_container_top)} >
-                        <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
-                            <div>
-                                <AspectRatio
-                                    ratio={1}
-                                    classes={{
-                                        outerWrapper: classes.section4_avatar_outer,
-                                        innerWrapper: classes.section4_avatar_inner,
-                                    }}
-                                >
-                                    <div className={clsx(classes.section4_avatar)}>
-
-                                    </div>
-                                </AspectRatio>
-                            </div>
-                            <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
-                                <Trans i18nKey={ID.ABOUT.CONTACT_2} />
-                            </Typography>
-                            <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
-                                <Trans i18nKey={ID.ABOUT.CONTACT_2_POSITION} />
-                            </Typography>
-                        </div>
-                    </div>
+            <InViewElement variants={commonMotion.groupTransition} key={`section4-${width}`}>
+                <div id={'section4'} className={clsx(classes.divRow2Column, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 5 }}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 1.2 }}>
+                        <Typography className={clsx(classes.textTitle, classes.section4_txt1)} color={'textSecondary'} >
+                            <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_1} />
+                        </Typography>
+                        <Typography className={clsx(classes.textCaption, classes.section4_txt2)} >
+                            <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_2} />
+                        </Typography>
+                        <Typography className={clsx(classes.textTitle, classes.section4_txt3)} >
+                            <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_3} />
+                        </Typography>
+                    </motion.div>
 
                     {
-                        isWidthUp('md', width) &&
-                        <div className={clsx(classes.fullHeight, classes.fullWidth)} style={{ position: 'absolute', zIndex: 1 }}>
-                            <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_1} />
-                            <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_2} />
-                            <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_3} variant={'square'} />
-                        </div>
+                        isWidthDown('sm', width) &&
+                        <div style={{ padding: 20 }} />
                     }
+
+                    <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={clsx(classes.divRow, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ flex: 3.8, position: 'relative' }}>
+                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.fullHeight, classes.section4_box_container_bottom)} >
+                            <div id={'section4.2a'} ref={this.refContactBox1} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
+                                <div>
+                                    <AspectRatio
+                                        ratio={1}
+                                        classes={{
+                                            outerWrapper: classes.section4_avatar_outer,
+                                            innerWrapper: classes.section4_avatar_inner,
+                                        }}
+                                    >
+                                        <div className={clsx(classes.section4_avatar)}>
+
+                                        </div>
+                                    </AspectRatio>
+                                </div>
+                                <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
+                                    <Trans i18nKey={ID.ABOUT.CONTACT_1} />
+                                </Typography>
+                                <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
+                                    <Trans i18nKey={ID.ABOUT.CONTACT_1_POSITION} />
+                                </Typography>
+                            </div>
+                        </motion.div>
+
+
+
+                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.fullHeight, classes.section4_box_container_top)} >
+                            <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
+                                <div>
+                                    <AspectRatio
+                                        ratio={1}
+                                        classes={{
+                                            outerWrapper: classes.section4_avatar_outer,
+                                            innerWrapper: classes.section4_avatar_inner,
+                                        }}
+                                    >
+                                        <div className={clsx(classes.section4_avatar)}>
+
+                                        </div>
+                                    </AspectRatio>
+                                </div>
+                                <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
+                                    <Trans i18nKey={ID.ABOUT.CONTACT_2} />
+                                </Typography>
+                                <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
+                                    <Trans i18nKey={ID.ABOUT.CONTACT_2_POSITION} />
+                                </Typography>
+                            </div>
+                        </motion.div>
+
+                        {
+                            isWidthUp('md', width) &&
+                            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.fullHeight, classes.fullWidth)} style={{ position: 'absolute', zIndex: 1 }}>
+                                <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_1} />
+                                <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_2} />
+                                <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_3} variant={'square'} />
+                            </motion.div>
+                        }
+                    </motion.div>
                 </div>
-            </div>
+            </InViewElement>
         )
     }
 

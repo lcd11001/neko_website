@@ -35,6 +35,15 @@ const MAX_LINE_HEIGHT = 3
 const styles = theme => ({
     section1: {
         backgroundImage: `linear-gradient(${theme.palette.primary.secondary}, ${theme.palette.primary.main})`,
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop'],
+                value: [150],
+                variant: [10],
+                unit: ['px']
+            }
+        ),
+
     },
 
     section1_img1: {
@@ -368,6 +377,7 @@ const styles = theme => ({
     },
 
     section4_carousel_buttons: {
+        padding: '0 12px',
         "&:hover": {
             backgroundColor: "transparent",
             color: theme.palette.primary.secondary
@@ -523,7 +533,7 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section6: {
-        
+
     },
 
     section6_txt1: {
@@ -802,8 +812,6 @@ class Home extends React.Component
 
         return (
             <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
-                <Toolbar disableGutters={true} className={classes.toolbarHome} style={{ backgroundColor: 'transparent' }} />
-
                 <InViewElement variants={commonMotion.groupTransition}>
                     <motion.div variants={commonMotion.delayTransition(0)} id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                         <div className={clsx(classes.divColumn, classes.divColumn)}>
