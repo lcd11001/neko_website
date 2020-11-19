@@ -22,13 +22,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import InViewElement from '../Components/InViewElement';
 
 const OPACITY = '7F'
-const GRID_LIST_SPACING = {
-    'xl': 120,// extra-large
-    'lg': 100, // large
-    'md': 80, // medium
-    'sm': 60, // small
-    'xs': 40, // extra small
-}
 
 const styles = theme => ({
     section1: {
@@ -124,16 +117,23 @@ const styles = theme => ({
     },
 
     gridList: {
-
+        ...breakpointsStyle(theme,
+            {
+                key: ['margin'],
+                value: [-60],
+                variant: [-10],
+                unit: ['px !important']
+            }
+        ),
     },
 
     gridListTitle: {
         ...breakpointsStyle(theme,
             {
-                key: ['height'],
-                value: [400],
-                variant: [20],
-                unit: ['px !important']
+                key: ['height', 'padding'],
+                value: [400, 60],
+                variant: [20, 10],
+                unit: ['px !important', 'px !important']
             }
         ),
     }
