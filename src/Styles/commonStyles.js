@@ -136,6 +136,12 @@ const styles = (theme) => ({
         boxShadow: '2px 5px 10px #EAEAEAEA'
     },
 
+    imgMotion: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover'
+    },
+
     fullWidth: {
         width: '100% !important'
         // backgroundColor: 'red'

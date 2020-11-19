@@ -202,9 +202,6 @@ const styles = theme => ({
         // left: '50%',
         // top: '50%',
         // position: 'absolute'
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
     },
 
     section3_container_img_small: {
@@ -491,7 +488,7 @@ class Works extends React.Component
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.fullWidth, classes.fullHeight)} style={{ flexDirection: flexContainer }}>
                 <div className={clsx(classes.section3_container_img, classes.section3_container_img_big)}>
                     <motion.img
-                        className={classes.section3_img}
+                        className={classes.imgMotion}
                         alt={item.img}
                         src={Utils.getUrl(item.img)}
                         whileHover={{

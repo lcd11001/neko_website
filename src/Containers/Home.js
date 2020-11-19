@@ -479,11 +479,6 @@ const styles = theme => ({
         borderTopRightRadius: 7,
     },
 
-    section5_img_motion: {
-        width: '100%',
-        objectFit: 'cover',
-    },
-
     section5_date: {
         ...breakpointsStyle(theme,
             {
@@ -1355,7 +1350,7 @@ class Home extends React.Component
                         <motion.img
                             alt={IMG}
                             src={path}
-                            className={classes.section5_img_motion}
+                            className={classes.imgMotion}
                             whileHover={{
                                 scale: 1.1
                             }}
