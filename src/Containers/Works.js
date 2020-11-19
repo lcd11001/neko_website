@@ -331,9 +331,67 @@ class Works extends React.Component
 
         return (
             <GridListTile key={index} cols={cellColumns}>
-                <Typography>{item.title}</Typography>
-                <Typography>{item.category.join(', ')}</Typography>
+                <InViewElement variants={commonMotion.groupTransition} key={`section3-${index}-${width}`}>
+                    {
+                        cellColumns === maxColumns
+                            ? this.renderBigCell(item, index)
+                            : this.renderSmallCell(item, index)
+                    }
+
+                </InViewElement>
             </GridListTile>
+        )
+    }
+
+    renderBigCell(item, index)
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props
+
+        const containerFlex = isWidthUp('md', width) ? 2 : 1
+        const imageFlex = isWidthUp('md', width)
+            ? index % 2 === 0
+                ? containerFlex * 0.6
+                : 0.4
+            : 1
+        const textFlex = isWidthUp('md', width)
+            ? containerFlex - imageFlex
+            : 1
+
+        return (
+            <div className={clsx(classes.divRow2Column, classes.fullWidth)} style={{ flex: containerFlex }}>
+                <div style={{ flex: imageFlex }}>
+                    <img alt={item.img} src={Utils.getUrl(item.img)} />
+                </div>
+                <div style={{ flex: textFlex }}>
+                    <Typography>{item.title}</Typography>
+                    <Typography>{item.category.join(', ')}</Typography>
+                </div>
+            </div>
+        )
+    }
+
+    renderSmallCell(item, index)
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props
+
+        return (
+            <div className={clsx(classes.divColumn, classes.fullWidth)}>
+                <div >
+                    <img alt={item.img} src={Utils.getUrl(item.img)} />
+                </div>
+                <div >
+                    <Typography>{item.title}</Typography>
+                    <Typography>{item.category.join(', ')}</Typography>
+                </div>
+            </div>
         )
     }
 
