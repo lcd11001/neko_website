@@ -8,12 +8,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
 
-import { connect } from 'react-redux'
 import compose from 'recompose/compose'
-import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
-import PageNotFound from '../Components/PageError/PageNotFound';
 
 import { WorksMenu } from '../Data/Defines'
 import { Link, withRouter } from 'react-router-dom';
@@ -269,12 +266,14 @@ class Works extends React.Component
                         return t(ID.MENU[item.replace(/MENU::/g, '').trim()])
                     })
                 let TITLE = t(ID.WORKS[`TITLE_${index + 1}`])
+                let CONTENT = t(ID.WORKS[`CONTENT_${index + 1}`])
                 let LINK = Utils.i18Link(t, ID.WORKS[`LINK_${index + 1}`])
 
                 return {
                     img: IMG,
                     category: CATEGORY,
                     title: TITLE,
+                    content: CONTENT,
                     link: LINK
                 }
             })
@@ -393,7 +392,12 @@ class Works extends React.Component
 
         return (
             <div key={`${section2_menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.section2_menu)}>
-                <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
+                <Link
+                    to={menuLink}
+                    className={clsx(classMenuLink, classes.textLinkHidden)}
+                    onMouseEnter={this.handleMouseEnter(menuLink)}
+                    onMouseLeave={this.handleMouseLeave(menuLink)}
+                >
                     <Typography className={classes.textTitle}>{t(section2_menu.text)}</Typography>
                 </Link>
                 <Divider className={classUnderline} />
@@ -456,7 +460,15 @@ class Works extends React.Component
         return (
             <GridListTile key={index} cols={cellColumns} className={classes.section3_grid_list_title}>
                 <InViewElement variants={commonMotion.groupTransition} key={`section3-${index}-${width}`}>
-                    <Link to={cellLink} className={clsx(classCellLink, classes.textLinkHidden)} onMouseEnter={this.handleMouseEnter(cellLink)} onMouseLeave={this.handleMouseLeave(cellLink)}>
+                    <Link
+                        to={{
+                            pathname: cellLink,
+                            query: item
+                        }}
+                        className={clsx(classCellLink, classes.textLinkHidden)}
+                        onMouseEnter={this.handleMouseEnter(cellLink)}
+                        onMouseLeave={this.handleMouseLeave(cellLink)}
+                    >
                         {
                             cellColumns === maxColumns && maxColumns > 1
                                 ? this.renderBigCell(item, index)

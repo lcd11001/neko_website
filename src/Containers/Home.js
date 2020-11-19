@@ -9,12 +9,9 @@ import WaterWave from 'react-water-wave'
 import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
 
-import { connect } from 'react-redux'
 import compose from 'recompose/compose'
-import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
-import PageUnderContruction from '../Components/PageError/PageUnderContruction';
 import { Button, Divider, Fade, IconButton, isWidthDown, Paper, Toolbar, Typography, withWidth } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
@@ -1481,20 +1478,7 @@ Home.propTypes =
     classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    ...state.global,
-    ...state.cms
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    SetTitle: (title) =>
-    {
-        dispatch(ActionGlobal.SetTitle(title))
-    }
-})
-
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
     withWidth()

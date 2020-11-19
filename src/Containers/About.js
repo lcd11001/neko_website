@@ -7,9 +7,7 @@ import { motion } from 'framer-motion'
 import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
 
-import { connect } from 'react-redux'
 import compose from 'recompose/compose'
-import * as ActionGlobal from '../Redux/Actions/ActionGlobal'
 
 import Utils from '../Utils'
 
