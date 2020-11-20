@@ -75,7 +75,7 @@ class App extends React.Component
                     {
                         // Fixed: missing menu when page transition
                         !isHome &&
-                        this.renderAppbar('relative', 'transparent', false)
+                        this.renderAppbar('relative', 'white', false)
                     }
                     {children}
                     <Footer />
