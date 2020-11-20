@@ -134,7 +134,7 @@ const styles = theme => ({
         )
     },
 
-    section2_text_category: {
+    section2_text_date: {
         color: theme.palette.text.disabled,
     },
 
@@ -325,7 +325,7 @@ class Blogs extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section2_container_des, classes.section2_container_des_small)}>
-                    <Typography className={clsx(classes.textSubTitle, classes.section2_text_category)}>{item.date}</Typography>
+                    <Typography className={clsx(classes.textSubTitle, classes.section2_text_date)}>{item.date}</Typography>
                     <Typography className={clsx(classes.textTitle, classes.section2_text_title)}>{item.title}</Typography>
                 </div>
             </motion.div>
