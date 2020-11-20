@@ -21,14 +21,14 @@ const delayTransition = (delay) => ({
         transition: {
             when: 'beforeChildren',
             delay: delay,
-            staggerChildren: 0.5
+            staggerChildren: 0.3
         }
     },
     invisible: {
         opacity: 0,
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0.5
+            staggerChildren: 0.3
         }
     }
 })
@@ -41,14 +41,14 @@ const groupTransition = {
         opacity: 1,
         transition: {
             when: 'beforeChildren',
-            staggerChildren: 0.5
+            staggerChildren: 0.3
         }
     },
     invisible: {
         opacity: 0,
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0.5
+            staggerChildren: 0.3
         }
     }
 }
@@ -63,10 +63,10 @@ const elementTransition = {
         y: 0,
         transition: {
             ease: 'easeOut',
-            duration: 1,
+            duration: 0.8,
 
             when: 'beforeChildren',
-            staggerChildren: 0.5
+            staggerChildren: 0.3
         }
     },
     invisible: {
@@ -74,7 +74,7 @@ const elementTransition = {
         y: '50px',
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0.5
+            staggerChildren: 0.3
         }
     }
 }
