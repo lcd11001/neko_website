@@ -133,7 +133,8 @@ const styles = (theme) => ({
         height: '100%',
         // border: '1px solid #EAEAEA',
         border: 'none',
-        boxShadow: '2px 5px 10px #EAEAEAEA'
+        boxShadow: '2px 5px 10px #EAEAEAEA',
+        overflow: 'hidden'
     },
 
     imgMotion: {
