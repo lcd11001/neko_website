@@ -12,15 +12,15 @@ import ID from '../Translations/ID.json'
 import compose from 'recompose/compose'
 
 import Utils from '../Utils'
-import { withWidth, Typography, GridList, GridListTile } from '@material-ui/core';
+import { withWidth, isWidthUp, Typography, GridList, GridListTile } from '@material-ui/core';
 
 import InViewElement from '../Components/InViewElement'
 
 const OPACITY = '7F'
 const CELL_HEIGHT = 400
 const CELL_HEIGHT_VARIANT = 25
-const CELL_PADDING = 60
-const CELL_PADDING_VARIANT = 10
+const CELL_PADDING = 40
+const CELL_PADDING_VARIANT = 5
 
 const styles = theme => ({
 
@@ -64,7 +64,7 @@ const styles = theme => ({
         ),
     },
 
-    section2_grid_list_title_root: {
+    section2_grid_list_title: {
         ...breakpointsStyle(theme,
             {
                 key: ['padding'],
@@ -73,11 +73,6 @@ const styles = theme => ({
                 unit: ['px !important']
             }
         ),
-    },
-
-    section2_grid_list_title_tile: {
-        // due to box shadow
-        padding: 10
     },
 
     section2_container_img: {
@@ -94,7 +89,13 @@ const styles = theme => ({
     },
 
     section2_container_img_big: {
-        width: 'calc(50% + var(--paddingWidth))',
+        width: '50%',
+        display: 'flex'
+    },
+
+    section2_container_des_big: {
+        height: '100%',
+        width: '50%',
     },
 
     section2_container_des: {
@@ -134,7 +135,7 @@ const styles = theme => ({
         )
     },
 
-    section2_text_date: {
+    section2_text_description: {
         color: theme.palette.text.disabled,
     },
 
@@ -273,6 +274,8 @@ class Capabilites extends React.Component
             width
         } = this.props
 
+        let cellColumns = isWidthUp('md', width) ? 2 : 1
+
         let cellLink = item.link
 
         let isHover = this.state[`hover_${cellLink}`] === true
@@ -282,7 +285,7 @@ class Capabilites extends React.Component
         })
 
         return (
-            <GridListTile key={index} cols={1} classes={{ root: classes.section2_grid_list_title_root, tile: classes.section2_grid_list_title_tile }}>
+            <GridListTile key={index} cols={1} className={classes.section2_grid_list_title}>
                 <InViewElement variants={commonMotion.groupTransition} key={`section2-${index}-${width}`}>
                     <Link
                         to={{
@@ -294,11 +297,54 @@ class Capabilites extends React.Component
                         onMouseLeave={this.handleMouseLeave(cellLink)}
                     >
                         {
-                            this.renderSmallCell(item, index)
+                            cellColumns > 1
+                                ? this.renderBigCell(item, index)
+                                : this.renderSmallCell(item, index)
                         }
                     </Link>
                 </InViewElement>
             </GridListTile>
+        )
+    }
+
+    renderBigCell(item, index)
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props
+
+        const flexContainer = isWidthUp('md', width)
+            ? index % 2 === 1 ? 'row' : 'row-reverse'
+            : null
+
+        const styleDes = isWidthUp('md', width)
+            ? index % 2 === 1 ? { paddingLeft: 'calc(2 * var(--paddingWidth))', paddingRight: 0 } : { paddingLeft: 0 }
+            : null
+
+        const styleImg = isWidthUp('md', width)
+            ? index % 2 === 1 ? { justifyContent: 'flex-start' } : { justifyContent: 'flex-end' }
+            : null
+
+        return (
+            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.fullWidth, classes.fullHeight)} style={{ flexDirection: flexContainer }}>
+                <div className={clsx(classes.section2_container_img, classes.section2_container_img_big)} style={styleImg}>
+                    <motion.img
+                        className={classes.imgMotionContain}
+                        alt={item.img}
+                        src={Utils.getUrl(item.img)}
+                        whileHover={{
+                            scale: 1.1
+                        }}
+                        transition={commonMotion.transition}
+                    />
+                </div>
+                <div className={clsx(classes.section2_container_des, classes.section2_container_des_big)} style={styleDes}>
+                    <Typography className={clsx(classes.textTitle2x, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.textSubTitle2x, classes.section2_text_description)}>{item.description}</Typography>
+                </div>
+            </motion.div>
         )
     }
 
@@ -314,7 +360,7 @@ class Capabilites extends React.Component
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight, classes.divBox)}>
                 <div className={clsx(classes.section2_container_img, classes.section2_container_img_small)}>
                     <motion.img
-                        className={classes.imgMotion}
+                        className={classes.imgMotionContain}
                         alt={item.img}
                         src={Utils.getUrl(item.img)}
                         whileHover={{
@@ -324,8 +370,8 @@ class Capabilites extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section2_container_des, classes.section2_container_des_small)}>
-                    <Typography className={clsx(classes.textSubTitle, classes.section2_text_date)}>{item.date}</Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.textTitle2x, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.textSubTitle2x, classes.section2_text_description)}>{item.description}</Typography>
                 </div>
             </motion.div>
         )

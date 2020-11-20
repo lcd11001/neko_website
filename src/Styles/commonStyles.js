@@ -143,6 +143,12 @@ const styles = (theme) => ({
         objectFit: 'cover'
     },
 
+    imgMotionContain: {
+        width: 'auto',
+        height: '100%',
+        objectFit: 'contain'
+    },
+
     fullWidth: {
         width: '100% !important'
         // backgroundColor: 'red'
