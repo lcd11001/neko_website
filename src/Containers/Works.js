@@ -529,7 +529,7 @@ class Works extends React.Component
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight)}>
                 <div className={clsx(classes.section3_container_img, classes.section3_container_img_small)}>
                     <motion.img
-                        className={classes.section3_img}
+                        className={classes.imgMotion}
                         alt={item.img}
                         src={Utils.getUrl(item.img)}
                         whileHover={{

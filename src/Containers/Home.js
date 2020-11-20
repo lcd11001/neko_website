@@ -1055,7 +1055,7 @@ class Home extends React.Component
                 </InViewElement>
 
                 <InViewElement variants={commonMotion.groupTransition}>
-                    <motion.div variants={commonMotion.delayTransition(3)} id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <motion.div variants={commonMotion.delayTransition(2)} id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
                         {/*
                         <Carousel
                             className={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
