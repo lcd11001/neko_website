@@ -101,7 +101,9 @@ InViewElement.defaultProps = {
     initial: 'hidden',
     animate: 'visible',
     exit: 'invisible',
-    options: {}
+    options: {
+        triggerOnce: true
+    }
 }
 
 export default withMultipleStyles(styles)(InViewElement)
