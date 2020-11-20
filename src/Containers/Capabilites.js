@@ -146,7 +146,7 @@ const styles = theme => ({
     }
 });
 
-class Blogs extends React.Component
+class Capabilites extends React.Component
 {
     constructor(props)
     {
@@ -156,30 +156,30 @@ class Blogs extends React.Component
 
     resetState()
     {
-        let totalBlogs = 3
+        let totalCapabilities = 5
         return {
-            allBlogs: this.getAllBlogs(totalBlogs)
+            allBlogs: this.getAllCapabilities(totalCapabilities)
         }
     }
 
-    getAllBlogs(totalBlogs)
+    getAllCapabilities(totalBlogs)
     {
         const { t } = this.props
 
         let allBlogs = Array.apply(0, Array(totalBlogs))
             .map((value, index) =>
             {
-                let IMG = Utils.i18Image(t, ID.BLOG[`IMG_${index + 1}`])
-                let DATE = t(ID.BLOG[`DATE_${index + 1}`])
-                let TITLE = t(ID.BLOG[`TITLE_${index + 1}`])
-                let CONTENT = t(ID.BLOG[`CONTENT_${index + 1}`])
-                let LINK = Utils.i18Link(t, ID.BLOG[`LINK_${index + 1}`])
+                let IMG = Utils.i18Image(t, ID.CAPABILITIES[`IMG_${index + 1}`])
+                let BUTTON = t(ID.CAPABILITIES[`BUTTON_${index + 1}`])
+                let TITLE = t(ID.CAPABILITIES[`TITLE_${index + 1}`])
+                let DESCRIPTION = t(ID.CAPABILITIES[`DESCRIPTION_${index + 1}`])
+                let LINK = Utils.i18Link(t, ID.CAPABILITIES[`LINK_${index + 1}`])
 
                 return {
                     img: IMG,
-                    date: DATE,
+                    button: BUTTON,
                     title: TITLE,
-                    content: CONTENT,
+                    description: DESCRIPTION,
                     link: LINK
                 }
             })
@@ -216,7 +216,7 @@ class Blogs extends React.Component
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
                     <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
-                            i18nKey={ID.BLOG.SECTION_1_TEXT_1}
+                            i18nKey={ID.CAPABILITIES.SECTION_1_TEXT_1}
                             components={{ span: <span /> }}
                             values={{
                                 custom: clsx(classes.section1_txt1)
@@ -334,7 +334,7 @@ class Blogs extends React.Component
     render()
     {
         const { classes, t } = this.props;
-        // console.log('Blogs::render', this.props)
+        // console.log('Capabilites::render', this.props)
         return (
             <motion.div
                 className={classes.root}
@@ -355,7 +355,7 @@ class Blogs extends React.Component
     }
 }
 
-Blogs.propTypes =
+Capabilites.propTypes =
 {
     classes: PropTypes.object.isRequired,
 };
@@ -364,5 +364,5 @@ export default compose(
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
     withWidth()
-)(Blogs);
+)(Capabilites);
 

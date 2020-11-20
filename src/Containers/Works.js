@@ -246,7 +246,6 @@ class Works extends React.Component
     {
         let totalWorks = 20
         return {
-            totalWorks: totalWorks,
             allCategory: this.getAllCategory(totalWorks),
             category: this.getCurrentCategory()
         }
