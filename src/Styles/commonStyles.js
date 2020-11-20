@@ -232,7 +232,7 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [75, 89],
-                variant: [12, 15],
+                variant: [13, 15],
                 unit: ['px', 'px']
             }
         ),

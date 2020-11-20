@@ -65,7 +65,7 @@ class App extends React.Component
             <React.Fragment>
                 <div className={classes.root}>
                     {
-                        this.renderAppbar('absolute', isHome ? 'transparent' : 'white', isSecondary)
+                        this.renderAppbar('absolute', isSecondary ? 'transparent' : 'white', isSecondary)
                     }
                     <HideOnScroll offsetY={-400} timeout={0}>
                         {

@@ -62,7 +62,7 @@ const styles = theme => ({
             {
                 key: ['minHeight'],
                 value: [80],
-                variant: [5],
+                variant: [-10],
                 unit: ['px']
             }
         ),

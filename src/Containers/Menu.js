@@ -34,9 +34,9 @@ const diagonalFrames = (color1 = 'black', color2 = 'transparent', angle = 'to ri
 const styles = theme => ({
     root: {
         // > means only apply to div.root instead of all div
-        '& > div:first-child': {
-            paddingLeft: 0
-        },
+        // '& > div:first-child': {
+        //     paddingLeft: 0
+        // },
 
         '& > div:last-child': {
             paddingRight: 0
