@@ -59,8 +59,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['margin', 'paddingLeft', 'paddingRight'],
-                value: [-CELL_PADDING, 0, 0],
-                variant: [-CELL_PADDING_VARIANT, 0, 0],
+                value: [0, 0, 0],
+                variant: [0, 0, 0],
                 unit: ['px !important', 'px', 'px']
             }
         ),
@@ -80,14 +80,30 @@ const styles = theme => ({
     },
 
     section2_grid_list_title_tile: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingLeft', 'paddingRight'],
-                value: [400, 400],
-                variant: [90, 90],
-                unit: ['px', 'px']
-            }
-        ),
+        // ...breakpointsStyle(theme,
+        //     {
+        //         key: ['paddingLeft', 'paddingRight'],
+        //         value: [400, 400],
+        //         variant: [120, 120],
+        //         unit: ['px', 'px']
+        //     }
+        // ),
+        [theme.breakpoints.only('xl')]: {
+            paddingLeft: 400,
+            paddingRight: 400
+        },
+        [theme.breakpoints.only('lg')]: {
+            paddingLeft: 200,
+            paddingRight: 200
+        },
+        [theme.breakpoints.only('md')]: {
+            paddingLeft: 100,
+            paddingRight: 100
+        },
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: 10,
+            paddingRight: 10
+        },
     },
 
     section2_container_img: {
@@ -110,7 +126,7 @@ const styles = theme => ({
 
     section2_container_des_big: {
         height: '100%',
-        width: '50%',
+        width: 'calc(50% + var(--paddingWidth))',
     },
 
     section2_container_des: {
@@ -135,6 +151,7 @@ const styles = theme => ({
 
     section2_container_des_small: {
         width: '100%',
+        paddingTop: 0,
         paddingBottom: 0
     },
 
@@ -149,7 +166,7 @@ const styles = theme => ({
             {
                 key: ['paddingTop', 'paddingBottom'],
                 value: [CELL_PADDING, CELL_PADDING],
-                variant: [0, 0],
+                variant: [5, 5],
                 unit: ['px !important', 'px !important']
             }
         ),

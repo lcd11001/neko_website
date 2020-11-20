@@ -145,7 +145,10 @@ const styles = theme => ({
     logo: {
         display: 'flex',
         justifyContent: 'flex-start',
-        position: 'relative',
+        position: 'relative'
+    },
+
+    logoRoot: {
         transform: 'translate(0, -30%) scale(1.2)',
         transformOrigin: 'left'
     },
@@ -339,7 +342,7 @@ class Footer extends React.Component
                     <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
                         <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3, minHeight: 200 }}>
                             <div className={classes.logo} style={{ flex: 2 }}>
-                                <Logo secondary />
+                                <Logo secondary classes={{ root: classes.logoRoot }} />
                             </div>
                             <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)} style={{ flex: 1 }}>
                                 <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
