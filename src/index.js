@@ -25,10 +25,12 @@ import About from './Containers/About'
 import Works from './Containers/Works'
 
 import PageNotFound from './Components/PageError/PageNotFound'
+import ScrollToTop from './Components/ScrollToTop'
 
 import { CssBaseline } from '@material-ui/core'
 import Utils from './Utils'
 import WorksDetail from './Containers/WorksDetail'
+import Blogs from './Containers/Blogs'
 
 window.isWaterWaveSupported = false; // Utils.isWaterWaveSupported()
 console.log('isWaterWaveSupported', window.isWaterWaveSupported)
@@ -77,6 +79,8 @@ const Routes = () =>
                     <Router>
                         <Fragment>
                             <CssBaseline />
+                            {/* Fixed: when navigating into another page, its position will remain like the page before. So it won't scroll to top automatically */}
+                            <ScrollToTop />
                             <App>
                                 <Route render={({ location }) => (
                                     <AnimatePresence initial={false} exitBeforeEnter={true}>
@@ -88,6 +92,7 @@ const Routes = () =>
                                             {/* single page */}
                                             <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
                                             <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
+                                            <Route exact path={i18next.t(ID.LINK.BLOG)} component={Blogs} />
 
                                             {/* has sub page "detail" MUST before "category" */}
                                             <Route path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
