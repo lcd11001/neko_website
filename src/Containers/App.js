@@ -67,7 +67,7 @@ class App extends React.Component
                     {
                         this.renderAppbar('absolute', isHome ? 'transparent' : 'white', isSecondary)
                     }
-                    <HideOnScroll offsetY={0} timeout={0}>
+                    <HideOnScroll offsetY={-400} timeout={0}>
                         {
                             this.renderAppbar('fixed', 'white', false)
                         }

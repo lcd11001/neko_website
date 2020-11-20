@@ -19,7 +19,7 @@ import InViewElement from '../Components/InViewElement'
 const OPACITY = '7F'
 const CELL_HEIGHT = 400
 const CELL_HEIGHT_VARIANT = 25
-const CELL_PADDING = 40
+const CELL_PADDING = 50
 const CELL_PADDING_VARIANT = 5
 
 const styles = theme => ({
@@ -50,27 +50,41 @@ const styles = theme => ({
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     section2: {
-
+        paddingLeft: 0,
+        paddingRight: 0
     },
 
     section2_grid_list: {
         ...breakpointsStyle(theme,
             {
                 key: ['margin', 'paddingLeft', 'paddingRight'],
-                value: [-CELL_PADDING, 250, 250],
-                variant: [-CELL_PADDING_VARIANT, 60, 60],
+                value: [-CELL_PADDING, 0, 0],
+                variant: [-CELL_PADDING_VARIANT, 0, 0],
                 unit: ['px !important', 'px', 'px']
             }
         ),
     },
 
-    section2_grid_list_title: {
+    section2_grid_list_title_root: {
         ...breakpointsStyle(theme,
             {
-                key: ['padding'],
-                value: [CELL_PADDING],
-                variant: [CELL_PADDING_VARIANT],
-                unit: ['px !important']
+                key: ['paddingTop', 'paddingBottom'],
+                value: [CELL_PADDING, CELL_PADDING],
+                variant: [0, 0],
+                unit: ['px !important', 'px !important']
+            }
+        ),
+        paddingLeft: '0 !important',
+        paddingRight: '0 !important'
+    },
+
+    section2_grid_list_title_tile: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft', 'paddingRight'],
+                value: [450, 450],
+                variant: [100, 100],
+                unit: ['px', 'px']
             }
         ),
     },
@@ -120,6 +134,7 @@ const styles = theme => ({
 
     section2_container_des_small: {
         width: '100%',
+        paddingBottom: 0
     },
 
     section2_text_title: {
@@ -284,8 +299,14 @@ class Capabilites extends React.Component
             [classes.section2_cell_link + '--hover']: isHover
         })
 
+        const showDot = index % 3 === 2
+
         return (
-            <GridListTile key={index} cols={1} className={classes.section2_grid_list_title}>
+            <GridListTile key={index} cols={1} classes={{
+                root: clsx(classes.section2_grid_list_title_root, showDot ? classes.divDot : ''),
+                tile: classes.section2_grid_list_title_tile
+            }}
+            >
                 <InViewElement variants={commonMotion.groupTransition} key={`section2-${index}-${width}`}>
                     <Link
                         to={{
@@ -357,7 +378,7 @@ class Capabilites extends React.Component
         } = this.props
 
         return (
-            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight, classes.divBox)}>
+            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight)}>
                 <div className={clsx(classes.section2_container_img, classes.section2_container_img_small)}>
                     <motion.img
                         className={classes.imgMotionContain}
