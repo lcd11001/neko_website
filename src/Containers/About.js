@@ -37,11 +37,11 @@ const styles = theme => ({
     },
 
     section1_txt1: {
-        color: '#FFFFFF'
+        color: theme.palette.text.secondary
     },
 
     section1_txt1_dim: {
-        color: '#FFFFFF40'
+        color: '#FFFFFF'
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -302,7 +302,7 @@ class About extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.ABOUT.SECTION_1_TEXT_1}
                             components={{ span: <span /> }}
@@ -354,9 +354,12 @@ class About extends React.Component
                 <Typography className={clsx(classes.textSubTitle, classes.section2_subtitle)}>{SUB_TITILE}</Typography>
                 <div className={classes.section2_btn}>
                     <Link to={LINK} className={classes.textLinkHidden}>
-                        <Button variant={'contained'} color={'primary'}>
+                        <Button
+                            variant={'contained'}
+                            color={'primary'}
+                            endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                        >
                             {BUTTON}
-                            <Icons.IconMenuArrow className={classes.iconArrow} />
                         </Button>
                     </Link>
                 </div>

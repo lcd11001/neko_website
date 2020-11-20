@@ -12,12 +12,13 @@ import ID from '../Translations/ID.json'
 import compose from 'recompose/compose'
 
 import Utils from '../Utils'
-import { withWidth, isWidthUp, Typography, GridList, GridListTile } from '@material-ui/core';
+import { withWidth, isWidthUp, Typography, GridList, GridListTile, Button } from '@material-ui/core';
 
 import InViewElement from '../Components/InViewElement'
+import * as Icons from '../Components/NekoIcons'
 
 const OPACITY = '7F'
-const CELL_HEIGHT = 400
+const CELL_HEIGHT = 500
 const CELL_HEIGHT_VARIANT = 25
 const CELL_PADDING = 50
 const CELL_PADDING_VARIANT = 5
@@ -82,8 +83,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'paddingRight'],
-                value: [450, 450],
-                variant: [100, 100],
+                value: [400, 400],
+                variant: [90, 90],
                 unit: ['px', 'px']
             }
         ),
@@ -103,7 +104,7 @@ const styles = theme => ({
     },
 
     section2_container_img_big: {
-        width: '50%',
+        width: 'calc(50% - var(--paddingWidth))',
         display: 'flex'
     },
 
@@ -140,18 +141,18 @@ const styles = theme => ({
     section2_text_title: {
         color: 'inherit',
         fontWeight: 'bold',
-        ...breakpointsStyle(theme,
-            {
-                key: ['marginTop'],
-                value: [30],
-                variant: [4],
-                unit: ['px']
-            }
-        )
     },
 
     section2_text_description: {
-        color: theme.palette.text.disabled,
+        color: theme.palette.text.primary,
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop', 'paddingBottom'],
+                value: [CELL_PADDING, CELL_PADDING],
+                variant: [0, 0],
+                unit: ['px !important', 'px !important']
+            }
+        ),
     },
 
     section2_cell_link: {
@@ -159,6 +160,17 @@ const styles = theme => ({
         '&--hover': {
             color: theme.palette.primary.main
         }
+    },
+
+    section2_button: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['minWidth'],
+                value: [250],
+                variant: [10],
+                unit: ['px']
+            }
+        )
     }
 });
 
@@ -230,7 +242,7 @@ class Capabilites extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.CAPABILITIES.SECTION_1_TEXT_1}
                             components={{ span: <span /> }}
@@ -341,7 +353,7 @@ class Capabilites extends React.Component
             : null
 
         const styleDes = isWidthUp('md', width)
-            ? index % 2 === 1 ? { paddingLeft: 'calc(2 * var(--paddingWidth))', paddingRight: 0 } : { paddingLeft: 0 }
+            ? index % 2 === 1 ? { paddingLeft: 'calc(2 * var(--paddingWidth))', paddingRight: 0 } : { paddingLeft: 0, paddingRight: 'calc(2 * var(--paddingWidth))' }
             : null
 
         const styleImg = isWidthUp('md', width)
@@ -362,8 +374,16 @@ class Capabilites extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.section2_container_des, classes.section2_container_des_big)} style={styleDes}>
-                    <Typography className={clsx(classes.textTitle2x, classes.section2_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.textSubTitle2x, classes.section2_text_description)}>{item.description}</Typography>
+                    <Typography className={clsx(classes.textCaption, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.textTitle, classes.section2_text_description)}>{item.description}</Typography>
+                    <Button
+                        variant={'contained'}
+                        color={'primary'}
+                        className={clsx(classes.divRow, classes.divBetween, classes.section2_button)}
+                        endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                    >
+                        {item.button}
+                    </Button>
                 </div>
             </motion.div>
         )
@@ -391,8 +411,16 @@ class Capabilites extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section2_container_des, classes.section2_container_des_small)}>
-                    <Typography className={clsx(classes.textTitle2x, classes.section2_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.textSubTitle2x, classes.section2_text_description)}>{item.description}</Typography>
+                    <Typography className={clsx(classes.textCaption, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.textTitle, classes.section2_text_description)}>{item.description}</Typography>
+                    <Button
+                        variant={'contained'}
+                        color={'primary'}
+                        className={clsx(classes.divRow, classes.divBetween, classes.section2_button)}
+                        endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                    >
+                        {item.button}
+                    </Button>
                 </div>
             </motion.div>
         )

@@ -817,11 +817,14 @@ class Home extends React.Component
 
                             <motion.div variants={commonMotion.elementTransition} className={classes.section1_btn1}>
                                 <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_1_LINK)} className={classes.textLinkHidden}>
-                                    <Button variant={'contained'} color={'primary'}>
+                                    <Button
+                                        variant={'contained'}
+                                        color={'primary'}
+                                        endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                                    >
                                         <Trans
                                             i18nKey={ID.HOME.SECTION_1_BUTTON_1}
                                         />
-                                        <Icons.IconMenuArrow className={classes.iconArrow} />
                                     </Button>
                                 </Link>
                             </motion.div>
@@ -872,11 +875,14 @@ class Home extends React.Component
 
                             <motion.div variants={commonMotion.elementTransition} className={classes.section1_btn1}>
                                 <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_2_LINK)} className={classes.textLinkHidden}>
-                                    <Button variant={'contained'} color={'primary'}>
+                                    <Button
+                                        variant={'contained'}
+                                        color={'primary'}
+                                        endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                                    >
                                         <Trans
                                             i18nKey={ID.HOME.SECTION_1_BUTTON_2}
                                         />
-                                        <Icons.IconMenuArrow className={classes.iconArrow} />
                                     </Button>
                                 </Link>
                             </motion.div>
@@ -1198,11 +1204,14 @@ class Home extends React.Component
                     </motion.div>
                     <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={classes.section4_btn1}>
                         <Link to={Utils.i18Link(t, caseStudiLink)} className={classes.textLinkHidden}>
-                            <Button variant={'contained'} color={'primary'}>
+                            <Button
+                                variant={'contained'}
+                                color={'primary'}
+                                endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                            >
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_4_BUTTON_1}
                                 />
-                                <Icons.IconMenuArrow className={classes.iconArrow} />
                             </Button>
                         </Link>
                     </motion.div>
@@ -1284,11 +1293,14 @@ class Home extends React.Component
 
                         <div className={classes.section5_btn1}>
                             <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
-                                <Button variant={'contained'} color={'primary'}>
+                                <Button
+                                    variant={'contained'}
+                                    color={'primary'}
+                                    endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                                >
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_5_BUTTON_1}
                                     />
-                                    <Icons.IconMenuArrow className={classes.iconArrow} />
                                 </Button>
                             </Link>
                         </div>
