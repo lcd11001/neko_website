@@ -64,8 +64,8 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
-                value: [150, 150, 100, 100],
-                variant: [35, 35, 10, 10],
+                value: [200, 200, 100, 100],
+                variant: [48, 48, 10, 10],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -171,8 +171,8 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [13, 15],
-                variant: [1, 1],
+                value: [12, 16],
+                variant: [0, 0],
                 unit: ['px', 'px']
             }
         ),
@@ -183,7 +183,7 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [20, 24],
+                value: [25, 30],
                 variant: [2, 2],
                 unit: ['px', 'px']
             }
@@ -195,7 +195,7 @@ const styles = (theme) => ({
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
-                value: [15, 18],
+                value: [18, 25],
                 variant: [1, 1],
                 unit: ['px', 'px']
             }
@@ -227,7 +227,7 @@ const styles = (theme) => ({
         fontWeight: 500
     },
 
-    textHeader: {
+    textHeader2x: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -239,12 +239,36 @@ const styles = (theme) => ({
         fontWeight: 600
     },
 
-    textSubHeader: {
+    textSubHeader2x: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
                 value: [55, 65],
                 variant: [10, 12],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600
+    },
+
+    textHeader: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [62, 69],
+                variant: [10, 13],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600
+    },
+
+    textSubHeader: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [40, 55],
+                variant: [8, 10],
                 unit: ['px', 'px']
             }
         ),

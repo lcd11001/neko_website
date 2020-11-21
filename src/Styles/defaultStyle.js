@@ -106,9 +106,9 @@ const defaultTheme = createMuiTheme({
                 ...breakpointsStyle(defaultMuiTheme,
                     {
                         key: ['font-size'],
-                        value: [1],
-                        variant: [0.1],
-                        unit: ['rem']
+                        value: [18],
+                        variant: [1],
+                        unit: ['px']
                     }
                 ),
             }

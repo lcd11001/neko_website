@@ -63,8 +63,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['height', 'paddingRight', 'paddingLeft'],
-                value: [SECONDARY_HEIGHT, 150, 150],
-                variant: [SECONDARY_HEIGHT_VARIANT, 35, 35],
+                value: [SECONDARY_HEIGHT, 200, 200],
+                variant: [SECONDARY_HEIGHT_VARIANT, 48, 48],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -79,8 +79,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['padding'],
-                value: [50],
-                variant: [10],
+                value: [100],
+                variant: [40],
                 unit: ['px']
             }
         ),
@@ -100,7 +100,7 @@ const styles = theme => ({
     },
 
     txtContact: {
-        padding: '10px 0'
+        padding: '5px 0'
     },
 
     copyrightContainer: {
@@ -135,8 +135,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingBottom'],
-                value: [54],
-                variant: [5],
+                value: [30],
+                variant: [4],
                 unit: ['px']
             }
         ),
@@ -151,6 +151,10 @@ const styles = theme => ({
     logoRoot: {
         transform: 'translate(0, -30%) scale(1.2)',
         transformOrigin: 'left'
+    },
+
+    contactRoot: {
+        transform: 'translate(0, -30%)',
     },
 
     icon: {
@@ -311,7 +315,7 @@ class Footer extends React.Component
         return (
             <div className={classes.rootSecondary}>
                 <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
-                    <div className={classTitleContainer}>
+                    <div className={classTitleContainer} style={{ top: -30, position: 'relative' }}>
                         <div className={clsx(classes.divColumn, classes.divLeft)}>
                             <Typography className={clsx(classes.txtWhite, classes.title)}>
                                 <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
@@ -344,7 +348,7 @@ class Footer extends React.Component
                             <div className={classes.logo} style={{ flex: 2 }}>
                                 <Logo secondary classes={{ root: classes.logoRoot }} />
                             </div>
-                            <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight)} style={{ flex: 1 }}>
+                            <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight, classes.contactRoot)} style={{ flex: 1 }}>
                                 <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
                                 </Typography>
@@ -360,7 +364,7 @@ class Footer extends React.Component
                     <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
                         <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.caption)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
                                 </Typography>
                             </div>
@@ -384,7 +388,7 @@ class Footer extends React.Component
                         </div>
                         <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.caption)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
                                 </Typography>
                             </div>
@@ -402,7 +406,7 @@ class Footer extends React.Component
                         </div>
                         <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textSubTitle, classes.caption)}>
+                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.caption)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
                                 </Typography>
                             </div>
