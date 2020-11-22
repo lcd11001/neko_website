@@ -145,7 +145,7 @@ class WorksDetail extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition}>
                 <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.text50, classes.section1_text_title)}>{title}</Typography>
+                    <Typography className={clsx(classes.text40, classes.section1_text_title)}>{title}</Typography>
                     <Typography className={clsx(classes.text18, classes.section1_text_category)}>{category.join(', ')}</Typography>
                 </motion.div>
             </InViewElement>

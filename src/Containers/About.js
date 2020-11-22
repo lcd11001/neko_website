@@ -51,12 +51,12 @@ const styles = theme => ({
 
     section2_title: {
         textTransform: 'uppercase',
-        padding: '10% 0',
+        padding: '30px 0',
         fontWeight: 'bold'
     },
 
     section2_subtitle: {
-        padding: '0 15%',
+        padding: '0 150px',
         textAlign: 'center',
         ...breakpointsStyle(theme,
             {
@@ -84,7 +84,7 @@ const styles = theme => ({
     },
 
     section2_btn: {
-        padding: '10% 0',
+        padding: '30px 0',
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,7 +350,7 @@ class About extends React.Component
         return (
             <motion.div variants={commonMotion.elementTransition} key={index} id={`section2.${index + 1}`} className={clsx(classes.divColumn, classes.divBetween)} style={{ flex: 1 }}>
                 <div className={classes.section2_img} />
-                <Typography className={clsx(classes.text25, classes.section2_title)}>{TITILE}</Typography>
+                <Typography className={clsx(classes.text40, classes.section2_title)}>{TITILE}</Typography>
                 <Typography className={clsx(classes.text18, classes.section2_subtitle)}>{SUB_TITILE}</Typography>
                 <div className={classes.section2_btn}>
                     <Link to={LINK} className={classes.textLinkHidden}>
@@ -399,13 +399,13 @@ class About extends React.Component
             <InViewElement variants={commonMotion.groupTransition} key={`section4-${width}`}>
                 <div id={'section4'} className={clsx(classes.divRow2Column, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 5 }}>
                     <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 1.2 }}>
-                        <Typography className={clsx(classes.text25, classes.section4_txt1)} color={'textSecondary'} >
+                        <Typography className={clsx(classes.text12, classes.section4_txt1)} color={'textSecondary'} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_1} />
                         </Typography>
-                        <Typography className={clsx(classes.text50, classes.section4_txt2)} >
+                        <Typography className={clsx(classes.text40, classes.section4_txt2)} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_2} />
                         </Typography>
-                        <Typography className={clsx(classes.text25, classes.section4_txt3)} >
+                        <Typography className={clsx(classes.text18, classes.section4_txt3)} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_3} />
                         </Typography>
                     </motion.div>
@@ -431,7 +431,7 @@ class About extends React.Component
                                         </div>
                                     </AspectRatio>
                                 </div>
-                                <Typography className={clsx(classes.text25, classes.section4_contact_title)} >
+                                <Typography className={clsx(classes.text18, classes.section4_contact_title)} >
                                     <Trans i18nKey={ID.ABOUT.CONTACT_1} />
                                 </Typography>
                                 <Typography className={clsx(classes.text12, classes.section4_contact_position)} >
@@ -457,7 +457,7 @@ class About extends React.Component
                                         </div>
                                     </AspectRatio>
                                 </div>
-                                <Typography className={clsx(classes.text25, classes.section4_contact_title)} >
+                                <Typography className={clsx(classes.text18, classes.section4_contact_title)} >
                                     <Trans i18nKey={ID.ABOUT.CONTACT_2} />
                                 </Typography>
                                 <Typography className={clsx(classes.text12, classes.section4_contact_position)} >

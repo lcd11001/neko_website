@@ -173,27 +173,19 @@ const styles = theme => ({
     },
 
     title: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [60, 75],
-                variant: [8, 15],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 600
+        lineHeight: '40px',
     },
 
     subTitle: {
         ...breakpointsStyle(theme,
             {
-                key: ['font-size', 'line-height', 'paddingLeft'],
-                value: [15, 18, 45],
-                variant: [2.0, 2.5, 5],
-                unit: ['px', 'px', 'px']
+                key: ['paddingLeft'],
+                value: [45],
+                variant: [5],
+                unit: ['px']
             }
         ),
-        fontWeight: 400,
+        lineHeight: '40px',
         textTransform: 'uppercase',
         color: 'inherit',
         letterSpacing: 'inherit'
@@ -311,15 +303,15 @@ class Footer extends React.Component
             <motion.div variants={commonMotion.footerTransitionZ1} className={classes.fullWidth} >
                 <div id={'footer-secondary'} className={classes.rootSecondary}>
                     <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
-                        <div className={classTitleContainer} style={{ top: -30, position: 'relative' }}>
+                        <div className={classTitleContainer}>
                             <div className={clsx(classes.divColumn, classes.divLeft)}>
-                                <Typography className={clsx(classes.txtWhite, classes.title)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text62, classes.title)}>
                                     <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
                                 </Typography>
 
                                 <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                                     <div className={clsx(classes.divRow, classes.divCenter)}>
-                                        <Typography className={clsx(classes.txtWhite, classes.subTitle)}>
+                                        <Typography component={'div'} className={clsx(classes.txtWhite, classes.text18, classes.subTitle)}>
                                             <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
                                         </Typography>
                                         <Icons.IconMenuArrow className={classIconArrow} />

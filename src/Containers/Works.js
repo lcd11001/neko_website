@@ -397,7 +397,7 @@ class Works extends React.Component
                     onMouseEnter={this.handleMouseEnter(menuLink)}
                     onMouseLeave={this.handleMouseLeave(menuLink)}
                 >
-                    <Typography className={classes.text25}>{t(section2_menu.text)}</Typography>
+                    <Typography className={classes.text18}>{t(section2_menu.text)}</Typography>
                 </Link>
                 <Divider className={classUnderline} />
             </div>
