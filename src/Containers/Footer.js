@@ -46,8 +46,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'paddingRight', 'paddingTop'],
-                value: [150, 150, PRIMARY_PADDING],
-                variant: [35, 35, PRIMARY_PADDING_VARIANT],
+                value: [200, 200, PRIMARY_PADDING],
+                variant: [48, 48, PRIMARY_PADDING_VARIANT],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -342,9 +342,9 @@ class Footer extends React.Component
 
         return (
             <div className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
-                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)}>
-                    <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
-                        <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ position: "relative", flex: 3, minHeight: 200 }}>
+                <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)} style={{ flex: 10 }}>
+                    <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 7 }}>
+                        <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight, classes.fullWidth)} style={{ position: "relative", minHeight: 200 }}>
                             <div className={classes.logo} style={{ flex: 2 }}>
                                 <Logo secondary classes={{ root: classes.logoRoot }} />
                             </div>
@@ -361,7 +361,7 @@ class Footer extends React.Component
                             </div>
                         </div>
                     </div>
-                    <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
+                    <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 3 }}>
                         <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                             <div>
                                 <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
