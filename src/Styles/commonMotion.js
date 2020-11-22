@@ -79,18 +79,78 @@ const elementTransition = {
     }
 }
 
-const inViewTransition = {
+const groupFooterTransition = {
     hidden: {
-        opacity: 0,
-        y: '50px'
+        opacity: 0
     },
     visible: {
         opacity: 1,
-        y: 0
+        transition: {
+            when: 'beforeChildren',
+            staggerChildren: 0.8
+        }
     },
     invisible: {
-        opacity: 0.2,
-        y: '50px'
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0.8
+        }
+    }
+}
+
+const footerTransition = {
+    hidden: {
+        y: '50px',
+        opacity: 0
+    },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            ease: 'easeOut',
+            duration: 0.8,
+
+            when: 'beforeChildren',
+            staggerChildren: 0.8
+        }
+    },
+    invisible: {
+        y: '50px',
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0.8
+        }
+    }
+}
+
+const footerTransitionZ1 = {
+    hidden: {
+        opacity: 0,
+        y: '50px',
+        zIndex: 1
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        zIndex: 1,
+        transition: {
+            ease: 'easeOut',
+            duration: 0.8,
+
+            when: 'beforeChildren',
+            staggerChildren: 0.8
+        }
+    },
+    invisible: {
+        opacity: 0,
+        y: '50px',
+        zIndex: 1,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0.8
+        }
     }
 }
 
@@ -177,7 +237,9 @@ export default {
     delayTransition,
     groupTransition,
     elementTransition,
-    inViewTransition,
+    groupFooterTransition,
+    footerTransition,
+    footerTransitionZ1,
     specializeTransition,
     backgroundTransition,
     posTransition
