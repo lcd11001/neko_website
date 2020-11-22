@@ -60,10 +60,15 @@ class App extends React.Component
         const isHome = t(ID.LINK.HOME) === pathname
         const shortMenu = isWidthDown('sm', width)
         const isSecondary = isHome && !shortMenu
+        const isDot = false
+        const classRoot = clsx(
+            classes.root,
+            isDot ? classes.divDot : ''
+        )
 
         return (
             <React.Fragment>
-                <div className={classes.root}>
+                <div className={classRoot}>
                     {
                         this.renderAppbar('absolute', isSecondary ? 'transparent' : 'white', isSecondary)
                     }

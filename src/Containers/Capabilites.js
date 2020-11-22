@@ -259,7 +259,7 @@ class Capabilites extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                    <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.CAPABILITIES.SECTION_1_TEXT_1}
                             components={{ span: <span /> }}
@@ -391,8 +391,8 @@ class Capabilites extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.section2_container_des, classes.section2_container_des_big)} style={styleDes}>
-                    <Typography className={clsx(classes.textCaption, classes.section2_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section2_text_description)}>{item.description}</Typography>
+                    <Typography className={clsx(classes.text50, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.text25, classes.section2_text_description)}>{item.description}</Typography>
                     <Button
                         variant={'contained'}
                         color={'primary'}
@@ -428,8 +428,8 @@ class Capabilites extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section2_container_des, classes.section2_container_des_small)}>
-                    <Typography className={clsx(classes.textCaption, classes.section2_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section2_text_description)}>{item.description}</Typography>
+                    <Typography className={clsx(classes.text50, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.text25, classes.section2_text_description)}>{item.description}</Typography>
                     <Button
                         variant={'contained'}
                         color={'primary'}

@@ -302,7 +302,7 @@ class About extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                    <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.ABOUT.SECTION_1_TEXT_1}
                             components={{ span: <span /> }}
@@ -350,8 +350,8 @@ class About extends React.Component
         return (
             <motion.div variants={commonMotion.elementTransition} key={index} id={`section2.${index + 1}`} className={clsx(classes.divColumn, classes.divBetween)} style={{ flex: 1 }}>
                 <div className={classes.section2_img} />
-                <Typography className={clsx(classes.textTitle, classes.section2_title)}>{TITILE}</Typography>
-                <Typography className={clsx(classes.textSubTitle, classes.section2_subtitle)}>{SUB_TITILE}</Typography>
+                <Typography className={clsx(classes.text25, classes.section2_title)}>{TITILE}</Typography>
+                <Typography className={clsx(classes.text18, classes.section2_subtitle)}>{SUB_TITILE}</Typography>
                 <div className={classes.section2_btn}>
                     <Link to={LINK} className={classes.textLinkHidden}>
                         <Button
@@ -376,7 +376,7 @@ class About extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section3-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section3'} className={clsx(classes.section, classes.section3)}>
-                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section3_txt1)} color={'textSecondary'} >
+                    <Typography className={clsx(classes.textBreak, classes.text62, classes.section3_txt1)} color={'textSecondary'} >
                         <Trans
                             i18nKey={ID.ABOUT.SECTION_3_TEXT_1}
                             components={{ span: <span /> }}
@@ -399,13 +399,13 @@ class About extends React.Component
             <InViewElement variants={commonMotion.groupTransition} key={`section4-${width}`}>
                 <div id={'section4'} className={clsx(classes.divRow2Column, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 5 }}>
                     <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 1.2 }}>
-                        <Typography className={clsx(classes.textTitle, classes.section4_txt1)} color={'textSecondary'} >
+                        <Typography className={clsx(classes.text25, classes.section4_txt1)} color={'textSecondary'} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_1} />
                         </Typography>
-                        <Typography className={clsx(classes.textCaption, classes.section4_txt2)} >
+                        <Typography className={clsx(classes.text50, classes.section4_txt2)} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_2} />
                         </Typography>
-                        <Typography className={clsx(classes.textTitle, classes.section4_txt3)} >
+                        <Typography className={clsx(classes.text25, classes.section4_txt3)} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_3} />
                         </Typography>
                     </motion.div>
@@ -431,10 +431,10 @@ class About extends React.Component
                                         </div>
                                     </AspectRatio>
                                 </div>
-                                <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
+                                <Typography className={clsx(classes.text25, classes.section4_contact_title)} >
                                     <Trans i18nKey={ID.ABOUT.CONTACT_1} />
                                 </Typography>
-                                <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
+                                <Typography className={clsx(classes.text12, classes.section4_contact_position)} >
                                     <Trans i18nKey={ID.ABOUT.CONTACT_1_POSITION} />
                                 </Typography>
                             </div>
@@ -457,10 +457,10 @@ class About extends React.Component
                                         </div>
                                     </AspectRatio>
                                 </div>
-                                <Typography className={clsx(classes.textTitle, classes.section4_contact_title)} >
+                                <Typography className={clsx(classes.text25, classes.section4_contact_title)} >
                                     <Trans i18nKey={ID.ABOUT.CONTACT_2} />
                                 </Typography>
-                                <Typography className={clsx(classes.textNormal, classes.section4_contact_position)} >
+                                <Typography className={clsx(classes.text12, classes.section4_contact_position)} >
                                     <Trans i18nKey={ID.ABOUT.CONTACT_2_POSITION} />
                                 </Typography>
                             </div>

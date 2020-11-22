@@ -390,7 +390,8 @@ const styles = theme => ({
     },
 
     section4_logo: {
-        maxWidth: 350
+        maxWidth: 300,
+        maxHeight: 200
     },
 
     section4_text: {
@@ -808,7 +809,7 @@ class Home extends React.Component
                     <motion.div variants={commonMotion.delayTransition(0)} id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
                         <div className={clsx(classes.divColumn, classes.divColumn)}>
                             <motion.div variants={commonMotion.elementTransition}>
-                                <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section1_txt1)}>
+                                <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_1_TEXT_1}
                                     />
@@ -851,7 +852,7 @@ class Home extends React.Component
                         <div className={clsx(classes.divColumn, classes.divColumn)}>
                             <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
                                 <motion.div variants={commonMotion.elementTransition}>
-                                    <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section1_txt2)}>
+                                    <Typography className={clsx(classes.textBreak, classes.text40, classes.section1_txt2)}>
                                         <Trans
                                             i18nKey={ID.HOME.SECTION_1_TEXT_2}
                                         />
@@ -866,7 +867,7 @@ class Home extends React.Component
                             </div>
 
                             <motion.div variants={commonMotion.elementTransition}>
-                                <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section1_txt3)}>
+                                <Typography className={clsx(classes.textBreak, classes.text18, classes.section1_txt3)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_1_TEXT_3}
                                     />
@@ -907,7 +908,7 @@ class Home extends React.Component
                 <div id={'section2.1'}>
                     <InViewElement variants={commonMotion.groupTransition}>
                         <motion.div variants={commonMotion.elementTransition}>
-                            <Typography className={clsx(classes.textBreak, classes.textNormal, classes.section2_txt1)}>
+                            <Typography className={clsx(classes.textBreak, classes.text12, classes.section2_txt1)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_2_TEXT_1}
                                 />
@@ -945,7 +946,7 @@ class Home extends React.Component
             [classes.menuLink + '--not-hover']: notHover
         })
 
-        let classMenuItem = clsx(classes.textSubHeader, classes.menuItem, {
+        let classMenuItem = clsx(classes.text40, classes.menuItem, {
             [classes.menuItem + '--hover']: isHover
         })
 
@@ -1049,7 +1050,7 @@ class Home extends React.Component
                                     className={classes.section3_img2}
                                 />
 
-                                <Typography className={clsx(classes.textBreak, classes.textSubTitle, classes.section3_txt2)}>
+                                <Typography className={clsx(classes.textBreak, classes.text18, classes.section3_txt2)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_3_TEXT_2}
                                     />
@@ -1218,7 +1219,7 @@ class Home extends React.Component
                     </motion.div>
                     <motion.div variants={commonMotion.elementTransition} id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
                         <div className={classes.section4_carousel_indicators}>
-                            <Typography className={clsx(classes.textSubTitle)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
+                            <Typography className={clsx(classes.text18)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
                         </div>
                         <div className={clsx(classes.divRow, classes.divBetween)}>
                             <IconButton
@@ -1263,8 +1264,8 @@ class Home extends React.Component
                     <img alt={LOGO} src={path} className={classes.section4_logo} />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={clsx(classes.textSubTitle, classes.section4_text, classes.textLimitMultiline)}>{TEXT}</Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section4_title)}>{TITILE}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section4_text, classes.textLimitMultiline)}>{TEXT}</Typography>
+                    <Typography className={clsx(classes.text25, classes.section4_title)}>{TITILE}</Typography>
                 </div>
             </div>
         )
@@ -1288,7 +1289,7 @@ class Home extends React.Component
                 <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
                     <motion.div variants={commonMotion.elementTransition} id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
 
-                        <Typography className={clsx(classes.textBreak, classes.textSubHeader, classes.section5_txt1)}>
+                        <Typography className={clsx(classes.textBreak, classes.text40, classes.section5_txt1)}>
                             <Trans
                                 i18nKey={ID.HOME.SECTION_5_TEXT_1}
                             />
@@ -1372,10 +1373,10 @@ class Home extends React.Component
 
                     <div className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 10 }}>
                         <div style={{ flex: 3 }}>
-                            <Typography className={clsx(classes.textNormal, classes.section5_date)}>{DATE}</Typography>
+                            <Typography className={clsx(classes.text12, classes.section5_date)}>{DATE}</Typography>
                         </div>
                         <div style={{ flex: 7 }}>
-                            <Typography className={clsx(classes.textSubTitle, classes.section5_title)}>{TITILE}</Typography>
+                            <Typography className={clsx(classes.text18, classes.section5_title)}>{TITILE}</Typography>
                         </div>
                     </div>
                 </Link>
@@ -1428,7 +1429,7 @@ class Home extends React.Component
                     <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
-                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog1_txt)}>
+                            <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog1_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
                                 />
@@ -1436,7 +1437,7 @@ class Home extends React.Component
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
-                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog2_txt)}>
+                            <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog2_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_4}
                                 />
@@ -1444,7 +1445,7 @@ class Home extends React.Component
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
-                            <Typography className={clsx(classes.textBreak, classes.textTitle, classes.section6_dialog3_txt)}>
+                            <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog3_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
                                 />

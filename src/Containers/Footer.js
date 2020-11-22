@@ -349,13 +349,13 @@ class Footer extends React.Component
                                 <Logo secondary classes={{ root: classes.logoRoot }} />
                             </div>
                             <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight, classes.contactRoot)} style={{ flex: 1 }}>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12, classes.txtContact)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12, classes.txtContact)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_EMAIL} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.txtContact)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12, classes.txtContact)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT_PHONE} />
                                 </Typography>
                             </div>
@@ -364,49 +364,49 @@ class Footer extends React.Component
                     <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)}>
                         <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.caption)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
                                 </Typography>
                             </div>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_BRAND} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_MOTION} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_WEB} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_2D} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_DIGITAL} />
                                 </Typography>
                             </div>
                         </div>
                         <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.caption)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
                                 </Typography>
                             </div>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_CONTACT} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_POLICY} />
                                 </Typography>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_TERMS} />
                                 </Typography>
                             </div>
                         </div>
                         <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
                             <div>
-                                <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.caption)}>
+                                <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
                                     <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
                                 </Typography>
                             </div>
@@ -444,7 +444,7 @@ class Footer extends React.Component
         return (
             <div className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth, classes.copyrightContainer)}>
                 <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
-                    <Typography className={clsx(classes.txtWhite, classes.textNormal, classes.copyright)} align={'center'}>
+                    <Typography className={clsx(classes.txtWhite, classes.text12, classes.copyright)} align={'center'}>
                         <Trans i18nKey={ID.FOOTER.PRIMARY_COPYRIGHT} />
                     </Typography>
                 </div>

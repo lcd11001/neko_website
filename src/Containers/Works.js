@@ -397,7 +397,7 @@ class Works extends React.Component
                     onMouseEnter={this.handleMouseEnter(menuLink)}
                     onMouseLeave={this.handleMouseLeave(menuLink)}
                 >
-                    <Typography className={classes.textTitle}>{t(section2_menu.text)}</Typography>
+                    <Typography className={classes.text25}>{t(section2_menu.text)}</Typography>
                 </Link>
                 <Divider className={classUnderline} />
             </div>
@@ -509,8 +509,8 @@ class Works extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.section3_container_des, classes.section3_container_des_big)} style={styleDes}>
-                    <Typography className={clsx(classes.textTitle2x, classes.section3_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.textSubTitle2x, classes.section3_text_category)}>{item.category.join(', ')}</Typography>
+                    <Typography className={clsx(classes.text25, classes.section3_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section3_text_category)}>{item.category.join(', ')}</Typography>
                 </div>
             </motion.div>
         )
@@ -538,8 +538,8 @@ class Works extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section3_container_des, classes.section3_container_des_small)}>
-                    <Typography className={clsx(classes.textTitle, classes.section3_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.textSubTitle, classes.section3_text_category)}>{item.category.join(', ')}</Typography>
+                    <Typography className={clsx(classes.text25, classes.section3_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section3_text_category)}>{item.category.join(', ')}</Typography>
                 </div>
             </motion.div>
         )
@@ -556,7 +556,7 @@ class Works extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                    <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.WORKS.SECTION_1_TEXT_1}
                             components={{ span: <span /> }}

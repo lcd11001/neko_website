@@ -214,7 +214,7 @@ class Blogs extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textBreak, classes.textHeader, classes.section1_txt1, classes.section1_txt1_dim)} >
+                    <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.BLOG.SECTION_1_TEXT_1}
                             components={{ span: <span /> }}
@@ -324,8 +324,8 @@ class Blogs extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section2_container_des, classes.section2_container_des_small)}>
-                    <Typography className={clsx(classes.textSubTitle, classes.section2_text_date)}>{item.date}</Typography>
-                    <Typography className={clsx(classes.textTitle, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section2_text_date)}>{item.date}</Typography>
+                    <Typography className={clsx(classes.text25, classes.section2_text_title)}>{item.title}</Typography>
                 </div>
             </motion.div>
         )
@@ -337,7 +337,7 @@ class Blogs extends React.Component
         // console.log('Blogs::render', this.props)
         return (
             <motion.div
-                className={classes.root}
+                className={clsx(classes.root)}
                 initial={'in'}
                 animate={'in'}
                 exit={'out'}

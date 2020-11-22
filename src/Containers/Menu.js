@@ -356,7 +356,7 @@ class Menu extends React.Component
                             menu.underline === 'disable' &&
                             <div key={`${menuLink}-${isHover}`} className={classDiagonalBackground} />
                         }
-                        <Typography className={clsx(classMenuItem, classes.textNormal)} noWrap >
+                        <Typography className={clsx(classMenuItem, classes.text12)} noWrap >
                             <Trans i18nKey={menu.text} />
                         </Typography>
                         {

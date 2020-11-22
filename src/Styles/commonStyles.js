@@ -167,7 +167,7 @@ const styles = (theme) => ({
         position: 'absolute'
     },
 
-    textNormal: {
+    text12: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -179,7 +179,7 @@ const styles = (theme) => ({
         fontWeight: 400
     },
 
-    textTitle: {
+    text25: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -191,7 +191,7 @@ const styles = (theme) => ({
         fontWeight: 500
     },
 
-    textSubTitle: {
+    text18: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -200,58 +200,11 @@ const styles = (theme) => ({
                 unit: ['px', 'px']
             }
         ),
-        fontWeight: 500
+        fontWeight: 400
     },
 
-    textTitle2x: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [30, 36],
-                variant: [4, 4],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 500
-    },
-
-    textSubTitle2x: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [22, 27],
-                variant: [2, 2],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 500
-    },
-
-    textHeader2x: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [75, 89],
-                variant: [13, 15],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 600
-    },
-
-    textSubHeader2x: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['font-size', 'line-height'],
-                value: [55, 65],
-                variant: [10, 12],
-                unit: ['px', 'px']
-            }
-        ),
-        fontWeight: 600
-    },
-
-    textHeader: {
+    
+    text62: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -263,7 +216,7 @@ const styles = (theme) => ({
         fontWeight: 600
     },
 
-    textSubHeader: {
+    text40: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
@@ -275,7 +228,7 @@ const styles = (theme) => ({
         fontWeight: 600
     },
 
-    textCaption: {
+    text50: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
