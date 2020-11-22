@@ -46,7 +46,6 @@ const styles = theme => ({
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     section2: {
-
     },
 
     section2_title: {
@@ -56,31 +55,28 @@ const styles = theme => ({
     },
 
     section2_subtitle: {
-        padding: '0 150px',
         textAlign: 'center',
         ...breakpointsStyle(theme,
             {
-                key: ['minHeight'],
-                value: [80],
-                variant: [-10],
-                unit: ['px']
+                key: ['minHeight', 'paddingLeft', 'paddingRight'],
+                value: [80, 150, 150],
+                variant: [0, 35, 35],
+                unit: ['px', 'px', 'px']
             }
         ),
     },
 
     section2_img: {
-        backgroundColor: theme.palette.primary.secondary,
         ...breakpointsStyle(theme,
             {
                 key: ['height', 'width'],
-                value: [150, 150],
-                variant: [20, 20],
+                value: [200, 200],
+                variant: [5, 5],
                 unit: ['px', 'px']
             }
         ),
-        borderRadius: 10,
-        transform: 'rotate(-20deg)',
-        marginBottom: '10%'
+        marginBottom: '10%',
+        marginTop: '10%'
     },
 
     section2_btn: {
@@ -323,7 +319,7 @@ class About extends React.Component
         const totalColumn = 2
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section2-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section2'} className={clsx(classes.divRow, classes.divCenter, classes.section, classes.section2)} style={{ flex: totalColumn }}>
+                <motion.div variants={commonMotion.elementTransition} id={'section2'} className={clsx(classes.divRow2Column, classes.divCenter, classes.section, classes.section2)} style={{ flex: totalColumn }}>
                     {
                         Array.apply(0, Array(totalColumn))
                             .map((value, index) => (
@@ -342,6 +338,7 @@ class About extends React.Component
             t
         } = this.props
 
+        const IMG = Utils.i18Image(t, ID.ABOUT[`SECTION_2_IMG_${index + 1}`])
         const TITILE = t(ID.ABOUT[`SECTION_2_TEXT_${index + 1}_A`])
         const SUB_TITILE = t(ID.ABOUT[`SECTION_2_TEXT_${index + 1}_B`])
         const LINK = Utils.i18Link(t, ID.ABOUT[`SECTION_2_BUTTON_${index + 1}_LINK`])
@@ -349,7 +346,9 @@ class About extends React.Component
 
         return (
             <motion.div variants={commonMotion.elementTransition} key={index} id={`section2.${index + 1}`} className={clsx(classes.divColumn, classes.divBetween)} style={{ flex: 1 }}>
-                <div className={classes.section2_img} />
+                <div className={classes.section2_img}                 >
+                    <img alt={IMG} src={Utils.getUrl(IMG)} className={classes.imgMotionContain} />
+                </div>
                 <Typography className={clsx(classes.text40, classes.section2_title)}>{TITILE}</Typography>
                 <Typography className={clsx(classes.text18, classes.section2_subtitle)}>{SUB_TITILE}</Typography>
                 <div className={classes.section2_btn}>
