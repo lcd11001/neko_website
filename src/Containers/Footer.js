@@ -80,7 +80,7 @@ const styles = theme => ({
             {
                 key: ['padding'],
                 value: [100],
-                variant: [30],
+                variant: [40],
                 variantXS: [25],
                 unit: ['px']
             }
