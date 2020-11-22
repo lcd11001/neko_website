@@ -173,6 +173,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [12, 16],
                 variant: [0, 0],
+                variantXS: [0.25, 0.25],
                 unit: ['px', 'px']
             }
         ),
@@ -184,7 +185,8 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [25, 30],
-                variant: [2, 2],
+                variant: [0, 0],
+                variantXS: [3, 3],
                 unit: ['px', 'px']
             }
         ),
@@ -196,20 +198,22 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [18, 25],
-                variant: [1, 1],
+                variant: [0, 0],
+                variantXS: [0.5, 0.5],
                 unit: ['px', 'px']
             }
         ),
         fontWeight: 400
     },
 
-    
+
     text62: {
         ...breakpointsStyle(theme,
             {
                 key: ['font-size', 'line-height'],
                 value: [62, 69],
-                variant: [10, 13],
+                variant: [5, 5],
+                variantXS: [10, 10],
                 unit: ['px', 'px']
             }
         ),
@@ -221,7 +225,8 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [40, 55],
-                variant: [8, 10],
+                variant: [0, 0],
+                variantXS: [5, 5],
                 unit: ['px', 'px']
             }
         ),
@@ -233,7 +238,8 @@ const styles = (theme) => ({
             {
                 key: ['font-size', 'line-height'],
                 value: [50, 59],
-                variant: [8, 8],
+                variant: [0, 0],
+                variantXS: [8, 8],
                 unit: ['px', 'px']
             }
         ),
