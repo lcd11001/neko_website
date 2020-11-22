@@ -351,11 +351,13 @@ class Works extends React.Component
                     }
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className={clsx(classes.divColumn, classes.divLeft, classes.fullWidth)}>
-                        {
-                            WorksMenu.filter(section2_menu => t(section2_menu.link) !== pathname).map(section2_menu => this.renderMenuItem(section2_menu, true))
-                        }
-                    </div>
+                    <InViewElement variants={commonMotion.groupTransition} options={{ triggerOnce: false }}>
+                        <div className={clsx(classes.divColumn, classes.divLeft, classes.fullWidth)}>
+                            {
+                                WorksMenu.filter(section2_menu => t(section2_menu.link) !== pathname).map(section2_menu => this.renderMenuItem(section2_menu, true))
+                            }
+                        </div>
+                    </InViewElement>
                 </AccordionDetails>
             </Accordion>
         )
@@ -390,7 +392,7 @@ class Works extends React.Component
         })
 
         return (
-            <div key={`${section2_menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.section2_menu)}>
+            <motion.div variants={commonMotion.elementTransition} key={`${section2_menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.section2_menu)}>
                 <Link
                     to={menuLink}
                     className={clsx(classMenuLink, classes.textLinkHidden)}
@@ -400,7 +402,7 @@ class Works extends React.Component
                     <Typography className={classes.text18}>{t(section2_menu.text)}</Typography>
                 </Link>
                 <Divider className={classUnderline} />
-            </div>
+            </motion.div>
         )
     }
 

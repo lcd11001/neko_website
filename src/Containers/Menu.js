@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose'
 
+import { motion } from 'framer-motion'
+
 import { Link, withRouter } from 'react-router-dom';
-import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import { Divider, Typography } from '@material-ui/core';
 import { HeaderMenu } from '../Data/Defines'
 
@@ -105,7 +107,7 @@ const styles = theme => ({
             ...breakpointsStyle(theme,
                 {
                     key: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
-                    value: [10, 10, 25, 25],
+                    value: [11, 11, 25, 25],
                     variant: [2, 2, 2, 2],
                     unit: ['px', 'px', 'px', 'px']
                 }
@@ -349,7 +351,7 @@ class Menu extends React.Component
 
         return (
 
-            <div key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
+            <motion.div variants={commonMotion.elementTransition} key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onClick={this.handleMouseClick(menuLink)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
                         {
@@ -369,7 +371,7 @@ class Menu extends React.Component
                     (shortMenu || menu.underline !== 'disable') &&
                     <Divider className={classUnderline} />
                 }
-            </div>
+            </motion.div>
         )
     }
 
@@ -385,13 +387,13 @@ class Menu extends React.Component
             : clsx(classes.root, classes.divRow, classes.divCenter)
 
         return (
-            <div className={classRoot}>
+            <motion.div variants={commonMotion.groupTransition} initial={'hidden'} animate={'visible'} exit={'invisible'} className={classRoot}>
                 {
                     HeaderMenu.map(menu => (
                         this.renderMenu(menu)
                     ))
                 }
-            </div>
+            </motion.div>
         );
     }
 
