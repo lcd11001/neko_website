@@ -80,7 +80,8 @@ const styles = theme => ({
             {
                 key: ['padding'],
                 value: [100],
-                variant: [40],
+                variant: [30],
+                variantXS: [25],
                 unit: ['px']
             }
         ),
@@ -89,7 +90,7 @@ const styles = theme => ({
     bgSecondarySize: {
         backgroundSize: 'cover',
 
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             backgroundSize: 'contain'
         }
     },
@@ -173,19 +174,25 @@ const styles = theme => ({
     },
 
     title: {
-        lineHeight: '40px',
+        ...breakpointsStyle(theme,
+            {
+                key: ['lineHeight'],
+                value: [40],
+                variant: [5],
+                unit: ['px', 'px']
+            }
+        )
     },
 
     subTitle: {
         ...breakpointsStyle(theme,
             {
-                key: ['paddingLeft'],
-                value: [45],
-                variant: [5],
-                unit: ['px']
+                key: ['paddingLeft', 'lineHeight'],
+                value: [45, 40],
+                variant: [5, 5],
+                unit: ['px', 'px']
             }
         ),
-        lineHeight: '40px',
         textTransform: 'uppercase',
         color: 'inherit',
         letterSpacing: 'inherit'
@@ -294,17 +301,21 @@ class Footer extends React.Component
         const img = t(ID.IMAGE.FOOTER_1)
         const imgUrl = pathname === t(ID.LINK.ABOUT) ? 'none' : `url(${Utils.getUrl(img)})`
 
-        const isSmall = isWidthDown('sm', width)
-        const classTitleContainer = clsx(classes.divColumn, classes.divCenter, classes.fullHeight, classes.fullWidth,
+        const isSmall = isWidthDown('md', width)
+        const classTitleRoot = clsx(classes.divColumn, classes.divCenter, classes.fullHeight, classes.fullWidth,
             isSmall ? classes.divBottom : classes.divRight
+        )
+        const classTitleContainer = clsx(classes.divColumn,
+            isSmall ? classes.divCenter : classes.divLeft,
+            isSmall ? classes.fullWidth : ''
         )
 
         return (
             <motion.div variants={commonMotion.footerTransitionZ1} className={classes.fullWidth} >
                 <div id={'footer-secondary'} className={classes.rootSecondary}>
                     <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
-                        <div className={classTitleContainer}>
-                            <div className={clsx(classes.divColumn, classes.divLeft)}>
+                        <div className={classTitleRoot}>
+                            <div className={classTitleContainer}>
                                 <Typography className={clsx(classes.txtWhite, classes.text62, classes.title)}>
                                     <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
                                 </Typography>
