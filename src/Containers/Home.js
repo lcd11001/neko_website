@@ -12,7 +12,7 @@ import ID from '../Translations/ID.json'
 import compose from 'recompose/compose'
 
 import Utils from '../Utils'
-import { Button, Divider, Fade, IconButton, isWidthDown, Paper, Toolbar, Typography, withWidth } from '@material-ui/core';
+import { Avatar, Button, Divider, Fade, IconButton, isWidthDown, Paper, Toolbar, Typography, withWidth } from '@material-ui/core';
 
 import * as Icons from '../Components/NekoIcons'
 
@@ -605,6 +605,7 @@ const styles = theme => ({
         ),
         border: '2px solid #707070',
         borderRadius: 7,
+        position: 'relative'
     },
 
     section6_dialog1_pos: {
@@ -615,26 +616,75 @@ const styles = theme => ({
         }
     },
 
+    section6_dialog1_avatar_container: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'left'],
+                value: [100, 100, -110],
+                variant: [10, 10, -10],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        position: 'absolute',
+    },
+
+    section6_dialog1_hash_tag_container: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'right'],
+                value: [100, 100, -110],
+                variant: [10, 10, -10],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        position: 'absolute',
+    },
+
     section6_dialog2: {
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
                 value: [600, 245],
-                variant: [90, 35],
+                variant: [50, 35],
                 unit: ['px', 'px']
             }
         ),
         borderRadius: 7,
         backgroundColor: '#EC6966',
+        position: 'relative'
     },
 
     section6_dialog2_pos: {
-        marginLeft: '30%',
+        marginLeft: '35%',
         marginTop: '5%',
 
         [theme.breakpoints.down('sm')]: {
             marginLeft: '30%',
         },
+    },
+
+    section6_dialog2_avatar_container: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'left'],
+                value: [100, 100, -110],
+                variant: [10, 10, -10],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        position: 'absolute',
+    },
+
+    section6_dialog2_hash_tag_container: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'right'],
+                value: [100, 100, -110],
+                variant: [10, 10, -10],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        position: 'absolute',
     },
 
     section6_dialog3: {
@@ -648,6 +698,7 @@ const styles = theme => ({
         ),
         borderRadius: 7,
         backgroundColor: '#555593',
+        position: 'relative'
     },
 
     section6_dialog3_pos: {
@@ -656,6 +707,30 @@ const styles = theme => ({
         [theme.breakpoints.down('sm')]: {
             marginLeft: '20%',
         }
+    },
+
+    section6_dialog3_avatar_container: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'left'],
+                value: [100, 100, -110],
+                variant: [10, 10, -10],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        position: 'absolute',
+    },
+
+    section6_dialog3_hash_tag_container: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'right'],
+                value: [100, 100, -110],
+                variant: [10, 10, -10],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        position: 'absolute',
     },
 
     section6_dialog1_txt: {
@@ -1434,6 +1509,12 @@ class Home extends React.Component
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
                                 />
                             </Typography>
+                            <div className={classes.section6_dialog1_avatar_container}>
+                                <img alt={ID.HOME.SECTION_6_IMG_3_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_3_1))} className={classes.imgMotionContain} />
+                            </div>
+                            <div className={classes.section6_dialog1_hash_tag_container}>
+                                <motion.img variants={commonMotion.hashTagTransition} alt={ID.HOME.SECTION_6_IMG_3_2} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_3_2))} className={classes.imgMotionContain} />
+                            </div>
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
@@ -1442,6 +1523,12 @@ class Home extends React.Component
                                     i18nKey={ID.HOME.SECTION_6_TEXT_4}
                                 />
                             </Typography>
+                            <div className={classes.section6_dialog2_avatar_container}>
+                                <img alt={ID.HOME.SECTION_6_IMG_4_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_4_1))} className={classes.imgMotionContain} />
+                            </div>
+                            <div className={classes.section6_dialog2_hash_tag_container}>
+                                <motion.img variants={commonMotion.hashTagTransition} alt={ID.HOME.SECTION_6_IMG_4_2} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_4_2))} className={classes.imgMotionContain} />
+                            </div>
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
@@ -1450,6 +1537,12 @@ class Home extends React.Component
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
                                 />
                             </Typography>
+                            <div className={classes.section6_dialog3_avatar_container}>
+                                <img alt={ID.HOME.SECTION_6_IMG_5_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_5_1))} className={classes.imgMotionContain} />
+                            </div>
+                            <div className={classes.section6_dialog3_hash_tag_container}>
+                                <motion.img variants={commonMotion.hashTagTransition} alt={ID.HOME.SECTION_6_IMG_5_2} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_5_2))} className={classes.imgMotionContain} />
+                            </div>
                         </motion.div>
                     </div>
                 </InViewElement>

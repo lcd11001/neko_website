@@ -231,6 +231,34 @@ const posTransition = (x, y, delay, duration) => ({
     }
 })
 
+const hashTagTransition = {
+    hidden: {
+        // opacity: 0,
+        y: 20
+    },
+    visible: {
+        // opacity: 1,
+        y: [20, -20, 20],
+        transition: {
+            loop: Infinity,
+            ease: 'easeInOut',
+            duration: 2.0,
+
+            when: 'beforeChildren',
+            staggerChildren: 0.3
+        }
+    },
+    invisible: {
+        // opacity: 0,
+        y: 20,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0.3
+        }
+    }
+    
+}
+
 export default {
     transition,
     pageTransition,
@@ -242,5 +270,6 @@ export default {
     footerTransitionZ1,
     specializeTransition,
     backgroundTransition,
-    posTransition
+    posTransition,
+    hashTagTransition
 }
