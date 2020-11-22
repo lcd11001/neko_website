@@ -391,8 +391,8 @@ class Capabilites extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.section2_container_des, classes.section2_container_des_big)} style={styleDes}>
-                    <Typography className={clsx(classes.text50, classes.section2_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.text25, classes.section2_text_description)}>{item.description}</Typography>
+                    <Typography className={clsx(classes.text40, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section2_text_description)}>{item.description}</Typography>
                     <Button
                         variant={'contained'}
                         color={'primary'}
@@ -428,8 +428,8 @@ class Capabilites extends React.Component
                     />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section2_container_des, classes.section2_container_des_small)}>
-                    <Typography className={clsx(classes.text50, classes.section2_text_title)}>{item.title}</Typography>
-                    <Typography className={clsx(classes.text25, classes.section2_text_description)}>{item.description}</Typography>
+                    <Typography className={clsx(classes.text40, classes.section2_text_title)}>{item.title}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section2_text_description)}>{item.description}</Typography>
                     <Button
                         variant={'contained'}
                         color={'primary'}
