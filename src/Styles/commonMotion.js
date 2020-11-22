@@ -233,11 +233,11 @@ const posTransition = (x, y, delay, duration) => ({
 
 const hashTagTransition = {
     hidden: {
-        // opacity: 0,
+        opacity: 0,
         y: 20
     },
     visible: {
-        // opacity: 1,
+        opacity: [0, 1, 0],
         y: [20, -20, 20],
         transition: {
             loop: Infinity,
@@ -249,7 +249,7 @@ const hashTagTransition = {
         }
     },
     invisible: {
-        // opacity: 0,
+        opacity: 0,
         y: 20,
         transition: {
             when: 'afterChildren',
