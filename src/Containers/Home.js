@@ -507,6 +507,7 @@ const styles = theme => ({
     section5_title: {
         textAlign: 'left',
         fontWeight: 'bold',
+        marginBottom: 20,
         marginLeft: 20,
         marginRight: 20,
         ...breakpointsStyle(theme,
@@ -524,7 +525,7 @@ const styles = theme => ({
 
     section5_content: {
         textAlign: 'left',
-        paddingTop: 20,
+        marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
         ...breakpointsStyle(theme,
@@ -968,7 +969,7 @@ class Home extends React.Component
                                 <Link to={Utils.i18Link(t, ID.HOME.SECTION_1_BUTTON_2_LINK)} className={classes.textLinkHidden}>
                                     <Button
                                         variant={'contained'}
-                                        color={'primary'}
+                                        color={'secondary'}
                                         endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
                                     >
                                         <Trans

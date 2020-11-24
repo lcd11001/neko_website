@@ -65,37 +65,37 @@ const defaultTheme = createMuiTheme({
                     }
                 ),
             },
-            contained: {
-                backgroundColor: '#4E5496',
+            containedPrimary: {
+                backgroundColor: '#3e4378',
                 color: '#FFFFFF',
                 boxShadow: 'none !important',
                 '&:hover': {
-                    backgroundColor: '#555593',
+                    backgroundColor: '#464b87',
                     color: '#FFFFFF'
                 },
                 '&:active': {
-                    backgroundColor: '#606593',
+                    backgroundColor: '#4E5496',
                     color: '#FFFFFF',
                 },
                 '&.Mui-disabled': {
-                    backgroundColor: '#B3BAE4',
-                    color: '#FFFFFF',
+                    backgroundColor: '#0f101e',
+                    color: '#ABABAB',
                 }
             },
             containedSecondary: {
-                backgroundColor: '#FDFDFD',
-                color: '#525252',
-                border: 'solid 1px #D6D6D6',
+                backgroundColor: '#c15450',
+                color: '#FFFFFF',
+                boxShadow: 'none !important',
                 '&:hover': {
-                    backgroundColor: '#F2F2F2',
-                    color: '#525252',
+                    backgroundColor: '#d95f5a',
+                    color: '#FFFFFF',
                 },
                 '&:active': {
-                    backgroundColor: '#D5D6D8',
-                    color: '#525252',
+                    backgroundColor: '#f26a65',
+                    color: '#FFFFFF',
                 },
                 '&.Mui-disabled': {
-                    backgroundColor: '#EDEDED',
+                    backgroundColor: '#301514',
                     color: '#ABABAB',
                 }
             },

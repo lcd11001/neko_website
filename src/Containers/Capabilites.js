@@ -215,10 +215,12 @@ class Capabilites extends React.Component
             .map((value, index) =>
             {
                 let IMG = Utils.i18Image(t, ID.CAPABILITIES[`IMG_${index + 1}`])
-                let BUTTON = t(ID.CAPABILITIES[`BUTTON_${index + 1}`])
                 let TITLE = t(ID.CAPABILITIES[`TITLE_${index + 1}`])
                 let DESCRIPTION = t(ID.CAPABILITIES[`DESCRIPTION_${index + 1}`])
-                let LINK = Utils.i18Link(t, ID.CAPABILITIES[`LINK_${index + 1}`])
+                // let BUTTON = t(ID.CAPABILITIES[`BUTTON_${index + 1}`])
+                // let LINK = Utils.i18Link(t, ID.CAPABILITIES[`LINK_${index + 1}`])
+                let BUTTON = t(ID.CAPABILITIES[`BUTTON_DEFAULT`])
+                let LINK = Utils.i18Link(t, ID.CAPABILITIES[`LINK_DEFAULT`])
 
                 return {
                     img: IMG,
