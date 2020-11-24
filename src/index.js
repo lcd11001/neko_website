@@ -34,6 +34,7 @@ import ScrollToTop from './Components/ScrollToTop'
 
 import { CssBaseline } from '@material-ui/core'
 import Utils from './Utils'
+import Generic from './Containers/Generic'
 
 window.isWaterWaveSupported = false; // Utils.isWaterWaveSupported()
 console.log('isWaterWaveSupported', window.isWaterWaveSupported)
@@ -106,7 +107,7 @@ const Routes = () =>
 
 
                                             {/* invalid path */}
-                                            <Route path='*' component={PageNotFound} />
+                                            <Route path='*' component={Generic} />
                                         </Switch>
                                     </AnimatePresence>
                                 )} />
