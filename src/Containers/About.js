@@ -50,18 +50,25 @@ const styles = theme => ({
 
     section2_title: {
         textTransform: 'uppercase',
-        padding: '30px 0',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginBottom'],
+                value: [50],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
     },
 
     section2_subtitle: {
         textAlign: 'center',
         ...breakpointsStyle(theme,
             {
-                key: ['minHeight', 'paddingLeft', 'paddingRight'],
-                value: [80, 150, 150],
-                variant: [0, 35, 35],
-                unit: ['px', 'px', 'px']
+                key: ['minHeight', 'paddingLeft', 'paddingRight', 'marginBottom'],
+                value: [80, 150, 150, 50],
+                variant: [0, 35, 35, 5],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
     },
@@ -69,18 +76,24 @@ const styles = theme => ({
     section2_img: {
         ...breakpointsStyle(theme,
             {
-                key: ['height', 'width'],
-                value: [200, 200],
-                variant: [5, 5],
-                unit: ['px', 'px']
+                key: ['height', 'width', 'marginBottom', 'marginTop'],
+                value: [350, 350, 50, 50],
+                variant: [10, 10, 5, 5],
+                unit: ['px', 'px', 'px', 'px']
             }
-        ),
-        marginBottom: '10%',
-        marginTop: '10%'
+        )
     },
 
     section2_btn: {
-        padding: '30px 0',
+        // combine with section2_img.marginTop => mobile single column
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginBottom'],
+                value: [50],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
