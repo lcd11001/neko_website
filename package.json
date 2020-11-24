@@ -53,8 +53,9 @@
   "devDependencies": {
     "env-cmd": "^10.1.0",
     "gh-pages": "^3.1.0",
-    "javascript-obfuscator": "^2.9.1",
+    "javascript-obfuscator": "^2.9.4",
     "json-loader": "^0.5.7",
+    "opencollective": "^1.0.3",
     "path": "^0.12.7",
     "redux-devtools-extension": "^2.13.8",
     "xlsx": "^0.16.9"
