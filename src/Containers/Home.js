@@ -126,8 +126,8 @@ const styles = theme => ({
     },
 
     section2_img_bg: {
-        width: 'auto',
-        height: '100%',
+        width: '100%',
+        height: 'auto',
         position: 'absolute',
         right: 0,
         objectFit: 'contain',
@@ -150,10 +150,13 @@ const styles = theme => ({
     },
 
     menuLink: {
-        color: 'black',
+        // color: 'green',
+        color: theme.palette.text.primary,
+        opacity: 1,
 
         '&--not-hover': {
-            color: '#A2A3A7'
+            // color: 'blue'
+            opacity: 0.6
         }
     },
 
@@ -175,7 +178,8 @@ const styles = theme => ({
         }),
 
         '&--hover': {
-            color: '#191616',
+            color: 'black',
+            opacity: 1,
             marginLeft: 30
         }
     },
@@ -192,7 +196,9 @@ const styles = theme => ({
         color: 'transparent',
         width: 0,
         position: 'relative',
-        top: 5,
+        // because menu text line-height = 55
+        // => make icon V-center
+        height: 55,
         transition: theme.transitions.create(['color', 'width'], {
             duration: 300
         }),
@@ -1018,7 +1024,7 @@ class Home extends React.Component
         let isShowBackground = this.state.lastHover === menuLink
 
         let classMenuLink = clsx(classes.menuLink, {
-            [classes.menuLink + '--not-hover']: notHover
+            [classes.menuLink + '--not-hover']: notHover && !isHover
         })
 
         let classMenuItem = clsx(classes.text40, classes.menuItem, {
@@ -1058,14 +1064,14 @@ class Home extends React.Component
                 </AnimatePresence>
 
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden, classes.divRow, classes.fullWidth, classes.divTop)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
-                    <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
+                    <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans
                                 i18nKey={menu.text}
                             />
                         </Typography>
                         <menu.icon className={classMenuIcon} />
-                    </motion.div>
+                    </div>
                 </Link>
             </div>
         )
