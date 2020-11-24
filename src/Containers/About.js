@@ -23,6 +23,9 @@ import InViewElement from '../Components/InViewElement';
 const styles = theme => ({
     section1: {
         backgroundColor: theme.palette.primary.main,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         ...breakpointsStyle(theme,
             {
                 key: ['height'],
@@ -307,10 +310,24 @@ class About extends React.Component
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     renderSection1()
     {
-        const { classes, width } = this.props;
+        const {
+            classes,
+            t,
+            width
+        } = this.props;
+
+        let ImageUrl = `url(${Utils.getUrl(t(ID.IMAGE.BACKGROUND_ABOUT))})`
+
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
+                <motion.div
+                    variants={commonMotion.elementTransition}
+                    id={'section1'}
+                    className={clsx(classes.section, classes.section1)}
+                    style={{
+                        backgroundImage: ImageUrl
+                    }}
+                >
                     <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.ABOUT.SECTION_1_TEXT_1}

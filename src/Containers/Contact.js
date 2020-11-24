@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import clsx from 'clsx'
 
 import { Trans, withTranslation } from 'react-i18next'
+
 import ID from '../Translations/ID.json'
 
 import compose from 'recompose/compose'
@@ -19,6 +20,9 @@ import InViewElement from '../Components/InViewElement'
 const styles = theme => ({
     section1: {
         backgroundColor: theme.palette.primary.main,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         ...breakpointsStyle(theme,
             {
                 key: ['height'],
@@ -52,9 +56,18 @@ class Contact extends React.Component
             width
         } = this.props;
 
+        let ImageUrl = `url(${Utils.getUrl(t(ID.IMAGE.BACKGROUND_CONTACT))})`
+
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
+                <motion.div
+                    variants={commonMotion.elementTransition}
+                    id={'section1'}
+                    className={clsx(classes.section, classes.section1)}
+                    style={{
+                        backgroundImage: ImageUrl
+                    }}
+                >
                     <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                         <Trans
                             i18nKey={ID.CONTACT.SECTION_1_TEXT_1}
