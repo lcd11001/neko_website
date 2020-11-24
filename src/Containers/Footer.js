@@ -145,7 +145,7 @@ const styles = theme => ({
     },
 
     logoRoot: {
-        transform: 'translate(0, -30%) scale(1.2)',
+        transform: 'translate(0, -50%) scale(1.0)',
         transformOrigin: 'left'
     },
 
@@ -322,7 +322,7 @@ class Footer extends React.Component
 
                                 <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                                     <div className={clsx(classes.divRow, classes.divCenter)}>
-                                        <Typography component={'div'} className={clsx(classes.txtWhite, classes.text18, classes.subTitle)}>
+                                        <Typography component={'div'} className={clsx(classes.txtWhite, classes.text14, classes.subTitle)}>
                                             <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
                                         </Typography>
                                         <Icons.IconMenuArrow className={classIconArrow} />
@@ -343,8 +343,8 @@ class Footer extends React.Component
         return (
             <motion.div variants={commonMotion.footerTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
                 <div id={'footer-primary'} className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
-                    <div className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)} style={{ flex: 10 }}>
-                        <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 7 }}>
+                    <div className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)} style={{ flex: 7 }}>
+                        <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 4 }}>
                             <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight, classes.fullWidth)} style={{ position: "relative", minHeight: 200 }}>
                                 <div className={classes.logo} style={{ flex: 2 }}>
                                     <Logo secondary classes={{ root: classes.logoRoot }} />

@@ -79,6 +79,52 @@ const elementTransition = {
     }
 }
 
+const groupHeaderTransition = {
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            when: 'beforeChildren',
+            staggerChildren: 0
+        }
+    },
+    invisible: {
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0
+        }
+    }
+}
+
+const headerTransition = {
+    hidden: {
+        y: '-50px',
+        opacity: 0
+    },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            ease: 'easeOut',
+            duration: 0.8,
+
+            when: 'beforeChildren',
+            staggerChildren: 0
+        }
+    },
+    invisible: {
+        y: '-50px',
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0
+        }
+    }
+}
+
 const groupFooterTransition = {
     hidden: {
         opacity: 0
@@ -265,6 +311,8 @@ export default {
     delayTransition,
     groupTransition,
     elementTransition,
+    groupHeaderTransition,
+    headerTransition,
     groupFooterTransition,
     footerTransition,
     footerTransitionZ1,

@@ -195,13 +195,15 @@ const styles = theme => ({
 
         '&--hover': {
             color: 'white',
-            border: `1px solid ${theme.palette.primary.main}`
+            // border: `1px solid ${theme.palette.primary.main}`
+            border: '1px solid transparent'
         },
 
         '&--secondary': {
             '&--hover': {
                 color: 'white',
-                border: '1px solid black'
+                // border: '1px solid black'
+                border: '1px solid transparent'
             },
         }
     },
@@ -351,7 +353,7 @@ class Menu extends React.Component
 
         return (
 
-            <motion.div variants={commonMotion.elementTransition} key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
+            <motion.div variants={commonMotion.headerTransition} key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onClick={this.handleMouseClick(menuLink)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
                         {
@@ -387,7 +389,7 @@ class Menu extends React.Component
             : clsx(classes.root, classes.divRow, classes.divCenter)
 
         return (
-            <motion.div variants={commonMotion.groupTransition} initial={'hidden'} animate={'visible'} exit={'invisible'} className={classRoot}>
+            <motion.div variants={commonMotion.groupHeaderTransition} initial={'hidden'} animate={'visible'} exit={'invisible'} className={classRoot}>
                 {
                     HeaderMenu.map(menu => (
                         this.renderMenu(menu)
