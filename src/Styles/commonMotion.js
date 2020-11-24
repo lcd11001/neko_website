@@ -233,17 +233,19 @@ const backgroundTransition = {
     in: {
         opacity: 1,
         transition: {
-            // when: 'beforeChildren',
+            when: 'beforeChildren',
             duration: .5,
-            ease: 'linear'
+            ease: 'easeIn'
+            // ease: 'linear'
         }
     },
     out: {
         opacity: 0,
         transition: {
-            // when: 'afterChildren',
+            when: 'afterChildren',
             duration: .5,
-            ease: 'linear'
+            ease: 'easeOut'
+            // ease: 'linear'
         }
     }
 }

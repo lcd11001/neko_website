@@ -111,6 +111,7 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
+        maxHeight: 1080
     },
 
     section2_bg: {
@@ -155,7 +156,7 @@ const styles = theme => ({
         opacity: 1,
 
         '&--not-hover': {
-            // color: 'blue'
+            color: '#424242',
             opacity: 0.6
         }
     },
@@ -998,7 +999,7 @@ class Home extends React.Component
                     </InViewElement>
                 </div>
                 <div id={'section2.2'}>
-                    <InViewElement variants={commonMotion.groupTransition}>
+                    <InViewElement variants={commonMotion.groupHeaderTransition /* commonMotion.groupTransition */}>
                         {
                             HomeMenu.map((menu, index) => (
                                 this.renderSection2Menu(menu, index)
@@ -1035,6 +1036,8 @@ class Home extends React.Component
             [classes.menuIcon + '--hover']: isHover
         })
 
+        let IMG_URL = Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))
+
         return (
             <div key={menu.text} className={clsx(classes.divRow)}>
                 <AnimatePresence initial={!false} exitBeforeEnter={true}>
@@ -1045,33 +1048,37 @@ class Home extends React.Component
                             id={`bg-${menu.text}`}
                             key={`bg-${menu.text}`}
                             style={{
-                                backgroundColor: t(menu.bg),
+                                // backgroundColor: t(menu.bg),
+                                backgroundImage: `url(${IMG_URL})`,
+                                backgroundSize: 'cover',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: 'right'
                             }}
                             variants={commonMotion.backgroundTransition}
                             initial={'hidden'}
                             animate={'in'}
                             exit={'out'}
                         >
-                            <motion.img
+                            {/* <motion.img
                                 key={`img-${menu.text}`}
                                 alt={`img-${menu.text}`}
                                 className={classes.section2_img_bg}
-                                src={Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))}
+                                src={IMG_URL}
                                 variants={commonMotion.specializeTransition}
-                            />
+                            /> */}
                         </motion.div>
                     }
                 </AnimatePresence>
 
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden, classes.divRow, classes.fullWidth, classes.divTop)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
-                    <div className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
+                    <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans
                                 i18nKey={menu.text}
                             />
                         </Typography>
                         <menu.icon className={classMenuIcon} />
-                    </div>
+                    </motion.div>
                 </Link>
             </div>
         )
