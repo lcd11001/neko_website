@@ -273,20 +273,20 @@ const posTransition = (x, y, delay, duration) => ({
         x: `${x}px`,
         y: `${y}px`,
         transition: {
-            delay: 0,
-            duration: 0.1
+            delay,
+            duration
         }
     }
 })
 
 const hashTagTransition = {
     hidden: {
-        opacity: 0,
-        y: 20
+        // opacity: 0,
+        y: 10
     },
     visible: {
-        opacity: [0, 1, 0],
-        y: [20, -20, 20],
+        // opacity: [0, 1, 0],
+        y: [10, -10, 10],
         transition: {
             loop: Infinity,
             ease: 'easeInOut',
@@ -297,14 +297,46 @@ const hashTagTransition = {
         }
     },
     invisible: {
-        opacity: 0,
-        y: 20,
+        // opacity: 0,
+        y: 10,
         transition: {
             when: 'afterChildren',
             staggerChildren: 0.3
         }
     }
-    
+
+}
+
+const groupTextTransition = (speed = 0.08) => ({
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            when: 'beforeChildren',
+            staggerChildren: speed
+        }
+    },
+    invisible: {
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: speed
+        }
+    }
+})
+
+const textTransition = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1
+    },
+    invisible: {
+        opacity: 0
+    }
 }
 
 export default {
@@ -321,5 +353,7 @@ export default {
     specializeTransition,
     backgroundTransition,
     posTransition,
-    hashTagTransition
+    hashTagTransition,
+    groupTextTransition,
+    textTransition
 }

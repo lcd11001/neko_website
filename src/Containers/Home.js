@@ -29,6 +29,12 @@ import InViewElement from '../Components/InViewElement';
 const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
 
+const AVATAR_SIZE = 100
+const AVATAR_VARIANT = 10
+
+const HASH_TAG_SIZE = 60
+const HASH_TAG_VARIANT = 6
+
 const styles = theme => ({
     section1: {
         backgroundImage: `linear-gradient(${theme.palette.primary.secondary}, ${theme.palette.primary.main})`,
@@ -40,7 +46,8 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
-
+        // fixed: section6 wrong inview effect
+        minHeight: '101vh',
     },
 
     section1_img1: {
@@ -626,10 +633,10 @@ const styles = theme => ({
     section6_dialog1_avatar_container: {
         ...breakpointsStyle(theme,
             {
-                key: ['width', 'height', 'left'],
-                value: [100, 100, -110],
-                variant: [10, 10, -10],
-                unit: ['px', 'px', 'px']
+                key: ['width', 'height', 'left', 'bottom'],
+                value: [AVATAR_SIZE, AVATAR_SIZE, -AVATAR_SIZE / 2, -AVATAR_SIZE / 2],
+                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, -AVATAR_VARIANT / 2],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
         position: 'absolute',
@@ -638,10 +645,10 @@ const styles = theme => ({
     section6_dialog1_hash_tag_container: {
         ...breakpointsStyle(theme,
             {
-                key: ['width', 'height', 'right'],
-                value: [100, 100, -110],
-                variant: [10, 10, -10],
-                unit: ['px', 'px', 'px']
+                key: ['width', 'height', 'right', 'top'],
+                value: [HASH_TAG_SIZE, HASH_TAG_SIZE, -0, -HASH_TAG_SIZE / 2],
+                variant: [HASH_TAG_VARIANT, HASH_TAG_VARIANT, -0, -HASH_TAG_VARIANT / 2],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
         position: 'absolute',
@@ -652,7 +659,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [600, 245],
-                variant: [50, 35],
+                variant: [40, 35],
                 unit: ['px', 'px']
             }
         ),
@@ -673,10 +680,10 @@ const styles = theme => ({
     section6_dialog2_avatar_container: {
         ...breakpointsStyle(theme,
             {
-                key: ['width', 'height', 'left'],
-                value: [100, 100, -110],
-                variant: [10, 10, -10],
-                unit: ['px', 'px', 'px']
+                key: ['width', 'height', 'right', 'top'],
+                value: [AVATAR_SIZE, AVATAR_SIZE, -AVATAR_SIZE / 2, AVATAR_SIZE / 3],
+                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 3],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
         position: 'absolute',
@@ -685,10 +692,10 @@ const styles = theme => ({
     section6_dialog2_hash_tag_container: {
         ...breakpointsStyle(theme,
             {
-                key: ['width', 'height', 'right'],
-                value: [100, 100, -110],
-                variant: [10, 10, -10],
-                unit: ['px', 'px', 'px']
+                key: ['width', 'height', 'left', 'bottom'],
+                value: [HASH_TAG_SIZE, HASH_TAG_SIZE, -HASH_TAG_SIZE / 2, HASH_TAG_SIZE],
+                variant: [HASH_TAG_VARIANT, HASH_TAG_VARIANT, -HASH_TAG_VARIANT / 2, HASH_TAG_VARIANT],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
         position: 'absolute',
@@ -699,7 +706,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [550, 190],
-                variant: [80, 30],
+                variant: [60, 30],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -720,8 +727,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height', 'left'],
-                value: [100, 100, -110],
-                variant: [10, 10, -10],
+                value: [AVATAR_SIZE, AVATAR_SIZE, AVATAR_SIZE / 10],
+                variant: [AVATAR_VARIANT, AVATAR_VARIANT, AVATAR_VARIANT / 10],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -731,10 +738,10 @@ const styles = theme => ({
     section6_dialog3_hash_tag_container: {
         ...breakpointsStyle(theme,
             {
-                key: ['width', 'height', 'right'],
-                value: [100, 100, -110],
-                variant: [10, 10, -10],
-                unit: ['px', 'px', 'px']
+                key: ['width', 'height', 'right', 'bottom'],
+                value: [HASH_TAG_SIZE, HASH_TAG_SIZE, -HASH_TAG_SIZE / 2, 0],
+                variant: [HASH_TAG_VARIANT, HASH_TAG_VARIANT, -HASH_TAG_VARIANT / 2, 0],
+                unit: ['px', 'px', 'px', 'px']
             }
         ),
         position: 'absolute',
@@ -745,12 +752,13 @@ const styles = theme => ({
     },
 
     section6_dialog2_txt: {
-        paddingLeft: '15%',
-        color: 'white'
+        paddingLeft: '10%',
+        paddingBottom: '10%',
+        color: 'white',
     },
 
     section6_dialog3_txt: {
-        paddingLeft: '15%',
+        paddingLeft: '25%',
         color: 'white'
     }
 });
@@ -1502,7 +1510,7 @@ class Home extends React.Component
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition}>
-                            <div id={'down-arrow'}
+                            <motion.div variants={commonMotion.hashTagTransition} id={'down-arrow'}
                                 className={classes.section6_bg_arrow}
                                 style={{
                                     backgroundImage: `url('${Utils.getUrl(t(ID.IMAGE.HOME_6_1))}')`
@@ -1518,9 +1526,17 @@ class Home extends React.Component
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog1_txt)}>
-                                <Trans
+                                {/* <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
-                                />
+                                /> */}
+                                <InViewElement variants={commonMotion.groupTextTransition(0.08)}>
+                                    {
+
+                                        t(ID.HOME.SECTION_6_TEXT_3).split('').map(char => (
+                                            <motion.span variants={commonMotion.textTransition}>{char}</motion.span>
+                                        ))
+                                    }
+                                </InViewElement>
                             </Typography>
                             <div className={classes.section6_dialog1_avatar_container}>
                                 <img alt={ID.HOME.SECTION_6_IMG_3_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_3_1))} className={classes.imgMotionContain} />
@@ -1532,9 +1548,17 @@ class Home extends React.Component
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog2_txt)}>
-                                <Trans
+                                {/* <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_4}
-                                />
+                                /> */}
+                                <InViewElement variants={commonMotion.groupTextTransition(0.05)}>
+                                    {
+
+                                        t(ID.HOME.SECTION_6_TEXT_4).split('').map(char => (
+                                            <motion.span variants={commonMotion.textTransition}>{char}</motion.span>
+                                        ))
+                                    }
+                                </InViewElement>
                             </Typography>
                             <div className={classes.section6_dialog2_avatar_container}>
                                 <img alt={ID.HOME.SECTION_6_IMG_4_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_4_1))} className={classes.imgMotionContain} />
@@ -1546,9 +1570,17 @@ class Home extends React.Component
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
                             <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog3_txt)}>
-                                <Trans
+                                {/* <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
-                                />
+                                /> */}
+                                <InViewElement variants={commonMotion.groupTextTransition(0.1)}>
+                                    {
+
+                                        t(ID.HOME.SECTION_6_TEXT_5).split('').map(char => (
+                                            <motion.span variants={commonMotion.textTransition}>{char}</motion.span>
+                                        ))
+                                    }
+                                </InViewElement>
                             </Typography>
                             <div className={classes.section6_dialog3_avatar_container}>
                                 <img alt={ID.HOME.SECTION_6_IMG_5_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_5_1))} className={classes.imgMotionContain} />
