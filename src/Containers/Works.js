@@ -392,7 +392,7 @@ class Works extends React.Component
         })
 
         return (
-            <motion.div variants={commonMotion.elementTransition} key={`${section2_menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.section2_menu)}>
+            <motion.div variants={commonMotion.headerTransition} key={`${section2_menu.text}-${isSecondary}`} className={clsx(classes.divColumn, classes.divCenter, classes.section2_menu)}>
                 <Link
                     to={menuLink}
                     className={clsx(classMenuLink, classes.textLinkHidden)}
@@ -580,8 +580,8 @@ class Works extends React.Component
         } = this.props;
 
         return (
-            <InViewElement variants={commonMotion.groupTransition} key={`section2-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section2'} className={clsx(classes.section, classes.section2)}>
+            <InViewElement variants={commonMotion.groupHeaderTransition} key={`section2-${width}`}>
+                <motion.div variants={commonMotion.headerTransition} id={'section2'} className={clsx(classes.section, classes.section2)}>
                     {
                         isWidthUp('md', width)
                             ? this.renderMenu()

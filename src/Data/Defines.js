@@ -6,7 +6,10 @@ export const HeaderMenu = [
         text: ID.MENU.HOMEPAGE, link: ID.LINK.HOME,
     },
     {
-        text: ID.MENU.WORKS, link: ID.LINK.WORKS,
+        text: ID.MENU.PORTFOLIO, link: ID.LINK.PORTFOLIO,
+    },
+    {
+        text: ID.MENU.WORKS, link: ID.LINK.WORKS, disable: true
     },
     {
         text: ID.MENU.ABOUT, link: ID.LINK.ABOUT,

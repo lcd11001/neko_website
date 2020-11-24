@@ -391,7 +391,14 @@ class Menu extends React.Component
         return (
             <motion.div variants={commonMotion.groupHeaderTransition} initial={'hidden'} animate={'visible'} exit={'invisible'} className={classRoot}>
                 {
-                    HeaderMenu.map(menu => (
+                    HeaderMenu
+                    .filter(menu => {
+                        if (menu.disable !== undefined) {
+                            return !!!menu.disable
+                        }
+                        return true
+                    })
+                    .map(menu => (
                         this.renderMenu(menu)
                     ))
                 }
