@@ -25,6 +25,8 @@ import About from './Containers/About'
 import Works from './Containers/Works'
 import Blogs from './Containers/Blogs'
 import Capabilites from './Containers/Capabilites'
+import Contact from './Containers/Contact'
+import Streamline from './Containers/Streamline'
 
 import WorksDetail from './Containers/WorksDetail'
 import BlogsDetail from './Containers/BlogsDetail'
@@ -35,6 +37,7 @@ import ScrollToTop from './Components/ScrollToTop'
 import { CssBaseline } from '@material-ui/core'
 import Utils from './Utils'
 import Generic from './Containers/Generic'
+
 
 window.isWaterWaveSupported = false; // Utils.isWaterWaveSupported()
 console.log('isWaterWaveSupported', window.isWaterWaveSupported)
@@ -98,6 +101,8 @@ const Routes = () =>
                                             <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
                                             <Route exact path={i18next.t(ID.LINK.BLOG)} component={Blogs} />
                                             <Route exact path={i18next.t(ID.LINK.CAPABILITIES)} component={Capabilites} />
+                                            <Route exact path={i18next.t(ID.LINK.CONTACT)} component={Contact} />
+                                            <Route exact path={i18next.t(ID.LINK.STREAMLINE)} component={Streamline} />
 
                                             {/* has sub page "detail" MUST before "category" */}
                                             <Route path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
