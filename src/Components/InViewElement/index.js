@@ -23,7 +23,6 @@ const InViewElement = (props) =>
 
         return () =>
         {
-            controls.stop()
             setDidMount(false)
         }
     }, [])
@@ -48,7 +47,7 @@ const InViewElement = (props) =>
         {
             controls.stop()
         }
-    }, [controls, inView, isDidMount, props.animate, props.exit])
+    }, [controls, inView, isDidMount, props.animate, props.exit, props.transition])
 
     return (
         <div
