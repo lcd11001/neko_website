@@ -411,8 +411,54 @@ const styles = theme => ({
 
     section4_carousel: {
         width: '100%',
+        height: '100%'
+    },
+
+    section4_carousel_slider: {
         height: '100%',
-        backgroundColor: 'yellow'
+        minWidth: '100%',
+
+        '& > li:first-child': {
+            paddingLeft: '5px !important'
+        },
+
+        '& > li:last-child': {
+            paddingRight: '5px !important'
+        }
+    },
+
+    section4_carousel_item: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['padding'],
+                value: [30],
+                variant: [5],
+                unit: ['px']
+            }
+        ),
+        height: '100%'
+    },
+
+    section4_carousel_multi_item_container: {
+        '& > div': {
+            backgroundColor: 'white',
+            marginTop: 10,
+            marginBottom: 10
+        },
+        '& > div:first-child': {
+            [theme.breakpoints.up('md')]: {
+
+                marginRight: 0,
+                marginLeft: 50
+            }
+        },
+
+        '& > div:last-child': {
+            [theme.breakpoints.up('md')]: {
+                marginLeft: 0,
+                marginRight: 50
+            }
+        }
     },
 
     section4_carousel_indicators: {
@@ -871,28 +917,13 @@ const carouselMultiResponsiveBlogs = {
 }
 
 const carouselMultiResponsiveCaseStudy = {
-    xl: {
-        breakpoint: { max: Number.MAX_SAFE_INTEGER, min: 1920 },
+    big: {
+        breakpoint: { max: Number.MAX_SAFE_INTEGER, min: 960 },
         items: 1,
         partialVisibilityGutter: 0
     },
-    lg: {
-        breakpoint: { max: 1920 - 1, min: 1280 },
-        items: 1,
-        partialVisibilityGutter: 0
-    },
-    md: {
-        breakpoint: { max: 1280 - 1, min: 960 },
-        items: 1,
-        partialVisibilityGutter: 0
-    },
-    sm: {
-        breakpoint: { max: 960 - 1, min: 600 },
-        items: 1,
-        partialVisibilityGutter: 80
-    },
-    xs: {
-        breakpoint: { max: 600 - 1, min: 0 },
+    small: {
+        breakpoint: { max: 960 - 1, min: 0 },
         items: 1,
         partialVisibilityGutter: 80
     }
@@ -1318,16 +1349,16 @@ class Home extends React.Component
             caseStudyNum
         } = this.state
 
-        const totalCaseStudy = 5
+        const isAutoPlay = isWidthDown('sm', width)
+        const numSlideCaseStudy = isAutoPlay ? 1 : 2
         // const carouselAnim = 'slide'
         const carouselAnim = 'fade'
-        const isAutoPlay = isWidthDown('sm', width)
 
         const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
 
         return (
-            <InViewElement variants={commonMotion.groupTransition}>
-                <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
+            <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
+                <InViewElement variants={commonMotion.groupTransition}>
                     <div className={clsx(classes.divRow2ColumnRevert, classes.fullWidth)} >
                         <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divRow, classes.divCenter, isAutoPlay ? classes.fullWidth : classes.halfWidth)} >
 
@@ -1336,8 +1367,8 @@ class Home extends React.Component
                                 ref={this.carouselCaseStudyRef}
                                 responsive={carouselMultiResponsiveCaseStudy}
                                 containerClass={clsx(classes.divColumn, classes.divLeft, classes.section4_carousel)}
-                                sliderClass={clsx(classes.section5_carousel_slider)}
-                                itemClass={clsx(classes.section5_carousel_item)}
+                                sliderClass={clsx(classes.section4_carousel_slider)}
+                                itemClass={clsx(classes.section4_carousel_item)}
                                 ssr={false}
                                 partialVisible={isAutoPlay}
                                 centerMode={false}
@@ -1350,10 +1381,14 @@ class Home extends React.Component
                                 autoPlaySpeed={3000}
                             >
                                 {
-                                    Array.apply(0, Array(totalCaseStudy))
+                                    Array.apply(0, Array(caseStudyNum))
+                                        .filter((value, index) =>
+                                        {
+                                            return index % numSlideCaseStudy === 0
+                                        })
                                         .map((value, index) =>
                                         {
-                                            return this.renderSection4CaseStudy(index)
+                                            return this.renderSection4MultiCaseStudy(index, numSlideCaseStudy, caseStudyNum)
                                         })
                                 }
                             </CarouselMulti>
@@ -1383,36 +1418,65 @@ class Home extends React.Component
                             </Link>
                         </motion.div>
                     </div>
-                    <motion.div variants={commonMotion.elementTransition} id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
-                        <div className={classes.section4_carousel_indicators}>
-                            <Typography className={clsx(classes.text18)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
-                        </div>
-                        <div className={clsx(classes.divRow, classes.divBetween)}>
-                            <IconButton
-                                onClick={this.handleCaseStudy(-1)}
-                                disableRipple
-                                className={classes.section4_carousel_buttons}
-                                disabled={caseIndex === 0}
-                            >
-                                <Icons.IconMenuArrow className={classes.iconArrow} style={{ transform: 'scaleX(-1)' }} />
-                            </IconButton>
-                            <IconButton
-                                onClick={this.handleCaseStudy(1)}
-                                disableRipple
-                                className={classes.section4_carousel_buttons}
-                                disabled={caseIndex + 1 === caseStudyNum}
-                            >
-                                <Icons.IconMenuArrow className={classes.iconArrow} />
-                            </IconButton>
-                        </div>
-                    </motion.div>
-                </div>
-            </InViewElement >
+                    {
+                        !isAutoPlay &&
+                        <motion.div variants={commonMotion.elementTransition} id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
+                            <div className={classes.section4_carousel_indicators}>
+                                <Typography className={clsx(classes.text18)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
+                            </div>
+                            <div className={clsx(classes.divRow, classes.divBetween)}>
+                                <IconButton
+                                    onClick={this.handleCaseStudy(-numSlideCaseStudy)}
+                                    disableRipple
+                                    className={classes.section4_carousel_buttons}
+                                    disabled={caseIndex === 0}
+                                >
+                                    <Icons.IconMenuArrow className={classes.iconArrow} style={{ transform: 'scaleX(-1)' }} />
+                                </IconButton>
+                                <IconButton
+                                    onClick={this.handleCaseStudy(numSlideCaseStudy)}
+                                    disableRipple
+                                    className={classes.section4_carousel_buttons}
+                                    disabled={caseIndex + 1 === caseStudyNum}
+                                >
+                                    <Icons.IconMenuArrow className={classes.iconArrow} />
+                                </IconButton>
+                            </div>
+                        </motion.div>
+                    }
+                </InViewElement >
+            </div>
         )
     }
 
-    renderSection4CaseStudy(index)
+    renderSection4MultiCaseStudy(parentIndex, len, total)
     {
+        const { classes } = this.props
+
+        return (
+            <div key={`case-study-parent-${parentIndex}`} className={clsx(classes.divColumn, classes.section4_carousel_multi_item_container)}>
+                {
+                    Array.apply(0, Array(len))
+                        .map((value, index) =>
+                        {
+                            let childIndex = (parentIndex * len) + index
+                            return (
+                                this.renderSection4CaseStudy(childIndex, total)
+                            )
+                        })
+                }
+            </div>
+        )
+
+    }
+
+    renderSection4CaseStudy(index, total)
+    {
+        if (index < 0 || index >= total)
+        {
+            return null
+        }
+
         const {
             classes,
             t
@@ -1425,7 +1489,7 @@ class Home extends React.Component
         const path = Utils.getUrl(LOGO)
 
         return (
-            <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter)}>
+            <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter, classes.divBox)}>
                 <div className={classes.section4_logo_container}>
                     <img alt={LOGO} src={path} className={classes.section4_case_study_logo} />
                 </div>
@@ -1439,7 +1503,7 @@ class Home extends React.Component
                             }}
                         />
                     </Typography>
-                    <Typography className={clsx(classes.text25, classes.section4_case_study_title)}>{TITILE}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section4_case_study_title)}>{TITILE}</Typography>
                 </div>
             </div>
         )
@@ -1459,8 +1523,8 @@ class Home extends React.Component
         const isAutoPlay = isWidthDown('sm', width)
 
         return (
-            <InViewElement variants={commonMotion.groupTransition}>
-                <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
+            <div id={'section5'} className={clsx(classes.divColumn, classes.section, classes.section5)}>
+                <InViewElement variants={commonMotion.groupTransition}>
                     <motion.div variants={commonMotion.elementTransition} id={'section5.1'} className={clsx(classes.divRow, classes.divBetween)}>
 
                         <Typography className={clsx(classes.textBreak, classes.text40, classes.section5_txt1)}>
@@ -1511,8 +1575,8 @@ class Home extends React.Component
                             }
                         </CarouselMulti>
                     </motion.div>
-                </div>
-            </InViewElement>
+                </InViewElement>
+            </div>
         )
     }
 
