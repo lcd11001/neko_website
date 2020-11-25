@@ -25,6 +25,7 @@ import "react-multi-carousel/lib/styles.css"
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement';
+import i18next from 'i18next';
 
 const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
@@ -34,6 +35,10 @@ const AVATAR_VARIANT = 10
 
 const HASH_TAG_SIZE = 60
 const HASH_TAG_VARIANT = 6
+
+const STAR_SIZE = 50
+const STAR_VARIANT = 5
+const STAR_NUM = 5
 
 const styles = theme => ({
     section1: {
@@ -359,12 +364,14 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height', 'maskSize'],
-                value: [5 * 50, 50, 50],
-                variant: [5 * 5, 5, 5],
+                value: [STAR_NUM * STAR_SIZE, STAR_SIZE, STAR_SIZE],
+                variant: [STAR_NUM * STAR_VARIANT, STAR_VARIANT, STAR_VARIANT],
                 unit: ['px', 'px', 'px']
             }
         ),
         backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
+
+        maskImage: `url("${Utils.getUrl(i18next.t(ID.IMAGE.HOME_4_2))}")`,
         maskRepeat: 'repeat-x',
         maskPosition: 'center'
     },
@@ -403,7 +410,9 @@ const styles = theme => ({
     },
 
     section4_carousel: {
-
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'yellow'
     },
 
     section4_carousel_indicators: {
@@ -861,6 +870,34 @@ const carouselMultiResponsiveBlogs = {
     }
 }
 
+const carouselMultiResponsiveCaseStudy = {
+    xl: {
+        breakpoint: { max: Number.MAX_SAFE_INTEGER, min: 1920 },
+        items: 1,
+        partialVisibilityGutter: 0
+    },
+    lg: {
+        breakpoint: { max: 1920 - 1, min: 1280 },
+        items: 1,
+        partialVisibilityGutter: 0
+    },
+    md: {
+        breakpoint: { max: 1280 - 1, min: 960 },
+        items: 1,
+        partialVisibilityGutter: 0
+    },
+    sm: {
+        breakpoint: { max: 960 - 1, min: 600 },
+        items: 1,
+        partialVisibilityGutter: 80
+    },
+    xs: {
+        breakpoint: { max: 600 - 1, min: 0 },
+        items: 1,
+        partialVisibilityGutter: 80
+    }
+}
+
 class Home extends React.Component
 {
 
@@ -912,16 +949,14 @@ class Home extends React.Component
 
     handleCaseStudy = (delta) => (evt) =>
     {
+        delta > 0
+            ? this.carouselCaseStudyRef.current.next(1)
+            : this.carouselCaseStudyRef.current.previous(1)
+
         this.setState(
             (state, props) => ({
                 caseIndex: ((state.caseIndex + delta) + state.caseStudyNum) % state.caseStudyNum
-            }),
-            () =>
-            {
-                delta > 0
-                    ? this.carouselCaseStudyRef.current.next()
-                    : this.carouselCaseStudyRef.current.prev()
-            }
+            })
         )
     }
 
@@ -1201,57 +1236,29 @@ class Home extends React.Component
 
                 <InViewElement variants={commonMotion.groupTransition}>
                     <motion.div variants={commonMotion.delayTransition(2)} id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
-                        {/*
-                        <Carousel
-                            className={clsx(classes.divColumn, classes.divCenter, classes.section3_carousel)}
+                        <CarouselMulti
+                            containerClass={clsx(classes.divColumn, classes.divLeft, classes.section3_carousel)}
+                            sliderClass={clsx(classes.section3_carousel_slider)}
+                            responsive={carouselMultiResponsive}
+                            ssr={false}
+                            partialVisible={false}
+                            centerMode={false}
+                            infinite={true}
+                            showDots={false}
+                            arrows={false}
+                            draggable={false}
+                            swipeable={false}
                             autoPlay={true}
-                            indicators={false}
-                            navButtonsAlwaysInvisible={true}
-                            animation={carouselAnim}
-                            interval={3000}
+                            autoPlaySpeed={3000}
                         >
                             {
                                 Array.apply(0, Array(totalLogo))
-                                    .filter((value, index) => {
-                                        if (carouselAnim === 'slide') {
-                                            return index % numLogo === 0
-                                        }
-                                        return true
-                                    })
-                                    .map((value, index) => {
-                                        if (carouselAnim === 'slide') {
-                                            return this.renderSection3LogoSlide(index, numLogo, totalLogo)
-                                        }
-                                        return this.renderSection3LogoFade(index, numLogo, totalLogo)
+                                    .map((value, index) =>
+                                    {
+                                        return this.renderSection3LogoFade(index, 1, totalLogo)
                                     })
                             }
-                        </Carousel>
-                    */}
-                        {
-                            <CarouselMulti
-                                containerClass={clsx(classes.divColumn, classes.divLeft, classes.section3_carousel)}
-                                sliderClass={clsx(classes.section3_carousel_slider)}
-                                responsive={carouselMultiResponsive}
-                                ssr={false}
-                                partialVisible={false}
-                                centerMode={false}
-                                infinite={true}
-                                showDots={false}
-                                arrows={false}
-                                draggable={false}
-                                swipeable={false}
-                                autoPlay={true}
-                                autoPlaySpeed={3000}
-                            >
-                                {
-                                    Array.apply(0, Array(totalLogo))
-                                        .map((value, index) =>
-                                        {
-                                            return this.renderSection3LogoFade(index, 1, totalLogo)
-                                        })
-                                }
-                            </CarouselMulti>
-                        }
+                        </CarouselMulti>
                     </motion.div>
                 </InViewElement>
 
@@ -1314,25 +1321,33 @@ class Home extends React.Component
         const totalCaseStudy = 5
         // const carouselAnim = 'slide'
         const carouselAnim = 'fade'
+        const isAutoPlay = isWidthDown('sm', width)
 
         const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
-        const starUrl = `url("${Utils.getUrl(t(ID.IMAGE.HOME_4_2))}")`
 
         return (
             <InViewElement variants={commonMotion.groupTransition}>
                 <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
-                    <div className={clsx(classes.divRow2ColumnRevert)} style={{ flex: 2 }}>
-                        <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)} style={{ flex: 1 }}>
-                            <Carousel
+                    <div className={clsx(classes.divRow2ColumnRevert, classes.fullWidth)} >
+                        <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divRow, classes.divCenter, isAutoPlay ? classes.fullWidth : classes.halfWidth)} >
+
+                            <CarouselMulti
                                 key={width}
                                 ref={this.carouselCaseStudyRef}
-                                className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
-                                autoPlay={!true}
-                                indicators={false}
-                                navButtonsAlwaysInvisible={true}
-                                animation={carouselAnim}
-                                interval={3000}
-                                startAt={caseIndex}
+                                responsive={carouselMultiResponsiveCaseStudy}
+                                containerClass={clsx(classes.divColumn, classes.divLeft, classes.section4_carousel)}
+                                sliderClass={clsx(classes.section5_carousel_slider)}
+                                itemClass={clsx(classes.section5_carousel_item)}
+                                ssr={false}
+                                partialVisible={isAutoPlay}
+                                centerMode={false}
+                                infinite={isAutoPlay}
+                                showDots={false}
+                                arrows={false}
+                                draggable={false}
+                                swipeable={false}
+                                autoPlay={isAutoPlay}
+                                autoPlaySpeed={3000}
                             >
                                 {
                                     Array.apply(0, Array(totalCaseStudy))
@@ -1341,10 +1356,11 @@ class Home extends React.Component
                                             return this.renderSection4CaseStudy(index)
                                         })
                                 }
-                            </Carousel>
+                            </CarouselMulti>
+
                         </motion.div>
-                        <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_info)} style={{ flex: 1 }}>
-                            <div className={clsx(classes.section4_info_stars)} style={{ '-webkit-mask-image': starUrl }} />
+                        <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={clsx(classes.divColumn, classes.divCenter, isAutoPlay ? classes.fullWidth : classes.halfWidth, classes.section4_info)} >
+                            <div className={clsx(classes.section4_info_stars)} />
                             <Typography className={clsx(classes.text40, classes.textLimitMultiline, classes.section4_info_text)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_4_HEADER_1}
@@ -1391,7 +1407,7 @@ class Home extends React.Component
                         </div>
                     </motion.div>
                 </div>
-            </InViewElement>
+            </InViewElement >
         )
     }
 
@@ -1403,7 +1419,7 @@ class Home extends React.Component
         } = this.props
 
         const LOGO = Utils.i18Image(t, ID.HOME[`SECTION_4_LOGO_${index + 1}`])
-        const TEXT = t(ID.HOME[`SECTION_4_TEXT_${index + 1}`])
+        // const TEXT = t(ID.HOME[`SECTION_4_TEXT_${index + 1}`])
         const TITILE = t(ID.HOME[`SECTION_4_TITLE_${index + 1}`])
 
         const path = Utils.getUrl(LOGO)
@@ -1587,15 +1603,15 @@ class Home extends React.Component
                     <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
-                            <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog1_txt)}>
+                            <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog1_txt)}>
                                 {/* <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
                                 /> */}
                                 <InViewElement variants={commonMotion.groupTextTransition(0.08)}>
                                     {
 
-                                        t(ID.HOME.SECTION_6_TEXT_3).split('').map(char => (
-                                            <motion.span variants={commonMotion.textTransition}>{char}</motion.span>
+                                        t(ID.HOME.SECTION_6_TEXT_3).split('').map((char, index) => (
+                                            <motion.span key={index} variants={commonMotion.textTransition}>{char}</motion.span>
                                         ))
                                     }
                                 </InViewElement>
@@ -1609,15 +1625,15 @@ class Home extends React.Component
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
-                            <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog2_txt)}>
+                            <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog2_txt)}>
                                 {/* <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_4}
                                 /> */}
                                 <InViewElement variants={commonMotion.groupTextTransition(0.05)}>
                                     {
 
-                                        t(ID.HOME.SECTION_6_TEXT_4).split('').map(char => (
-                                            <motion.span variants={commonMotion.textTransition}>{char}</motion.span>
+                                        t(ID.HOME.SECTION_6_TEXT_4).split('').map((char, index) => (
+                                            <motion.span key={index} variants={commonMotion.textTransition}>{char}</motion.span>
                                         ))
                                     }
                                 </InViewElement>
@@ -1631,15 +1647,15 @@ class Home extends React.Component
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
-                            <Typography className={clsx(classes.textBreak, classes.text25, classes.section6_dialog3_txt)}>
+                            <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog3_txt)}>
                                 {/* <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
                                 /> */}
                                 <InViewElement variants={commonMotion.groupTextTransition(0.1)}>
                                     {
 
-                                        t(ID.HOME.SECTION_6_TEXT_5).split('').map(char => (
-                                            <motion.span variants={commonMotion.textTransition}>{char}</motion.span>
+                                        t(ID.HOME.SECTION_6_TEXT_5).split('').map((char, index) => (
+                                            <motion.span key={index} variants={commonMotion.textTransition}>{char}</motion.span>
                                         ))
                                     }
                                 </InViewElement>

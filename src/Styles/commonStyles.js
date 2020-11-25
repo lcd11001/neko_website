@@ -159,6 +159,16 @@ const styles = (theme) => ({
         // backgroundColor: 'red'
     },
 
+    halfWidth: {
+        width: '50% !important'
+        // backgroundColor: 'red'
+    },
+
+    halfHeight: {
+        height: '50% !important',
+        // backgroundColor: 'red'
+    },
+
     relative: {
         position: 'relative'
     },
