@@ -445,8 +445,8 @@ const styles = theme => ({
     section4_carousel_multi_item_container: {
         '& > div': {
             backgroundColor: 'white',
-            marginTop: 10,
-            marginBottom: 10,
+            marginTop: 20,
+            marginBottom: 20,
             padding: 50
         },
         '& > div:first-child': {
