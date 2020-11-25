@@ -497,7 +497,8 @@ const styles = theme => ({
                 unit: ['px !important', 'px !important']
             }
         ),
-        paddingRight: 20
+        paddingRight: 20,
+        alignSelf: 'flex-start'
     },
 
     section4_case_study_text: {
