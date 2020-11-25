@@ -355,8 +355,42 @@ const styles = theme => ({
         backgroundColor: '#f6f6f6',
     },
 
+    section4_info_stars: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'height', 'maskSize'],
+                value: [5 * 50, 50, 50],
+                variant: [5 * 5, 5, 5],
+                unit: ['px', 'px', 'px']
+            }
+        ),
+        backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
+        maskRepeat: 'repeat-x',
+        maskPosition: 'center'
+    },
+
+    section4_info: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginLeft', 'marginRight'],
+                value: [50, 50],
+                variant: [5, 5],
+                unit: ['px', 'px']
+            }
+        ),
+    },
+
+    section4_info_text: {
+        textAlign: 'center',
+        // textOverflow: 'unset'
+    },
+
+    section4_info_text_1: {
+        color: theme.palette.text.secondary
+    },
+
     section4_btn1: {
-        // because section4_logo has width = 40%
+        // because section4_case_study_logo has width = 40%
         // => section4_btn1 has marginLeft 40%
         ...breakpointsStyle(theme,
             {
@@ -403,12 +437,12 @@ const styles = theme => ({
         paddingRight: '10%'
     },
 
-    section4_logo: {
+    section4_case_study_logo: {
         maxWidth: 300,
         maxHeight: 200
     },
 
-    section4_text: {
+    section4_case_study_text: {
         // ...breakpointsStyle(theme,
         //     {
         //         key: ['line-height', 'max-height'],
@@ -425,7 +459,7 @@ const styles = theme => ({
         fontWeight: 'bold'
     },
 
-    section4_title: {
+    section4_case_study_title: {
         paddingTop: 30,
         fontWeight: 'bold'
     },
@@ -1282,44 +1316,57 @@ class Home extends React.Component
         const carouselAnim = 'fade'
 
         const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
+        const starUrl = `url("${Utils.getUrl(t(ID.IMAGE.HOME_4_2))}")`
 
         return (
             <InViewElement variants={commonMotion.groupTransition}>
                 <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
-                    <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)}>
-                        <Carousel
-                            key={width}
-                            ref={this.carouselCaseStudyRef}
-                            className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
-                            autoPlay={!true}
-                            indicators={false}
-                            navButtonsAlwaysInvisible={true}
-                            animation={carouselAnim}
-                            interval={3000}
-                            startAt={caseIndex}
-                        >
-                            {
-                                Array.apply(0, Array(totalCaseStudy))
-                                    .map((value, index) =>
-                                    {
-                                        return this.renderSection4CaseStudy(index)
-                                    })
-                            }
-                        </Carousel>
-                    </motion.div>
-                    <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={classes.section4_btn1}>
-                        <Link to={Utils.i18Link(t, caseStudiLink)} className={classes.textLinkHidden}>
-                            <Button
-                                variant={'contained'}
-                                color={'primary'}
-                                endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                    <div className={clsx(classes.divRow2ColumnRevert)} style={{ flex: 2 }}>
+                        <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divRow, classes.divCenter)} style={{ flex: 1 }}>
+                            <Carousel
+                                key={width}
+                                ref={this.carouselCaseStudyRef}
+                                className={clsx(classes.divColumn, classes.divCenter, classes.section4_carousel)}
+                                autoPlay={!true}
+                                indicators={false}
+                                navButtonsAlwaysInvisible={true}
+                                animation={carouselAnim}
+                                interval={3000}
+                                startAt={caseIndex}
                             >
+                                {
+                                    Array.apply(0, Array(totalCaseStudy))
+                                        .map((value, index) =>
+                                        {
+                                            return this.renderSection4CaseStudy(index)
+                                        })
+                                }
+                            </Carousel>
+                        </motion.div>
+                        <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={clsx(classes.divColumn, classes.divCenter, classes.section4_info)} style={{ flex: 1 }}>
+                            <div className={clsx(classes.section4_info_stars)} style={{ '-webkit-mask-image': starUrl }} />
+                            <Typography className={clsx(classes.text40, classes.textLimitMultiline, classes.section4_info_text)}>
                                 <Trans
-                                    i18nKey={ID.HOME.SECTION_4_BUTTON_1}
+                                    i18nKey={ID.HOME.SECTION_4_HEADER_1}
+                                    components={{ span: <span /> }}
+                                    values={{
+                                        custom: clsx(classes.section4_info_text_1)
+                                    }}
                                 />
-                            </Button>
-                        </Link>
-                    </motion.div>
+                            </Typography>
+                            <Link to={Utils.i18Link(t, caseStudiLink)} className={classes.textLinkHidden}>
+                                <Button
+                                    variant={'contained'}
+                                    color={'primary'}
+                                    endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                                >
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_4_BUTTON_1}
+                                    />
+                                </Button>
+                            </Link>
+                        </motion.div>
+                    </div>
                     <motion.div variants={commonMotion.elementTransition} id={'section4.3'} className={clsx(classes.divRow, classes.divBetween)}>
                         <div className={classes.section4_carousel_indicators}>
                             <Typography className={clsx(classes.text18)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
@@ -1364,10 +1411,10 @@ class Home extends React.Component
         return (
             <div key={`case-study-${index}`} className={clsx(classes.divRow, classes.divCenter)}>
                 <div className={classes.section4_logo_container}>
-                    <img alt={LOGO} src={path} className={classes.section4_logo} />
+                    <img alt={LOGO} src={path} className={classes.section4_case_study_logo} />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={clsx(classes.text18, classes.section4_text, classes.textLimitMultiline)}>
+                    <Typography className={clsx(classes.text18, classes.textLimitMultiline, classes.section4_case_study_text)}>
                         <Trans
                             i18nKey={ID.HOME[`SECTION_4_TEXT_${index + 1}`]}
                             components={{ span: <span /> }}
@@ -1376,7 +1423,7 @@ class Home extends React.Component
                             }}
                         />
                     </Typography>
-                    <Typography className={clsx(classes.text25, classes.section4_title)}>{TITILE}</Typography>
+                    <Typography className={clsx(classes.text25, classes.section4_case_study_title)}>{TITILE}</Typography>
                 </div>
             </div>
         )
