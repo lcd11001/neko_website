@@ -409,14 +409,20 @@ const styles = theme => ({
     },
 
     section4_text: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['line-height', 'max-height'],
-                value: [25, 25 * MAX_LINE_HEIGHT],
-                variant: [2, 2 * MAX_LINE_HEIGHT],
-                unit: ['px', 'px']
-            }
-        ),
+        // ...breakpointsStyle(theme,
+        //     {
+        //         key: ['line-height', 'max-height'],
+        //         value: [25, 25 * MAX_LINE_HEIGHT],
+        //         variant: [2, 2 * MAX_LINE_HEIGHT],
+        //         unit: ['px', 'px']
+        //     }
+        // ),
+        textOverflow: 'unset'
+    },
+
+    section4_text_1: {
+        color: theme.palette.text.secondary,
+        fontWeight: 'bold'
     },
 
     section4_title: {
@@ -1361,7 +1367,15 @@ class Home extends React.Component
                     <img alt={LOGO} src={path} className={classes.section4_logo} />
                 </div>
                 <div className={clsx(classes.divColumn, classes.divLeft)}>
-                    <Typography className={clsx(classes.text18, classes.section4_text, classes.textLimitMultiline)}>{TEXT}</Typography>
+                    <Typography className={clsx(classes.text18, classes.section4_text, classes.textLimitMultiline)}>
+                        <Trans
+                            i18nKey={ID.HOME[`SECTION_4_TEXT_${index + 1}`]}
+                            components={{ span: <span /> }}
+                            values={{
+                                custom: clsx(classes.section4_text_1)
+                            }}
+                        />
+                    </Typography>
                     <Typography className={clsx(classes.text25, classes.section4_title)}>{TITILE}</Typography>
                 </div>
             </div>
