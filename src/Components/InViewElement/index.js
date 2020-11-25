@@ -5,6 +5,8 @@ import { useInView } from 'react-intersection-observer'
 import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
 import { withMultipleStyles, commonMotion } from '../../Styles'
+import { compose } from 'recompose'
+import { withWidth } from '@material-ui/core'
 
 const styles = theme => ({
     root: {
@@ -51,6 +53,7 @@ const InViewElement = (props) =>
 
     return (
         <div
+            key={props.width}
             className={props.classes.root}
             ref={ref}
             style={{ ...props.style }}
@@ -77,6 +80,8 @@ const InViewElement = (props) =>
 
 InViewElement.propTypes = {
     children: PropTypes.node.isRequired,
+    // use withWidth() when export
+    width: PropTypes.string.isRequired,
     variants: PropTypes.object,
     transition: PropTypes.object,
     initial: PropTypes.string,
@@ -105,4 +110,7 @@ InViewElement.defaultProps = {
     }
 }
 
-export default withMultipleStyles(styles)(InViewElement)
+export default compose(
+    withMultipleStyles(styles),
+    withWidth()
+)(InViewElement)

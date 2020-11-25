@@ -59,6 +59,18 @@ const styles = (theme) => ({
         ),
     },
 
+    iconArrowBig: {
+        color: 'inherit',
+        ...breakpointsStyle(theme,
+            {
+                key: ['width', 'marginLeft'],
+                value: [65, 40],
+                variant: [7, 5],
+                unit: ['px', 'px']
+            }
+        ),
+    },
+
     section: {
         width: '100%',
         ...breakpointsStyle(theme,
