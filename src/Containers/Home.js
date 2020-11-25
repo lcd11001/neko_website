@@ -369,7 +369,7 @@ const styles = theme => ({
                 unit: ['px', 'px', 'px']
             }
         ),
-        backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
+        backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 60%)`,
 
         maskImage: `url("${Utils.getUrl(i18next.t(ID.IMAGE.HOME_4_2))}")`,
         maskRepeat: 'repeat-x',
@@ -380,8 +380,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['marginLeft', 'marginRight'],
-                value: [50, 50],
-                variant: [5, 5],
+                value: [150, 0],
+                variant: [30, 0],
                 unit: ['px', 'px']
             }
         ),
@@ -389,7 +389,8 @@ const styles = theme => ({
 
     section4_info_text: {
         textAlign: 'center',
-        // textOverflow: 'unset'
+        // textOverflow: 'unset',
+        padding: '50px 0'
     },
 
     section4_info_text_1: {
@@ -1351,7 +1352,9 @@ class Home extends React.Component
         // const carouselAnim = 'slide'
         const carouselAnim = 'fade'
 
-        const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
+        // const caseStudiLink = ID.HOME[`SECTION_4_LINK_${caseIndex + 1}`]
+        const caseStudiLink = ID.HOME.SECTION_4_BUTTON_1_LINK
+
 
         return (
             <div id={'section4'} className={clsx(classes.divColumn, classes.section, classes.section4)}>
