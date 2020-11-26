@@ -78,6 +78,12 @@ class SendEmail extends React.Component
             [ID.FORM_CONTACT.SECTION_3_TEXT_4]: false,
             [ID.FORM_CONTACT.SECTION_3_TEXT_5]: false,
             [ID.FORM_CONTACT.SECTION_3_TEXT_6]: false,
+
+            [ID.FORM_CONTACT.SECTION_4_NAME]: '',
+            [ID.FORM_CONTACT.SECTION_4_COMPANY]: '',
+            [ID.FORM_CONTACT.SECTION_4_EMAIL]: '',
+            [ID.FORM_CONTACT.SECTION_4_PHONE]: '',
+            [ID.FORM_CONTACT.SECTION_4_QUESTION]: '',
         }
     }
 
@@ -88,6 +94,22 @@ class SendEmail extends React.Component
         this.setState({
             [id]: checked
         })
+    }
+
+    handleTextbox = (useTrim) => (evt) =>
+    {
+        const id = evt.target.id
+        const value = evt.target.value
+
+        this.setState({
+            [id]: useTrim ? value.replace(/ /g, '') : value
+        })
+    }
+
+    handleSubmit = (evt) =>
+    {
+        evt.preventDefault()
+        console.log('submit')
     }
 
     renderDetailForm() 
@@ -205,9 +227,15 @@ class SendEmail extends React.Component
                 id={'sectionSimple'}
                 className={clsx(classes.sectionSimple)}
             >
-                <FormControl className={clsx(classes.divColumn, classes.divLeft)}>
+                <FormControl
+                    component={'form'}
+                    className={clsx(classes.divColumn, classes.divLeft)}
+                    autoComplete={'on'}
+                    onSubmit={this.handleSubmit}
+                >
                     <TextField
-                        id={'name'}
+                        id={ID.FORM_CONTACT.SECTION_4_NAME}
+                        value={this.state[ID.FORM_CONTACT.SECTION_4_NAME]}
                         fullWidth={true}
                         required={true}
                         label={t(ID.FORM_CONTACT.SECTION_4_NAME)}
@@ -217,10 +245,13 @@ class SendEmail extends React.Component
                                 shrink: clsx(classes.text18)
                             }
                         }}
+                        type={'text'}
                         className={classes.sectionSimple_text_field}
+                        onChange={this.handleTextbox(false)}
                     />
                     <TextField
-                        id={'company'}
+                        id={ID.FORM_CONTACT.SECTION_4_COMPANY}
+                        value={this.state[ID.FORM_CONTACT.SECTION_4_COMPANY]}
                         fullWidth={true}
                         required={false}
                         label={t(ID.FORM_CONTACT.SECTION_4_COMPANY)}
@@ -230,10 +261,13 @@ class SendEmail extends React.Component
                                 shrink: clsx(classes.text18)
                             }
                         }}
+                        type={'text'}
                         className={classes.sectionSimple_text_field}
+                        onChange={this.handleTextbox(false)}
                     />
                     <TextField
-                        id={'email'}
+                        id={ID.FORM_CONTACT.SECTION_4_EMAIL}
+                        value={this.state[ID.FORM_CONTACT.SECTION_4_EMAIL]}
                         fullWidth={true}
                         required={true}
                         label={t(ID.FORM_CONTACT.SECTION_4_EMAIL)}
@@ -243,10 +277,13 @@ class SendEmail extends React.Component
                                 shrink: clsx(classes.text18)
                             }
                         }}
+                        type={'email'}
                         className={classes.sectionSimple_text_field}
+                        onChange={this.handleTextbox(true)}
                     />
                     <TextField
-                        id={'phone'}
+                        id={ID.FORM_CONTACT.SECTION_4_PHONE}
+                        value={this.state[ID.FORM_CONTACT.SECTION_4_PHONE]}
                         fullWidth={true}
                         required={true}
                         label={t(ID.FORM_CONTACT.SECTION_4_PHONE)}
@@ -256,10 +293,14 @@ class SendEmail extends React.Component
                                 shrink: clsx(classes.text18)
                             }
                         }}
+                        type={'tel'}
+                        pattern={'[0-9]{10}'}
                         className={classes.sectionSimple_text_field}
+                        onChange={this.handleTextbox(true)}
                     />
                     <TextField
-                        id={'question'}
+                        id={ID.FORM_CONTACT.SECTION_4_QUESTION}
+                        value={this.state[ID.FORM_CONTACT.SECTION_4_QUESTION]}
                         fullWidth={true}
                         required={true}
                         label={t(ID.FORM_CONTACT.SECTION_4_QUESTION)}
@@ -272,12 +313,14 @@ class SendEmail extends React.Component
                         multiline={true}
                         rows={5}
                         className={classes.sectionSimple_text_field}
+                        onChange={this.handleTextbox(false)}
                     />
                     <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
                         <Button
                             variant={'contained'}
                             color={'secondary'}
                             endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                            type={'submit'}
                         >
                             <Trans
                                 i18nKey={ID.FORM_CONTACT.SECTION_4_SEND}
