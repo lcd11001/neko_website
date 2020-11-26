@@ -712,6 +712,7 @@ const styles = theme => ({
         ),
         border: '2px solid #707070',
         borderRadius: 7,
+        backgroundColor: 'white',
         position: 'relative'
     },
 

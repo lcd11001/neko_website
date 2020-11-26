@@ -161,6 +161,28 @@ const styles = (theme) => ({
         objectFit: 'contain'
     },
 
+    avatarOuter: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['minWidth'],
+                value: [250],
+                variant: [40],
+                unit: ['px']
+            }
+        ),
+    },
+
+    avatarInner: {
+
+    },
+
+    avatarBorder: {
+        borderRadius: 14,
+        border: '1px solid #707070',
+        height: '100%',
+        width: '100%'
+    },
+
     fullWidth: {
         width: '100% !important'
         // backgroundColor: 'red'

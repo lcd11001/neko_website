@@ -113,6 +113,12 @@ const styles = theme => ({
                 }
             ),
             borderRadius: 0,
+
+            '&--selected': {
+                border: `1px solid transparent`,
+                backgroundColor: theme.palette.primary.main,
+                color: 'white'
+            }
         },
 
         '&--secondary': {
@@ -310,6 +316,7 @@ class Menu extends React.Component
 
         let classMenuBorder = clsx(classes.menuBorder, {
             [classes.menuBorder + '--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (!shortMenu && menu.customStyle && menu.customStyle.border),
+            [classes.menuBorder + '--' + ((menu.customStyle && menu.customStyle.border) || 'undefined') + '--selected']: (!shortMenu && menu.customStyle && menu.customStyle.border && isSelected),
 
             [classes.menuBorder + '--secondary']: secondary,
             [classes.menuBorder + '--secondary--' + ((menu.customStyle && menu.customStyle.border) || 'undefined')]: (secondary && menu.customStyle && menu.customStyle.border)

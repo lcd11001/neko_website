@@ -192,28 +192,6 @@ const styles = theme => ({
         borderRadius: 14
     },
 
-    section4_avatar_outer: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['minWidth'],
-                value: [250],
-                variant: [40],
-                unit: ['px']
-            }
-        ),
-    },
-
-    section4_avatar_inner: {
-
-    },
-
-    section4_avatar: {
-        borderRadius: 14,
-        border: '1px solid #707070',
-        height: '100%',
-        width: '100%'
-    },
-
     section4_contact_title: {
         fontWeight: 'bold',
         ...breakpointsStyle(theme,
@@ -451,11 +429,11 @@ class About extends React.Component
                                     <AspectRatio
                                         ratio={1}
                                         classes={{
-                                            outerWrapper: classes.section4_avatar_outer,
-                                            innerWrapper: classes.section4_avatar_inner,
+                                            outerWrapper: classes.avatarOuter,
+                                            innerWrapper: classes.avatarInner,
                                         }}
                                     >
-                                        <div className={clsx(classes.section4_avatar)}>
+                                        <div className={clsx(classes.avatarBorder)}>
 
                                         </div>
                                     </AspectRatio>
@@ -477,11 +455,11 @@ class About extends React.Component
                                     <AspectRatio
                                         ratio={1}
                                         classes={{
-                                            outerWrapper: classes.section4_avatar_outer,
-                                            innerWrapper: classes.section4_avatar_inner,
+                                            outerWrapper: classes.avatarOuter,
+                                            innerWrapper: classes.avatarInner,
                                         }}
                                     >
-                                        <div className={clsx(classes.section4_avatar)}>
+                                        <div className={clsx(classes.avatarBorder)}>
 
                                         </div>
                                     </AspectRatio>
