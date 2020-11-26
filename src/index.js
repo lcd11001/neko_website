@@ -27,6 +27,7 @@ import Blogs from './Containers/Blogs'
 import Capabilites from './Containers/Capabilites'
 import Contact from './Containers/Contact'
 import Streamline from './Containers/Streamline'
+import FormContact from './Containers/FormContact'
 
 import WorksDetail from './Containers/WorksDetail'
 import BlogsDetail from './Containers/BlogsDetail'
@@ -103,6 +104,7 @@ const Routes = () =>
                                             <Route exact path={i18next.t(ID.LINK.CAPABILITIES)} component={Capabilites} />
                                             <Route exact path={i18next.t(ID.LINK.CONTACT)} component={Contact} />
                                             <Route exact path={i18next.t(ID.LINK.STREAMLINE)} component={Streamline} />
+                                            <Route exact path={i18next.t(ID.LINK.FORM_CONTACT)} component={FormContact} />
 
                                             {/* has sub page "detail" MUST before "category" */}
                                             <Route path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
@@ -112,7 +114,7 @@ const Routes = () =>
 
 
                                             {/* invalid path */}
-                                            <Route path='*' component={Generic} />
+                                            <Route path='*' component={PageNotFound} />
                                         </Switch>
                                     </AnimatePresence>
                                 )} />

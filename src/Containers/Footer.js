@@ -320,7 +320,7 @@ class Footer extends React.Component
                                     <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
                                 </Typography>
 
-                                <Link to={'/form-contact'} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+                                <Link to={t(ID.LINK.FORM_CONTACT)} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                                     <div className={clsx(classes.divRow, classes.divCenter)}>
                                         <Typography component={'div'} className={clsx(classes.txtWhite, classes.text14, classes.subTitle)}>
                                             <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />

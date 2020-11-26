@@ -66,7 +66,7 @@ const defaultTheme = createMuiTheme({
                 ),
             },
             containedPrimary: {
-                backgroundColor: '#3e4378',
+                backgroundColor: '#4E5496',
                 color: '#FFFFFF',
                 boxShadow: 'none !important',
                 '&:hover': {
@@ -74,7 +74,7 @@ const defaultTheme = createMuiTheme({
                     color: '#FFFFFF'
                 },
                 '&:active': {
-                    backgroundColor: '#4E5496',
+                    backgroundColor: '#3e4378',
                     color: '#FFFFFF',
                 },
                 '&.Mui-disabled': {
@@ -83,7 +83,7 @@ const defaultTheme = createMuiTheme({
                 }
             },
             containedSecondary: {
-                backgroundColor: '#c15450',
+                backgroundColor: '#f26a65',
                 color: '#FFFFFF',
                 boxShadow: 'none !important',
                 '&:hover': {
@@ -91,7 +91,7 @@ const defaultTheme = createMuiTheme({
                     color: '#FFFFFF',
                 },
                 '&:active': {
-                    backgroundColor: '#f26a65',
+                    backgroundColor: '#c15450',
                     color: '#FFFFFF',
                 },
                 '&.Mui-disabled': {
@@ -229,21 +229,21 @@ const defaultTheme = createMuiTheme({
         },
         MuiCheckbox: {
             colorPrimary: {
-                color: '#1B1F43',
+                color: '#F26A65',
                 '&:hover': {
-                    color: '#4A58B2'
+                    color: '#4E5496'
                 },
                 '&.Mui-checked': {
-                    color: '#4A58B2'
+                    color: '#4E5496'
                 }
             },
             colorSecondary: {
-                color: '#1B1F43',
+                color: '#4E5496',
                 '&:hover': {
-                    color: '#F52300'
+                    color: '#F26A65'
                 },
                 '&.Mui-checked': {
-                    color: '#F52300'
+                    color: '#F26A65'
                 }
             }
         },

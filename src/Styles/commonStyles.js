@@ -83,6 +83,18 @@ const styles = (theme) => ({
         ),
     },
 
+    spacing: {
+        // same as section padding
+        ...breakpointsStyle(theme,
+            {
+                key: ['--spacing'],
+                value: [200],
+                variant: [48],
+                unit: ['px']
+            }
+        ),
+    },
+
     divRow: {
         display: 'flex',
         flexDirection: 'row'

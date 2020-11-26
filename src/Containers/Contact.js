@@ -19,20 +19,9 @@ import { withWidth, Typography, FormControl, Button, Grid, TextField } from '@ma
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement'
+import SendEmail from '../Components/SendEmail'
 
 const styles = theme => ({
-    spacing: {
-        // same as section padding
-        ...breakpointsStyle(theme,
-            {
-                key: ['--spacing'],
-                value: [200],
-                variant: [48],
-                unit: ['px']
-            }
-        ),
-    },
-
     pageRoot: {
         position: 'relative',
         backgroundColor: '#FFFFFF',
@@ -95,27 +84,9 @@ const styles = theme => ({
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     section3: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingLeft', 'paddingRight'],
-                value: [50, 50],
-                variant: [5, 5],
-                unit: ['px', 'px']
-            }
-        ),
-        paddingTop: 'calc(var(--spacing) / 2)',
-        paddingBottom: 'calc(var(--spacing) / 2)',
         backgroundColor: 'white',
         marginLeft: 'calc(var(--spacing) / 2)',
         marginTop: 'calc(-1 * var(--spacing))'
-    },
-
-    section3_txt_secondary: {
-        color: theme.palette.text.secondary
-    },
-
-    section3_text_field: {
-        marginBottom: 'calc(var(--spacing) / 2)'
     }
 });
 
@@ -253,86 +224,7 @@ class Contact extends React.Component
                 className={clsx(classes.divBox, classes.section3)}
                 style={{ flex: 1 }}
             >
-                <FormControl className={clsx(classes.divColumn, classes.divLeft)}>
-                    <TextField
-                        id={'name'}
-                        fullWidth={true}
-                        required={true}
-                        label={t(ID.CONTACT.SECTION_3_NAME)}
-                        InputLabelProps={{
-                            shrink: true,
-                            classes: {
-                                shrink: clsx(classes.text18)
-                            }
-                        }}
-                        className={classes.section3_text_field}
-                    />
-                    <TextField
-                        id={'company'}
-                        fullWidth={true}
-                        required={false}
-                        label={t(ID.CONTACT.SECTION_3_COMPANY)}
-                        InputLabelProps={{
-                            shrink: true,
-                            classes: {
-                                shrink: clsx(classes.text18)
-                            }
-                        }}
-                        className={classes.section3_text_field}
-                    />
-                    <TextField
-                        id={'email'}
-                        fullWidth={true}
-                        required={true}
-                        label={t(ID.CONTACT.SECTION_3_EMAIL)}
-                        InputLabelProps={{
-                            shrink: true,
-                            classes: {
-                                shrink: clsx(classes.text18)
-                            }
-                        }}
-                        className={classes.section3_text_field}
-                    />
-                    <TextField
-                        id={'phone'}
-                        fullWidth={true}
-                        required={true}
-                        label={t(ID.CONTACT.SECTION_3_PHONE)}
-                        InputLabelProps={{
-                            shrink: true,
-                            classes: {
-                                shrink: clsx(classes.text18)
-                            }
-                        }}
-                        className={classes.section3_text_field}
-                    />
-                    <TextField
-                        id={'question'}
-                        fullWidth={true}
-                        required={true}
-                        label={t(ID.CONTACT.SECTION_3_QUESTION)}
-                        InputLabelProps={{
-                            shrink: true,
-                            classes: {
-                                shrink: clsx(classes.text18, classes.section3_txt_secondary)
-                            }
-                        }}
-                        multiline={true}
-                        rows={5}
-                        className={classes.section3_text_field}
-                    />
-                    <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
-                        <Button
-                            variant={'contained'}
-                            color={'secondary'}
-                            endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
-                        >
-                            <Trans
-                                i18nKey={ID.CONTACT.SECTION_3_SEND}
-                            />
-                        </Button>
-                    </div>
-                </FormControl>
+                <SendEmail />
             </motion.div>
         )
     }

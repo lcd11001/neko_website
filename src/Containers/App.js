@@ -57,6 +57,7 @@ class App extends React.Component
             width
         } = this.props;
 
+        const isFormContact = t(ID.LINK.FORM_CONTACT) === pathname
         const isHome = t(ID.LINK.HOME) === pathname
         const shortMenu = isWidthDown('sm', width)
         const isSecondary = isHome && !shortMenu
@@ -70,20 +71,24 @@ class App extends React.Component
             <React.Fragment>
                 <div className={classRoot}>
                     {
+                        !isFormContact &&
                         this.renderAppbar('absolute', isSecondary ? 'transparent' : 'white', isSecondary)
                     }
-                    <HideOnScroll offsetY={-400} timeout={0}>
+                    <HideOnScroll offsetY={isFormContact ? 0 : -400} timeout={0}>
                         {
                             this.renderAppbar('fixed', 'white', false)
                         }
                     </HideOnScroll>
                     {
                         // Fixed: missing menu when page transition
-                        !isHome &&
+                        !isHome && !isFormContact &&
                         this.renderAppbar('relative', 'white', false)
                     }
                     {children}
-                    <Footer />
+                    {
+                        !isFormContact &&
+                        <Footer />
+                    }
                 </div>
                 {
                     isLoading > 0 && <CircularLoading message={loadingMessage} />
