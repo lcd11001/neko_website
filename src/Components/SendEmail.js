@@ -109,6 +109,7 @@ class SendEmail extends React.Component
     handleSubmit = (evt) =>
     {
         evt.preventDefault()
+        // https://stackoverflow.com/questions/55795125/how-to-send-email-from-my-react-web-application
         console.log('submit')
     }
 
@@ -277,7 +278,10 @@ class SendEmail extends React.Component
                                 shrink: clsx(classes.text18)
                             }
                         }}
-                        type={'email'}
+                        type={'text'}
+                        inputProps={{
+                            pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+                        }}
                         className={classes.sectionSimple_text_field}
                         onChange={this.handleTextbox(true)}
                     />
@@ -294,7 +298,9 @@ class SendEmail extends React.Component
                             }
                         }}
                         type={'tel'}
-                        pattern={'[0-9]{10}'}
+                        inputProps={{
+                            pattern: '[0-9]{10}'
+                        }}
                         className={classes.sectionSimple_text_field}
                         onChange={this.handleTextbox(true)}
                     />
