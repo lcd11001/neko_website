@@ -15,7 +15,7 @@ import compose from 'recompose/compose'
 
 import Utils from '../Utils'
 
-import { withWidth, Typography, FormControl, Button, Grid } from '@material-ui/core';
+import { withWidth, Typography, FormControl, Button, Grid, TextField } from '@material-ui/core';
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement'
@@ -73,9 +73,8 @@ const styles = theme => ({
         marginTop: 'calc(var(--spacing) / 2)'
     },
 
-    section2_txt1: {
-        wordBreak: 'break-word',
-        whiteSpace: 'normal',
+    section2_avatar_container: {
+        marginBottom: 'calc(var(--spacing) / 4)'
     },
 
     section2_avatar: {
@@ -84,19 +83,40 @@ const styles = theme => ({
         transformOrigin: 'top left'
     },
 
+    section2_txt1: {
+        wordBreak: 'break-word',
+        whiteSpace: 'normal',
+        marginBottom: 'calc(var(--spacing) / 4)'
+    },
+
+    section2_txt_contact: {
+        marginBottom: 'calc(var(--spacing) / 8)'
+    },
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     section3: {
         ...breakpointsStyle(theme,
             {
-                key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
-                value: [50, 50, 100, 200],
-                variant: [5, 5, 10, 10],
-                unit: ['px', 'px', 'px', 'px']
+                key: ['paddingLeft', 'paddingRight'],
+                value: [50, 50],
+                variant: [5, 5],
+                unit: ['px', 'px']
             }
         ),
+        paddingTop: 'calc(var(--spacing) / 2)',
+        paddingBottom: 'calc(var(--spacing) / 2)',
         backgroundColor: 'white',
-        marginLeft: 'calc(var(--spacing) / 2)'
+        marginLeft: 'calc(var(--spacing) / 2)',
+        marginTop: 'calc(-1 * var(--spacing))'
     },
+
+    section3_txt_secondary: {
+        color: theme.palette.text.secondary
+    },
+
+    section3_text_field: {
+        marginBottom: 'calc(var(--spacing) / 2)'
+    }
 });
 
 class Contact extends React.Component
@@ -171,10 +191,10 @@ class Contact extends React.Component
             <motion.div
                 variants={commonMotion.elementTransition}
                 id={'section2'}
-                className={clsx(classes.divColumn, classes.divLeft, classes.spacing, classes.section2)}
+                className={clsx(classes.divColumn, classes.divLeft, classes.section2)}
                 style={{ flex: 1 }}
             >
-                <div>
+                <div className={clsx(classes.section2_avatar_container)}>
                     <AspectRatio
                         ratio={1}
                         classes={{
@@ -192,23 +212,23 @@ class Contact extends React.Component
                 </Typography>
                 <Grid container >
                     <Grid item xs={2}>
-                        <Typography className={clsx(classes.text18)} color={'textSecondary'} >
+                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'} >
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_2_1} />
                         </Typography>
                     </Grid>
                     <Grid item xs={10}>
-                        <Typography className={clsx(classes.text18)} color={'textSecondary'}>
+                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_2_2} />
                         </Typography>
                     </Grid>
 
                     <Grid item xs={2}>
-                        <Typography className={clsx(classes.text18)} color={'textSecondary'}>
+                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_3_1} />
                         </Typography>
                     </Grid>
                     <Grid item xs={10}>
-                        <Typography className={clsx(classes.text18)} color={'textSecondary'}>
+                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_3_2} />
                         </Typography>
                     </Grid>
@@ -230,10 +250,77 @@ class Contact extends React.Component
             <motion.div
                 variants={commonMotion.elementTransition}
                 id={'section3'}
-                className={clsx(classes.divBox, classes.spacing, classes.section3)}
+                className={clsx(classes.divBox, classes.section3)}
                 style={{ flex: 1 }}
             >
                 <FormControl className={clsx(classes.divColumn, classes.divLeft)}>
+                    <TextField
+                        id={'name'}
+                        fullWidth={true}
+                        required={true}
+                        label={t(ID.CONTACT.SECTION_3_NAME)}
+                        InputLabelProps={{
+                            shrink: true,
+                            classes: {
+                                shrink: clsx(classes.text18)
+                            }
+                        }}
+                        className={classes.section3_text_field}
+                    />
+                    <TextField
+                        id={'company'}
+                        fullWidth={true}
+                        required={false}
+                        label={t(ID.CONTACT.SECTION_3_COMPANY)}
+                        InputLabelProps={{
+                            shrink: true,
+                            classes: {
+                                shrink: clsx(classes.text18)
+                            }
+                        }}
+                        className={classes.section3_text_field}
+                    />
+                    <TextField
+                        id={'email'}
+                        fullWidth={true}
+                        required={true}
+                        label={t(ID.CONTACT.SECTION_3_EMAIL)}
+                        InputLabelProps={{
+                            shrink: true,
+                            classes: {
+                                shrink: clsx(classes.text18)
+                            }
+                        }}
+                        className={classes.section3_text_field}
+                    />
+                    <TextField
+                        id={'phone'}
+                        fullWidth={true}
+                        required={true}
+                        label={t(ID.CONTACT.SECTION_3_PHONE)}
+                        InputLabelProps={{
+                            shrink: true,
+                            classes: {
+                                shrink: clsx(classes.text18)
+                            }
+                        }}
+                        className={classes.section3_text_field}
+                    />
+                    <TextField
+                        id={'question'}
+                        fullWidth={true}
+                        required={true}
+                        label={t(ID.CONTACT.SECTION_3_QUESTION)}
+                        InputLabelProps={{
+                            shrink: true,
+                            classes: {
+                                shrink: clsx(classes.text18, classes.section3_txt_secondary)
+                            }
+                        }}
+                        multiline={true}
+                        rows={5}
+                        className={classes.section3_text_field}
+                    />
                     <div className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
                         <Button
                             variant={'contained'}
@@ -256,7 +343,7 @@ class Contact extends React.Component
         // console.log('Contact::render', this.props)
         return (
             <motion.div
-                className={clsx(classes.root, classes.pageRoot)}
+                className={clsx(classes.root, classes.pageRoot, classes.spacing)}
                 initial={'in'}
                 animate={'in'}
                 exit={'out'}
