@@ -57,6 +57,8 @@ class App extends React.Component
             width
         } = this.props;
 
+        console.log('width', width)
+
         const isFormContact = t(ID.LINK.FORM_CONTACT) === pathname
         const isStreamline = t(ID.LINK.STREAMLINE) === pathname
         const isHome = t(ID.LINK.HOME) === pathname
