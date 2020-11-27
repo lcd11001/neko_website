@@ -18,6 +18,8 @@ import InViewElement from '../Components/InViewElement'
 
 import * as Icons from '../Components/NekoIcons'
 
+const QUESTION_SPACING = 20
+
 const styles = theme => ({
     section1: {
         backgroundImage: `linear-gradient(${theme.palette.primary.secondary}, ${theme.palette.primary.main})`,
@@ -169,6 +171,56 @@ const styles = theme => ({
     section3_button1: {
         backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
         marginBottom: 'calc(var(--spacing) / 2)'
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    section4: {
+        position: 'relative',
+        marginTop: 'calc(var(--spacing) / 2)',
+        marginBottom: 'calc(var(--spacing) / 2)'
+    },
+
+    section4_txt1: {
+        color: theme.palette.primary.main,
+        textAlign: 'right',
+        marginLeft: '10%',
+        marginRight: `calc(50% + ${QUESTION_SPACING}px)`,
+        marginBottom: 60
+    },
+
+    section4_txt2: {
+        textAlign: 'left',
+        marginLeft: `calc(50% + ${QUESTION_SPACING}px)`,
+        marginRight: '10%',
+        marginBottom: 30
+    },
+
+    section4_txt3: {
+        textAlign: 'left',
+        marginLeft: `calc(50% + ${QUESTION_SPACING}px)`,
+        marginRight: '10%'
+    },
+
+    section4_txt_question_container: {
+        zIndex: -1,
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0
+    },
+
+    section4_txt_question_mask: {
+        color: theme.palette.primary.secondary,
+        opacity: 0.15,
+        fontSize: 500,
+        fontWeight: 600,
+        fontFamily: 'Raleway',
+        transform: 'translate(-50%, -50%)',
+        left: '50%',
+        top: '50%',
+        position: 'absolute'
     }
 });
 
@@ -373,6 +425,41 @@ class Streamline extends React.Component
         )
     }
 
+    renderSection4() 
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props;
+
+        return (
+            <InViewElement variants={commonMotion.groupTransition} key={`section4-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} id={'section4'} className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.section, classes.section4)}>
+                    <div className={clsx(classes.section4_txt_question_container)}>
+                        <span className={clsx(classes.section4_txt_question_mask)} >?</span>
+                    </div>
+
+                    <Typography className={clsx(classes.textLimitMultiline, classes.text75, classes.section4_txt1)} >
+                        <Trans
+                            i18nKey={ID.STREAMLINE.SECTION_4_TEXT_1}
+                        />
+                    </Typography>
+                    <Typography className={clsx(classes.textLimitMultiline, classes.text25, classes.section4_txt2)} >
+                        <Trans
+                            i18nKey={ID.STREAMLINE.SECTION_4_TEXT_2}
+                        />
+                    </Typography>
+                    <Typography className={clsx(classes.textLimitMultiline, classes.text25, classes.section4_txt3)} >
+                        <Trans
+                            i18nKey={ID.STREAMLINE.SECTION_4_TEXT_3}
+                        />
+                    </Typography>
+                </motion.div>
+            </InViewElement>
+        )
+    }
+
     render()
     {
         const { classes, t } = this.props;
@@ -394,6 +481,9 @@ class Streamline extends React.Component
                 }
                 {
                     this.renderSection3()
+                }
+                {
+                    this.renderSection4()
                 }
             </motion.div>
         );
