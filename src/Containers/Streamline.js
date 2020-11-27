@@ -139,6 +139,36 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    section3: {
+        backgroundColor: '#F8F8F8'
+    },
+
+    section3_txt1: {
+        marginLeft: '50%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['marginRight'],
+                value: [10],
+                variant: [2],
+                unit: ['%']
+            }
+        ),
+        marginTop: 'calc(var(--spacing) / 2)',
+        marginBottom: 'calc(var(--spacing) / 4)',
+        textAlign: 'left'
+    },
+
+    section3_button1_container: {
+        marginLeft: '50%'
+    },
+
+    section3_button1: {
+        backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
+        marginBottom: 'calc(var(--spacing) / 2)'
     }
 });
 
@@ -216,21 +246,23 @@ class Streamline extends React.Component
 
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section2-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section2'} className={clsx(classes.divColumn, classes.divCenter, classes.section, classes.divDot, classes.section2)}>
+                <div id={'section2'} className={clsx(classes.divColumn, classes.divCenter, classes.section, classes.divDot, classes.section2)}>
                     <Grid container spacing={gridSpacing[width]}>
                         <Grid item xs={12}>
-                            <Typography className={clsx(classes.textLimitMultiline, classes.text75, classes.section2_txt1)} >
-                                <Trans
-                                    i18nKey={ID.STREAMLINE.SECTION_2_HEADER}
-                                />
-                            </Typography>
+                            <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
+                                <Typography className={clsx(classes.textLimitMultiline, classes.text75, classes.section2_txt1)} >
+                                    <Trans
+                                        i18nKey={ID.STREAMLINE.SECTION_2_HEADER}
+                                    />
+                                </Typography>
+                            </motion.div>
                         </Grid>
                         {
                             isWidthDown('sm', width) &&
                             Array.apply(0, Array(3))
                                 .map((_, index) => (
                                     <Grid key={index} item md={4} xs={12}>
-                                        <div className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
+                                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
                                             <div className={classes.section2_img}>
                                                 <img
                                                     alt={ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]}
@@ -250,7 +282,7 @@ class Streamline extends React.Component
                                                 />
                                             </Typography>
 
-                                        </div>
+                                        </motion.div>
                                     </Grid>
                                 ))
                         }
@@ -259,7 +291,7 @@ class Streamline extends React.Component
                             Array.apply(0, Array(3))
                                 .map((_, index) => (
                                     <Grid key={index} item md={4} xs={12}>
-                                        <div className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
+                                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
                                             <div className={classes.section2_img}>
                                                 <img
                                                     alt={ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]}
@@ -267,7 +299,7 @@ class Streamline extends React.Component
                                                     className={classes.imgMotionContain}
                                                 />
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     </Grid>
                                 ))
                         }
@@ -276,13 +308,13 @@ class Streamline extends React.Component
                             Array.apply(0, Array(3))
                                 .map((_, index) => (
                                     <Grid key={index} item md={4} xs={12}>
-                                        <div className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
+                                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
                                             <Typography className={clsx(classes.text40, classes.section2_txt_title)} >
                                                 <Trans
                                                     i18nKey={ID.STREAMLINE[`SECTION_2_TITLE_${index + 1}`]}
                                                 />
                                             </Typography>
-                                        </div>
+                                        </motion.div>
                                     </Grid>
                                 ))
                         }
@@ -291,17 +323,51 @@ class Streamline extends React.Component
                             Array.apply(0, Array(3))
                                 .map((_, index) => (
                                     <Grid key={index} item md={4} xs={12}>
-                                        <div className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
+                                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
                                             <Typography className={clsx(classes.text18, classes.section2_txt_description)} >
                                                 <Trans
                                                     i18nKey={ID.STREAMLINE[`SECTION_2_DESCRIPTION_${index + 1}`]}
                                                 />
                                             </Typography>
-                                        </div>
+                                        </motion.div>
                                     </Grid>
                                 ))
                         }
                     </Grid>
+                </div>
+            </InViewElement>
+        )
+    }
+
+    renderSection3() 
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props;
+
+        return (
+            <InViewElement variants={commonMotion.groupTransition} key={`section3-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} id={'section3'} className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.section, classes.section3)}>
+                    <Typography className={clsx(classes.textLimitMultiline, classes.text40, classes.section3_txt1)} >
+                        <Trans
+                            i18nKey={ID.STREAMLINE.SECTION_3_TEXT_1}
+                        />
+                    </Typography>
+                    <Link to={Utils.i18Link(t, ID.STREAMLINE.SECTION_3_LINK_1)} className={clsx(classes.textLinkHidden, classes.section3_button1_container)}>
+                        <Button
+                            variant={'contained'}
+                            color={'primary'}
+                            endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                            type={'submit'}
+                            classes={{ containedPrimary: classes.section3_button1 }}
+                        >
+                            <Trans
+                                i18nKey={ID.STREAMLINE.SECTION_3_BUTTON_1}
+                            />
+                        </Button>
+                    </Link>
                 </motion.div>
             </InViewElement>
         )
@@ -325,6 +391,9 @@ class Streamline extends React.Component
                 }
                 {
                     this.renderSection2()
+                }
+                {
+                    this.renderSection3()
                 }
             </motion.div>
         );
