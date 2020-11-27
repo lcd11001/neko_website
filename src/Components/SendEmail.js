@@ -59,6 +59,11 @@ const styles = theme => ({
 
     sectionSimple_text_field: {
         marginBottom: 'calc(var(--spacing) / 2)'
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    sendButton: {
+        // incase override CSS
     }
 });
 
@@ -327,6 +332,9 @@ class SendEmail extends React.Component
                             color={'secondary'}
                             endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
                             type={'submit'}
+                            classes={{
+                                containedSecondary: classes.sendButton
+                            }}
                         >
                             <Trans
                                 i18nKey={ID.FORM_CONTACT.SECTION_4_SEND}

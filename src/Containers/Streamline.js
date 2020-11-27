@@ -17,8 +17,27 @@ import { withWidth, Typography, Button, GridList, Grid, isWidthDown, isWidthUp }
 import InViewElement from '../Components/InViewElement'
 
 import * as Icons from '../Components/NekoIcons'
+import SendEmail from '../Components/SendEmail';
 
 const QUESTION_SPACING = 20
+
+const diagonalFrames = (color1 = 'black', color2 = 'transparent', angle = 'to right top', step = 1) =>
+{
+    let result = Array.apply(0, Array((100 * step) + 1))
+        .reduce((frames, _, index) =>
+        {
+            let key = `${index / step}%`
+            let value = {
+                backgroundImage: `linear-gradient(${angle}, ${color1} ${key}, ${color2} 100%)`
+            }
+            frames[key] = value
+
+            return frames
+        }, {})
+
+    console.log('diagonalFrames', result)
+    return result
+}
 
 const styles = theme => ({
     section1: {
@@ -221,7 +240,83 @@ const styles = theme => ({
         left: '50%',
         top: '50%',
         position: 'absolute'
-    }
+    },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    section5: {
+        backgroundImage: `linear-gradient(${theme.palette.primary.secondary}, #FFFFFF)`,
+    },
+
+    section5_txt1: {
+        textAlign: 'center',
+        color: '#FFFFFF',
+        marginBottom: 'calc(var(--spacing) / 2)'
+    },
+
+    section5_txt2: {
+        textAlign: 'center',
+        color: '#FFFFFF',
+        marginBottom: 'calc(var(--spacing) / 2)'
+    },
+
+    section5_form_container: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['width'],
+                value: [50],
+                variant: [-10],
+                unit: ['%']
+            }
+        ),
+        backgroundColor: '#FFFFFF'
+    },
+
+    section5_form_send_button: {
+        // backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
+        // '&:hover': {
+        //     animationName: '$diagonal-hover',
+        //     animationDuration: '0.3s',
+        //     animationTimingFunction: 'linear',
+        //     animationIterationCount: '1',
+        //     animationFillMode: 'forwards',
+        //     animationDirection: 'alternate'
+        // },
+
+        // '&:hover-backward': {
+        //     animationName: '$diagonal-hover',
+        //     animationDuration: '0.3s',
+        //     animationTimingFunction: 'linear',
+        //     animationIterationCount: '1',
+        //     animationFillMode: 'forwards',
+        //     animationDirection: 'reverse'
+        // }
+
+        ...breakpointsStyle(theme,
+            {
+                key: ['width'],
+                value: [250],
+                variant: [10],
+                unit: ['px']
+            }
+        ),
+
+        background: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
+        transition: 'background 0.3s ease-out',
+
+        '&:hover': {
+            ...breakpointsStyle(theme,
+                {
+                    key: ['backgroundPosition'],
+                    value: [250],
+                    variant: [10],
+                    unit: ['px']
+                }
+            ),
+        }
+    },
+
+    '@keyframes diagonal-hover': diagonalFrames(theme.palette.primary.main, theme.palette.primary.secondary, 'to right', 10)
 });
 
 class Streamline extends React.Component
@@ -460,6 +555,37 @@ class Streamline extends React.Component
         )
     }
 
+    renderSection5() 
+    {
+        const {
+            classes,
+            t,
+            width
+        } = this.props;
+
+        return (
+            <InViewElement variants={commonMotion.groupTransition} key={`section5-${width}`}>
+                <motion.div variants={commonMotion.elementTransition} id={'section5'} className={clsx(classes.divColumn, classes.divCenter, classes.section, classes.section5)}>
+                    <Typography className={clsx(classes.textBreak, classes.text75, classes.section5_txt1)} >
+                        <Trans
+                            i18nKey={ID.STREAMLINE.SECTION_5_TEXT_1}
+                        />
+                    </Typography>
+                    <Typography className={clsx(classes.textLimitMultiline, classes.text18, classes.section5_txt2)} >
+                        <Trans
+                            i18nKey={ID.STREAMLINE.SECTION_5_TEXT_2}
+                        />
+                    </Typography>
+                    <div className={classes.section5_form_container}>
+                        <SendEmail classes={{
+                            sendButton: classes.section5_form_send_button
+                        }} />
+                    </div>
+                </motion.div>
+            </InViewElement>
+        )
+    }
+
     render()
     {
         const { classes, t } = this.props;
@@ -484,6 +610,9 @@ class Streamline extends React.Component
                 }
                 {
                     this.renderSection4()
+                }
+                {
+                    this.renderSection5()
                 }
             </motion.div>
         );
