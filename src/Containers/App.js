@@ -58,6 +58,7 @@ class App extends React.Component
         } = this.props;
 
         const isFormContact = t(ID.LINK.FORM_CONTACT) === pathname
+        const isStreamline = t(ID.LINK.STREAMLINE) === pathname
         const isHome = t(ID.LINK.HOME) === pathname
         const shortMenu = isWidthDown('sm', width)
         const isSecondary = isHome && !shortMenu
@@ -87,7 +88,7 @@ class App extends React.Component
                     {children}
                     {
                         !isFormContact &&
-                        <Footer />
+                        <Footer simpleFooter={isStreamline} />
                     }
                 </div>
                 {

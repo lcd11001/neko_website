@@ -446,12 +446,13 @@ class Footer extends React.Component
 
     render()
     {
-        const { classes } = this.props;
+        const { classes, simpleFooter } = this.props;
 
         return (
             <InViewElement variants={commonMotion.groupFooterTransition}>
                 <div className={clsx(classes.root, classes.divColumn, classes.divBetween)}>
                     {
+                        !simpleFooter &&
                         this.renderSecondary()
                     }
                     {
@@ -466,7 +467,13 @@ class Footer extends React.Component
 Footer.propTypes =
 {
     classes: PropTypes.object.isRequired,
+    simpleFooter: PropTypes.bool
 };
+
+Footer.defaultProps =
+{
+    simpleFooter: false
+}
 
 export default compose(
     withMultipleStyles(commonStyles, styles),
