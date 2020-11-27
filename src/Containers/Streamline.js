@@ -63,7 +63,8 @@ const styles = theme => ({
         },
         '&:active': {
             backgroundColor: '#323232',
-        }
+        },
+        marginBottom: 'calc(var(--spacing) / 3)'
     }
 });
 
