@@ -8,6 +8,8 @@ import { withMultipleStyles, commonMotion } from '../../Styles'
 import { compose } from 'recompose'
 import { withWidth } from '@material-ui/core'
 
+import uniqueId from 'lodash/uniqueId'
+
 const styles = theme => ({
     root: {
         // overflow: 'hidden'
@@ -18,6 +20,7 @@ const styles = theme => ({
 
 const InViewElement = (props) =>
 {
+    const [id] = useState(uniqueId('InViewElement-'))
     const [isDidMount, setDidMount] = useState(false)
     useEffect(() =>
     {
@@ -53,7 +56,8 @@ const InViewElement = (props) =>
 
     return (
         <div
-            key={props.width}
+            id={`${id}-${props.width}`}
+            key={`${id}-${props.width}`}
             className={props.classes.root}
             ref={ref}
             style={{ ...props.style }}
