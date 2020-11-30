@@ -327,6 +327,19 @@ const styles = (theme) => ({
         fontWeight: 600
     },
 
+    text125: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [125, 150],
+                variant: [10, 10],
+                variantXS: [15, 15],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 600
+    },
+
     textBreak: {
         whiteSpace: 'pre'
     },

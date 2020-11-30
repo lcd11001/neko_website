@@ -65,7 +65,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['maxWidth'],
-                value: [50],
+                value: [45],
                 variant: [-10],
                 unit: ['%']
             }
@@ -79,7 +79,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['maxWidth'],
-                value: [50],
+                value: [40],
                 variant: [-10],
                 unit: ['%']
             }
@@ -93,7 +93,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['maxWidth'],
-                value: [50],
+                value: [40],
                 variant: [-10],
                 unit: ['%']
             }
@@ -189,7 +189,37 @@ const styles = theme => ({
 
     section3_button1: {
         backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 100%)`,
-        marginBottom: 'calc(var(--spacing) / 2)'
+        marginBottom: 'calc(var(--spacing) / 2)',
+
+        // '&:hover': {
+        //     backgroundImage: `linear-gradient(to right,  #464b87 0%, #d95f5a 100%)`,
+        // },
+        // '&:active': {
+        //     backgroundImage: `linear-gradient(to right,  #3e4378 0%, #c15450 100%)`,
+        // },
+
+        ...breakpointsStyle(theme,
+            {
+                key: ['width'],
+                value: [280],
+                variant: [10],
+                unit: ['px']
+            }
+        ),
+
+        transition: 'background 0.3s ease-out',
+
+        '&:hover': {
+            background: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, #3e4378 100%)`,
+            ...breakpointsStyle(theme,
+                {
+                    key: ['backgroundPosition'],
+                    value: [280],
+                    variant: [10],
+                    unit: ['px']
+                }
+            ),
+        }
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,6 +335,7 @@ const styles = theme => ({
         transition: 'background 0.3s ease-out',
 
         '&:hover': {
+            background: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, #3e4378 100%)`,
             ...breakpointsStyle(theme,
                 {
                     key: ['backgroundPosition'],
@@ -332,7 +363,7 @@ class Streamline extends React.Component
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textLimitMultiline, classes.text75, classes.section1_txt1)} >
+                    <Typography className={clsx(classes.textLimitMultiline, classes.text125, classes.section1_txt1)} >
                         <Trans
                             i18nKey={ID.STREAMLINE.SECTION_1_TEXT_1}
                         />

@@ -62,7 +62,7 @@ const styles = theme => ({
             ...breakpointsStyle(theme,
                 {
                     key: ['paddingTop'],
-                    value: [COPYRIGHT_PADDING + COPYRIGHT_LINE_HEIGHT],
+                    value: [COPYRIGHT_PADDING + 2 * COPYRIGHT_LINE_HEIGHT],
                     variant: [COPYRIGHT_PADDING_VARIANT],
                     unit: ['px']
                 }
