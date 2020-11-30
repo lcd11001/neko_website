@@ -236,6 +236,19 @@ const styles = (theme) => ({
         fontWeight: 400
     },
 
+    text14: {
+        ...breakpointsStyle(theme,
+            {
+                key: ['font-size', 'line-height'],
+                value: [14, 18],
+                variant: [0, 0],
+                variantXS: [0.25, 0.25],
+                unit: ['px', 'px']
+            }
+        ),
+        fontWeight: 400
+    },
+
     text18: {
         ...breakpointsStyle(theme,
             {

@@ -188,8 +188,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingLeft', 'lineHeight'],
-                value: [45, 40],
-                variant: [5, 5],
+                value: [75, 40],
+                variant: [20, 5],
                 unit: ['px', 'px']
             }
         ),
