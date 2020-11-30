@@ -17,6 +17,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Typography, Divider, withWidth, isWidthUp, Accordion, AccordionSummary, AccordionDetails, GridList, GridListTile } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import InViewElement from '../Components/InViewElement';
+import AspectRatio from '../Components/AspectRatio';
 
 const OPACITY = '7F'
 const CELL_HEIGHT = 400
@@ -29,14 +30,15 @@ const styles = theme => ({
 
     section1: {
         backgroundColor: theme.palette.primary.main,
-        ...breakpointsStyle(theme,
-            {
-                key: ['height'],
-                value: [25],
-                variant: [-2],
-                unit: ['vw']
-            }
-        ),
+        // ...breakpointsStyle(theme,
+        //     {
+        //         key: ['height'],
+        //         value: [600],
+        //         variant: [20],
+        //         unit: ['px']
+        //     }
+        // ),
+        height: '100%',
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -557,17 +559,23 @@ class Works extends React.Component
 
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section1'} className={clsx(classes.section, classes.section1)}>
-                    <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
-                        <Trans
-                            i18nKey={ID.WORKS.SECTION_1_TEXT_1}
-                            components={{ span: <span /> }}
-                            values={{
-                                custom: clsx(classes.section1_txt1)
-                            }}
-                        />
-                    </Typography>
-                </motion.div>
+                <AspectRatio ratio={1920 / 600}>
+                    <motion.div
+                        // variants={commonMotion.elementTransition} 
+                        id={'section1'}
+                        className={clsx(classes.section, classes.section1)}
+                    >
+                        <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
+                            <Trans
+                                i18nKey={ID.WORKS.SECTION_1_TEXT_1}
+                                components={{ span: <span /> }}
+                                values={{
+                                    custom: clsx(classes.section1_txt1)
+                                }}
+                            />
+                        </Typography>
+                    </motion.div>
+                </AspectRatio>
             </InViewElement>
         )
     }

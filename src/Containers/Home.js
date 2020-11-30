@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import WaterWave from 'react-water-wave'
 
 import { Trans, withTranslation } from 'react-i18next'
+import i18next from 'i18next';
 import ID from '../Translations/ID.json'
 
 import compose from 'recompose/compose'
@@ -25,7 +26,6 @@ import "react-multi-carousel/lib/styles.css"
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement';
-import i18next from 'i18next';
 
 const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
