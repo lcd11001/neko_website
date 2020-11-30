@@ -218,7 +218,7 @@ const styles = theme => ({
         position: 'absolute',
         width: '100%',
         height: '100%',
-        backgroundImage: `linear-gradient(to right top, ${theme.palette.primary.main} 0%, transparent 0%)`,
+        backgroundImage: `linear-gradient(to right top, ${theme.palette.text.primary} 0%, transparent 0%)`,
         zIndex: -1,
 
         '&--hover-forward': {
@@ -249,7 +249,7 @@ const styles = theme => ({
         }
     },
 
-    '@keyframes diagonal-hover': diagonalFrames(theme.palette.primary.main, 'transparent', 'to right top', 10),
+    '@keyframes diagonal-hover': diagonalFrames(theme.palette.text.primary, 'transparent', 'to right top', 10),
     '@keyframes diagonal-hover-secondary': diagonalFrames('black', 'transparent', 'to right top', 10),
 
 });

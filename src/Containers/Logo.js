@@ -5,10 +5,12 @@ import { Typography } from '@material-ui/core';
 
 import { IconMenuLogo as AppLogo } from '../Components/NekoIcons'
 
-import { Trans } from 'react-i18next'
+import { Trans, Translation, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
 
 import clsx from 'clsx'
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 
 const TEXT_OFFSET = -3
 const TEXT_OFFSET_DELTA = 0
@@ -81,7 +83,11 @@ class Logo extends React.Component
     {
         const {
             classes,
-            secondary
+            secondary,
+            t,
+            location: {
+                pathname
+            }
         } = this.props
 
         let classLogo = clsx(classes.logo, {
@@ -96,18 +102,26 @@ class Logo extends React.Component
             [classes.subtitle + '--secondary']: secondary
         })
 
+        let customStyle = {
+            pointerEvents: pathname === t(ID.LINK.HOME)
+                ? 'none'
+                : 'all'
+        }
+
         return (
-            <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
-                <AppLogo className={classLogo} />
-                <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 15 }}>
-                    <Typography className={clsx(classTitle, classes.divRow, classes.divCenter)} >
-                        <Trans i18nKey={ID.COMMON.LOGO_TITLE} />
-                    </Typography>
-                    <Typography className={clsx(classSubTitle, classes.divRow, classes.divCenter)} >
-                        <Trans i18nKey={ID.COMMON.LOGO_SUBTITLE} />
-                    </Typography>
+            <Link to={t(ID.LINK.HOME)} className={clsx(classes.textLinkHidden)} style={customStyle}>
+                <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
+                    <AppLogo className={classLogo} />
+                    <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 15 }}>
+                        <Typography className={clsx(classTitle, classes.divRow, classes.divCenter)} >
+                            <Trans i18nKey={ID.COMMON.LOGO_TITLE} />
+                        </Typography>
+                        <Typography className={clsx(classSubTitle, classes.divRow, classes.divCenter)} >
+                            <Trans i18nKey={ID.COMMON.LOGO_SUBTITLE} />
+                        </Typography>
+                    </div>
                 </div>
-            </div>
+            </Link>
         );
     }
 
@@ -124,4 +138,8 @@ Logo.defaultProps = {
     secondary: false
 }
 
-export default withMultipleStyles(commonStyles, styles)(Logo);
+export default compose(
+    withMultipleStyles(commonStyles, styles),
+    withTranslation(),
+    withRouter
+)(Logo);
