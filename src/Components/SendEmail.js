@@ -248,7 +248,7 @@ class SendEmail extends React.Component
                         InputLabelProps={{
                             shrink: true,
                             classes: {
-                                shrink: clsx(classes.text18)
+                                shrink: clsx(classes.text25)
                             }
                         }}
                         type={'text'}
@@ -264,7 +264,7 @@ class SendEmail extends React.Component
                         InputLabelProps={{
                             shrink: true,
                             classes: {
-                                shrink: clsx(classes.text18)
+                                shrink: clsx(classes.text25)
                             }
                         }}
                         type={'text'}
@@ -280,7 +280,7 @@ class SendEmail extends React.Component
                         InputLabelProps={{
                             shrink: true,
                             classes: {
-                                shrink: clsx(classes.text18)
+                                shrink: clsx(classes.text25)
                             }
                         }}
                         type={'text'}
@@ -299,7 +299,7 @@ class SendEmail extends React.Component
                         InputLabelProps={{
                             shrink: true,
                             classes: {
-                                shrink: clsx(classes.text18)
+                                shrink: clsx(classes.text25)
                             }
                         }}
                         type={'tel'}
@@ -318,7 +318,7 @@ class SendEmail extends React.Component
                         InputLabelProps={{
                             shrink: true,
                             classes: {
-                                shrink: clsx(classes.text18, classes.sectionSimple_txt_secondary)
+                                shrink: clsx(classes.text25, classes.sectionSimple_txt_secondary)
                             }
                         }}
                         multiline={true}

@@ -137,9 +137,10 @@ const defaultTheme = createMuiTheme({
         },
         MuiFormLabel: {
             root: {
+                fontFamily: '"Raleway", sans-serif !important',
                 color: '#ABABAB',
                 '&.Mui-focused': {
-                    color: '#4A58B2'
+                    color: '#4E5496'
                 },
                 '&.Mui-disabled': {
                     color: '#1B1F43'

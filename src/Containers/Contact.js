@@ -87,7 +87,8 @@ const styles = theme => ({
     section3: {
         backgroundColor: 'white',
         marginLeft: 'calc(var(--spacing) / 2)',
-        marginTop: 'calc(-1 * var(--spacing))'
+        marginTop: 'calc(-1 * var(--spacing))',
+        zIndex: 1
     }
 });
 
@@ -186,23 +187,23 @@ class Contact extends React.Component
                 </Typography>
                 <Grid container >
                     <Grid item xs={2}>
-                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'} >
+                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'} >
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_2_1} />
                         </Typography>
                     </Grid>
                     <Grid item xs={10}>
-                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'}>
+                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_2_2} />
                         </Typography>
                     </Grid>
 
                     <Grid item xs={2}>
-                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'}>
+                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_3_1} />
                         </Typography>
                     </Grid>
                     <Grid item xs={10}>
-                        <Typography className={clsx(classes.text18, classes.section2_txt_contact)} color={'textSecondary'}>
+                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_3_2} />
                         </Typography>
                     </Grid>

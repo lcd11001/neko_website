@@ -602,7 +602,7 @@ class Streamline extends React.Component
                             i18nKey={ID.STREAMLINE.SECTION_5_TEXT_1}
                         />
                     </Typography>
-                    <Typography className={clsx(classes.textLimitMultiline, classes.text18, classes.section5_txt2)} >
+                    <Typography className={clsx(classes.textLimitMultiline, classes.text25, classes.section5_txt2)} >
                         <Trans
                             i18nKey={ID.STREAMLINE.SECTION_5_TEXT_2}
                         />
