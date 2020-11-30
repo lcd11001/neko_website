@@ -168,7 +168,7 @@ const styles = theme => ({
         width: 0,
         height: 2,
         maxWidth: '100%',
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.text.primary,
         transition: theme.transitions.create(['width'], {
             duration: 300
         }),
