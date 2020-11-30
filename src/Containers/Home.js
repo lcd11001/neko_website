@@ -362,18 +362,29 @@ const styles = theme => ({
     },
 
     section4_info_stars: {
+        backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 60%)`,
+
+        // ...breakpointsStyle(theme,
+        //     {
+        //         key: ['width', 'height', 'maskSize'],
+        //         value: [STAR_NUM * STAR_SIZE, STAR_SIZE, STAR_SIZE],
+        //         variant: [STAR_NUM * STAR_VARIANT, STAR_VARIANT, STAR_VARIANT],
+        //         unit: ['px', 'px', 'px']
+        //     }
+        // ),
+        // maskImage: `url("${Utils.getUrl(i18next.t(ID.IMAGE.HOME_4_2))}")`,
+        // maskRepeat: 'repeat-x',
+
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height', 'maskSize'],
-                value: [STAR_NUM * STAR_SIZE, STAR_SIZE, STAR_SIZE],
-                variant: [STAR_NUM * STAR_VARIANT, STAR_VARIANT, STAR_VARIANT],
+                value: [STAR_NUM * STAR_SIZE, STAR_SIZE, STAR_NUM * STAR_SIZE],
+                variant: [STAR_NUM * STAR_VARIANT, STAR_VARIANT, STAR_NUM * STAR_VARIANT],
                 unit: ['px', 'px', 'px']
             }
         ),
-        backgroundImage: `linear-gradient(to right,  ${theme.palette.primary.main} 0%, ${theme.palette.primary.secondary} 60%)`,
-
-        maskImage: `url("${Utils.getUrl(i18next.t(ID.IMAGE.HOME_4_2))}")`,
-        maskRepeat: 'repeat-x',
+        maskImage: `url("${Utils.getUrl(i18next.t(ID.IMAGE.HOME_4_1))}")`,
+        maskRepeat: 'no-repeat',
         maskPosition: 'center'
     },
 
@@ -508,12 +519,18 @@ const styles = theme => ({
     },
 
     section4_text_1: {
-        color: theme.palette.text.secondary,
-        fontWeight: 'bold'
+        // color: theme.palette.text.secondary,
+        // fontWeight: 'bold'
+        fontWeight: 500
     },
 
     section4_case_study_title: {
         paddingTop: 30,
+        fontWeight: 'bold'
+    },
+
+    section4_case_study_subtitle: {
+        paddingTop: 5,
         fontWeight: 'bold'
     },
 
@@ -1492,6 +1509,7 @@ class Home extends React.Component
         const LOGO = Utils.i18Image(t, ID.HOME[`SECTION_4_LOGO_${index + 1}`])
         // const TEXT = t(ID.HOME[`SECTION_4_TEXT_${index + 1}`])
         const TITILE = t(ID.HOME[`SECTION_4_TITLE_${index + 1}`])
+        const SUBTITILE = t(ID.HOME[`SECTION_4_SUBTITLE_${index + 1}`])
 
         const path = Utils.getUrl(LOGO)
 
@@ -1511,6 +1529,7 @@ class Home extends React.Component
                         />
                     </Typography>
                     <Typography className={clsx(classes.text18, classes.section4_case_study_title)}>{TITILE}</Typography>
+                    <Typography className={clsx(classes.text14, classes.section4_case_study_subtitle)}>{SUBTITILE}</Typography>
                 </div>
             </div>
         )

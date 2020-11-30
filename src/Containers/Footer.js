@@ -26,6 +26,8 @@ const PRIMARY_PADDING_VARIANT = Math.floor(SECONDARY_HEIGHT_VARIANT / 2)
 const COPYRIGHT_PADDING = Math.floor((SECONDARY_HEIGHT - PRIMARY_PADDING) / 2)
 const COPYRIGHT_PADDING_VARIANT = Math.floor((SECONDARY_HEIGHT_VARIANT - PRIMARY_PADDING_VARIANT) / 2)
 
+const COPYRIGHT_LINE_HEIGHT = 15
+
 const styles = theme => ({
     root: {
         position: 'relative',
@@ -38,6 +40,9 @@ const styles = theme => ({
                 unit: ['px']
             }
         ),
+        '&--simple': {
+            marginTop: 0
+        }
     },
 
     rootPrimary: {
@@ -51,7 +56,18 @@ const styles = theme => ({
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
-        paddingBottom: 0
+        paddingBottom: 0,
+
+        '&--simple': {
+            ...breakpointsStyle(theme,
+                {
+                    key: ['paddingTop'],
+                    value: [COPYRIGHT_PADDING + COPYRIGHT_LINE_HEIGHT],
+                    variant: [COPYRIGHT_PADDING_VARIANT],
+                    unit: ['px']
+                }
+            ),
+        }
     },
 
     rootSecondary: {
@@ -122,8 +138,8 @@ const styles = theme => ({
     copyright: {
         width: '100%',
         backgroundColor: '#3C4570',
-        paddingTop: 15,
-        paddingBottom: 15,
+        paddingTop: COPYRIGHT_LINE_HEIGHT,
+        paddingBottom: COPYRIGHT_LINE_HEIGHT,
         color: '#FFFFFF7F'
     },
 
@@ -299,7 +315,7 @@ class Footer extends React.Component
         })
 
         const img = t(ID.IMAGE.FOOTER_1)
-        const imgUrl = pathname === t(ID.LINK.ABOUT) ? 'none' : `url(${Utils.getUrl(img)})`
+        const imgUrl = /*pathname === t(ID.LINK.ABOUT) ? 'none' :*/ `url(${Utils.getUrl(img)})`
 
         const isSmall = isWidthDown('md', width)
         const classTitleRoot = clsx(classes.divColumn, classes.divCenter, classes.fullHeight, classes.fullWidth,
@@ -338,11 +354,15 @@ class Footer extends React.Component
 
     renderPrimary()
     {
-        const { classes, t } = this.props;
+        const { classes, t, simpleFooter } = this.props;
+
+        let classRootPrimary = clsx(classes.rootPrimary, {
+            [classes.rootPrimary + '--simple']: simpleFooter
+        })
 
         return (
             <motion.div variants={commonMotion.footerTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
-                <div id={'footer-primary'} className={clsx(classes.rootPrimary, classes.divColumn, classes.divBetween)}>
+                <div id={'footer-primary'} className={clsx(classRootPrimary, classes.divColumn, classes.divBetween)}>
                     <div className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)} style={{ flex: 7 }}>
                         <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 4 }}>
                             <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight, classes.fullWidth)} style={{ position: "relative", minHeight: 200 }}>
@@ -448,9 +468,13 @@ class Footer extends React.Component
     {
         const { classes, simpleFooter } = this.props;
 
+        let classRoot = clsx(classes.root, {
+            [classes.root + '--simple']: simpleFooter
+        })
+
         return (
-            <InViewElement variants={commonMotion.groupFooterTransition}>
-                <div className={clsx(classes.root, classes.divColumn, classes.divBetween)}>
+            <InViewElement variants={commonMotion.groupFooterTransition} options={{ triggerOnce: false }}>
+                <div className={clsx(classRoot, classes.divColumn, classes.divBetween)}>
                     {
                         !simpleFooter &&
                         this.renderSecondary()
