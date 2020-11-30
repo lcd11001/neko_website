@@ -115,15 +115,7 @@ const styles = theme => ({
 
     section2: {
         position: 'relative',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingTop', 'paddingBottom'],
-                value: [130, 130],
-                variant: [10, 10],
-                unit: ['px', 'px']
-            }
-        ),
-        maxHeight: 1080
+        height: '100%'
     },
 
     section2_bg: {
@@ -148,14 +140,6 @@ const styles = theme => ({
 
     section2_txt1: {
         position: 'relative',
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingBottom'],
-                value: [100],
-                variant: [10],
-                unit: ['px']
-            }
-        ),
         fontWeight: 'bold',
         letterSpacing: 1.5,
         textTransform: 'uppercase',
@@ -175,14 +159,6 @@ const styles = theme => ({
     },
 
     menuItem: {
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingBottom'],
-                value: [60],
-                variant: [8],
-                unit: ['px']
-            }
-        ),
         textAlign: 'left',
         color: 'inherit',
         marginLeft: 0,
@@ -1120,28 +1096,31 @@ class Home extends React.Component
         } = this.props
 
         return (
-            <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
-                <div id={'section2.1'}>
-                    <InViewElement variants={commonMotion.groupTransition}>
-                        <motion.div variants={commonMotion.elementTransition}>
+            <AspectRatio ratio={1920 / 990}>
+                <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
+
+                    <InViewElement variants={commonMotion.groupTransition} classes={{ root: clsx(classes.divColumn, classes.divLeft) }} style={{ flex: 8 }}>
+                        <div style={{ flex: 1 }} />
+                        <motion.div variants={commonMotion.elementTransition} style={{ flex: 1 }}>
                             <Typography className={clsx(classes.textBreak, classes.text12, classes.section2_txt1)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_2_TEXT_1}
                                 />
                             </Typography>
                         </motion.div>
+
+                        <motion.div variants={commonMotion.groupHeaderTransition} className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 5 }}>
+                            {
+                                HomeMenu.map((menu, index) => (
+                                    this.renderSection2Menu(menu, index)
+                                ))
+                            }
+                        </motion.div>
+                        <div style={{ flex: 1 }} />
                     </InViewElement>
+
                 </div>
-                <div id={'section2.2'}>
-                    <InViewElement variants={commonMotion.groupHeaderTransition /* commonMotion.groupTransition */}>
-                        {
-                            HomeMenu.map((menu, index) => (
-                                this.renderSection2Menu(menu, index)
-                            ))
-                        }
-                    </InViewElement>
-                </div>
-            </div>
+            </AspectRatio>
         )
     }
 
@@ -1173,8 +1152,8 @@ class Home extends React.Component
         let IMG_URL = Utils.getUrl(t(ID.IMAGE[`WORK_SPECIALIZED_${index + 1}`]))
 
         return (
-            <div key={menu.text} className={clsx(classes.divRow)}>
-                <AnimatePresence initial={!false} exitBeforeEnter={true}>
+            <div key={menu.text} className={clsx(classes.divRow)} style={{ flex: 1 }}>
+                <AnimatePresence key={IMG_URL} initial={!false} exitBeforeEnter={true}>
                     {
                         isShowBackground &&
 
@@ -1205,7 +1184,7 @@ class Home extends React.Component
                 </AnimatePresence>
 
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden, classes.divRow, classes.fullWidth, classes.divTop)} onMouseEnter={this.handleMouseEnter('menu', menuLink)} onMouseLeave={this.handleMouseLeave('menu', menuLink)}>
-                    <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divCenter, classes.divLeft)}>
+                    <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divCenter, classes.divRight)}>
                         <Typography className={clsx(classMenuItem)} noWrap>
                             <Trans
                                 i18nKey={menu.text}

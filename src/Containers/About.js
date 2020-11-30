@@ -80,24 +80,36 @@ const styles = theme => ({
     section2_img: {
         ...breakpointsStyle(theme,
             {
-                key: ['height', 'width', 'marginBottom', 'marginTop'],
-                value: [350, 350, 50, 50],
-                variant: [10, 10, 5, 5],
-                unit: ['px', 'px', 'px', 'px']
+                key: ['height', 'width', 'marginBottom'],
+                value: [350, 350, 50],
+                variant: [10, 10, 5],
+                unit: ['px', 'px', 'px']
             }
-        )
+        ),
+        '&--small': {
+            ...breakpointsStyle(theme,
+                {
+                    key: ['marginTop'],
+                    value: [50],
+                    variant: [5],
+                    unit: ['px']
+                }
+            ),
+        }
     },
 
     section2_btn: {
-        // combine with section2_img.marginTop => mobile single column
-        ...breakpointsStyle(theme,
-            {
-                key: ['marginBottom'],
-                value: [50],
-                variant: [5],
-                unit: ['px']
-            }
-        ),
+        '&--small': {
+            // combine with section2_img.marginTop => mobile single column
+            ...breakpointsStyle(theme,
+                {
+                    key: ['marginBottom'],
+                    value: [50],
+                    variant: [5],
+                    unit: ['px']
+                }
+            ),
+        }
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -190,7 +202,8 @@ const styles = theme => ({
         ),
         backgroundColor: 'white',
         paddingBottom: 0,
-        borderRadius: 14
+        borderRadius: 14,
+        overflow: 'visible'
     },
 
     section4_contact_title: {
@@ -215,6 +228,12 @@ const styles = theme => ({
                 unit: ['px']
             }
         )
+    },
+
+    section4_contact_img: {
+        height: 'auto',
+        position: 'absolute',
+        bottom: 0
     },
 
     section4_icon_outer: {
@@ -346,7 +365,8 @@ class About extends React.Component
     {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
         const IMG = Utils.i18Image(t, ID.ABOUT[`SECTION_2_IMG_${index + 1}`])
@@ -355,14 +375,22 @@ class About extends React.Component
         const LINK = Utils.i18Link(t, ID.ABOUT[`SECTION_2_BUTTON_${index + 1}_LINK`])
         const BUTTON = t(ID.ABOUT[`SECTION_2_BUTTON_${index + 1}`])
 
+        let classImg = clsx(classes.section2_img, {
+            [classes.section2_img + '--small']: isWidthDown('sm', width)
+        })
+
+        let classBtn = clsx(classes.section2_btn, {
+            [classes.section2_btn + '--small']: isWidthDown('sm', width)
+        })
+
         return (
             <motion.div variants={commonMotion.elementTransition} key={index} id={`section2.${index + 1}`} className={clsx(classes.divColumn, classes.divBetween)} style={{ flex: 1 }}>
-                <div className={classes.section2_img}                 >
+                <div className={classImg}                 >
                     <img alt={IMG} src={Utils.getUrl(IMG)} className={classes.imgMotionContain} />
                 </div>
                 <Typography className={clsx(classes.text40, classes.section2_title)}>{TITILE}</Typography>
                 <Typography className={clsx(classes.text18, classes.section2_subtitle)}>{SUB_TITILE}</Typography>
-                <div className={classes.section2_btn}>
+                <div className={classBtn}>
                     <Link to={LINK} className={classes.textLinkHidden}>
                         <Button
                             variant={'contained'}
@@ -430,14 +458,18 @@ class About extends React.Component
                             <div id={'section4.2a'} ref={this.refContactBox1} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
                                 <div>
                                     <AspectRatio
-                                        ratio={1}
+                                        ratio={3 / 4}
                                         classes={{
                                             outerWrapper: classes.avatarOuter,
                                             innerWrapper: classes.avatarInner,
                                         }}
                                     >
                                         <div className={clsx(classes.avatarBorder)}>
-
+                                            <img
+                                                className={clsx(classes.imgMotion, classes.section4_contact_img)}
+                                                alt={ID.ABOUT.CONTACT_1_IMG}
+                                                src={Utils.getUrl(Utils.i18Image(t, ID.ABOUT.CONTACT_1_IMG))}
+                                            />
                                         </div>
                                     </AspectRatio>
                                 </div>
@@ -456,14 +488,18 @@ class About extends React.Component
                             <div id={'section4.2b'} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
                                 <div>
                                     <AspectRatio
-                                        ratio={1}
+                                        ratio={3 / 4}
                                         classes={{
                                             outerWrapper: classes.avatarOuter,
                                             innerWrapper: classes.avatarInner,
                                         }}
                                     >
                                         <div className={clsx(classes.avatarBorder)}>
-
+                                            <img
+                                                className={clsx(classes.imgMotion, classes.section4_contact_img)}
+                                                alt={ID.ABOUT.CONTACT_2_IMG}
+                                                src={Utils.getUrl(Utils.i18Image(t, ID.ABOUT.CONTACT_2_IMG))}
+                                            />
                                         </div>
                                     </AspectRatio>
                                 </div>

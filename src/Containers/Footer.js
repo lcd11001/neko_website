@@ -466,14 +466,20 @@ class Footer extends React.Component
 
     render()
     {
-        const { classes, simpleFooter } = this.props;
+        const {
+            classes,
+            simpleFooter,
+            location: {
+                pathname
+            }
+        } = this.props;
 
         let classRoot = clsx(classes.root, {
             [classes.root + '--simple']: simpleFooter
         })
 
         return (
-            <InViewElement variants={commonMotion.groupFooterTransition} options={{ triggerOnce: false }}>
+            <InViewElement key={pathname} variants={commonMotion.groupFooterTransition} options={{ triggerOnce: true }}>
                 <div className={clsx(classRoot, classes.divColumn, classes.divBetween)}>
                     {
                         !simpleFooter &&
