@@ -116,7 +116,7 @@ const styles = theme => ({
 
             '&--selected': {
                 border: `1px solid transparent`,
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.text.primary,
                 color: 'white'
             }
         },
