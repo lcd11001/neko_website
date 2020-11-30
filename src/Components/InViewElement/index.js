@@ -55,30 +55,26 @@ const InViewElement = (props) =>
     }, [controls, inView, isDidMount, props.animate, props.exit, props.transition])
 
     return (
-        <div
-            id={`${id}-${props.width}`}
-            key={`${id}-${props.width}`}
-            className={props.classes.root}
-            ref={ref}
-            style={{ ...props.style }}
-        >
-            <AnimatePresence key={`${isDidMount}-${inView}`}>
-                {
-                    // inView &&
-                    <motion.div
-                        className={props.classes.root}
-                        animate={controls}
-                        initial={props.initial}
-                        variants={props.variants}
+        <AnimatePresence key={`${id}-${props.width}-${isDidMount}-${inView}`}>
+            {
+                // inView &&
+                <motion.div
+                    id={`${id}-${props.width}`}
+                    key={`${id}-${props.width}`}
+                    className={props.classes.root}
+                    animate={controls}
+                    initial={props.initial}
+                    variants={props.variants}
                     // transition={props.transition}
-                    >
-                        {
-                            props.children
-                        }
-                    </motion.div>
-                }
-            </AnimatePresence>
-        </div>
+                    ref={ref}
+                    style={{ ...props.style }}
+                >
+                    {
+                        props.children
+                    }
+                </motion.div>
+            }
+        </AnimatePresence>
     )
 }
 
