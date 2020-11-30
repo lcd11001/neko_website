@@ -1,6 +1,6 @@
 const transition = {
     duration: 0.6,
-    ease: [0.43, 0.13, 0.23, 0.96]
+    ease: [0.53, 0.13, 0.23, 0.96]
 }
 
 const pageTransition = {
@@ -21,14 +21,14 @@ const delayTransition = (delay) => ({
         transition: {
             when: 'beforeChildren',
             delay: delay,
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     },
     invisible: {
         opacity: 0,
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     }
 })
@@ -41,14 +41,14 @@ const groupTransition = {
         opacity: 1,
         transition: {
             when: 'beforeChildren',
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     },
     invisible: {
         opacity: 0,
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     }
 }
@@ -66,7 +66,7 @@ const elementTransition = {
             duration: 0.8,
 
             when: 'beforeChildren',
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     },
     invisible: {
@@ -74,7 +74,7 @@ const elementTransition = {
         y: '50px',
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     }
 }
@@ -282,26 +282,26 @@ const posTransition = (x, y, delay, duration) => ({
 const hashTagTransition = {
     hidden: {
         // opacity: 0,
-        y: 10
+        y: 5
     },
     visible: {
         // opacity: [0, 1, 0],
-        y: [10, -10, 10],
+        y: [5, -5, 5],
         transition: {
             loop: Infinity,
             ease: 'easeInOut',
             duration: 2.0,
 
             when: 'beforeChildren',
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     },
     invisible: {
         // opacity: 0,
-        y: 10,
+        y: 5,
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0.3
+            staggerChildren: 0.5
         }
     }
 

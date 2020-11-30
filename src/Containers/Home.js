@@ -30,8 +30,8 @@ import i18next from 'i18next';
 const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
 
-const AVATAR_SIZE = 100
-const AVATAR_VARIANT = 10
+const AVATAR_SIZE = 150
+const AVATAR_VARIANT = 15
 
 const HASH_TAG_SIZE = 60
 const HASH_TAG_VARIANT = 6
@@ -159,7 +159,8 @@ const styles = theme => ({
         fontWeight: 'bold',
         letterSpacing: 1.5,
         textTransform: 'uppercase',
-        color: '#A2A3A7'
+        color: '#424242',
+        opacity: 0.6
     },
 
     menuLink: {
@@ -177,8 +178,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingBottom'],
-                value: [70],
-                variant: [10],
+                value: [60],
+                variant: [8],
                 unit: ['px']
             }
         ),
@@ -713,7 +714,8 @@ const styles = theme => ({
         border: '2px solid #707070',
         borderRadius: 7,
         backgroundColor: 'white',
-        position: 'relative'
+        position: 'relative',
+        zIndex: 2
     },
 
     section6_dialog1_pos: {
@@ -759,7 +761,8 @@ const styles = theme => ({
         ),
         borderRadius: 7,
         backgroundColor: '#EC6966',
-        position: 'relative'
+        position: 'relative',
+        zIndex: 1
     },
 
     section6_dialog2_pos: {
@@ -806,7 +809,8 @@ const styles = theme => ({
         ),
         borderRadius: 7,
         backgroundColor: '#555593',
-        position: 'relative'
+        position: 'relative',
+        zIndex: 3
     },
 
     section6_dialog3_pos: {
@@ -852,7 +856,7 @@ const styles = theme => ({
     },
 
     section6_dialog3_txt: {
-        paddingLeft: '25%',
+        paddingLeft: '35%',
         color: 'white'
     }
 });
@@ -1223,9 +1227,9 @@ class Home extends React.Component
                             src={Utils.getUrl(t(ID.IMAGE.HOME_3_1))}
                             className={classes.section3_img1}
                         />
-                        <motion.div variants={commonMotion.groupTransition} className={clsx(classes.divColumn, classes.divTop)} >
+                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divTop)} >
 
-                            <motion.div variants={commonMotion.elementTransition} id={'section3.1.a'} className={clsx(classes.divRow, classes.divTop)}>
+                            <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divTop)}>
                                 <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_3_PROJECTS_NUM}
@@ -1240,11 +1244,11 @@ class Home extends React.Component
                                         }}
                                     />
                                 </Typography>
-                            </motion.div>
+                            </div>
 
-                            <motion.hr variants={commonMotion.elementTransition} className={classes.section3_divider} />
+                            <hr className={classes.section3_divider} />
 
-                            <motion.div variants={commonMotion.elementTransition} id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
+                            <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
                                 <img
                                     variants={commonMotion.elementTransition}
                                     alt={t(ID.IMAGE.HOME_3_2)}
@@ -1258,14 +1262,14 @@ class Home extends React.Component
                                     />
                                 </Typography>
 
-                            </motion.div>
+                            </div>
 
                         </motion.div>
                     </div>
                 </InViewElement>
 
                 <InViewElement variants={commonMotion.groupTransition}>
-                    <motion.div variants={commonMotion.delayTransition(2)} id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <motion.div variants={commonMotion.delayTransition(1.5)} id={'section3.2'} className={clsx(classes.divRow, classes.divCenter)}>
                         <CarouselMulti
                             key={width}
                             containerClass={clsx(classes.divColumn, classes.divLeft, classes.section3_carousel)}
@@ -1637,7 +1641,7 @@ class Home extends React.Component
         return (
             <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divCenter, classes.section, classes.section6, classes.divDot)} style={{ flex: 3 }}>
                 <InViewElement variants={commonMotion.groupTransition} style={{ flex: 1 }}>
-                    <div id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
                         <motion.div variants={commonMotion.elementTransition}>
                             <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
                                 <Trans
@@ -1662,26 +1666,26 @@ class Home extends React.Component
                                 }}
                             />
                         </motion.div>
-                    </div>
+                    </motion.div>
                 </InViewElement>
 
 
                 <InViewElement variants={commonMotion.groupTransition} style={{ flex: 2 }}>
-                    <div id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
                             <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog1_txt)}>
-                                {/* <Trans
+                                <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
-                                /> */}
-                                <InViewElement variants={commonMotion.groupTextTransition(0.08)}>
+                                />
+                                {/* <InViewElement variants={commonMotion.groupTextTransition(0.08)}>
                                     {
 
                                         t(ID.HOME.SECTION_6_TEXT_3).split('').map((char, index) => (
                                             <motion.span key={index} variants={commonMotion.textTransition}>{char}</motion.span>
                                         ))
                                     }
-                                </InViewElement>
+                                </InViewElement> */}
                             </Typography>
                             <div className={classes.section6_dialog1_avatar_container}>
                                 <img alt={ID.HOME.SECTION_6_IMG_3_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_3_1))} className={classes.imgMotionContain} />
@@ -1693,17 +1697,17 @@ class Home extends React.Component
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog2, classes.section6_dialog2_pos)}>
                             <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog2_txt)}>
-                                {/* <Trans
+                                <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_4}
-                                /> */}
-                                <InViewElement variants={commonMotion.groupTextTransition(0.05)}>
+                                />
+                                {/* <InViewElement variants={commonMotion.groupTextTransition(0.05)}>
                                     {
 
                                         t(ID.HOME.SECTION_6_TEXT_4).split('').map((char, index) => (
                                             <motion.span key={index} variants={commonMotion.textTransition}>{char}</motion.span>
                                         ))
                                     }
-                                </InViewElement>
+                                </InViewElement> */}
                             </Typography>
                             <div className={classes.section6_dialog2_avatar_container}>
                                 <img alt={ID.HOME.SECTION_6_IMG_4_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_4_1))} className={classes.imgMotionContain} />
@@ -1715,17 +1719,17 @@ class Home extends React.Component
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
                             <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog3_txt)}>
-                                {/* <Trans
+                                <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
-                                /> */}
-                                <InViewElement variants={commonMotion.groupTextTransition(0.1)}>
+                                />
+                                {/* <InViewElement variants={commonMotion.groupTextTransition(0.1)}>
                                     {
 
                                         t(ID.HOME.SECTION_6_TEXT_5).split('').map((char, index) => (
                                             <motion.span key={index} variants={commonMotion.textTransition}>{char}</motion.span>
                                         ))
                                     }
-                                </InViewElement>
+                                </InViewElement> */}
                             </Typography>
                             <div className={classes.section6_dialog3_avatar_container}>
                                 <img alt={ID.HOME.SECTION_6_IMG_5_1} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_5_1))} className={classes.imgMotionContain} />
@@ -1734,7 +1738,7 @@ class Home extends React.Component
                                 <motion.img variants={commonMotion.hashTagTransition} alt={ID.HOME.SECTION_6_IMG_5_2} src={Utils.getUrl(Utils.i18Image(t, ID.HOME.SECTION_6_IMG_5_2))} className={classes.imgMotionContain} />
                             </div>
                         </motion.div>
-                    </div>
+                    </motion.div>
                 </InViewElement>
             </div>
         )
