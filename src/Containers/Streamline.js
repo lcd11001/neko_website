@@ -151,7 +151,7 @@ const styles = theme => ({
         ),
     },
 
-    section2_img: {
+    section2_img_container: {
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
@@ -160,6 +160,10 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
+    },
+
+    section2_img: {
+        width: 'auto'
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -441,11 +445,11 @@ class Streamline extends React.Component
                                 .map((_, index) => (
                                     <Grid key={index} item md={4} xs={12}>
                                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
-                                            <div className={classes.section2_img}>
+                                            <div className={classes.section2_img_container}>
                                                 <img
                                                     alt={ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]}
                                                     src={Utils.getUrl(Utils.i18Image(t, ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]))}
-                                                    className={classes.imgMotionContain}
+                                                    className={clsx(classes.imgMotionContain, classes.section2_img)}
                                                 />
                                             </div>
                                             <Typography className={clsx(classes.text40, classes.section2_txt_title)} >
@@ -470,11 +474,11 @@ class Streamline extends React.Component
                                 .map((_, index) => (
                                     <Grid key={index} item md={4} xs={12}>
                                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
-                                            <div className={classes.section2_img}>
+                                            <div className={classes.section2_img_container}>
                                                 <img
                                                     alt={ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]}
                                                     src={Utils.getUrl(Utils.i18Image(t, ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]))}
-                                                    className={classes.imgMotionContain}
+                                                    className={clsx(classes.imgMotionContain, classes.section2_img)}
                                                 />
                                             </div>
                                         </motion.div>
