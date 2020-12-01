@@ -29,6 +29,14 @@ const ReducerCMS = (state = defaultState, action) =>
             }
         }
 
+        case `SEND_EMAIL_${ActionType.Fulfilled}`: {
+            console.log('SEND_EMAIL OK', action)
+            return {
+                ...state,
+                email: action.payload
+            }
+        }
+
         default:
             return state
     }

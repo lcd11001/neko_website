@@ -9,6 +9,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "axios": "^0.21.0",
+    "emailjs-com": "^2.6.4",
     "framer-motion": "^2.9.4",
     "i18next": "^19.8.4",
     "lodash": "^4.17.20",

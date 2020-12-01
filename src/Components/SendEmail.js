@@ -5,10 +5,13 @@ import { withRouter } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import clsx from 'clsx'
 
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
+
+import * as ActionCMS from '../Redux/Actions/ActionCMS'
+
 import { Trans, withTranslation } from 'react-i18next'
 import ID from '../Translations/ID.json'
-
-import compose from 'recompose/compose'
 
 import Utils from '../Utils'
 import PageUnderContruction from '../Components/PageError/PageUnderContruction';
@@ -116,6 +119,22 @@ class SendEmail extends React.Component
         evt.preventDefault()
         // https://stackoverflow.com/questions/55795125/how-to-send-email-from-my-react-web-application
         console.log('submit')
+
+        const {
+            templateID,
+            SendEmailService
+        } = this.props
+
+        const params = {
+            from_name: 'from_name',
+            to_name: 'to_name',
+            message: 'message',
+            reply_to: 'reply_to',
+            bcc: 'bcc',
+            cc: 'cc'
+        }
+
+        SendEmailService(templateID, params)
     }
 
     renderDetailForm() 
@@ -367,14 +386,28 @@ class SendEmail extends React.Component
 SendEmail.propTypes =
 {
     classes: PropTypes.object.isRequired,
-    simpleForm: PropTypes.bool
+    simpleForm: PropTypes.bool,
+    templateID: PropTypes.string
 };
 
 SendEmail.defaultProps = {
-    simpleForm: true
+    simpleForm: true,
+    templateID: process.env.REACT_APP_EMAIL_TEMPLATE_TEST
 }
 
+const mapStateToProps = (state) => ({
+    ...state.cms
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    SendEmailService: (templateID, params) =>
+    {
+        dispatch(ActionCMS.SendEmail(templateID, params))
+    }
+})
+
 export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
     withWidth()
