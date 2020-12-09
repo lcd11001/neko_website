@@ -257,13 +257,13 @@ const styles = theme => ({
 
     section4_icon_1: {
         position: 'absolute',
-        top: '20%',
-        left: '10%',
+        bottom: '40%',
+        left: '5%',
 
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
-                value: [100, 100],
+                value: [150, 150],
                 variant: [10, 10],
                 unit: ['px', 'px']
             }
@@ -272,8 +272,8 @@ const styles = theme => ({
 
     section4_icon_2: {
         position: 'absolute',
-        bottom: '0%',
-        left: '35%',
+        bottom: '10%',
+        left: '43%',
 
         ...breakpointsStyle(theme,
             {
@@ -287,13 +287,13 @@ const styles = theme => ({
 
     section4_icon_3: {
         position: 'absolute',
-        right: '5%',
-        bottom: '25%',
+        right: '8%',
+        top: '10%',
 
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
-                value: [180, 180],
+                value: [150, 150],
                 variant: [10, 10],
                 unit: ['px', 'px']
             }
