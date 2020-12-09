@@ -17,7 +17,7 @@ import Utils from '../Utils';
 import InViewElement from '../Components/InViewElement';
 import { motion } from 'framer-motion'
 
-const SECONDARY_HEIGHT = 500
+const SECONDARY_HEIGHT = 580
 const SECONDARY_HEIGHT_VARIANT = 80
 
 const PRIMARY_PADDING = Math.floor(SECONDARY_HEIGHT * 2 / 3)
@@ -161,7 +161,7 @@ const styles = theme => ({
     },
 
     logoRoot: {
-        transform: 'translate(0, -50%) scale(1.0)',
+        // transform: 'translate(0, -50%) scale(1.0)',
         transformOrigin: 'left'
     },
 
