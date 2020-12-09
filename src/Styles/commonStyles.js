@@ -17,7 +17,11 @@ const styles = (theme) => ({
 
     appbar: {
         // backgroundColor: 'transparent'
-        width: '100%'
+        width: '100%',
+        '&--fixed': {
+            boxShadow: '2px 5px 10px #EAEAEAEA',
+            // boxShadow: theme.shadows[5]
+        }
     },
 
     toolbar: {

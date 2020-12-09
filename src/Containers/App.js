@@ -34,8 +34,13 @@ class App extends React.Component
     renderAppbar(position, backgroundColor, secondary)
     {
         const { classes } = this.props
+
+        let classAppbar = clsx(classes.appbar, {
+            [classes.appbar + '--' + position]: true
+        })
+
         return (
-            <AppBar id={`appbar-${position}`} elevation={0} className={classes.appbar} position={position} style={{ backgroundColor: backgroundColor }}>
+            <AppBar id={`appbar-${position}`} elevation={0} className={classAppbar} position={position} style={{ backgroundColor: backgroundColor }}>
                 <Toolbar disableGutters={true} className={classes.toolbar}>
                     <Header secondary={secondary} />
                 </Toolbar>
