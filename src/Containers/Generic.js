@@ -58,7 +58,7 @@ class Generic extends React.Component
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
                 <AspectRatio ratio={1920 / 600}>
                     <motion.div
-                        // variants={commonMotion.elementTransition} 
+                        variants={commonMotion.groupTransition} 
                         id={'section1'}
                         className={clsx(classes.section, classes.section1)}
                     >
