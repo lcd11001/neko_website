@@ -131,8 +131,8 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['maxWidth'],
-                value: [60],
-                variant: [-15],
+                value: [70],
+                variant: [-10],
                 unit: ['%']
             }
         ),
@@ -160,10 +160,15 @@ const styles = theme => ({
                 unit: ['px', 'px']
             }
         ),
+        marginBottom: 'calc(var(--spacing) / 4)',
+        position: 'relative'
     },
 
     section2_img: {
-        width: 'auto'
+        width: 'auto',
+        position: 'absolute',
+        left: '50%',
+        transform: 'translateX(-50%)'
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -432,7 +437,6 @@ class Streamline extends React.Component
                             </motion.div>
                         </Grid>
                         {
-                            isWidthDown('sm', width) &&
                             Array.apply(0, Array(3))
                                 .map((_, index) => (
                                     <Grid key={index} item md={4} xs={12}>
@@ -460,53 +464,7 @@ class Streamline extends React.Component
                                     </Grid>
                                 ))
                         }
-                        {
-                            isWidthUp('md', width) &&
-                            Array.apply(0, Array(3))
-                                .map((_, index) => (
-                                    <Grid key={index} item md={4} xs={12}>
-                                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
-                                            <div className={classes.section2_img_container}>
-                                                <img
-                                                    alt={ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]}
-                                                    src={Utils.getUrl(Utils.i18Image(t, ID.STREAMLINE[`SECTION_2_IMG_${index + 1}`]))}
-                                                    className={clsx(classes.imgMotionContain, classes.section2_img)}
-                                                />
-                                            </div>
-                                        </motion.div>
-                                    </Grid>
-                                ))
-                        }
-                        {
-                            isWidthUp('md', width) &&
-                            Array.apply(0, Array(3))
-                                .map((_, index) => (
-                                    <Grid key={index} item md={4} xs={12}>
-                                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
-                                            <Typography className={clsx(classes.text40, classes.section2_txt_title)} >
-                                                <Trans
-                                                    i18nKey={ID.STREAMLINE[`SECTION_2_TITLE_${index + 1}`]}
-                                                />
-                                            </Typography>
-                                        </motion.div>
-                                    </Grid>
-                                ))
-                        }
-                        {
-                            isWidthUp('md', width) &&
-                            Array.apply(0, Array(3))
-                                .map((_, index) => (
-                                    <Grid key={index} item md={4} xs={12}>
-                                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
-                                            <Typography className={clsx(classes.text18, classes.section2_txt_description)} >
-                                                <Trans
-                                                    i18nKey={ID.STREAMLINE[`SECTION_2_DESCRIPTION_${index + 1}`]}
-                                                />
-                                            </Typography>
-                                        </motion.div>
-                                    </Grid>
-                                ))
-                        }
+
                     </Grid>
                 </div>
             </InViewElement>
