@@ -270,7 +270,9 @@ const styles = theme => ({
         position: 'absolute',
         right: '100%',
         width: 'auto',
-        zIndex: -1
+        zIndex: -1,
+        // fixed: image doesn't v-align to text
+        paddingTop: 15
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
