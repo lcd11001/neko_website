@@ -200,9 +200,10 @@ const styles = theme => ({
                 unit: ['px', 'px', 'px', 'px', 'px']
             }
         ),
-        backgroundColor: 'white',
+        backgroundColor: theme.palette.primary.secondary,
         paddingBottom: 0,
         borderRadius: 14,
+        border: 'none',
         overflow: 'visible'
     },
 
@@ -215,11 +216,13 @@ const styles = theme => ({
                 variant: [5],
                 unit: ['px']
             }
-        )
+        ),
+        color: 'white'
     },
 
     section4_contact_position: {
-        color: theme.palette.text.disabled,
+        // color: theme.palette.text.disabled,
+        color: 'white',
         ...breakpointsStyle(theme,
             {
                 key: ['paddingBottom'],
@@ -233,7 +236,8 @@ const styles = theme => ({
     section4_contact_img: {
         height: 'auto',
         position: 'absolute',
-        bottom: 0
+        bottom: 0,
+        left: 10
     },
 
     section4_icon_outer: {
@@ -259,7 +263,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
-                value: [80, 80],
+                value: [100, 100],
                 variant: [10, 10],
                 unit: ['px', 'px']
             }
@@ -274,7 +278,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
-                value: [60, 60],
+                value: [100, 100],
                 variant: [10, 10],
                 unit: ['px', 'px']
             }
@@ -289,7 +293,7 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['width', 'height'],
-                value: [150, 150],
+                value: [180, 180],
                 variant: [10, 10],
                 unit: ['px', 'px']
             }
@@ -464,7 +468,7 @@ class About extends React.Component
                                             innerWrapper: classes.avatarInner,
                                         }}
                                     >
-                                        <div className={clsx(classes.avatarBorder)}>
+                                        <div className={clsx(classes.avatarFilled)}>
                                             <img
                                                 className={clsx(classes.imgMotion, classes.section4_contact_img)}
                                                 alt={ID.ABOUT.CONTACT_1_IMG}
@@ -494,7 +498,7 @@ class About extends React.Component
                                             innerWrapper: classes.avatarInner,
                                         }}
                                     >
-                                        <div className={clsx(classes.avatarBorder)}>
+                                        <div className={clsx(classes.avatarFilled)}>
                                             <img
                                                 className={clsx(classes.imgMotion, classes.section4_contact_img)}
                                                 alt={ID.ABOUT.CONTACT_2_IMG}
@@ -515,9 +519,36 @@ class About extends React.Component
                         {
                             isWidthUp('md', width) &&
                             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.fullHeight, classes.fullWidth)} style={{ position: 'absolute', zIndex: 1 }}>
-                                <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_1} />
-                                <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_2} />
-                                <Avatar src={Utils.getIconUrl('neko_logo.png')} className={classes.section4_icon_3} variant={'square'} />
+                                <Avatar
+                                    src={Utils.getUrl(t(ID.IMAGE.ABOUT_LIKE))}
+                                    className={classes.section4_icon_1}
+                                    variant={'square'}
+                                    imgProps={{
+                                        style: {
+                                            objectFit: 'contain'
+                                        }
+                                    }}
+                                />
+                                <Avatar
+                                    src={Utils.getUrl(t(ID.IMAGE.ABOUT_ATSIGN))}
+                                    className={classes.section4_icon_2}
+                                    variant={'square'}
+                                    imgProps={{
+                                        style: {
+                                            objectFit: 'contain'
+                                        }
+                                    }}
+                                />
+                                <Avatar
+                                    src={Utils.getUrl(t(ID.IMAGE.ABOUT_TALK))}
+                                    className={classes.section4_icon_3}
+                                    variant={'square'}
+                                    imgProps={{
+                                        style: {
+                                            objectFit: 'contain'
+                                        }
+                                    }}
+                                />
                             </motion.div>
                         }
                     </motion.div>

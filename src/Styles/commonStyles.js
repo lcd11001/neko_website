@@ -195,6 +195,14 @@ const styles = (theme) => ({
         width: '100%'
     },
 
+    avatarFilled: {
+        backgroundColor: 'white',
+        borderRadius: 14,
+        border: 'none',
+        height: '100%',
+        width: '100%'
+    },
+
     fullWidth: {
         width: '100% !important'
         // backgroundColor: 'red'
