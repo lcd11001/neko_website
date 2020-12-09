@@ -236,44 +236,36 @@ const styles = theme => ({
 
     section4_txt1: {
         color: theme.palette.primary.main,
-        textAlign: 'right',
-        marginLeft: '10%',
-        marginRight: `calc(50% + ${QUESTION_SPACING}px)`,
+        textAlign: 'left',
+        marginLeft: QUESTION_SPACING,
+        marginRight: 0,
         marginBottom: 60
     },
 
     section4_txt2: {
         textAlign: 'left',
-        marginLeft: `calc(50% + ${QUESTION_SPACING}px)`,
-        marginRight: '10%',
-        marginBottom: 30
+        marginLeft: QUESTION_SPACING,
+        marginRight: 0,
+        marginBottom: 5,
+        fontWeight: 'bold'
     },
 
     section4_txt3: {
         textAlign: 'left',
-        marginLeft: `calc(50% + ${QUESTION_SPACING}px)`,
-        marginRight: '10%'
+        marginLeft: QUESTION_SPACING,
+        marginRight: 0,
+        fontWeight: 'bold'
     },
 
     section4_txt_question_container: {
-        zIndex: -1,
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0
+        maxHeight: '100%'
     },
 
     section4_txt_question_mask: {
-        color: theme.palette.primary.secondary,
-        opacity: 0.15,
-        fontSize: 500,
-        fontWeight: 600,
-        fontFamily: 'Raleway',
-        transform: 'translate(-50%, -50%)',
-        left: '50%',
-        top: '50%',
-        position: 'absolute'
+        position: 'absolute',
+        right: '100%',
+        width: 'auto',
+        zIndex: -1
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -565,26 +557,35 @@ class Streamline extends React.Component
 
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section4-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section4'} className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.section, classes.section4)}>
-                    <div className={clsx(classes.section4_txt_question_container)}>
-                        <span className={clsx(classes.section4_txt_question_mask)} >?</span>
+                <motion.div variants={commonMotion.elementTransition} id={'section4'} className={clsx(classes.divRow, classes.divCenter, classes.section, classes.section4)} style={{ flex: 2 }}>
+                    <div className={clsx(classes.section4_txt_question_container)} style={{ flex: 1 }}>
+                        {
+                            // empty space
+                        }
                     </div>
 
-                    <Typography className={clsx(classes.textLimitMultiline, classes.text75, classes.section4_txt1)} >
-                        <Trans
-                            i18nKey={ID.STREAMLINE.SECTION_4_TEXT_1}
+                    <div className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 1, position: 'relative' }}>
+                        <img
+                            className={clsx(classes.imgMotionContain, classes.section4_txt_question_mask)}
+                            alt={t(ID.IMAGE.STREAMLINE_QUESTION_MARK)}
+                            src={Utils.getUrl(t(ID.IMAGE.STREAMLINE_QUESTION_MARK))}
                         />
-                    </Typography>
-                    <Typography className={clsx(classes.textLimitMultiline, classes.text25, classes.section4_txt2)} >
-                        <Trans
-                            i18nKey={ID.STREAMLINE.SECTION_4_TEXT_2}
-                        />
-                    </Typography>
-                    <Typography className={clsx(classes.textLimitMultiline, classes.text25, classes.section4_txt3)} >
-                        <Trans
-                            i18nKey={ID.STREAMLINE.SECTION_4_TEXT_3}
-                        />
-                    </Typography>
+                        <Typography className={clsx(classes.textLimitMultiline, classes.text75, classes.section4_txt1)} >
+                            <Trans
+                                i18nKey={ID.STREAMLINE.SECTION_4_TEXT_1}
+                            />
+                        </Typography>
+                        <Typography className={clsx(classes.textLimitMultiline, classes.text25, classes.section4_txt2)} >
+                            <Trans
+                                i18nKey={ID.STREAMLINE.SECTION_4_TEXT_2}
+                            />
+                        </Typography>
+                        <Typography className={clsx(classes.textLimitMultiline, classes.text25, classes.section4_txt3)} >
+                            <Trans
+                                i18nKey={ID.STREAMLINE.SECTION_4_TEXT_3}
+                            />
+                        </Typography>
+                    </div>
                 </motion.div>
             </InViewElement>
         )
