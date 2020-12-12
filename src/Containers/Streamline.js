@@ -272,7 +272,7 @@ const styles = theme => ({
         width: 'auto',
         zIndex: -1,
         // fixed: image doesn't v-align to text
-        paddingTop: 15
+        // paddingTop: 15
     },
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
