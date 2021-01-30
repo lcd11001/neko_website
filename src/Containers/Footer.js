@@ -14,7 +14,7 @@ import * as Icons from '../Components/NekoIcons'
 
 import { IconButton, isWidthDown, withWidth, Typography } from '@material-ui/core';
 import Utils from '../Utils';
-import InViewElement from '../Components/InViewElement';
+// import InViewElement from '../Components/InViewElement';
 import { motion } from 'framer-motion'
 
 const SECONDARY_HEIGHT = 580
@@ -479,7 +479,7 @@ class Footer extends React.Component
         })
 
         return (
-            <InViewElement key={pathname} variants={commonMotion.groupFooterTransition} options={{ triggerOnce: true }}>
+            // <InViewElement key={pathname} variants={commonMotion.groupFooterTransition} options={{ triggerOnce: true }}>
                 <div className={clsx(classRoot, classes.divColumn, classes.divBetween)}>
                     {
                         !simpleFooter &&
@@ -489,7 +489,7 @@ class Footer extends React.Component
                         this.renderPrimary()
                     }
                 </div>
-            </InViewElement>
+            // </InViewElement>
         );
     }
 }
