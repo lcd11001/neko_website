@@ -6,12 +6,17 @@ const screenSizes = [
     'xs', // extra small
 ]
 
+const isSmallScreen = (screen) =>
+{
+    return screen === 'sm' || screen === 'xs'
+}
+
 const createStyleForScreenSize = (theme, options, screen, multiply) =>
 {
     const key = options.key
     const value = options.value || 3.0
     const variant = options.variant || 0.5
-    const variantXS = options.variantXS || variant || 1
+    const variantSM = options.variantSM || variant || 1
     const unit = options.unit || 'px'
 
     let styleDetail = {}
@@ -22,17 +27,17 @@ const createStyleForScreenSize = (theme, options, screen, multiply) =>
         {
             const value0 = Array.isArray(value) ? value[i] : value
             const variant0 = Array.isArray(variant) ? variant[i] : variant
-            const variantXS0 = Array.isArray(variantXS) ? variantXS[i] : variant0
+            const variantSM0 = Array.isArray(variantSM) ? variantSM[i] : variant0
             const unit0 = Array.isArray(unit) ? unit[i] : unit
 
             styleDetail = Object.assign(styleDetail, {
-                [key0]: `${value0 - multiply * (screen === 'xs' ? variantXS0 : variant0)}${unit0}`
+                [key0]: `${value0 - multiply * (isSmallScreen(screen) ? variantSM0 : variant0)}${unit0}`
             })
         })
     } else
     {
         styleDetail = Object.assign(styleDetail, {
-            [key]: `${value - multiply * (screen === 'xs' ? variantXS : variant)}${unit}`
+            [key]: `${value - multiply * (isSmallScreen(screen) ? variantSM : variant)}${unit}`
         })
     }
 

@@ -61,6 +61,7 @@ const defaultTheme = createMuiTheme({
                         key: ['height', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
                         value: [55, 20, 20, 30, 30],
                         variant: [5, 2, 2, 4, 4],
+                        variantSM: [0, 0, 0, 0, 0],
                         unit: ['px', 'px', 'px', 'px', 'px']
                     }
                 ),
@@ -108,6 +109,7 @@ const defaultTheme = createMuiTheme({
                         key: ['font-size'],
                         value: [18],
                         variant: [1],
+                        variantSM: [-1],
                         unit: ['px']
                     }
                 ),

@@ -58,6 +58,7 @@ const styles = (theme) => ({
                 key: ['width', 'marginLeft'],
                 value: [45, 30],
                 variant: [7, 5],
+                variantSM: [2, 3],
                 unit: ['px', 'px']
             }
         ),
@@ -81,7 +82,7 @@ const styles = (theme) => ({
             {
                 key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
                 value: [200, 200, 100, 100],
-                variant: [48, 48, 10, 10],
+                variant: [40, 40, 10, 10],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -241,7 +242,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [12, 16],
                 variant: [0, 0],
-                variantXS: [0.25, 0.25],
+                variantSM: [0.25, 0.25],
                 unit: ['px', 'px']
             }
         ),
@@ -254,7 +255,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [14, 18],
                 variant: [0, 0],
-                variantXS: [0.25, 0.25],
+                variantSM: [0.25, 0.25],
                 unit: ['px', 'px']
             }
         ),
@@ -267,7 +268,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [18, 25],
                 variant: [1, 1],
-                variantXS: [0.5, 0.5],
+                variantSM: [0, 0],
                 unit: ['px', 'px']
             }
         ),
@@ -280,7 +281,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [25, 30],
                 variant: [2, 2],
-                variantXS: [3, 3],
+                variantSM: [3, 3],
                 unit: ['px', 'px']
             }
         ),
@@ -290,11 +291,11 @@ const styles = (theme) => ({
     text40: {
         ...breakpointsStyle(theme,
             {
-                key: ['font-size', 'line-height'],
-                value: [40, 55],
-                variant: [4, 4],
-                variantXS: [5, 5],
-                unit: ['px', 'px']
+                key: ['font-size', 'line-height', 'fontWeight'],
+                value: [40, 55, 600],
+                variant: [4, 4, 0],
+                variantSM: [1.25, 1.25, 25],
+                unit: ['px', 'px', '']
             }
         ),
         fontWeight: 600
@@ -306,7 +307,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [50, 60],
                 variant: [5, 5],
-                variantXS: [8, 8],
+                variantSM: [8, 8],
                 unit: ['px', 'px']
             }
         ),
@@ -316,14 +317,13 @@ const styles = (theme) => ({
     text62: {
         ...breakpointsStyle(theme,
             {
-                key: ['font-size', 'line-height'],
-                value: [62, 70],
-                variant: [5, 5],
-                variantXS: [10, 10],
-                unit: ['px', 'px']
+                key: ['font-size', 'line-height', 'fontWeight'],
+                value: [62, 70, 600],
+                variant: [5, 5, 0],
+                variantSM: [2, 2, 25],
+                unit: ['px', 'px', '']
             }
-        ),
-        fontWeight: 600
+        )
     },
 
     text75: {
@@ -332,7 +332,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [75, 90],
                 variant: [7, 7],
-                variantXS: [12, 12],
+                variantSM: [12, 12],
                 unit: ['px', 'px']
             }
         ),
@@ -345,7 +345,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [125, 150],
                 variant: [10, 10],
-                variantXS: [15, 15],
+                variantSM: [15, 15],
                 unit: ['px', 'px']
             }
         ),
@@ -353,7 +353,12 @@ const styles = (theme) => ({
     },
 
     textBreak: {
-        whiteSpace: 'pre'
+        whiteSpace: 'pre',
+        [theme.breakpoints.down('sm')]: {
+            // remove new line character & auto wrap
+            display: 'table-cell',
+            whiteSpace: 'normal',
+        }
     },
 
     textLimitMultiline: {

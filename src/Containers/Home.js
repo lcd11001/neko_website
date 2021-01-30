@@ -62,6 +62,7 @@ const styles = theme => ({
                 key: ['padding-left', 'width'],
                 value: [50, 45],
                 variant: [10, 2],
+                variantSM: [12.5, -13.75],
                 unit: ['px', '%']
             }
         ),
@@ -74,17 +75,27 @@ const styles = theme => ({
                 key: ['padding-right', 'width'],
                 value: [50, 55],
                 variant: [10, 3],
+                variantSM: [12.5, -11.25],
                 unit: ['px', '%']
             }
         ),
     },
 
     section1_img3: {
-        width: '15%',
         objectFit: 'contain',
         backgroundColor: `${theme.palette.primary.secondary}1E`, // 1E = 12%
         borderRadius: '50%',
-        // transform: 'translateX(-25%) scaleX(-1)'
+        // transform: 'translateX(-25%) scaleX(-1)',
+        position: 'absolute',
+        ...breakpointsStyle(theme,
+            {
+                key: ['right', 'bottom', 'width'],
+                value: [45, 10, 15],
+                variant: [2, 2, -2],
+                variantSM: [11, 0, -2],
+                unit: ['px', 'px', '%']
+            }
+        )
     },
 
     section1_txt1: {
@@ -998,7 +1009,7 @@ class Home extends React.Component
         return (
             <div id={'section1'} className={clsx(classes.divColumn, classes.section, classes.section1)}>
                 <InViewElement variants={commonMotion.groupTransition}>
-                    <motion.div variants={commonMotion.delayTransition(0)} id={'section1.1'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <motion.div variants={commonMotion.delayTransition(0)} id={'section1.1'} className={clsx(classes.divRow2Column, classes.divCenter)}>
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divColumn)}>
 
                             <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1)}>
@@ -1032,7 +1043,7 @@ class Home extends React.Component
                 </InViewElement>
 
                 <InViewElement variants={commonMotion.groupTransition}>
-                    <motion.div variants={commonMotion.delayTransition(1.5)} id={'section1.2'} className={clsx(classes.divRow, classes.divCenter)} style={{ paddingTop: 10 }}>
+                    <motion.div variants={commonMotion.delayTransition(1.5)} id={'section1.2'} className={clsx(classes.divRow2ColumnRevert, classes.divCenter)} style={{ paddingTop: 10 }}>
                         <motion.img
                             variants={commonMotion.elementTransition}
                             alt={t(ID.IMAGE.HOME_1_2)}
@@ -1041,7 +1052,7 @@ class Home extends React.Component
                         />
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divColumn)}>
-                            <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
+                            <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)} style={{ position: 'relative' }}>
                                 <Typography className={clsx(classes.textBreak, classes.text40, classes.section1_txt2)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_1_TEXT_2}
