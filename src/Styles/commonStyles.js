@@ -281,7 +281,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [25, 30],
                 variant: [2, 2],
-                variantSM: [3, 3],
+                variantSM: [1, 1],
                 unit: ['px', 'px']
             }
         ),
@@ -359,6 +359,10 @@ const styles = (theme) => ({
             display: 'table-cell',
             whiteSpace: 'normal',
         }
+    },
+
+    textBreakForce: {
+        whiteSpace: 'pre'
     },
 
     textLimitMultiline: {

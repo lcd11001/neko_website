@@ -31,7 +31,7 @@ const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
 
 const AVATAR_SIZE = 150
-const AVATAR_VARIANT = 15
+const AVATAR_VARIANT = 21
 
 const HASH_TAG_SIZE = 60
 const HASH_TAG_VARIANT = 6
@@ -72,7 +72,7 @@ const styles = theme => ({
         objectFit: 'contain',
         ...breakpointsStyle(theme,
             {
-                key: ['padding-right', 'width', 'margin'],
+                key: ['padding-right', 'width', 'marginTop'],
                 value: [50, 55, 0],
                 variant: [10, 3, 0],
                 variantSM: [12.5, -11.25, -12],
@@ -649,6 +649,7 @@ const styles = theme => ({
                 key: ['font-size', 'line-height'],
                 value: [80, 80],
                 variant: [10, 10],
+                variantSM: [5, 5],
                 unit: ['px', 'px']
             }
         ),
@@ -661,10 +662,15 @@ const styles = theme => ({
                 key: ['font-size', 'line-height', 'paddingTop', 'paddingBottom'],
                 value: [180, 140, 50, 50],
                 variant: [20, 20, 5, 5],
+                variantSM: [15, 10, 0, 0],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center',
+        }
     },
 
     section6_arrow: {
@@ -696,9 +702,19 @@ const styles = theme => ({
         backgroundRepeat: 'no-repeat'
     },
 
+    section6_text_root: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        [theme.breakpoints.down('sm')]: {
+            alignItems: 'center',
+            paddingTop: 50
+        }
+    },
+
     section6_dialog_root: {
-        overflow: 'unset',
-        width: '100%'
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     section6_dialog1: {
@@ -706,7 +722,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [550, 150],
-                variant: [80, 20],
+                variant: [60, 10],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -721,7 +737,7 @@ const styles = theme => ({
         marginLeft: '15%',
 
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '25%',
+            marginLeft: 0,
         }
     },
 
@@ -730,7 +746,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height', 'left', 'top'],
                 value: [AVATAR_SIZE, AVATAR_SIZE, -AVATAR_SIZE / 2, AVATAR_SIZE / 3],
-                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 3],
+                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 7],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -754,7 +770,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [600, 245],
-                variant: [40, 35],
+                variant: [80, 25],
                 unit: ['px', 'px']
             }
         ),
@@ -769,7 +785,7 @@ const styles = theme => ({
         marginTop: '5%',
 
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '30%',
+            marginLeft: 0,
         },
     },
 
@@ -778,7 +794,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height', 'right', 'top'],
                 value: [AVATAR_SIZE, AVATAR_SIZE, -AVATAR_SIZE / 2, AVATAR_SIZE / 3],
-                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 3],
+                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 7],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -802,7 +818,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [550, 190],
-                variant: [60, 30],
+                variant: [55, 20],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -816,7 +832,7 @@ const styles = theme => ({
         marginLeft: '10%',
         marginTop: '-5%',
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '20%',
+            marginLeft: 0,
         }
     },
 
@@ -856,6 +872,14 @@ const styles = theme => ({
 
     section6_dialog3_txt: {
         paddingLeft: '35%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft'],
+                value: [35],
+                variant: [3],
+                unit: ['%']
+            }
+        ),
         color: 'white'
     }
 });
@@ -1640,7 +1664,7 @@ class Home extends React.Component
         return (
             <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divCenter, classes.section, classes.section6, classes.divDot)} style={{ flex: 3 }}>
                 <InViewElement variants={commonMotion.groupTransition} style={{ flex: 1 }}>
-                    <motion.div variants={commonMotion.elementTransition} id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section6.1'} className={clsx(classes.divColumn, classes.section6_text_root)}>
                         <motion.div variants={commonMotion.elementTransition}>
                             <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
                                 <Trans
@@ -1670,10 +1694,10 @@ class Home extends React.Component
 
 
                 <InViewElement variants={commonMotion.groupTransition} style={{ flex: 2 }}>
-                    <motion.div variants={commonMotion.elementTransition} id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section6.2'} className={clsx(classes.divColumn, classes.section6_dialog_root)}>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
-                            <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog1_txt)}>
+                            <Typography component={'div'} className={clsx(classes.textBreakForce, classes.text25, classes.section6_dialog1_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
                                 />
@@ -1717,7 +1741,7 @@ class Home extends React.Component
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
-                            <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog3_txt)}>
+                            <Typography component={'div'} className={clsx(classes.textBreakForce, classes.text25, classes.section6_dialog3_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
                                 />
