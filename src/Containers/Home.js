@@ -59,11 +59,11 @@ const styles = theme => ({
         objectFit: 'contain',
         ...breakpointsStyle(theme,
             {
-                key: ['padding-left', 'width'],
-                value: [50, 45],
-                variant: [10, 2],
-                variantSM: [12.5, -13.75],
-                unit: ['px', '%']
+                key: ['padding-left', 'width', 'margin'],
+                value: [50, 45, 0],
+                variant: [10, 2, 0],
+                variantSM: [12.5, -13.75, -12],
+                unit: ['px', '%', 'px']
             }
         ),
     },
@@ -72,11 +72,11 @@ const styles = theme => ({
         objectFit: 'contain',
         ...breakpointsStyle(theme,
             {
-                key: ['padding-right', 'width'],
-                value: [50, 55],
-                variant: [10, 3],
-                variantSM: [12.5, -11.25],
-                unit: ['px', '%']
+                key: ['padding-right', 'width', 'margin'],
+                value: [50, 55, 0],
+                variant: [10, 3, 0],
+                variantSM: [12.5, -11.25, -12],
+                unit: ['px', '%', 'px']
             }
         ),
     },
@@ -85,17 +85,11 @@ const styles = theme => ({
         objectFit: 'contain',
         backgroundColor: `${theme.palette.primary.secondary}1E`, // 1E = 12%
         borderRadius: '50%',
-        // transform: 'translateX(-25%) scaleX(-1)',
+        transform: 'translate(-50%, -50%)',
         position: 'absolute',
-        ...breakpointsStyle(theme,
-            {
-                key: ['right', 'bottom', 'width'],
-                value: [45, 10, 15],
-                variant: [2, 2, -2],
-                variantSM: [11, 0, -2],
-                unit: ['px', 'px', '%']
-            }
-        )
+        left: '100%',
+        bottom: '-50%',
+        width: '30%'
     },
 
     section1_txt1: {
@@ -103,7 +97,8 @@ const styles = theme => ({
     },
 
     section1_txt2: {
-        color: 'white'
+        color: 'white',
+        position: 'relative'
     },
 
     section1_txt3: {
@@ -1052,18 +1047,18 @@ class Home extends React.Component
                         />
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divColumn)}>
-                            <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)} style={{ position: 'relative' }}>
-                                <Typography className={clsx(classes.textBreak, classes.text40, classes.section1_txt2)}>
+                            <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)} >
+                                <Typography component={'div'} className={clsx(classes.textBreak, classes.text40, classes.section1_txt2)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_1_TEXT_2}
                                     />
-                                </Typography>
 
-                                <img
-                                    alt={t(ID.IMAGE.HOME_1_3)}
-                                    src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))}
-                                    className={classes.section1_img3}
-                                />
+                                    <img
+                                        alt={t(ID.IMAGE.HOME_1_3)}
+                                        src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))}
+                                        className={classes.section1_img3}
+                                    />
+                                </Typography>
                             </div>
 
                             <Typography className={clsx(classes.textBreak, classes.text18, classes.section1_txt3)}>
