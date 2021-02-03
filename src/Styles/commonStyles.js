@@ -242,7 +242,6 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [12, 16],
                 variant: [0, 0],
-                variantSM: [0.25, 0.25],
                 unit: ['px', 'px']
             }
         ),
@@ -255,7 +254,6 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height'],
                 value: [14, 18],
                 variant: [0, 0],
-                variantSM: [0.25, 0.25],
                 unit: ['px', 'px']
             }
         ),
@@ -294,11 +292,10 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height', 'fontWeight'],
                 value: [40, 55, 600],
                 variant: [4, 4, 0],
-                variantSM: [1.25, 1.25, 25],
+                variantSM: [2.5, 2.5, 25],
                 unit: ['px', 'px', '']
             }
-        ),
-        fontWeight: 600
+        )
     },
 
     text50: {

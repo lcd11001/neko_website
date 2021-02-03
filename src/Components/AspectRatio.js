@@ -56,8 +56,14 @@ class AspectRatio extends React.Component
             classes,
             children,
             ratio,
-            padding
+            padding,
+            disable
         } = this.props
+
+        if (disable)
+        {
+            return children
+        }
 
         let customOuterStyles = {
             paddingBottom: `${100 / ratio}%`
@@ -83,7 +89,11 @@ class AspectRatio extends React.Component
 
     componentDidUpdate()
     {
-        this._rescale()
+        const { disable } = this.props
+        if (!disable)
+        {
+            this._rescale()
+        }
     }
 
     _rescale = () =>
@@ -125,11 +135,13 @@ class AspectRatio extends React.Component
 AspectRatio.propTypes = {
     classes: PropTypes.object.isRequired,
     ratio: PropTypes.number.isRequired,
-    padding: PropTypes.number
+    padding: PropTypes.number,
+    disable: PropTypes.bool
 }
 
 AspectRatio.defaultProps = {
-    padding: 0
+    padding: 0,
+    disable: false
 }
 
 export default withMultipleStyles(styles)(AspectRatio)

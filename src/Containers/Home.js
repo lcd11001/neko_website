@@ -121,7 +121,26 @@ const styles = theme => ({
 
     section2: {
         position: 'relative',
-        height: '100%'
+        height: '100%',
+        [theme.breakpoints.down('sm')]: {
+            backgroundColor: '#E5E7EA',
+        }
+    },
+
+    section2_header: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        [theme.breakpoints.down('sm')]: {
+            alignItems: 'center'
+        }
+    },
+
+    section2_menu: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        [theme.breakpoints.down('sm')]: {
+            alignItems: 'center'
+        }
     },
 
     section2_bg: {
@@ -150,7 +169,16 @@ const styles = theme => ({
         letterSpacing: 1.5,
         textTransform: 'uppercase',
         color: '#424242',
-        opacity: 0.6
+        opacity: 0.6,
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop', 'paddingBottom'],
+                value: [0, 0],
+                variant: [0, 0],
+                variantSM: [-10, -10],
+                unit: ['px', 'px']
+            }
+        ),
     },
 
     menuLink: {
@@ -1117,24 +1145,27 @@ class Home extends React.Component
     {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
+        let isDisable = isWidthDown('sm', width) ? true : false
+
         return (
-            <AspectRatio ratio={1920 / 990}>
+            <AspectRatio ratio={1920 / 990} disable={isDisable}>
                 <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
 
-                    <InViewElement variants={commonMotion.groupTransition} classes={{ root: clsx(classes.divColumn, classes.divLeft) }} style={{ flex: 8 }}>
+                    <InViewElement variants={commonMotion.groupTransition} classes={{ root: clsx(classes.divColumn, classes.section2_header) }} style={{ flex: 10 }}>
                         <div style={{ flex: 1 }} />
                         <motion.div variants={commonMotion.elementTransition} style={{ flex: 1 }}>
-                            <Typography className={clsx(classes.textBreak, classes.text12, classes.section2_txt1)}>
+                            <Typography className={clsx(classes.textBreak, classes.text14, classes.section2_txt1)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_2_TEXT_1}
                                 />
                             </Typography>
                         </motion.div>
 
-                        <motion.div variants={commonMotion.groupHeaderTransition} className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 5 }}>
+                        <motion.div variants={commonMotion.groupHeaderTransition} className={clsx(classes.divColumn, classes.section2_menu)} style={{ flex: 8 }}>
                             {
                                 HomeMenu.map((menu, index) => (
                                     this.renderSection2Menu(menu, index)
@@ -1153,14 +1184,15 @@ class Home extends React.Component
     {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
         let menuLink = t(menu.link)
 
         let isHover = this.state[`hover_${menuLink}`] === true
         let notHover = this.state.countHover !== 0
-        let isShowBackground = this.state.lastHover === menuLink
+        let isShowBackground = isWidthDown('sm', width) ? false : this.state.lastHover === menuLink
 
         let classMenuLink = clsx(classes.menuLink, {
             [classes.menuLink + '--not-hover']: notHover && !isHover
