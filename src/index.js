@@ -36,12 +36,6 @@ import PageNotFound from './Components/PageError/PageNotFound'
 import ScrollToTop from './Components/ScrollToTop'
 
 import { CssBaseline } from '@material-ui/core'
-import Utils from './Utils'
-import Generic from './Containers/Generic'
-
-
-window.isWaterWaveSupported = false; // Utils.isWaterWaveSupported()
-console.log('isWaterWaveSupported', window.isWaterWaveSupported)
 
 const metadata = require('./metadata.json')
 console.log('metadata', metadata)
