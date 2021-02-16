@@ -30,7 +30,7 @@ const MAX_BLOG_LINE_HEIGHT = 6
 const MAX_LINE_HEIGHT = 3
 
 const AVATAR_SIZE = 150
-const AVATAR_VARIANT = 15
+const AVATAR_VARIANT = 21
 
 const HASH_TAG_SIZE = 60
 const HASH_TAG_VARIANT = 6
@@ -58,11 +58,11 @@ const styles = theme => ({
         objectFit: 'contain',
         ...breakpointsStyle(theme,
             {
-                key: ['padding-left', 'width'],
-                value: [50, 45],
-                variant: [10, 2],
-                variantSM: [12.5, -13.75],
-                unit: ['px', '%']
+                key: ['padding-left', 'width', 'margin'],
+                value: [50, 45, 0],
+                variant: [10, 2, 0],
+                variantSM: [12.5, -13.75, -12],
+                unit: ['px', '%', 'px']
             }
         ),
     },
@@ -71,11 +71,11 @@ const styles = theme => ({
         objectFit: 'contain',
         ...breakpointsStyle(theme,
             {
-                key: ['padding-right', 'width'],
-                value: [50, 55],
-                variant: [10, 3],
-                variantSM: [12.5, -11.25],
-                unit: ['px', '%']
+                key: ['padding-right', 'width', 'marginTop'],
+                value: [50, 55, 0],
+                variant: [10, 3, 0],
+                variantSM: [12.5, -11.25, -12],
+                unit: ['px', '%', 'px']
             }
         ),
     },
@@ -84,17 +84,11 @@ const styles = theme => ({
         objectFit: 'contain',
         backgroundColor: `${theme.palette.primary.secondary}1E`, // 1E = 12%
         borderRadius: '50%',
-        // transform: 'translateX(-25%) scaleX(-1)',
+        transform: 'translate(-50%, -50%)',
         position: 'absolute',
-        ...breakpointsStyle(theme,
-            {
-                key: ['right', 'bottom', 'width'],
-                value: [45, 10, 15],
-                variant: [2, 2, -2],
-                variantSM: [11, 0, -2],
-                unit: ['px', 'px', '%']
-            }
-        )
+        left: '100%',
+        bottom: '-50%',
+        width: '30%'
     },
 
     section1_txt1: {
@@ -102,7 +96,8 @@ const styles = theme => ({
     },
 
     section1_txt2: {
-        color: 'white'
+        color: 'white',
+        position: 'relative'
     },
 
     section1_txt3: {
@@ -125,7 +120,26 @@ const styles = theme => ({
 
     section2: {
         position: 'relative',
-        height: '100%'
+        height: '100%',
+        [theme.breakpoints.down('sm')]: {
+            backgroundColor: '#E5E7EA',
+        }
+    },
+
+    section2_header: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        [theme.breakpoints.down('sm')]: {
+            alignItems: 'center'
+        }
+    },
+
+    section2_menu: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        [theme.breakpoints.down('sm')]: {
+            alignItems: 'center'
+        }
     },
 
     section2_bg: {
@@ -154,7 +168,16 @@ const styles = theme => ({
         letterSpacing: 1.5,
         textTransform: 'uppercase',
         color: '#424242',
-        opacity: 0.6
+        opacity: 0.6,
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingTop', 'paddingBottom'],
+                value: [0, 0],
+                variant: [0, 0],
+                variantSM: [-10, -10],
+                unit: ['px', 'px']
+            }
+        ),
     },
 
     menuLink: {
@@ -653,6 +676,7 @@ const styles = theme => ({
                 key: ['font-size', 'line-height'],
                 value: [80, 80],
                 variant: [10, 10],
+                variantSM: [5, 5],
                 unit: ['px', 'px']
             }
         ),
@@ -665,10 +689,15 @@ const styles = theme => ({
                 key: ['font-size', 'line-height', 'paddingTop', 'paddingBottom'],
                 value: [180, 140, 50, 50],
                 variant: [20, 20, 5, 5],
+                variantSM: [15, 10, 0, 0],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'center',
+        }
     },
 
     section6_arrow: {
@@ -700,9 +729,19 @@ const styles = theme => ({
         backgroundRepeat: 'no-repeat'
     },
 
+    section6_text_root: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        [theme.breakpoints.down('sm')]: {
+            alignItems: 'center',
+            paddingTop: 50
+        }
+    },
+
     section6_dialog_root: {
-        overflow: 'unset',
-        width: '100%'
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     section6_dialog1: {
@@ -710,7 +749,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [550, 150],
-                variant: [80, 20],
+                variant: [60, 10],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -725,7 +764,7 @@ const styles = theme => ({
         marginLeft: '15%',
 
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '25%',
+            marginLeft: 0,
         }
     },
 
@@ -734,7 +773,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height', 'left', 'top'],
                 value: [AVATAR_SIZE, AVATAR_SIZE, -AVATAR_SIZE / 2, AVATAR_SIZE / 3],
-                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 3],
+                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 7],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -758,7 +797,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [600, 245],
-                variant: [40, 35],
+                variant: [80, 25],
                 unit: ['px', 'px']
             }
         ),
@@ -773,7 +812,7 @@ const styles = theme => ({
         marginTop: '5%',
 
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '30%',
+            marginLeft: 0,
         },
     },
 
@@ -782,7 +821,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height', 'right', 'top'],
                 value: [AVATAR_SIZE, AVATAR_SIZE, -AVATAR_SIZE / 2, AVATAR_SIZE / 3],
-                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 3],
+                variant: [AVATAR_VARIANT, AVATAR_VARIANT, -AVATAR_VARIANT / 2, AVATAR_VARIANT / 7],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),
@@ -806,7 +845,7 @@ const styles = theme => ({
             {
                 key: ['width', 'height'],
                 value: [550, 190],
-                variant: [60, 30],
+                variant: [55, 20],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -820,7 +859,7 @@ const styles = theme => ({
         marginLeft: '10%',
         marginTop: '-5%',
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '20%',
+            marginLeft: 0,
         }
     },
 
@@ -860,6 +899,14 @@ const styles = theme => ({
 
     section6_dialog3_txt: {
         paddingLeft: '35%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['paddingLeft'],
+                value: [35],
+                variant: [3],
+                unit: ['%']
+            }
+        ),
         color: 'white'
     }
 });
@@ -1051,18 +1098,18 @@ class Home extends React.Component
                         />
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divColumn)}>
-                            <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)} style={{ position: 'relative' }}>
-                                <Typography className={clsx(classes.textBreak, classes.text40, classes.section1_txt2)}>
+                            <div className={clsx(classes.divRow, classes.divCenter, classes.divTop)} >
+                                <Typography component={'div'} className={clsx(classes.textBreak, classes.text40, classes.section1_txt2)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_1_TEXT_2}
                                     />
-                                </Typography>
 
-                                <img
-                                    alt={t(ID.IMAGE.HOME_1_3)}
-                                    src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))}
-                                    className={classes.section1_img3}
-                                />
+                                    <img
+                                        alt={t(ID.IMAGE.HOME_1_3)}
+                                        src={Utils.getUrl(t(ID.IMAGE.HOME_1_3))}
+                                        className={classes.section1_img3}
+                                    />
+                                </Typography>
                             </div>
 
                             <Typography className={clsx(classes.textBreak, classes.text18, classes.section1_txt3)}>
@@ -1097,24 +1144,27 @@ class Home extends React.Component
     {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
+        let isDisable = isWidthDown('sm', width) ? true : false
+
         return (
-            <AspectRatio ratio={1920 / 990}>
+            <AspectRatio ratio={1920 / 990} disable={isDisable}>
                 <div id={'section2'} className={clsx(classes.divColumn, classes.section, classes.section2)}>
 
-                    <InViewElement variants={commonMotion.groupTransition} classes={{ root: clsx(classes.divColumn, classes.divLeft) }} style={{ flex: 8 }}>
+                    <InViewElement variants={commonMotion.groupTransition} classes={{ root: clsx(classes.divColumn, classes.section2_header) }} style={{ flex: 10 }}>
                         <div style={{ flex: 1 }} />
                         <motion.div variants={commonMotion.elementTransition} style={{ flex: 1 }}>
-                            <Typography className={clsx(classes.textBreak, classes.text12, classes.section2_txt1)}>
+                            <Typography className={clsx(classes.textBreak, classes.text14, classes.section2_txt1)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_2_TEXT_1}
                                 />
                             </Typography>
                         </motion.div>
 
-                        <motion.div variants={commonMotion.groupHeaderTransition} className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 5 }}>
+                        <motion.div variants={commonMotion.groupHeaderTransition} className={clsx(classes.divColumn, classes.section2_menu)} style={{ flex: 8 }}>
                             {
                                 HomeMenu.map((menu, index) => (
                                     this.renderSection2Menu(menu, index)
@@ -1133,14 +1183,15 @@ class Home extends React.Component
     {
         const {
             classes,
-            t
+            t,
+            width
         } = this.props
 
         let menuLink = t(menu.link)
 
         let isHover = this.state[`hover_${menuLink}`] === true
         let notHover = this.state.countHover !== 0
-        let isShowBackground = this.state.lastHover === menuLink
+        let isShowBackground = isWidthDown('sm', width) ? false : this.state.lastHover === menuLink
 
         let classMenuLink = clsx(classes.menuLink, {
             [classes.menuLink + '--not-hover']: notHover && !isHover
@@ -1644,7 +1695,7 @@ class Home extends React.Component
         return (
             <div id={'section6'} className={clsx(classes.divRow2ColumnRevert, classes.divCenter, classes.section, classes.section6, classes.divDot)} style={{ flex: 3 }}>
                 <InViewElement variants={commonMotion.groupTransition} style={{ flex: 1 }}>
-                    <motion.div variants={commonMotion.elementTransition} id={'section6.1'} className={clsx(classes.divColumn, classes.divLeft)}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section6.1'} className={clsx(classes.divColumn, classes.section6_text_root)}>
                         <motion.div variants={commonMotion.elementTransition}>
                             <Typography className={clsx(classes.textBreak, classes.section6_txt1)}>
                                 <Trans
@@ -1674,10 +1725,10 @@ class Home extends React.Component
 
 
                 <InViewElement variants={commonMotion.groupTransition} style={{ flex: 2 }}>
-                    <motion.div variants={commonMotion.elementTransition} id={'section6.2'} className={clsx(classes.divColumn, classes.divCenter)} style={{ width: '100%' }}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section6.2'} className={clsx(classes.divColumn, classes.section6_dialog_root)}>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog1, classes.section6_dialog1_pos)}>
-                            <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog1_txt)}>
+                            <Typography component={'div'} className={clsx(classes.textBreakForce, classes.text25, classes.section6_dialog1_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_3}
                                 />
@@ -1721,7 +1772,7 @@ class Home extends React.Component
                         </motion.div>
 
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divRow, classes.divBetween, classes.section6_dialog3, classes.section6_dialog3_pos)}>
-                            <Typography component={'div'} className={clsx(classes.textBreak, classes.text25, classes.section6_dialog3_txt)}>
+                            <Typography component={'div'} className={clsx(classes.textBreakForce, classes.text25, classes.section6_dialog3_txt)}>
                                 <Trans
                                     i18nKey={ID.HOME.SECTION_6_TEXT_5}
                                 />
