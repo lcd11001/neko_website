@@ -259,6 +259,7 @@ const styles = theme => ({
                 key: ['font-size', 'line-height'],
                 value: [25, 25],
                 variant: [3, 5],
+                variantSM: [1, 1],
                 unit: ['px', 'px']
             }
         ),
@@ -274,6 +275,7 @@ const styles = theme => ({
                 key: ['font-size'],
                 value: [80],
                 variant: [10],
+                variantSM: [5],
                 unit: ['px']
             }
         ),
@@ -286,6 +288,7 @@ const styles = theme => ({
                 key: ['font-size', 'line-height'],
                 value: [150, 170],
                 variant: [25, 30],
+                variantSM: [10, 10],
                 unit: ['px', 'px']
             }
         ),
@@ -296,8 +299,14 @@ const styles = theme => ({
 
     section3_txt2: {
         textAlign: 'left',
-        color: 'inherit',
-        whiteSpace: 'pre-wrap'
+        color: 'inherit'
+    },
+
+    section3_vertical_divider: {
+        minWidth: 40,
+        [theme.breakpoints.down('sm')]: {
+            minWidth: 0,
+        }
     },
 
     section3_img1: {
@@ -305,10 +314,11 @@ const styles = theme => ({
         width: 'auto',
         ...breakpointsStyle(theme,
             {
-                key: ['paddingRight', 'height'],
-                value: [40, 300],
-                variant: [5, 30],
-                unit: ['px', 'px']
+                key: ['height'],
+                value: [300],
+                variant: [30],
+                variantSM: [10],
+                unit: ['px']
             }
         ),
     },
@@ -322,6 +332,7 @@ const styles = theme => ({
                 key: ['width'],
                 value: [50],
                 variant: [5],
+                variantSM: [0],
                 unit: ['px']
             }
         ),
@@ -359,6 +370,7 @@ const styles = theme => ({
                 key: ['padding'],
                 value: [20],
                 variant: [-2],
+                variantSM: [3],
                 unit: ['%']
             }
         ),
@@ -930,12 +942,12 @@ const carouselMultiResponsiveLogo = {
     },
     sm: {
         breakpoint: { max: 960 - 1, min: 600 },
-        items: 5,
+        items: 3,
         partialVisibilityGutter: 0
     },
     xs: {
         breakpoint: { max: 600 - 1, min: 0 },
-        items: 4,
+        items: 3,
         partialVisibilityGutter: 0
     }
 }
@@ -1272,22 +1284,25 @@ class Home extends React.Component
         return (
             <div id={'section3'} className={clsx(classes.divColumn, classes.section, classes.section3)}>
                 <InViewElement variants={commonMotion.groupTransition}>
-                    <div id={'section3.1'} className={clsx(classes.divRow, classes.divCenter)}>
+                    <div id={'section3.1'} className={clsx(classes.divRow2Column, classes.divCenter)}>
                         <motion.img
                             variants={commonMotion.elementTransition}
                             alt={t(ID.IMAGE.HOME_3_1)}
                             src={Utils.getUrl(t(ID.IMAGE.HOME_3_1))}
                             className={classes.section3_img1}
                         />
-                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divTop)} >
 
-                            <div id={'section3.1.a'} className={clsx(classes.divRow, classes.divTop)}>
+                        <div className={classes.section3_vertical_divider} />
+
+                        <motion.div variants={commonMotion.elementTransition} className={/*isWidthDown('sm', width) ? clsx(classes.divColumn, classes.divCenter) :*/ clsx(classes.divColumn, classes.divTop)} >
+
+                            <div id={'section3.1.a'} className={isWidthDown('sm', width) ? clsx(classes.divRow, classes.divCenter) : clsx(classes.divRow, classes.divTop)}>
                                 <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_3_PROJECTS_NUM}
                                     />
                                 </Typography>
-                                <Typography className={clsx(classes.textBreak, classes.section3_txt1)}>
+                                <Typography className={clsx(classes.textBreakForce, classes.section3_txt1)}>
                                     <Trans
                                         i18nKey={ID.HOME.SECTION_3_TEXT_1}
                                         components={{ span: <span /> }}
@@ -1298,9 +1313,9 @@ class Home extends React.Component
                                 </Typography>
                             </div>
 
-                            <hr className={classes.section3_divider} />
+                            <hr className={clsx(classes.section3_divider)} />
 
-                            <div id={'section3.1.b'} className={clsx(classes.divRow, classes.divCenter, classes.divTop)}>
+                            <div id={'section3.1.b'} className={isWidthDown('sm', width) ? clsx(classes.divRow, classes.divCenter) : clsx(classes.divRow, classes.divTop)}>
                                 <img
                                     variants={commonMotion.elementTransition}
                                     alt={t(ID.IMAGE.HOME_3_2)}
