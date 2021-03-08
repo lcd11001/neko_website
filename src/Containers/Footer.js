@@ -212,7 +212,7 @@ const styles = theme => ({
             {
                 key: ['paddingLeft', 'lineHeight'],
                 value: [75, 40],
-                variant: [20, 5],
+                variant: [18.75, 5],
                 unit: ['px', 'px']
             }
         ),
@@ -337,13 +337,17 @@ class Footer extends React.Component
             isSmall ? classes.fullWidth : ''
         )
 
+        const classTitle = clsx(classes.txtWhite, classes.title,
+            isSmall ? classes.text50 : classes.text62
+        )
+
         return (
             <motion.div variants={commonMotion.footerTransitionZ1} className={classes.fullWidth} >
                 <div id={'footer-secondary'} className={classes.rootSecondary}>
                     <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondaryPosition, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
                         <div className={classTitleRoot}>
                             <div className={classTitleContainer}>
-                                <Typography className={clsx(classes.txtWhite, classes.text62, classes.title)}>
+                                <Typography className={classTitle}>
                                     <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
                                 </Typography>
 
