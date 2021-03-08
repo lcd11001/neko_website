@@ -584,6 +584,7 @@ const styles = theme => ({
                 key: ['height'],
                 value: [500],
                 variant: [50],
+                variantSM: [20],
                 unit: ['px']
             }
         ),
@@ -616,7 +617,8 @@ const styles = theme => ({
     },
 
     section5_blogs: {
-        paddingTop: 20
+        paddingTop: 20,
+        paddingBottom: 20
     },
 
     section5_blog: {
@@ -624,8 +626,14 @@ const styles = theme => ({
 
     section5_div_img: {
         overflow: 'hidden',
-        maxHeight: '60%',
-        height: '60%',
+        ...breakpointsStyle(theme,
+            {
+                key: ['maxHeight', 'height'],
+                value: [60, 60],
+                variant: [5, 5],
+                unit: ['%', '%']
+            }
+        ),
         borderTopLeftRadius: 7,
         borderTopRightRadius: 7,
     },
@@ -979,12 +987,12 @@ const carouselMultiResponsiveBlogs = {
     sm: {
         breakpoint: { max: 960 - 1, min: 600 },
         items: 1,
-        partialVisibilityGutter: 80
+        partialVisibilityGutter: 100
     },
     xs: {
         breakpoint: { max: 600 - 1, min: 0 },
         items: 1,
-        partialVisibilityGutter: 80
+        partialVisibilityGutter: 50
     }
 }
 
@@ -1613,19 +1621,23 @@ class Home extends React.Component
                             />
                         </Typography>
 
-                        <div className={classes.section5_btn1}>
-                            <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
-                                <Button
-                                    variant={'contained'}
-                                    color={'primary'}
-                                    endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
-                                >
-                                    <Trans
-                                        i18nKey={ID.HOME.SECTION_5_BUTTON_1}
-                                    />
-                                </Button>
-                            </Link>
-                        </div>
+                        {
+                            !isAutoPlay &&
+                            <div className={classes.section5_btn1}>
+                                <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
+                                    <Button
+                                        variant={'contained'}
+                                        color={'primary'}
+                                        endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                                    >
+                                        <Trans
+                                            i18nKey={ID.HOME.SECTION_5_BUTTON_1}
+                                        />
+                                    </Button>
+                                </Link>
+                            </div>
+                        }
+
                     </motion.div>
 
                     <motion.div variants={commonMotion.elementTransition} id={'section5.2'} className={clsx(classes.divRow, classes.divCenter, classes.section5_blogs)}>
@@ -1643,7 +1655,7 @@ class Home extends React.Component
                             arrows={false}
                             draggable={false}
                             swipeable={false}
-                            autoPlay={isAutoPlay}
+                            autoPlay={false && isAutoPlay}
                             autoPlaySpeed={3000}
                         >
                             {
@@ -1655,6 +1667,23 @@ class Home extends React.Component
                             }
                         </CarouselMulti>
                     </motion.div>
+
+                    {
+                        isAutoPlay &&
+                        <motion.div variants={commonMotion.elementTransition} id={'section5.3'} className={classes.section5_btn1}>
+                            <Link to={Utils.i18Link(t, ID.HOME.SECTION_5_BUTTON_1_LINK)} className={classes.textLinkHidden}>
+                                <Button
+                                    variant={'contained'}
+                                    color={'primary'}
+                                    endIcon={<Icons.IconMenuArrow className={classes.iconArrow} />}
+                                >
+                                    <Trans
+                                        i18nKey={ID.HOME.SECTION_5_BUTTON_1}
+                                    />
+                                </Button>
+                            </Link>
+                        </motion.div>
+                    }
                 </InViewElement>
             </div>
         )
