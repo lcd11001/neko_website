@@ -83,6 +83,8 @@ const styles = (theme) => ({
                 key: ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom'],
                 value: [200, 200, 100, 100],
                 variant: [40, 40, 10, 10],
+                valueSM: [60, 60, 60, 60],
+                variantSM: [10, 10, 10, 10],
                 unit: ['px', 'px', 'px', 'px']
             }
         ),

@@ -482,7 +482,12 @@ const styles = theme => ({
             backgroundColor: 'white',
             marginTop: 20,
             marginBottom: 20,
-            padding: 50
+            [theme.breakpoints.up('md')]: {
+                padding: `20px 50px`
+            },
+            [theme.breakpoints.down('md')]: {
+                padding: `20px 10px`
+            }
         },
         '& > div:first-child': {
             [theme.breakpoints.up('md')]: {
@@ -529,6 +534,7 @@ const styles = theme => ({
                 key: ['minWidth', 'maxWidth'],
                 value: [120, 150],
                 variant: [10, 10],
+                variantSM: [15, 15],
                 unit: ['px !important', 'px !important']
             }
         ),
@@ -1445,7 +1451,7 @@ class Home extends React.Component
                                 sliderClass={clsx(classes.section4_carousel_slider)}
                                 itemClass={clsx(classes.section4_carousel_item)}
                                 ssr={false}
-                                partialVisible={isAutoPlay}
+                                partialVisible={!isAutoPlay}
                                 centerMode={false}
                                 infinite={isAutoPlay}
                                 showDots={false}
@@ -1468,32 +1474,28 @@ class Home extends React.Component
                                 }
                             </CarouselMulti>
 
-                            {
-                                !isAutoPlay &&
-                                <motion.div variants={commonMotion.elementTransition} id={'section4.3'} className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
-                                    {/* <div className={classes.section4_carousel_indicators}>
-                                        <Typography className={clsx(classes.text18)}>{Utils.zeroPadding(caseIndex + 1, 2)}/{Utils.zeroPadding(caseStudyNum, 2)}</Typography>
-                                    </div> */}
-                                    <div className={clsx(classes.divRow, classes.divBetween)}>
-                                        <IconButton
-                                            onClick={this.handleCaseStudy(-numSlideCaseStudy)}
-                                            disableRipple
-                                            className={classes.section4_carousel_buttons}
-                                            disabled={caseIndex === 0}
-                                        >
-                                            <Icons.IconMenuArrow className={classes.iconArrowBig} style={{ transform: 'scaleX(-1)' }} />
-                                        </IconButton>
-                                        <IconButton
-                                            onClick={this.handleCaseStudy(numSlideCaseStudy)}
-                                            disableRipple
-                                            className={classes.section4_carousel_buttons}
-                                            disabled={caseIndex + 1 === caseStudyNum}
-                                        >
-                                            <Icons.IconMenuArrow className={classes.iconArrowBig} />
-                                        </IconButton>
-                                    </div>
-                                </motion.div>
-                            }
+
+                            <motion.div variants={commonMotion.elementTransition} id={'section4.3'} className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)}>
+                                <div className={clsx(classes.divRow, classes.divBetween)}>
+                                    <IconButton
+                                        onClick={this.handleCaseStudy(-numSlideCaseStudy)}
+                                        disableRipple
+                                        className={classes.section4_carousel_buttons}
+                                        disabled={caseIndex === 0}
+                                    >
+                                        <Icons.IconMenuArrow className={classes.iconArrowBig} style={{ transform: 'scaleX(-1)' }} />
+                                    </IconButton>
+                                    <IconButton
+                                        onClick={this.handleCaseStudy(numSlideCaseStudy)}
+                                        disableRipple
+                                        className={classes.section4_carousel_buttons}
+                                        disabled={caseIndex + 1 === caseStudyNum}
+                                    >
+                                        <Icons.IconMenuArrow className={classes.iconArrowBig} />
+                                    </IconButton>
+                                </div>
+                            </motion.div>
+
                         </motion.div>
                         <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={clsx(classes.divColumn, classes.divCenter, isAutoPlay ? classes.fullWidth : classes.halfWidth, classes.section4_info)} >
                             <div className={clsx(classes.section4_info_stars)} />
