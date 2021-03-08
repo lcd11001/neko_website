@@ -354,11 +354,13 @@ class Footer extends React.Component
 
     renderPrimary()
     {
-        const { classes, t, simpleFooter } = this.props;
+        const { classes, t, simpleFooter, width } = this.props;
 
         let classRootPrimary = clsx(classes.rootPrimary, {
             [classes.rootPrimary + '--simple']: simpleFooter
         })
+
+        let isSmallScreen = isWidthDown('sm', width)
 
         return (
             <motion.div variants={commonMotion.footerTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
@@ -382,77 +384,81 @@ class Footer extends React.Component
                                 </div>
                             </div>
                         </div>
-                        <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 3 }}>
-                            <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
-                                <div>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
-                                    </Typography>
+
+                        {
+                            !isSmallScreen &&
+                            <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 3 }}>
+                                <div id={'work'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
+                                    <div>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS} />
+                                        </Typography>
+                                    </div>
+                                    <div>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_BRAND} />
+                                        </Typography>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_MOTION} />
+                                        </Typography>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_WEB} />
+                                        </Typography>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_2D} />
+                                        </Typography>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_DIGITAL} />
+                                        </Typography>
+                                    </div>
                                 </div>
-                                <div>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_BRAND} />
-                                    </Typography>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_MOTION} />
-                                    </Typography>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_WEB} />
-                                    </Typography>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_2D} />
-                                    </Typography>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_WORKS_DIGITAL} />
-                                    </Typography>
+                                <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
+                                    <div>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
+                                        </Typography>
+                                    </div>
+                                    <div>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_CONTACT} />
+                                        </Typography>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_POLICY} />
+                                        </Typography>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_TERMS} />
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
+                                    <div>
+                                        <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
+                                            <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
+                                        </Typography>
+                                    </div>
+                                    <div>
+                                        <IconButton
+                                            className={classes.iconButton}
+                                            onClick={this.handleOpenUrl(t(ID.LINK.FACEBOOK))}
+                                        >
+                                            <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('fb.svg')} />
+                                        </IconButton>
+                                        <IconButton
+                                            className={classes.iconButton}
+                                            onClick={this.handleOpenUrl(t(ID.LINK.INSTAGRAM))}
+                                        >
+                                            <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('IG.svg')} />
+                                        </IconButton>
+                                        <IconButton
+                                            className={classes.iconButton}
+                                            onClick={this.handleOpenUrl(t(ID.LINK.YOUTUBE))}
+                                        >
+                                            <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.svg')} />
+                                        </IconButton>
+                                    </div>
                                 </div>
                             </div>
-                            <div id={'support'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
-                                <div>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT} />
-                                    </Typography>
-                                </div>
-                                <div>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_CONTACT} />
-                                    </Typography>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_POLICY} />
-                                    </Typography>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_SUPPORT_TERMS} />
-                                    </Typography>
-                                </div>
-                            </div>
-                            <div id={'social'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight)} style={{ flex: 1, minHeight: 200 }}>
-                                <div>
-                                    <Typography className={clsx(classes.txtWhite, classes.text12, classes.caption)}>
-                                        <Trans i18nKey={ID.FOOTER.PRIMARY_SOCIAL} />
-                                    </Typography>
-                                </div>
-                                <div>
-                                    <IconButton
-                                        className={classes.iconButton}
-                                        onClick={this.handleOpenUrl(t(ID.LINK.FACEBOOK))}
-                                    >
-                                        <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('fb.svg')} />
-                                    </IconButton>
-                                    <IconButton
-                                        className={classes.iconButton}
-                                        onClick={this.handleOpenUrl(t(ID.LINK.INSTAGRAM))}
-                                    >
-                                        <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('IG.svg')} />
-                                    </IconButton>
-                                    <IconButton
-                                        className={classes.iconButton}
-                                        onClick={this.handleOpenUrl(t(ID.LINK.YOUTUBE))}
-                                    >
-                                        <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.svg')} />
-                                    </IconButton>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
                 <div id={'group3'} className={clsx(classes.divRow, classes.divCenter, classes.fullWidth, classes.copyrightContainer)}>
@@ -480,15 +486,15 @@ class Footer extends React.Component
 
         return (
             // <InViewElement key={pathname} variants={commonMotion.groupFooterTransition} options={{ triggerOnce: true }}>
-                <div className={clsx(classRoot, classes.divColumn, classes.divBetween)}>
-                    {
-                        !simpleFooter &&
-                        this.renderSecondary()
-                    }
-                    {
-                        this.renderPrimary()
-                    }
-                </div>
+            <div className={clsx(classRoot, classes.divColumn, classes.divBetween)}>
+                {
+                    !simpleFooter &&
+                    this.renderSecondary()
+                }
+                {
+                    this.renderPrimary()
+                }
+            </div>
             // </InViewElement>
         );
     }
