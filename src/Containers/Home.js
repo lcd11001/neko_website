@@ -1310,7 +1310,7 @@ class Home extends React.Component
 
                         <div className={classes.section3_vertical_divider} />
 
-                        <motion.div variants={commonMotion.elementTransition} className={/*isWidthDown('sm', width) ? clsx(classes.divColumn, classes.divCenter) :*/ clsx(classes.divColumn, classes.divTop)} >
+                        <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.divTop)} >
 
                             <div id={'section3.1.a'} className={isWidthDown('sm', width) ? clsx(classes.divRow, classes.divCenter) : clsx(classes.divRow, classes.divTop)}>
                                 <Typography className={clsx(classes.textBreak, classes.section3_project_num)}>
@@ -1655,7 +1655,7 @@ class Home extends React.Component
                             arrows={false}
                             draggable={false}
                             swipeable={false}
-                            autoPlay={false && isAutoPlay}
+                            autoPlay={isAutoPlay}
                             autoPlaySpeed={3000}
                         >
                             {
