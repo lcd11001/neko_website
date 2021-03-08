@@ -14,9 +14,13 @@ const isSmallScreen = (screen) =>
 const createStyleForScreenSize = (theme, options, screen, multiply) =>
 {
     const key = options.key
+
     const value = options.value || 3.0
+    const valueSM = options.valueSM || value
+
     const variant = options.variant || 0.5
-    const variantSM = options.variantSM || variant || 1
+    const variantSM = options.variantSM || variant
+
     const unit = options.unit || 'px'
 
     let styleDetail = {}
@@ -26,19 +30,24 @@ const createStyleForScreenSize = (theme, options, screen, multiply) =>
         key.forEach((key0, i) =>
         {
             const value0 = Array.isArray(value) ? value[i] : value
+            const valueSM0 = Array.isArray(valueSM) ? valueSM[i] : valueSM
+
             const variant0 = Array.isArray(variant) ? variant[i] : variant
-            const variantSM0 = Array.isArray(variantSM) ? variantSM[i] : variant0
+            const variantSM0 = Array.isArray(variantSM) ? variantSM[i] : variantSM
+
             const unit0 = Array.isArray(unit) ? unit[i] : unit
 
-            styleDetail = Object.assign(styleDetail, {
-                [key0]: `${value0 - multiply * (isSmallScreen(screen) ? variantSM0 : variant0)}${unit0}`
-            })
+            styleDetail = isSmallScreen(screen)
+                ? Object.assign(styleDetail, { [key0]: `${valueSM0 - multiply * variantSM0}${unit0}` })
+                : Object.assign(styleDetail, { [key0]: `${value0 - multiply * variant0}${unit0}` })
+
         })
-    } else
+    }
+    else
     {
-        styleDetail = Object.assign(styleDetail, {
-            [key]: `${value - multiply * (isSmallScreen(screen) ? variantSM : variant)}${unit}`
-        })
+        styleDetail = isSmallScreen(screen)
+            ? Object.assign(styleDetail, { [key]: `${valueSM - multiply * variantSM}${unit}` })
+            : Object.assign(styleDetail, { [key]: `${value - multiply * variant}${unit}` })
     }
 
     if (screen === 'default')

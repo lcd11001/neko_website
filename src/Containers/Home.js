@@ -415,6 +415,8 @@ const styles = theme => ({
                 key: ['marginLeft', 'marginRight'],
                 value: [150, 0],
                 variant: [30, 0],
+                valueSM: [0, 0],
+                variantSM: [0, 0],
                 unit: ['px', 'px']
             }
         ),
