@@ -89,7 +89,6 @@ const styles = theme => ({
     bgSecondary: {
         borderRadius: 9,
         backgroundColor: theme.palette.primary.secondary,
-        backgroundPosition: 'left top',
         backgroundRepeat: 'no-repeat',
 
         ...breakpointsStyle(theme,
@@ -103,10 +102,18 @@ const styles = theme => ({
         ),
     },
 
+    bgSecondaryPosition: {
+        backgroundPosition: 'left top',
+
+        [theme.breakpoints.down('sm')]: {
+            backgroundPosition: 'top center'
+        }
+    },
+
     bgSecondarySize: {
         backgroundSize: 'cover',
 
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
             backgroundSize: 'contain'
         }
     },
@@ -314,10 +321,14 @@ class Footer extends React.Component
             [classes.iconArrow + '--hover']: this.state.isHover
         })
 
-        const img = t(ID.IMAGE.FOOTER_1)
-        const imgUrl = /*pathname === t(ID.LINK.ABOUT) ? 'none' :*/ `url(${Utils.getUrl(img)})`
+        const isSmall = isWidthDown('sm', width)
 
-        const isSmall = isWidthDown('md', width)
+        const imgBig = t(ID.IMAGE.FOOTER_1)
+        const imgSmall = t(ID.IMAGE.FOOTER_2)
+        const imgUrl = isSmall
+            ? `url(${Utils.getUrl(imgSmall)})`
+            : `url(${Utils.getUrl(imgBig)})`
+
         const classTitleRoot = clsx(classes.divColumn, classes.divCenter, classes.fullHeight, classes.fullWidth,
             isSmall ? classes.divBottom : classes.divRight
         )
@@ -329,7 +340,7 @@ class Footer extends React.Component
         return (
             <motion.div variants={commonMotion.footerTransitionZ1} className={classes.fullWidth} >
                 <div id={'footer-secondary'} className={classes.rootSecondary}>
-                    <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
+                    <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondaryPosition, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
                         <div className={classTitleRoot}>
                             <div className={classTitleContainer}>
                                 <Typography className={clsx(classes.txtWhite, classes.text62, classes.title)}>

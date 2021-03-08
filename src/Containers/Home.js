@@ -485,7 +485,7 @@ const styles = theme => ({
             [theme.breakpoints.up('md')]: {
                 padding: `20px 50px`
             },
-            [theme.breakpoints.down('md')]: {
+            [theme.breakpoints.down('sm')]: {
                 padding: `20px 10px`
             }
         },
