@@ -18,7 +18,7 @@ import Utils from '../Utils';
 import { motion } from 'framer-motion'
 
 const SECONDARY_HEIGHT = 580
-const SECONDARY_HEIGHT_VARIANT = 80
+const SECONDARY_HEIGHT_VARIANT = 70
 
 const PRIMARY_PADDING = Math.floor(SECONDARY_HEIGHT * 2 / 3)
 const PRIMARY_PADDING_VARIANT = Math.floor(SECONDARY_HEIGHT_VARIANT / 2)
