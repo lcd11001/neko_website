@@ -23,7 +23,7 @@ const COPYRIGHT_LINE_HEIGHT = 15
 
 const RATIO_BACKGROUND_BIG = (1577 / 572)
 
-const RATIO_BACKGROUND_SMALL = (928 / 572)
+const RATIO_BACKGROUND_SMALL = (928 / 672)
 
 const screenSizes = [
     'default', // extra-large
@@ -102,16 +102,9 @@ const styles = theme => ({
 
     copyrightContainer: {
         backgroundColor: theme.palette.primary.main,
-        ...breakpointsStyle(theme,
-            {
-                key: ['paddingTop'],
-                value: [90],
-                variant: [10],
-                unit: ['px']
-            }
-        ),
+        paddingTop: 45,
         // Fixed: 1px white line when moving up
-        // top: -1,
+        top: -1,
         position: 'relative'
     },
 
@@ -147,6 +140,10 @@ const styles = theme => ({
 
     contactRoot: {
         transform: 'translate(0, -30%)',
+
+        [theme.breakpoints.down('sm')]: {
+            transform: 'translate(0, 0)',
+        }
     },
 
     icon: {
@@ -330,7 +327,7 @@ class Footer extends React.Component
                 <AspectRatio ratio={rootRatio} padding={rootPadding}>
                     <div id={'footer-secondary'} className={classes.rootSecondary} >
                         <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondaryPosition, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
-                            <div className={classTitleRoot}>
+                            <div className={classTitleRoot} style={{ marginBottom: isSmall ? 10 : 0 }}>
                                 <div className={classTitleContainer}>
                                     <Typography className={classTitle}>
                                         <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
@@ -370,13 +367,13 @@ class Footer extends React.Component
         return (
             <motion.div variants={commonMotion.footerTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
                 <div id={'footer-primary'} className={clsx(classRootPrimary, classes.divColumn, classes.divBetween)} style={{ marginTop: -rootMarginTop, paddingTop: rootMarginTop }}>
-                    <div className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)} style={{ flex: 7 }}>
-                        <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 4 }}>
-                            <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight, classes.fullWidth)} style={{ position: "relative", minHeight: 200 }}>
+                    <div className={clsx(classes.divRow2Column, isSmallScreen ? classes.divCenter : classes.divTop, classes.fullWidth)} style={{ flex: isSmallScreen ? 4 : 7, marginTop: 45 }}>
+                        <div id={'group1'} className={clsx(classes.divRow, isSmallScreen ? classes.divCenter : classes.divTop, classes.fullWidth)} style={{ flex: isSmallScreen ? 3 : 4 }}>
+                            <div id={'logo'} className={clsx(classes.divColumn, isSmallScreen ? classes.divCenter : classes.divTop, classes.fullHeight, classes.fullWidth)} style={{ position: "relative" }}>
                                 <div className={classes.logo} style={{ flex: 2 }}>
                                     <Logo secondary classes={{ root: classes.logoRoot }} />
                                 </div>
-                                <div className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.fullHeight, classes.contactRoot)} style={{ flex: 1 }}>
+                                <div className={clsx(classes.divColumn, classes.divCenter, isSmallScreen ? null : classes.divLeft, classes.fullHeight, classes.contactRoot)} style={{ flex: 1 }}>
                                     <Typography className={clsx(classes.txtWhite, classes.text12, classes.txtContact)}>
                                         <Trans i18nKey={ID.FOOTER.PRIMARY_CONTACT} />
                                     </Typography>
@@ -467,23 +464,20 @@ class Footer extends React.Component
 
                         {
                             isSmallScreen &&
-                            <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 3 }}>
+                            <div id={'group2'} className={clsx(classes.divRow, classes.divCenter, classes.fullWidth)} style={{ flex: 1 }}>
                                 <IconButton
-                                    style={{ flex: 1 }}
                                     className={classes.iconButton}
                                     onClick={this.handleOpenUrl(t(ID.LINK.FACEBOOK))}
                                 >
                                     <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('fb.svg')} />
                                 </IconButton>
                                 <IconButton
-                                    style={{ flex: 1 }}
                                     className={classes.iconButton}
                                     onClick={this.handleOpenUrl(t(ID.LINK.INSTAGRAM))}
                                 >
                                     <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('IG.svg')} />
                                 </IconButton>
                                 <IconButton
-                                    style={{ flex: 1 }}
                                     className={classes.iconButton}
                                     onClick={this.handleOpenUrl(t(ID.LINK.YOUTUBE))}
                                 >
