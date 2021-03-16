@@ -17,32 +17,26 @@ import Utils from '../Utils';
 // import InViewElement from '../Components/InViewElement';
 import { motion } from 'framer-motion'
 
-const SECONDARY_HEIGHT = 580
-const SECONDARY_HEIGHT_VARIANT = 70
-
-const PRIMARY_PADDING = Math.floor(SECONDARY_HEIGHT * 2 / 3)
-const PRIMARY_PADDING_VARIANT = Math.floor(SECONDARY_HEIGHT_VARIANT / 2)
-
-const COPYRIGHT_PADDING = Math.floor((SECONDARY_HEIGHT - PRIMARY_PADDING) / 2)
-const COPYRIGHT_PADDING_VARIANT = Math.floor((SECONDARY_HEIGHT_VARIANT - PRIMARY_PADDING_VARIANT) / 2)
+import AspectRatio from '../Components/AspectRatio'
 
 const COPYRIGHT_LINE_HEIGHT = 15
+
+const RATIO_BACKGROUND_BIG = (1577 / 572)
+
+const RATIO_BACKGROUND_SMALL = (928 / 572)
+
+const screenSizes = [
+    'default', // extra-large
+    'lg', // large
+    'md', // medium
+    'sm', // small
+    'xs', // extra small
+]
 
 const styles = theme => ({
     root: {
         position: 'relative',
-        backgroundColor: '#FFFFFF',
-        ...breakpointsStyle(theme,
-            {
-                key: ['marginTop'],
-                value: [SECONDARY_HEIGHT / 2],
-                variant: [PRIMARY_PADDING_VARIANT],
-                unit: ['px']
-            }
-        ),
-        '&--simple': {
-            marginTop: 0
-        }
+        backgroundColor: '#FFFFFF'
     },
 
     rootPrimary: {
@@ -50,40 +44,19 @@ const styles = theme => ({
         width: '100%',
         ...breakpointsStyle(theme,
             {
-                key: ['paddingLeft', 'paddingRight', 'paddingTop'],
-                value: [200, 200, PRIMARY_PADDING],
-                variant: [48, 48, PRIMARY_PADDING_VARIANT],
-                unit: ['px', 'px', 'px', 'px']
+                key: ['paddingLeft', 'paddingRight'],
+                value: [200, 200],
+                variant: [48, 48],
+                unit: ['px', 'px']
             }
         ),
-        paddingBottom: 0,
-
-        '&--simple': {
-            ...breakpointsStyle(theme,
-                {
-                    key: ['paddingTop'],
-                    value: [COPYRIGHT_PADDING + 2 * COPYRIGHT_LINE_HEIGHT],
-                    variant: [COPYRIGHT_PADDING_VARIANT],
-                    unit: ['px']
-                }
-            ),
-        }
+        paddingBottom: 0
     },
 
     rootSecondary: {
         position: 'absolute',
-        top: 0,
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
         width: '100%',
-        ...breakpointsStyle(theme,
-            {
-                key: ['height', 'paddingRight', 'paddingLeft'],
-                value: [SECONDARY_HEIGHT, 200, 200],
-                variant: [SECONDARY_HEIGHT_VARIANT, 48, 48],
-                unit: ['px', 'px', 'px']
-            }
-        )
+        height: '100%'
     },
 
     bgSecondary: {
@@ -132,13 +105,13 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['paddingTop'],
-                value: [COPYRIGHT_PADDING],
-                variant: [COPYRIGHT_PADDING_VARIANT],
+                value: [90],
+                variant: [10],
                 unit: ['px']
             }
         ),
         // Fixed: 1px white line when moving up
-        top: -1,
+        // top: -1,
         position: 'relative'
     },
 
@@ -181,7 +154,7 @@ const styles = theme => ({
             {
                 key: ['height'],
                 value: [24],
-                variant: [3],
+                variant: [2],
                 unit: ['px']
             }
         ),
@@ -341,28 +314,41 @@ class Footer extends React.Component
             isSmall ? classes.text50 : classes.text62
         )
 
+        const rootPadding = screenSizes.reduce((padding, value, index) =>
+        {
+            if (value === width)
+            {
+                return padding - index * 48;
+            }
+            return padding
+        }, 200)
+
+        const rootRatio = isSmall ? RATIO_BACKGROUND_SMALL : RATIO_BACKGROUND_BIG
+
         return (
             <motion.div variants={commonMotion.footerTransitionZ1} className={classes.fullWidth} >
-                <div id={'footer-secondary'} className={classes.rootSecondary}>
-                    <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondaryPosition, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
-                        <div className={classTitleRoot}>
-                            <div className={classTitleContainer}>
-                                <Typography className={classTitle}>
-                                    <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
-                                </Typography>
+                <AspectRatio ratio={rootRatio} padding={rootPadding}>
+                    <div id={'footer-secondary'} className={classes.rootSecondary} >
+                        <div className={clsx(classes.divColumn, classes.divCenter, classes.bgSecondary, classes.bgSecondaryPosition, classes.bgSecondarySize, classes.fullHeight)} style={{ backgroundImage: imgUrl }}>
+                            <div className={classTitleRoot}>
+                                <div className={classTitleContainer}>
+                                    <Typography className={classTitle}>
+                                        <Trans i18nKey={ID.FOOTER.SECONDARY_TITLE} />
+                                    </Typography>
 
-                                <Link to={t(ID.LINK.FORM_CONTACT)} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-                                    <div className={clsx(classes.divRow, classes.divCenter)}>
-                                        <Typography component={'div'} className={clsx(classes.txtWhite, classes.text14, classes.subTitle)}>
-                                            <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
-                                        </Typography>
-                                        <Icons.IconMenuArrow className={classIconArrow} />
-                                    </div>
-                                </Link>
+                                    <Link to={t(ID.LINK.FORM_CONTACT)} className={classFooterLink} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+                                        <div className={clsx(classes.divRow, classes.divCenter)}>
+                                            <Typography component={'div'} className={clsx(classes.txtWhite, classes.text14, classes.subTitle)}>
+                                                <Trans i18nKey={ID.FOOTER.SECONDARY_SUBTITLE} />
+                                            </Typography>
+                                            <Icons.IconMenuArrow className={classIconArrow} />
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </AspectRatio>
             </motion.div>
         )
     }
@@ -377,9 +363,13 @@ class Footer extends React.Component
 
         let isSmallScreen = isWidthDown('sm', width)
 
+        const rootRatio = isSmallScreen ? RATIO_BACKGROUND_SMALL : RATIO_BACKGROUND_BIG
+
+        const rootMarginTop = 0.5 * window.innerWidth / rootRatio
+
         return (
             <motion.div variants={commonMotion.footerTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
-                <div id={'footer-primary'} className={clsx(classRootPrimary, classes.divColumn, classes.divBetween)}>
+                <div id={'footer-primary'} className={clsx(classRootPrimary, classes.divColumn, classes.divBetween)} style={{ marginTop: -rootMarginTop, paddingTop: rootMarginTop }}>
                     <div className={clsx(classes.divRow2Column, classes.divTop, classes.fullWidth)} style={{ flex: 7 }}>
                         <div id={'group1'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 4 }}>
                             <div id={'logo'} className={clsx(classes.divColumn, classes.divTop, classes.fullHeight, classes.fullWidth)} style={{ position: "relative", minHeight: 200 }}>
@@ -472,6 +462,33 @@ class Footer extends React.Component
                                         </IconButton>
                                     </div>
                                 </div>
+                            </div>
+                        }
+
+                        {
+                            isSmallScreen &&
+                            <div id={'group2'} className={clsx(classes.divRow, classes.divTop, classes.fullWidth)} style={{ flex: 3 }}>
+                                <IconButton
+                                    style={{ flex: 1 }}
+                                    className={classes.iconButton}
+                                    onClick={this.handleOpenUrl(t(ID.LINK.FACEBOOK))}
+                                >
+                                    <img className={classes.icon} alt='facebook' src={Utils.getIconUrl('fb.svg')} />
+                                </IconButton>
+                                <IconButton
+                                    style={{ flex: 1 }}
+                                    className={classes.iconButton}
+                                    onClick={this.handleOpenUrl(t(ID.LINK.INSTAGRAM))}
+                                >
+                                    <img className={classes.icon} alt='instagram' src={Utils.getIconUrl('IG.svg')} />
+                                </IconButton>
+                                <IconButton
+                                    style={{ flex: 1 }}
+                                    className={classes.iconButton}
+                                    onClick={this.handleOpenUrl(t(ID.LINK.YOUTUBE))}
+                                >
+                                    <img className={classes.icon} alt='youtube' src={Utils.getIconUrl('youtube.svg')} />
+                                </IconButton>
                             </div>
                         }
                     </div>
