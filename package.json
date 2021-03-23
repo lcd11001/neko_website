@@ -19,7 +19,7 @@
     "react-i18next": "^11.8.10",
     "react-intersection-observer": "^8.31.0",
     "react-multi-carousel": "^2.6.2",
-    "react-redux": "^7.2.2",
+    "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-visibility-sensor": "^5.1.1",
