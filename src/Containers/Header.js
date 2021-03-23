@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose'
-import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import clsx from 'clsx'
 
 import { withWidth, isWidthDown, IconButton, Collapse } from '@material-ui/core'
-import ListIcon from '@material-ui/icons/List'
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+
+import { motion } from "framer-motion"
+import { MenuToggle } from '../Components/Menu/MenuToggle'
 
 import Logo from './Logo'
 import Menu from './Menu'
@@ -46,20 +46,12 @@ class Header extends React.Component
         const { menuOpened } = this.state
         return (
             <div className={clsx(classes.root, classes.divColumn)}>
-                <div className={clsx(classes.divRow, classes.divBetween)}>
-                    <div className={clsx(classes.divRow, classes.divCenter)}>
-                        <IconButton onClick={this.handleMenu} style={{ paddingLeft: 0 }}>
-                            {
-                                menuOpened
-                                    ? <MenuOpenIcon />
-                                    : <MenuIcon />
-                            }
-                        </IconButton>
-                        <Logo secondary={secondary} />
-                    </div>
+                <div className={clsx(classes.divRow, classes.divBetween)} >
+                    <Logo secondary={secondary} />
+                    <MenuToggle toggle={this.handleMenu} animate={menuOpened ? "open" : "closed"} />
                 </div>
 
-                <Collapse in={menuOpened}>
+                <Collapse in={menuOpened} collapsedHeight={menuOpened ? window.innerHeight : 0} >
                     <Menu shortMenu={true} secondary={secondary} />
                 </Collapse>
             </div>
