@@ -122,19 +122,27 @@ const styles = theme => ({
             {
                 key: ['height'],
                 value: [35],
-                variant: [-2],
+                variant: [-6],
                 unit: ['vw']
             }
         ),
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingTop: '5% !important'
+        paddingTop: '5% !important',
+
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center'
+        }
     },
 
     section3_txt1: {
         textAlign: 'center',
-        marginRight: '10%'
+        marginRight: '10%',
+
+        [theme.breakpoints.down('sm')]: {
+            marginRight: 0
+        }
     },
 
     section3_txt1_custom: {
@@ -150,6 +158,10 @@ const styles = theme => ({
     section4_txt1: {
         textTransform: 'uppercase',
         fontWeight: 'bold',
+
+        [theme.breakpoints.down('sm')]: {
+            paddingTop: 50
+        }
     },
 
     section4_txt2: {
@@ -177,6 +189,7 @@ const styles = theme => ({
                 key: ['paddingTop'],
                 value: [100],
                 variant: [10],
+                variantSM: [20],
                 unit: ['px']
             }
         ),
@@ -188,6 +201,7 @@ const styles = theme => ({
                 key: ['paddingBottom'],
                 value: [100],
                 variant: [10],
+                variantSM: [20],
                 unit: ['px']
             }
         ),
@@ -377,6 +391,8 @@ class About extends React.Component
             width
         } = this.props
 
+        const isSmallScreen = isWidthDown('sm', width)
+
         const IMG = Utils.i18Image(t, ID.ABOUT[`SECTION_2_IMG_${index + 1}`])
         const TITILE = t(ID.ABOUT[`SECTION_2_TEXT_${index + 1}_A`])
         const SUB_TITILE = t(ID.ABOUT[`SECTION_2_TEXT_${index + 1}_B`])
@@ -384,11 +400,11 @@ class About extends React.Component
         const BUTTON = t(ID.ABOUT[`SECTION_2_BUTTON_${index + 1}`])
 
         let classImg = clsx(classes.section2_img, {
-            [classes.section2_img + '--small']: isWidthDown('sm', width)
+            [classes.section2_img + '--small']: isSmallScreen
         })
 
         let classBtn = clsx(classes.section2_btn, {
-            [classes.section2_btn + '--small']: isWidthDown('sm', width)
+            [classes.section2_btn + '--small']: isSmallScreen
         })
 
         return (
@@ -419,10 +435,12 @@ class About extends React.Component
     renderSection3()
     {
         const { classes, width } = this.props;
+        const isSmallScreen = isWidthDown('sm', width)
+
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section3-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section3'} className={clsx(classes.section, classes.section3)}>
-                    <Typography className={clsx(classes.textBreak, classes.text62, classes.section3_txt1)} color={'textSecondary'} >
+                    <Typography className={clsx(classes.textBreakForce, isSmallScreen ? classes.text50 : classes.text62, classes.section3_txt1)} color={'textSecondary'} >
                         <Trans
                             i18nKey={ID.ABOUT.SECTION_3_TEXT_1}
                             components={{ span: <span /> }}
@@ -441,14 +459,16 @@ class About extends React.Component
     renderSection4()
     {
         const { classes, width, t } = this.props;
+        const isSmallScreen = isWidthDown('sm', width)
+
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section4-${width}`}>
                 <div id={'section4'} className={clsx(classes.divRow2Column, classes.divBetween, classes.section, classes.section4, classes.divDot)} style={{ flex: 5 }}>
                     <motion.div variants={commonMotion.elementTransition} id={'section4.1'} className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.fullHeight)} style={{ flex: 1.2 }}>
-                        <Typography className={clsx(classes.text12, classes.section4_txt1)} color={'textSecondary'} >
+                        <Typography className={clsx(classes.text25, classes.section4_txt1)} color={'textSecondary'} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_1} />
                         </Typography>
-                        <Typography className={clsx(classes.text40, classes.section4_txt2)} >
+                        <Typography className={clsx(classes.text50, classes.section4_txt2)} >
                             <Trans i18nKey={ID.ABOUT.SECTION_4_TEXT_2} />
                         </Typography>
                         <Typography className={clsx(classes.text18, classes.section4_txt3)} >
@@ -457,11 +477,11 @@ class About extends React.Component
                     </motion.div>
 
                     {
-                        isWidthDown('sm', width) &&
+                        isSmallScreen &&
                         <div style={{ padding: 20 }} />
                     }
 
-                    <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={clsx(classes.divRow, classes.divCenter, classes.divRight, classes.fullHeight)} style={{ flex: 3.8, position: 'relative' }}>
+                    <motion.div variants={commonMotion.elementTransition} id={'section4.2'} className={clsx(classes.divRow2Column, classes.divCenter, isSmallScreen ? classes.divLeft : classes.divRight, isSmallScreen ? classes.fullWidth : classes.fullHeight)} style={{ flex: 3.8, position: 'relative' }}>
                         <motion.div variants={commonMotion.elementTransition} className={clsx(classes.fullHeight, classes.section4_box_container_bottom)} >
                             <div id={'section4.2a'} ref={this.refContactBox1} className={clsx(classes.divColumn, classes.divCenter, classes.divBox, classes.section4_box)} >
                                 <div>

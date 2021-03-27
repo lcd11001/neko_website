@@ -186,6 +186,7 @@ const styles = (theme) => ({
                 key: ['minWidth'],
                 value: [250],
                 variant: [40],
+                variantSM: [20],
                 unit: ['px']
             }
         ),
