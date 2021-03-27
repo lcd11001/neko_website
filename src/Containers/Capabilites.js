@@ -12,7 +12,7 @@ import ID from '../Translations/ID.json'
 import compose from 'recompose/compose'
 
 import Utils from '../Utils'
-import { withWidth, isWidthUp, Typography, GridList, GridListTile, Button } from '@material-ui/core';
+import { withWidth, isWidthUp, Typography, GridList, GridListTile, Button, isWidthDown } from '@material-ui/core';
 
 import InViewElement from '../Components/InViewElement'
 import * as Icons from '../Components/NekoIcons'
@@ -263,11 +263,14 @@ class Capabilites extends React.Component
             width
         } = this.props;
 
+        const isSmallScreen = isWidthDown('sm', width)
+        const ratio = isSmallScreen ? (600 / 380) : (1920 / 600)
+
         let ImageUrl = `url(${Utils.getUrl(t(ID.IMAGE.BACKGROUND_CAPABILITIES))})`
 
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
-                <AspectRatio ratio={1920 / 600}>
+                <AspectRatio ratio={ratio}>
                     <motion.div
                         variants={commonMotion.groupTransition}
                         id={'section1'}
@@ -276,9 +279,9 @@ class Capabilites extends React.Component
                             backgroundImage: ImageUrl
                         }}
                     >
-                        <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
+                        <Typography className={clsx(classes.textBreakForce, isSmallScreen ? classes.text50 : classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                             <Trans
-                                i18nKey={ID.CAPABILITIES.SECTION_1_TEXT_1}
+                                i18nKey={isSmallScreen ? ID.CAPABILITIES.SECTION_1_TEXT_1_SMALL : ID.CAPABILITIES.SECTION_1_TEXT_1}
                                 components={{ span: <span /> }}
                                 values={{
                                     custom: clsx(classes.section1_txt1)
