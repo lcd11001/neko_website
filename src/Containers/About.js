@@ -83,6 +83,7 @@ const styles = theme => ({
                 key: ['height', 'width', 'marginBottom'],
                 value: [350, 350, 50],
                 variant: [10, 10, 5],
+                variantSM: [30, 30, 10],
                 unit: ['px', 'px', 'px']
             }
         ),
@@ -92,6 +93,7 @@ const styles = theme => ({
                     key: ['marginTop'],
                     value: [50],
                     variant: [5],
+                    variantSM: [10],
                     unit: ['px']
                 }
             ),
