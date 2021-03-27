@@ -319,10 +319,12 @@ class About extends React.Component
         } = this.props;
 
         let ImageUrl = `url("${Utils.getUrl(t(ID.IMAGE.BACKGROUND_ABOUT))}")`
+        const isSmallScreen = isWidthDown('sm', width)
+        const ratio = isSmallScreen ? (600 / 380) : (1920 / 600)
 
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
-                <AspectRatio ratio={1920 / 600}>
+                <AspectRatio ratio={ratio}>
                     <motion.div
                         variants={commonMotion.groupTransition}
                         id={'section1'}
@@ -331,9 +333,9 @@ class About extends React.Component
                             backgroundImage: ImageUrl
                         }}
                     >
-                        <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
+                        <Typography className={clsx(classes.textBreakForce, isSmallScreen ? classes.text50 : classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                             <Trans
-                                i18nKey={ID.ABOUT.SECTION_1_TEXT_1}
+                                i18nKey={isSmallScreen ? ID.ABOUT.SECTION_1_TEXT_1_SMALL : ID.ABOUT.SECTION_1_TEXT_1}
                                 components={{ span: <span /> }}
                                 values={{
                                     custom: clsx(classes.section1_txt1)
