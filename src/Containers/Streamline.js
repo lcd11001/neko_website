@@ -262,22 +262,34 @@ const styles = theme => ({
         textAlign: 'left',
         marginLeft: QUESTION_SPACING,
         marginRight: 0,
-        marginBottom: 60
+        marginBottom: 60,
+
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 0,
+        }
     },
 
     section4_txt2: {
         textAlign: 'left',
         marginLeft: QUESTION_SPACING,
         marginRight: 0,
-        marginBottom: 5,
-        fontWeight: 'bold'
+        marginBottom: 15,
+        fontWeight: 'bold',
+
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 0,
+        }
     },
 
     section4_txt3: {
         textAlign: 'left',
         marginLeft: QUESTION_SPACING,
         marginRight: 0,
-        fontWeight: 'bold'
+        fontWeight: 'normal',
+
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 0,
+        }
     },
 
     section4_txt_question_container: {
@@ -535,21 +547,26 @@ class Streamline extends React.Component
             width
         } = this.props;
 
+        const isSmallScreen = isWidthDown('sm', width)
+
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section4-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section4'} className={clsx(classes.divRow, classes.divCenter, classes.section, classes.section4)} style={{ flex: 2 }}>
-                    <div className={clsx(classes.section4_txt_question_container)} style={{ flex: 1 }}>
+                    <div className={clsx(classes.section4_txt_question_container)} style={{ flex: isSmallScreen ? 0 : 1 }}>
                         {
                             // empty space
                         }
                     </div>
 
                     <div className={clsx(classes.divColumn, classes.divLeft)} style={{ flex: 1, position: 'relative' }}>
-                        <img
-                            className={clsx(classes.imgMotionContain, classes.section4_txt_question_mask)}
-                            alt={t(ID.IMAGE.STREAMLINE_QUESTION_MARK)}
-                            src={Utils.getUrl(t(ID.IMAGE.STREAMLINE_QUESTION_MARK))}
-                        />
+                        {
+                            !isSmallScreen &&
+                            <img
+                                className={clsx(classes.imgMotionContain, classes.section4_txt_question_mask)}
+                                alt={t(ID.IMAGE.STREAMLINE_QUESTION_MARK)}
+                                src={Utils.getUrl(t(ID.IMAGE.STREAMLINE_QUESTION_MARK))}
+                            />
+                        }
                         <Typography className={clsx(classes.textLimitMultiline, classes.text75, classes.section4_txt1)} >
                             <Trans
                                 i18nKey={ID.STREAMLINE.SECTION_4_TEXT_1}
