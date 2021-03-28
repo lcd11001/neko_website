@@ -97,6 +97,7 @@ const styles = (theme) => ({
                 key: ['--spacing'],
                 value: [200],
                 variant: [48],
+                variantSM: [25],
                 unit: ['px']
             }
         ),
@@ -293,7 +294,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height', 'fontWeight'],
                 value: [40, 55, 600],
                 variant: [4, 4, 0],
-                variantSM: [2.5, 2.5, 25],
+                variantSM: [2, 2, 25],
                 unit: ['px', 'px', '']
             }
         )
@@ -330,7 +331,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height', 'fontWeight'],
                 value: [75, 90, 600],
                 variant: [7, 7, 0],
-                variantSM: [12, 12, 25],
+                variantSM: [7, 10, 0],
                 unit: ['px', 'px', '']
             }
         )
@@ -342,7 +343,7 @@ const styles = (theme) => ({
                 key: ['font-size', 'line-height', 'fontWeight'],
                 value: [125, 150, 600],
                 variant: [10, 10, 0],
-                variantSM: [15, 15, 25],
+                variantSM: [17, 15, 25],
                 unit: ['px', 'px', '']
             }
         )
