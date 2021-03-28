@@ -332,7 +332,11 @@ const styles = theme => ({
                 unit: ['%']
             }
         ),
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        }
     },
 
     section5_form_send_button: {
@@ -358,8 +362,9 @@ const styles = theme => ({
         ...breakpointsStyle(theme,
             {
                 key: ['width'],
-                value: [250],
+                value: [280],
                 variant: [10],
+                variantSM: [5],
                 unit: ['px']
             }
         ),
@@ -372,8 +377,9 @@ const styles = theme => ({
             ...breakpointsStyle(theme,
                 {
                     key: ['backgroundPosition'],
-                    value: [250],
+                    value: [280],
                     variant: [10],
+                    variantSM: [5],
                     unit: ['px']
                 }
             ),
@@ -596,10 +602,12 @@ class Streamline extends React.Component
             width
         } = this.props;
 
+        const isSmallScreen = isWidthDown('sm', width)
+
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section5-${width}`}>
                 <motion.div variants={commonMotion.elementTransition} id={'section5'} className={clsx(classes.divColumn, classes.divCenter, classes.section, classes.section5)}>
-                    <Typography className={clsx(classes.textBreak, classes.text75, classes.section5_txt1)} >
+                    <Typography className={clsx(classes.textBreak, isSmallScreen ? classes.text50 : classes.text75, classes.section5_txt1)} >
                         <Trans
                             i18nKey={ID.STREAMLINE.SECTION_5_TEXT_1}
                         />

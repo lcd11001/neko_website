@@ -362,7 +362,9 @@ class Footer extends React.Component
 
         const rootRatio = isSmallScreen ? RATIO_BACKGROUND_SMALL : RATIO_BACKGROUND_BIG
 
-        const rootMarginTop = 0.5 * window.innerWidth / rootRatio
+        const rootMarginTop = simpleFooter
+            ? 0
+            : 0.5 * window.innerWidth / rootRatio
 
         return (
             <motion.div variants={commonMotion.footerTransition} className={clsx(classes.divColumn, classes.divCenter, classes.fullWidth)}>
