@@ -22,6 +22,7 @@ const OPACITY = '7F'
 const CELL_HEIGHT = 500
 const CELL_HEIGHT_VARIANT = 25
 const CELL_PADDING = 50
+const CELL_PADDING_SMALL = 30
 const CELL_PADDING_VARIANT = 5
 
 const styles = theme => ({
@@ -60,6 +61,12 @@ const styles = theme => ({
         paddingRight: 0
     },
 
+    section2_divider: {
+        height: 2,
+        color: '#C0C0C0',
+        margin: '20px 0'
+    },
+
     section2_grid_list: {
         ...breakpointsStyle(theme,
             {
@@ -76,6 +83,7 @@ const styles = theme => ({
             {
                 key: ['paddingTop', 'paddingBottom'],
                 value: [CELL_PADDING, CELL_PADDING],
+                valueSM: [CELL_PADDING_SMALL, 0],
                 variant: [0, 0],
                 unit: ['px !important', 'px !important']
             }
@@ -152,6 +160,8 @@ const styles = theme => ({
 
     section2_container_img_small: {
         width: '100%',
+        height: 'auto',
+        padding: 'calc(var(--paddingWidth))',
     },
 
     section2_container_des_small: {
@@ -349,7 +359,11 @@ class Capabilites extends React.Component
             [classes.section2_cell_link + '--hover']: isHover
         })
 
-        const showDot = index % 3 === 2
+        const isSmallScreen = isWidthDown('sm', width)
+
+        const showDot = isSmallScreen
+            ? false
+            : index % 3 === 2
 
         return (
             <GridListTile key={index} cols={1} classes={{
@@ -435,19 +449,14 @@ class Capabilites extends React.Component
             width
         } = this.props
 
+        const {
+            allBlogs
+        } = this.state
+
+        const useDivider = index < allBlogs.length - 1
+
         return (
             <motion.div variants={commonMotion.elementTransition} className={clsx(classes.divColumn, classes.fullWidth, classes.fullHeight)}>
-                <div className={clsx(classes.section2_container_img, classes.section2_container_img_small)}>
-                    <motion.img
-                        className={classes.imgMotionContain}
-                        alt={item.img}
-                        src={Utils.getUrl(item.img)}
-                        whileHover={{
-                            scale: 1.1
-                        }}
-                        transition={commonMotion.transition}
-                    />
-                </div>
                 <div className={clsx(classes.divColumn, classes.divLeft, classes.divBetween, classes.section2_container_des, classes.section2_container_des_small)}>
                     <Typography className={clsx(classes.text40, classes.section2_text_title)}>{item.title}</Typography>
                     <Typography className={clsx(classes.text18, classes.section2_text_description)}>{item.description}</Typography>
@@ -460,6 +469,23 @@ class Capabilites extends React.Component
                         {item.button}
                     </Button>
                 </div>
+
+                <div className={clsx(classes.section2_container_img, classes.section2_container_img_small)}>
+                    <motion.img
+                        className={classes.imgMotionContain}
+                        alt={item.img}
+                        src={Utils.getUrl(item.img)}
+                        whileHover={{
+                            scale: 1.1
+                        }}
+                        transition={commonMotion.transition}
+                    />
+                </div>
+
+                {
+                    useDivider &&
+                    <hr className={clsx(classes.section2_divider)} />
+                }
             </motion.div>
         )
     }
