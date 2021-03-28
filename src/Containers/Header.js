@@ -40,6 +40,18 @@ class Header extends React.Component
         }))
     }
 
+    handleMenuItemClicked = (link) =>
+    {
+        const { width } = this.props
+        // console.log('handleMenuItemClicked', link)
+        if (isWidthDown('sm', width))
+        {
+            this.setState({
+                menuOpened: false
+            })
+        }
+    }
+
     renderShortHeader()
     {
         const { classes, secondary } = this.props;
@@ -52,7 +64,7 @@ class Header extends React.Component
                 </div>
 
                 <Collapse in={menuOpened} collapsedHeight={menuOpened ? window.innerHeight : 0} >
-                    <Menu shortMenu={true} secondary={secondary} />
+                    <Menu shortMenu={true} secondary={secondary} handleClicked={this.handleMenuItemClicked} />
                 </Collapse>
             </div>
         );

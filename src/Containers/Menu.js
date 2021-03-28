@@ -266,10 +266,17 @@ class Menu extends React.Component
 
     handleMouseClick = (link) => (evt) =>
     {
-        this.setState((state) => ({
-            // fixed: after change menu, anim diagonal-hover still play
-            last_hover_link: ''
-        }))
+        this.setState(
+            {
+                // fixed: after change menu, anim diagonal-hover still play
+                last_hover_link: ''
+            },
+            () =>
+            {
+                const { handleClicked } = this.props
+                handleClicked && handleClicked(link)
+            }
+        )
     }
 
     handleMouseEnter = (link) => (evt) =>
@@ -399,15 +406,17 @@ class Menu extends React.Component
             <motion.div variants={commonMotion.groupHeaderTransition} initial={'hidden'} animate={'visible'} exit={'invisible'} className={classRoot}>
                 {
                     HeaderMenu
-                    .filter(menu => {
-                        if (menu.disable !== undefined) {
-                            return !!!menu.disable
-                        }
-                        return true
-                    })
-                    .map(menu => (
-                        this.renderMenu(menu)
-                    ))
+                        .filter(menu =>
+                        {
+                            if (menu.disable !== undefined)
+                            {
+                                return !!!menu.disable
+                            }
+                            return true
+                        })
+                        .map(menu => (
+                            this.renderMenu(menu)
+                        ))
                 }
             </motion.div>
         );
@@ -421,12 +430,14 @@ Menu.propTypes =
     classes: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     shortMenu: PropTypes.bool,
-    secondary: PropTypes.bool
+    secondary: PropTypes.bool,
+    handleClicked: PropTypes.func
 };
 
 Menu.defaultProps = {
     shortMenu: false,
-    secondary: false
+    secondary: false,
+    handleClicked: null
 }
 
 export default compose(
