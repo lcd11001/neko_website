@@ -410,7 +410,7 @@ class Menu extends React.Component
             : clsx(classes.root, classes.divRow, classes.divCenter)
 
         return (
-            <motion.div variants={isSmallScreen ? commonMotion.groupHeaderTransition(0.1) : commonMotion.groupHeaderTransition(0)} animate={isOpen ? 'visible' : 'invisible'} className={classRoot}>
+            <motion.div variants={isSmallScreen ? commonMotion.groupHeaderTransition(0.1) : commonMotion.groupHeaderTransition(0)} animate={isOpen ? 'visible' : 'invisible'} initial={'hidden'} className={classRoot}>
                 {
                     HeaderMenu
                         .filter(menu =>
