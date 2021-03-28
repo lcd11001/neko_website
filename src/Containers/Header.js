@@ -63,7 +63,7 @@ class Header extends React.Component
                     <MenuToggle toggle={this.handleMenu} animate={menuOpened ? "open" : "closed"} />
                 </div>
 
-                <Collapse in={menuOpened} collapsedHeight={menuOpened ? window.innerHeight : 0} timeout={{ exit: 1000 }} >
+                <Collapse in={menuOpened} collapsedHeight={menuOpened ? window.innerHeight : 0} timeout={{ exit: 2000 }} >
                     <Menu shortMenu={true} secondary={secondary} isOpen={menuOpened} handleClicked={this.handleMenuItemClicked} />
                 </Collapse>
             </div>

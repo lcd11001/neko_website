@@ -135,7 +135,7 @@ const headerTransitionX = {
         opacity: 1,
         transition: {
             ease: 'easeOut',
-            duration: 0.3,
+            duration: 0.5,
 
             when: 'beforeChildren',
             staggerChildren: 0
@@ -145,6 +145,9 @@ const headerTransitionX = {
         x: '-100%',
         opacity: 0,
         transition: {
+            ease: 'easeIn',
+            duration: 0.5,
+
             when: 'afterChildren',
             staggerChildren: 0
         }
