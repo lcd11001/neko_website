@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 import { Link, withRouter } from 'react-router-dom';
 import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
-import { Divider, Typography } from '@material-ui/core';
+import { Divider, Typography, withWidth, isWidthDown } from '@material-ui/core';
 import { HeaderMenu } from '../Data/Defines'
 
 import clsx from 'clsx'
@@ -305,8 +305,11 @@ class Menu extends React.Component
             },
             shortMenu,
             t,
-            secondary
+            secondary,
+            width
         } = this.props
+
+        const isSmallScreen = isWidthDown('sm', width)
 
         let menuLink = t(menu.link)
 
@@ -367,7 +370,7 @@ class Menu extends React.Component
 
         return (
 
-            <motion.div variants={commonMotion.headerTransition} key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
+            <motion.div variants={isSmallScreen ? commonMotion.headerTransitionX : commonMotion.headerTransition} key={menu.text} className={clsx(classes.divColumn, classes.divCenter, classes.menu)}>
                 <Link to={menuLink} className={clsx(classMenuLink, classes.textLinkHidden)} onClick={this.handleMouseClick(menuLink)} onMouseEnter={this.handleMouseEnter(menuLink)} onMouseLeave={this.handleMouseLeave(menuLink)}>
                     <div className={clsx(classes.divRow, classes.divCenter, classUnderbackground, classMenuBorder)}>
                         {
@@ -395,15 +398,19 @@ class Menu extends React.Component
     {
         const {
             classes,
-            shortMenu
+            shortMenu,
+            width,
+            isOpen
         } = this.props
+
+        const isSmallScreen = isWidthDown('sm', width)
 
         let classRoot = shortMenu
             ? clsx(classes.root, classes.divColumn, classes.divLeft)
             : clsx(classes.root, classes.divRow, classes.divCenter)
 
         return (
-            <motion.div variants={commonMotion.groupHeaderTransition} initial={'hidden'} animate={'visible'} exit={'invisible'} className={classRoot}>
+            <motion.div variants={isSmallScreen ? commonMotion.groupHeaderTransition(0.1) : commonMotion.groupHeaderTransition(0)} animate={isOpen ? 'visible' : 'invisible'} className={classRoot}>
                 {
                     HeaderMenu
                         .filter(menu =>
@@ -431,17 +438,20 @@ Menu.propTypes =
     location: PropTypes.object.isRequired,
     shortMenu: PropTypes.bool,
     secondary: PropTypes.bool,
-    handleClicked: PropTypes.func
+    handleClicked: PropTypes.func,
+    isOpen: PropTypes.bool
 };
 
 Menu.defaultProps = {
     shortMenu: false,
     secondary: false,
-    handleClicked: null
+    handleClicked: null,
+    isOpen: true
 }
 
 export default compose(
     withMultipleStyles(commonStyles, styles),
     withTranslation(),
+    withWidth(),
     withRouter
 )(Menu);

@@ -79,7 +79,7 @@ const elementTransition = {
     }
 }
 
-const groupHeaderTransition = {
+const groupHeaderTransition = (speed = 0) => ({
     hidden: {
         opacity: 0
     },
@@ -87,17 +87,17 @@ const groupHeaderTransition = {
         opacity: 1,
         transition: {
             when: 'beforeChildren',
-            staggerChildren: 0
+            staggerChildren: speed
         }
     },
     invisible: {
         opacity: 0,
         transition: {
             when: 'afterChildren',
-            staggerChildren: 0
+            staggerChildren: speed
         }
     }
-}
+})
 
 const headerTransition = {
     hidden: {
@@ -117,6 +117,32 @@ const headerTransition = {
     },
     invisible: {
         y: '-50px',
+        opacity: 0,
+        transition: {
+            when: 'afterChildren',
+            staggerChildren: 0
+        }
+    }
+}
+
+const headerTransitionX = {
+    hidden: {
+        x: '-100%',
+        opacity: 0
+    },
+    visible: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            ease: 'easeOut',
+            duration: 0.3,
+
+            when: 'beforeChildren',
+            staggerChildren: 0
+        }
+    },
+    invisible: {
+        x: '-100%',
         opacity: 0,
         transition: {
             when: 'afterChildren',
@@ -347,6 +373,7 @@ export default {
     elementTransition,
     groupHeaderTransition,
     headerTransition,
+    headerTransitionX,
     groupFooterTransition,
     footerTransition,
     footerTransitionZ1,
