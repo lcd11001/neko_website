@@ -15,7 +15,7 @@ import compose from 'recompose/compose'
 
 import Utils from '../Utils'
 
-import { withWidth, Typography, FormControl, Button, Grid, TextField } from '@material-ui/core';
+import { withWidth, Typography, FormControl, Button, Grid, TextField, isWidthDown } from '@material-ui/core';
 
 import AspectRatio from '../Components/AspectRatio'
 import InViewElement from '../Components/InViewElement'
@@ -60,7 +60,11 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     section2: {
         marginRight: 'calc(var(--spacing) / 2)',
-        marginTop: 'calc(var(--spacing) / 2)'
+        marginTop: 'calc(var(--spacing) / 2)',
+
+        [theme.breakpoints.down('sm')]: {
+            marginRight: 0
+        }
     },
 
     section2_avatar_container: {
@@ -88,7 +92,13 @@ const styles = theme => ({
         backgroundColor: 'white',
         marginLeft: 'calc(var(--spacing) / 2)',
         marginTop: 'calc(-1 * var(--spacing))',
-        zIndex: 1
+        zIndex: 1,
+
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 0,
+            marginTop: 0,
+            zIndex: 0
+        }
     }
 });
 
@@ -102,11 +112,14 @@ class Contact extends React.Component
             width
         } = this.props;
 
+        const isSmallScreen = isWidthDown('sm', width)
+        const ratio = isSmallScreen ? (600 / 380) : (1920 / 600)
+
         let ImageUrl = `url(${Utils.getUrl(t(ID.IMAGE.BACKGROUND_CONTACT))})`
 
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section1-${width}`}>
-                <AspectRatio ratio={1920 / 600}>
+                <AspectRatio ratio={ratio}>
                     <motion.div
                         variants={commonMotion.groupTransition}
                         id={'section1'}
@@ -115,7 +128,7 @@ class Contact extends React.Component
                             backgroundImage: ImageUrl
                         }}
                     >
-                        <Typography className={clsx(classes.textBreak, classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
+                        <Typography className={clsx(classes.textBreakForce, isSmallScreen ? classes.text50 : classes.text62, classes.section1_txt1, classes.section1_txt1_dim)} >
                             <Trans
                                 i18nKey={ID.CONTACT.SECTION_1_TEXT_1}
                                 components={{ span: <span /> }}
@@ -161,6 +174,8 @@ class Contact extends React.Component
             width
         } = this.props;
 
+        const isSmallScreen = isWidthDown('sm', width)
+
         return (
 
             <motion.div
@@ -182,28 +197,28 @@ class Contact extends React.Component
                         </div>
                     </AspectRatio>
                 </div>
-                <Typography className={clsx(classes.text62, classes.section2_txt1)} >
+                <Typography className={clsx(isSmallScreen ? classes.text50 : classes.text62, classes.section2_txt1)} >
                     <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_1} />
                 </Typography>
                 <Grid container >
-                    <Grid item xs={2}>
-                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'} >
+                    <Grid item md={2} xs={1}>
+                        <Typography className={clsx(isSmallScreen ? classes.text20 : classes.text25, classes.section2_txt_contact)} color={'textSecondary'} >
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_2_1} />
                         </Typography>
                     </Grid>
-                    <Grid item xs={10}>
-                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
+                    <Grid item md={10} xs={11}>
+                        <Typography className={clsx(isSmallScreen ? classes.text20 : classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_2_2} />
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={2}>
-                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
+                    <Grid item md={2} xs={1}>
+                        <Typography className={clsx(isSmallScreen ? classes.text20 : classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_3_1} />
                         </Typography>
                     </Grid>
-                    <Grid item xs={10}>
-                        <Typography className={clsx(classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
+                    <Grid item md={10} xs={11}>
+                        <Typography className={clsx(isSmallScreen ? classes.text20 : classes.text25, classes.section2_txt_contact)} color={'textSecondary'}>
                             <Trans i18nKey={ID.CONTACT.SECTION_2_TEXT_3_2} />
                         </Typography>
                     </Grid>
