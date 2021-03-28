@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withMultipleStyles, breakpointsStyle, commonStyles } from '../Styles';
+import { withMultipleStyles, breakpointsStyle, commonStyles, commonMotion } from '../Styles';
 import { Typography } from '@material-ui/core';
 
 import { IconMenuLogo as AppLogo } from '../Components/NekoIcons'
@@ -11,6 +11,8 @@ import ID from '../Translations/ID.json'
 import clsx from 'clsx'
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
+
+import { motion } from 'framer-motion'
 
 const TEXT_OFFSET = -3
 const TEXT_OFFSET_DELTA = 0
@@ -110,17 +112,19 @@ class Logo extends React.Component
 
         return (
             <Link to={t(ID.LINK.HOME)} className={clsx(classes.textLinkHidden)} style={customStyle}>
-                <div className={clsx(classes.root, classes.divRow, classes.divCenter)}>
-                    <AppLogo className={classLogo} />
-                    <div className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 15 }}>
-                        <Typography className={clsx(classTitle, classes.divRow, classes.divCenter)} >
+                <motion.div variants={commonMotion.groupTextTransition(0)} className={clsx(classes.root, classes.divRow, classes.divCenter)} initial={'hidden'} animate={'visible'}>
+                    <motion.div variants={commonMotion.posTransition(-200, 0, 0, 0.5)}>
+                        <AppLogo className={classLogo} />
+                    </motion.div>
+                    <motion.div variant={commonMotion.textTransition} className={clsx(classes.divColumn, classes.divCenter)} style={{ paddingLeft: 15 }}>
+                        <motion.div variants={commonMotion.posTransition(0, -100, 0, 0.5)} className={clsx(classTitle, classes.divRow, classes.divCenter)} >
                             <Trans i18nKey={ID.COMMON.LOGO_TITLE} />
-                        </Typography>
-                        <Typography className={clsx(classSubTitle, classes.divRow, classes.divCenter)} >
+                        </motion.div>
+                        <motion.div variants={commonMotion.posTransition(0, 100, 0, 0.5)} className={clsx(classSubTitle, classes.divRow, classes.divCenter)} >
                             <Trans i18nKey={ID.COMMON.LOGO_SUBTITLE} />
-                        </Typography>
-                    </div>
-                </div>
+                        </motion.div>
+                    </motion.div>
+                </motion.div>
             </Link>
         );
     }

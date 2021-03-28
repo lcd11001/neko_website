@@ -60,7 +60,9 @@ class Header extends React.Component
             <div className={clsx(classes.root, classes.divColumn)}>
                 <div className={clsx(classes.divRow, classes.divBetween)} >
                     <Logo secondary={secondary} />
-                    <MenuToggle toggle={this.handleMenu} animate={menuOpened ? "open" : "closed"} />
+                    <motion.div variants={commonMotion.posTransition(200, 0, 0, 0.5)} animate={'visible'} initial={'hidden'}>
+                        <MenuToggle toggle={this.handleMenu} animate={menuOpened ? "open" : "closed"} />
+                    </motion.div>
                 </div>
 
                 <Collapse in={menuOpened} collapsedHeight={menuOpened ? window.innerHeight : 0} timeout={{ exit: 2000 }} >
