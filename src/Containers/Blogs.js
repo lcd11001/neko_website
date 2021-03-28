@@ -59,7 +59,9 @@ const styles = theme => ({
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     section2: {
-
+        [theme.breakpoints.down('sm')]: {
+            padding: 0
+        }
     },
 
     section2_grid_list: {
@@ -68,6 +70,8 @@ const styles = theme => ({
                 key: ['margin', 'paddingLeft', 'paddingRight'],
                 value: [-CELL_PADDING, 250, 250],
                 variant: [-CELL_PADDING_VARIANT, 60, 60],
+                valueSM: [0, 250, 250],
+                variantSM: [0, 60, 60],
                 unit: ['px !important', 'px', 'px']
             }
         ),
