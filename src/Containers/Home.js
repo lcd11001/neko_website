@@ -583,8 +583,8 @@ const styles = theme => ({
             {
                 key: ['height'],
                 value: [500],
-                variant: [50],
-                variantSM: [20],
+                variant: [30],
+                variantSM: [15],
                 unit: ['px']
             }
         ),
@@ -630,7 +630,8 @@ const styles = theme => ({
             {
                 key: ['maxHeight', 'height'],
                 value: [60, 60],
-                variant: [5, 5],
+                variant: [7, 7],
+                variantSM: [3, 3],
                 unit: ['%', '%']
             }
         ),
