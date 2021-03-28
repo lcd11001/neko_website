@@ -87,11 +87,12 @@ class App extends React.Component
                             this.renderAppbar('fixed', 'white', false)
                         }
                     </HideOnScroll>
-                    {
-                        // Fixed: missing menu when page transition
-                        !isHome && !isFormContact &&
-                        this.renderAppbar('relative', 'white', false)
-                    }
+                    <div style={{ display: !isHome && !isFormContact ? 'block' : 'none' }}>
+                        {
+                            // Fixed: missing menu when page transition
+                            this.renderAppbar('relative', 'white', false)
+                        }
+                    </div>
                     {children}
                     {
                         !isFormContact &&
