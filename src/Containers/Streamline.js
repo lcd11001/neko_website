@@ -174,7 +174,15 @@ const styles = theme => ({
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     section3: {
-        backgroundColor: '#F8F8F8'
+        backgroundColor: '#F8F8F8',
+        ...breakpointsStyle(theme,
+            {
+                key: ['minHeight'],
+                value: [500],
+                variant: [10],
+                unit: ['px']
+            }
+        ),
     },
 
     section3_txt1: {
@@ -189,11 +197,19 @@ const styles = theme => ({
         ),
         marginTop: 'calc(var(--spacing) / 2)',
         marginBottom: 'calc(var(--spacing) / 4)',
-        textAlign: 'left'
+        textAlign: 'left',
+
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 0,
+        }
     },
 
     section3_button1_container: {
-        marginLeft: '50%'
+        marginLeft: '50%',
+
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 0,
+        }
     },
 
     section3_button1: {
@@ -212,6 +228,7 @@ const styles = theme => ({
                 key: ['width'],
                 value: [280],
                 variant: [10],
+                variantSM: [-5],
                 unit: ['px']
             }
         ),
@@ -225,6 +242,7 @@ const styles = theme => ({
                     key: ['backgroundPosition'],
                     value: [280],
                     variant: [10],
+                    variantSM: [-5],
                     unit: ['px']
                 }
             ),
@@ -481,9 +499,11 @@ class Streamline extends React.Component
             width
         } = this.props;
 
+        const isSmallScreen = isWidthDown('sm', width)
+
         return (
             <InViewElement variants={commonMotion.groupTransition} key={`section3-${width}`}>
-                <motion.div variants={commonMotion.elementTransition} id={'section3'} className={clsx(classes.divColumn, classes.divCenter, classes.divLeft, classes.section, classes.section3)}>
+                <motion.div variants={commonMotion.elementTransition} id={'section3'} className={clsx(classes.divColumn, isSmallScreen ? classes.divBottom : classes.divCenter, classes.divLeft, classes.section, classes.section3)}>
                     <Typography className={clsx(classes.textLimitMultiline, classes.text40, classes.section3_txt1)} >
                         <Trans
                             i18nKey={ID.STREAMLINE.SECTION_3_TEXT_1}
