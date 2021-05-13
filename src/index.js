@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
 
 import { I18nextProvider } from 'react-i18next'
@@ -19,6 +19,13 @@ import { Provider } from 'react-redux'
 
 import * as serviceWorker from './serviceWorker'
 
+import CircularLoading from './Components/CircularLoading'
+import PageNotFound from './Components/PageError/PageNotFound'
+import ScrollToTop from './Components/ScrollToTop'
+
+import { CssBaseline } from '@material-ui/core'
+
+/*
 import App from './Containers/App'
 import Home from './Containers/Home'
 import About from './Containers/About'
@@ -28,14 +35,23 @@ import Capabilites from './Containers/Capabilites'
 import Contact from './Containers/Contact'
 import Streamline from './Containers/Streamline'
 import FormContact from './Containers/FormContact'
-
 import WorksDetail from './Containers/WorksDetail'
 import BlogsDetail from './Containers/BlogsDetail'
+*/
 
-import PageNotFound from './Components/PageError/PageNotFound'
-import ScrollToTop from './Components/ScrollToTop'
-
-import { CssBaseline } from '@material-ui/core'
+// MUST after import session
+// split code: https://reactjs.org/docs/code-splitting.html#route-based-code-splitting
+const App = lazy(() => import('./Containers/App'))
+const Home = lazy(() => import('./Containers/Home'))
+const About = lazy(() => import('./Containers/About'))
+const Works = lazy(() => import('./Containers/Works'))
+const Blogs = lazy(() => import('./Containers/Blogs'))
+const Capabilites = lazy(() => import('./Containers/Capabilites'))
+const Contact = lazy(() => import('./Containers/Contact'))
+const Streamline = lazy(() => import('./Containers/Streamline'))
+const FormContact = lazy(() => import('./Containers/FormContact'))
+const WorksDetail = lazy(() => import('./Containers/WorksDetail'))
+const BlogsDetail = lazy(() => import('./Containers/BlogsDetail'))
 
 const metadata = require('./metadata.json')
 console.log('metadata', metadata)
@@ -79,41 +95,45 @@ const Routes = () =>
             <Provider store={store}>
                 <I18nextProvider i18n={i18next}>
                     <Router>
-                        <Fragment>
-                            <CssBaseline />
-                            {/* Fixed: when navigating into another page, its position will remain like the page before. So it won't scroll to top automatically */}
-                            <ScrollToTop />
-                            <App>
-                                <Route render={({ location }) => (
-                                    <AnimatePresence initial={false} exitBeforeEnter={true}>
-                                        <Switch location={location} key={location.pathname}>
-                                            {/* Homepage === Profile because of user permission */}
-                                            <MotionRedirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
-                                            <MotionRedirect exact from={i18next.t(ID.LINK.WORKS)} to={i18next.t(ID.LINK.WORKS_ALL)} />
+                        <Suspense fallback={<CircularLoading message='' backgroundColor='FFFFFF' />}>
+                            <Fragment>
+                                <CssBaseline />
+                                {/* Fixed: when navigating into another page, its position will remain like the page before. So it won't scroll to top automatically */}
+                                <ScrollToTop />
+                                <App>
+                                    <Route render={({ location }) => (
+                                        <AnimatePresence initial={false} exitBeforeEnter={true}>
 
-                                            {/* single page */}
-                                            <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
-                                            <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
-                                            <Route exact path={i18next.t(ID.LINK.BLOG)} component={Blogs} />
-                                            <Route exact path={i18next.t(ID.LINK.CAPABILITIES)} component={Capabilites} />
-                                            <Route exact path={i18next.t(ID.LINK.CONTACT)} component={Contact} />
-                                            <Route exact path={i18next.t(ID.LINK.STREAMLINE)} component={Streamline} />
-                                            <Route exact path={i18next.t(ID.LINK.FORM_CONTACT)} component={FormContact} />
+                                            <Switch location={location} key={location.pathname}>
+                                                {/* Homepage === Profile because of user permission */}
+                                                <MotionRedirect exact from='/' to={i18next.t(ID.LINK.HOME)} />
+                                                <MotionRedirect exact from={i18next.t(ID.LINK.WORKS)} to={i18next.t(ID.LINK.WORKS_ALL)} />
 
-                                            {/* has sub page "detail" MUST before "category" */}
-                                            <Route path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
-                                            <Route path={i18next.t(ID.LINK.WORKS_CATEGORY)} component={({ match }) => <Works {...match.params} />} />
+                                                {/* single page */}
+                                                <Route exact path={i18next.t(ID.LINK.HOME)} component={Home} />
+                                                <Route exact path={i18next.t(ID.LINK.ABOUT)} component={About} />
+                                                <Route exact path={i18next.t(ID.LINK.BLOG)} component={Blogs} />
+                                                <Route exact path={i18next.t(ID.LINK.CAPABILITIES)} component={Capabilites} />
+                                                <Route exact path={i18next.t(ID.LINK.CONTACT)} component={Contact} />
+                                                <Route exact path={i18next.t(ID.LINK.STREAMLINE)} component={Streamline} />
+                                                <Route exact path={i18next.t(ID.LINK.FORM_CONTACT)} component={FormContact} />
 
-                                            <Route path={i18next.t(ID.LINK.BLOG_DETAIL)} component={({ match }) => <BlogsDetail {...match.params} />} />
+                                                {/* has sub page "detail" MUST before "category" */}
+                                                <Route path={i18next.t(ID.LINK.WORKS_DETAIL)} component={({ match }) => <WorksDetail {...match.params} />} />
+                                                <Route path={i18next.t(ID.LINK.WORKS_CATEGORY)} component={({ match }) => <Works {...match.params} />} />
+
+                                                <Route path={i18next.t(ID.LINK.BLOG_DETAIL)} component={({ match }) => <BlogsDetail {...match.params} />} />
 
 
-                                            {/* invalid path */}
-                                            <Route path='*' component={PageNotFound} />
-                                        </Switch>
-                                    </AnimatePresence>
-                                )} />
-                            </App>
-                        </Fragment>
+                                                {/* invalid path */}
+                                                <Route path='*' component={PageNotFound} />
+                                            </Switch>
+
+                                        </AnimatePresence>
+                                    )} />
+                                </App>
+                            </Fragment>
+                        </Suspense>
                     </Router>
                 </I18nextProvider>
             </Provider>
