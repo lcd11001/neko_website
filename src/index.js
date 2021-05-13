@@ -95,7 +95,7 @@ const Routes = () =>
             <Provider store={store}>
                 <I18nextProvider i18n={i18next}>
                     <Router>
-                        <Suspense fallback={<CircularLoading message='' backgroundColor='FFFFFF' />}>
+                        <Suspense fallback={<CircularLoading message='' backgroundColor='#FFFFFF' />}>
                             <Fragment>
                                 <CssBaseline />
                                 {/* Fixed: when navigating into another page, its position will remain like the page before. So it won't scroll to top automatically */}
